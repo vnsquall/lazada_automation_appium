@@ -28,8 +28,6 @@ public class Helper {
         driver = webDriver;
         serverAddress = driverServerAddress;
         int timeoutInSeconds = 60;
-        // must wait at least 60 seconds for running on Sauce.
-        // waiting for 30 seconds works locally however it fails on Sauce.
         driverWait = new WebDriverWait(webDriver, timeoutInSeconds);
     }
 

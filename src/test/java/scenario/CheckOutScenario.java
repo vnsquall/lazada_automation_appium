@@ -1,4 +1,4 @@
-package util;
+package scenario;
 
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
@@ -7,6 +7,7 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import util.AppiumSetupTest;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -19,39 +20,12 @@ import static util.Helper.*;
 /**
  * Created by lazhcm10136 on 9/30/14.
  */
-public class AppiumTestSetup {
+public class CheckOutScenario extends AppiumSetupTest {
 
+    private String appPackage;
 
-    public void init() throws MalformedURLException {
-        DesiredCapabilities capabilities = getAndroid4_4_capabilities();
-        URL serverAddress = new URL("http://127.0.0.1:4723/wd/hub");
-        driver = new AppiumDriver(serverAddress, capabilities);
-
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        Helper.init(driver, serverAddress);
-    }
-
-    private DesiredCapabilities getAndroid4_4_capabilities() {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(CapabilityType.BROWSER_NAME, "");
-        capabilities.setCapability("automationName", "Selendroid");
-        capabilities.setCapability("appium-version", "1.2.3");
-        capabilities.setCapability("platformName", "Android");
-        capabilities.setCapability("platformVersion", "4.4");
-        capabilities.setCapability("deviceName", "Android Emulator");
-//        capabilities.setCapability("appPackage", "pt.rocket.lazada.dev");
-//        capabilities.setCapability("appActivity", "pt.rocket.view.SplashScreenActivity");
-        capabilities.setCapability("automationName", "Appium");
-
-//        capabilities.setCapability("platformVersion", "4.3");
-        String userDir = System.getProperty("user.dir");
-
-        URL serverAddress;
-        String localApp = "lazada-android-dev.apk";
-
-        String appPath = Paths.get(userDir, localApp).toAbsolutePath().toString();
-        capabilities.setCapability("app", appPath);
-        return capabilities;
+    public CheckOutScenario() {
+        appPackage = "pt.rocket.lazada.dev";
     }
 
     protected void checkOutAndUsingTheCashDelivery(String venture, String categoryName, String subCategoryName) throws InterruptedException {
@@ -59,7 +33,7 @@ public class AppiumTestSetup {
 
         Thread.sleep(2000);
         text("Tap to open the menu").click();
-        find("pt.rocket.lazada.dev:id/abs__home").click();
+        find(appPackage + ":id/abs__home").click();
 
         Thread.sleep(1000);
         text_exact(categoryName).click();
@@ -70,7 +44,7 @@ public class AppiumTestSetup {
         /*
         Get size of sub-category and randomly click on it
          */
-        List<WebElement> meCatText = driver.findElements(By.id("pt.rocket.lazada.dev:id/text"));
+        List<WebElement> meCatText = driver.findElements(By.id(appPackage + ":id/text"));
         int catNum = meCatText.size();
         Random rand = new Random();
         int randNum = rand.nextInt((catNum - 1) + 1) + 1;
@@ -78,8 +52,8 @@ public class AppiumTestSetup {
         /*
         Get back to the Main Screen
          */
-        find("pt.rocket.lazada.dev:id/general_container").click();
-        find("pt.rocket.lazada.dev:id/general_container").click();
+        find(appPackage + ":id/general_container").click();
+        find(appPackage + ":id/general_container").click();
 
         text_exact("Tap to open the product gallery").click();
 
@@ -87,9 +61,9 @@ public class AppiumTestSetup {
 //
 //        }
 
-        find("pt.rocket.lazada.dev:id/shop").click();
-        find("pt.rocket.lazada.dev:id/button1").click();
-        find("pt.rocket.lazada.dev:id/checkout_button").click();
+        find(appPackage + ":id/shop").click();
+        find(appPackage + ":id/button1").click();
+        find(appPackage + ":id/checkout_button").click();
 
         //Login to CheckOut
 
@@ -102,17 +76,17 @@ public class AppiumTestSetup {
 //        driver.hideKeyboard(); // Need on read devices
 
         find("Show Password").click();
-        find("pt.rocket.lazada.dev:id/middle_login_button_signin").click();
+        find(appPackage + ":id/middle_login_button_signin").click();
 
         Thread.sleep(4000);
         WebDriverWait wait = new WebDriverWait(driver, 60);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("pt.rocket.lazada.dev:id/rocket_app_checkoutweb")));
-        driver.findElement(By.id("pt.rocket.lazada.dev:id/rocket_app_checkoutweb"));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(appPackage + ":id/rocket_app_checkoutweb")));
+        driver.findElement(By.id(appPackage + ":id/rocket_app_checkoutweb"));
 
         driver.getContextHandles();
         Thread.sleep(2000);
         driver.getContext();
-        driver.context("WEBVIEW_pt.rocket.lazada.dev");
+        driver.context("WEBVIEW_" + appPackage);
         driver.findElement(By.className("submit_btn_text")).click();
         Thread.sleep(2000);
         /*
