@@ -16,11 +16,13 @@ import static util.Helper.driver;
  */
 public class AppiumSetupTest {
 
+    //    public String appPackage = "pt.rocket.lazada.dev"; //for Staging build
+    public String appPackage = "com.lazada.android"; //for Live build
+
     public void init() throws MalformedURLException {
         DesiredCapabilities capabilities = getAndroid4_4_capabilities();
         URL serverAddress = new URL("http://127.0.0.1:4723/wd/hub");
         driver = new AppiumDriver(serverAddress, capabilities);
-
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         Helper.init(driver, serverAddress);
     }
@@ -33,16 +35,13 @@ public class AppiumSetupTest {
         capabilities.setCapability("platformName", "Android");
         capabilities.setCapability("platformVersion", "4.4");
         capabilities.setCapability("deviceName", "Android Emulator");
+        capabilities.setCapability("automationName", "Appium");
 //        capabilities.setCapability("appPackage", "pt.rocket.lazada.dev");
 //        capabilities.setCapability("appActivity", "pt.rocket.view.SplashScreenActivity");
-        capabilities.setCapability("automationName", "Appium");
-
 //        capabilities.setCapability("platformVersion", "4.3");
+
         String userDir = System.getProperty("user.dir");
-
-        URL serverAddress;
-        String localApp = "lazada-android-dev.apk";
-
+        String localApp = "lazada-android.apk";
         String appPath = Paths.get(userDir, localApp).toAbsolutePath().toString();
         capabilities.setCapability("app", appPath);
         return capabilities;

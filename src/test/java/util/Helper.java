@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -29,6 +31,60 @@ public class Helper {
         serverAddress = driverServerAddress;
         int timeoutInSeconds = 60;
         driverWait = new WebDriverWait(webDriver, timeoutInSeconds);
+    }
+
+    public static void randClick(By locator) {
+        Random rand = new Random();
+        List<WebElement> we = driver.findElements(locator);
+        int catNum = we.size();
+        int randClick = rand.nextInt((catNum - 1 + 1) + 1);
+
+        if (!we.get(randClick).getText().isEmpty()) {
+            we.get(randClick).click();
+        } else {
+            randClick(locator);
+        }
+    }
+
+    public static Boolean isElementPresent(By locator) {
+        Boolean isPresent = Boolean.FALSE;
+        try {
+            isPresent = driver.findElements(locator).size() > 0;
+            return isPresent;
+        } catch (NoSuchElementException ex) {
+            return isPresent;
+        }
+    }
+
+    public static WebElement find_xpath_forText(String appPackage, String id, String text) {
+        WebElement we = driver.findElement(By.xpath("//android.widget.TextView[@resource-id='" + appPackage + id + "'and @text='" + text + "']"));
+        return we;
+    }
+
+    public static void randomSelectProduct(String categories, String appPackage, String filterWiz, String prodWiz) {
+        text_exact(categories).click();
+
+        // Random selection Categories
+        randClick(By.id(appPackage + ":id/category_name"));
+
+        text_exact(filterWiz).click();
+
+        // Random selection sub-Categories
+        randClick(By.id(appPackage + ":id/text"));
+
+        // Get back to the Main Screen for viewing the product
+        find(appPackage + ":id/general_container").click();
+        find(appPackage + ":id/general_container").click();
+
+        text_exact(prodWiz).click();
+    }
+
+    public static void selectVenture(String venture, String menuWiz) throws InterruptedException {
+        driver.findElement(By.xpath(("//android.widget.TextView[contains(@text, '" + venture + "')]"))).click();
+        Thread.sleep(1000);
+//        wait_web(By.xpath(("//android.widget.TextView[contains(@text, '" + menuWiz + "')]"))).click();
+        find(menuWiz).click();
+        Thread.sleep(1000);
     }
 
     /**
@@ -145,9 +201,13 @@ public class Helper {
         return element(for_find(value));
     }
 
-    public static By for_edit_text(String text) { return By.xpath("//android.widget.EditText[@text='" + text + "']"); }
+    public static By for_edit_text(String text) {
+        return By.xpath("//android.widget.EditText[@text='" + text + "']");
+    }
 
-    public static MobileElement find_edit_text(String value) { return  element(for_edit_text(value)); }
+    public static MobileElement find_edit_text(String value) {
+        return element(for_edit_text(value));
+    }
 
     /**
      * Wait 30 seconds for locator to find an element *
@@ -159,6 +219,7 @@ public class Helper {
     public static WebElement wait_web(By locator) {
         return driverWait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
+
     /**
      * Wait 60 seconds for locator to find all elements *
      */

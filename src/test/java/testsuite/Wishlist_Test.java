@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import scenario.WishListScenario;
 
 import static util.Helper.driver;
-import static util.VentureText.setVentureText;
+import static util.VentureText.setText;
 
 /**
  * Created by lazhcm10136 on 10/2/14.
@@ -26,21 +26,20 @@ public class Wishlist_Test extends WishListScenario {
 
     @DataProvider
     Object[][] getVenturesDataToTest() {
-
         return new Object[][]{
-                {"Singapore"},
-                {"Malaysia"},
-                {"Philippines"},
-                {"Indonesia"},
+//                {"Singapore"},
+//                {"Malaysia"},
+//                {"Philippines"},
+//                {"Indonesia"},
                 {"Vietnam"}
         };
     }
 
     @Test(dataProvider = "getVenturesDataToTest")
     public void test_WishListNotLogin(String venture) throws Exception {
-        wishListNotLogin(venture, setVentureText(venture).get("menuWiz"),
-                setVentureText(venture).get("emptyWL"), setVentureText(venture).get("categories"),
-                setVentureText(venture).get("filterWiz"), setVentureText(venture).get("prodWiz"));
+        wishListNotLogin(venture, setText(venture).get("menuWiz"),
+                setText(venture).get("emptyWL"), setText(venture).get("categories"),
+                setText(venture).get("filterWiz"), setText(venture).get("prodWiz"), setText(venture).get("addWL"));
     }
 
 }

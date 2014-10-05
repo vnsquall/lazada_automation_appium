@@ -1,20 +1,12 @@
 package scenario;
 
-import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import util.AppiumSetupTest;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.file.Paths;
 import java.util.List;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
+import java.util.Set;
+
 import static util.Helper.*;
 
 /**
@@ -22,90 +14,123 @@ import static util.Helper.*;
  */
 public class CheckOutScenario extends AppiumSetupTest {
 
-    private String appPackage;
-
-    public CheckOutScenario() {
-        appPackage = "pt.rocket.lazada.dev";
-    }
-
-    protected void checkOutAndUsingTheCashDelivery(String venture, String categoryName, String subCategoryName) throws InterruptedException {
-        driver.findElement(By.xpath(("//android.widget.TextView[contains(@text, '" + venture + "')]"))).click();
-
-        Thread.sleep(2000);
-        text("Tap to open the menu").click();
+    protected void checkOut(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
+        selectVenture(venture, menuWiz);
         find(appPackage + ":id/abs__home").click();
 
         Thread.sleep(1000);
-        text_exact(categoryName).click();
-        text_exact(subCategoryName).click();
-        text_exact("Select the filters you want and tap apply").click();
-//        text("Tablets").click(); // Only using for "Mobile & Tablets" category
+        randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
+        find(appPackage + ":id/shop").click(); //Add to Cart button
 
-        /*
-        Get size of sub-category and randomly click on it
-         */
-        List<WebElement> meCatText = driver.findElements(By.id(appPackage + ":id/text"));
-        int catNum = meCatText.size();
-        Random rand = new Random();
-        int randNum = rand.nextInt((catNum - 1) + 1) + 1;
-        meCatText.get(randNum).click();
-        /*
-        Get back to the Main Screen
-         */
-        find(appPackage + ":id/general_container").click();
-        find(appPackage + ":id/general_container").click();
+        //Check for Variant Selection
+        Boolean productVar = isElementPresent(By.id(appPackage + ":id/product_variant_container"));
+        if (productVar) {
+            driver.findElement(By.id(appPackage + ":id/product_variant_button")).click();
+            randClick(By.id("pt.rocket.lazada.dev:id/item_text"));
+            find(appPackage + ":id/shop").click();
+        }
 
-        text_exact("Tap to open the product gallery").click();
-
-//        if(ExpectedConditions.visibilityOf(By.xpath(""))){
-//
-//        }
-
-        find(appPackage + ":id/shop").click();
         find(appPackage + ":id/button1").click();
         find(appPackage + ":id/checkout_button").click();
 
         //Login to CheckOut
-
         List<WebElement> editTextList = driver.findElements(By.className("android.widget.EditText"));
         editTextList.get(0).click();
         editTextList.get(0).sendKeys("qa000@mail.com");
-//        driver.hideKeyboard(); // Need on read devices
         editTextList.get(1).click();
         editTextList.get(1).sendKeys("a12345");
-//        driver.hideKeyboard(); // Need on read devices
 
-        find("Show Password").click();
+        driver.findElement(By.className("android.widget.CheckBox")).click();
         find(appPackage + ":id/middle_login_button_signin").click();
 
         Thread.sleep(4000);
-        WebDriverWait wait = new WebDriverWait(driver, 60);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(appPackage + ":id/rocket_app_checkoutweb")));
+        wait_web(By.id(appPackage + ":id/rocket_app_checkoutweb"));
         driver.findElement(By.id(appPackage + ":id/rocket_app_checkoutweb"));
-
-        driver.getContextHandles();
         Thread.sleep(2000);
-        driver.getContext();
-        driver.context("WEBVIEW_" + appPackage);
-        driver.findElement(By.className("submit_btn_text")).click();
+        Set<String> contextNames = driver.getContextHandles();
+        for (String contextName : contextNames) {
+            if (contextName.contains("WEBVIEW")) {
+                driver.context(contextName); // set context to WEBVIEW_$
+            }
+        }
         Thread.sleep(2000);
-        /*
-        ** Only for testing the element, not need to be executed
-        driver.findElement(By.id("form-account-payment")).click();
-        driver.findElement(By.xpath("//li[@class='payment-methods for-cashondelivery']")).click();
-        */
-        driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
+        wait_web(By.xpath("//button[@class='orange-button']"));
         driver.findElement(By.xpath("//button[@class='orange-button']")).click();
-
-        wait_web(By.xpath("//input[@name='sendPayment']"));
-
-        driver.findElement(By.xpath("//input[@name='sendPayment']")).click();
-
-        driver.getContextHandles();
         Thread.sleep(2000);
-        driver.context("NATIVE_APP");
-//        driver.findElement(By.xpath("//div[@class='description-order' and ./p[contains(., 'Your order with the number')]]")).isDisplayed();
-        find("Your order number is").isDisplayed();
     }
 
+    protected void checkOutAndUseTheCoD(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
+        // Perform Check Out steps
+        checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
+
+        // Check the Cash On Delivery is available or not for this CheckOutTest
+        if (isElementPresent(By.xpath("//label[@for='cashondelivery']"))) {
+
+            driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
+            driver.findElement(By.xpath("//button[@class='orange-button']")).click();
+
+            wait_web(By.xpath("//input[@name='sendPayment']"));
+
+            driver.findElement(By.xpath("//input[@name='sendPayment']")).click();
+
+            driver.getContextHandles();
+            Thread.sleep(2000);
+            driver.context("NATIVE_APP");
+            //Venture checking for validation successful text
+            if (venture.equals("Singapore")) {
+                find("Your order number is").isDisplayed();
+            }
+            if (venture.equals("Philippines")) {
+                find("The Credit Card number is not correct").isDisplayed();
+            }
+            if (venture.equals("Vietnam")) {
+                find("Mã đơn hàng của bạn là").isDisplayed();
+            }
+        }
+    }
+
+    protected void checkOutAndUseCreditCard(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
+        // Perform Check Out steps
+        checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
+
+        // Check the Credit Cards is available or not for this CheckOutTest
+        if (isElementPresent(By.xpath("//label[@class='creditcards']"))) {
+
+            driver.findElement(By.xpath("//label[@class='creditcards']")).click();
+            Thread.sleep(1000);
+            // waiting & input the CC info
+            driver.findElement(By.id("PaymentMethodForm_parameter_cc_number")).click();
+            driver.findElement(By.id("PaymentMethodForm_parameter_cc_number")).sendKeys("4400123456784011");
+            driver.findElement(By.id("PaymentMethodForm_parameter_cc_holder")).click();
+            driver.findElement(By.id("PaymentMethodForm_parameter_cc_holder")).sendKeys("Mr Test");
+            driver.findElement(By.id("PaymentMethodForm_parameter_cc_security_code")).click();
+            driver.findElement(By.id("PaymentMethodForm_parameter_cc_security_code")).sendKeys("123");
+
+            driver.findElement(By.id("month-selector-mobile")).click();
+            driver.findElement(By.xpath("//option[@value='09']")).click();
+            driver.findElement(By.id("year-selector-mobile")).click();
+            driver.findElement(By.xpath("//option[@value='2016']")).click();
+
+            driver.findElement(By.xpath("//button[@class='orange-button']")).click();
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("//button[@class='orange-button']")).click(); //Place Order
+            driver.findElement(By.xpath("//input[@name='sendFinish']")).click(); //Place Order
+
+            driver.getContextHandles();
+            Thread.sleep(2000);
+            driver.context("NATIVE_APP");
+
+            //Venture checking for validation successful text
+            if (venture.equals("Singapore")) {
+                find("Sorry, the Credit Card number you entered is Invalid").isDisplayed();
+            }
+            if (venture.equals("Philippines")) {
+                find("The Credit Card number is not correct").isDisplayed();
+            }
+            if (venture.equals("Vietnam")) {
+                find("Số thẻ tín dụng không đúng").isDisplayed();
+            }
+        }
+    }
 }
