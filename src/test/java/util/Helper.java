@@ -37,12 +37,15 @@ public class Helper {
         Random rand = new Random();
         List<WebElement> we = driver.findElements(locator);
         int catNum = we.size();
-        int randClick = rand.nextInt((catNum - 1 + 1) + 1);
-
-        if (!we.get(randClick).getText().isEmpty()) {
-            we.get(randClick).click();
-        } else {
+        int randClick = rand.nextInt((catNum - 1) + 1);
+        if (randClick > catNum || randClick < 1) {
             randClick(locator);
+        } else {
+            if (!we.get(randClick).getText().isEmpty()) {
+                we.get(randClick).click();
+            } else {
+                randClick(locator);
+            }
         }
     }
 
@@ -81,10 +84,10 @@ public class Helper {
 
     public static void selectVenture(String venture, String menuWiz) throws InterruptedException {
         driver.findElement(By.xpath(("//android.widget.TextView[contains(@text, '" + venture + "')]"))).click();
-        Thread.sleep(1000);
+        Thread.sleep(3000);
 //        wait_web(By.xpath(("//android.widget.TextView[contains(@text, '" + menuWiz + "')]"))).click();
         find(menuWiz).click();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
     }
 
     /**

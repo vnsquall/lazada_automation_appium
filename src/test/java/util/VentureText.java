@@ -14,6 +14,7 @@ public class VentureText {
 
         if (venture.equals("Singapore") || venture.equals("Philippines") || venture.equals("Malaysia")) {
             ventureText.put("menuWiz", "Tap to open the menu");
+            ventureText.put("wishList", "Wishlist");
             ventureText.put("categories", "Categories");
             ventureText.put("filterWiz", "Select the filters you want and tap apply");
             ventureText.put("prodWiz", "Tap to open the product gallery");
@@ -22,6 +23,7 @@ public class VentureText {
         }
         if (venture.equals("Indonesia")) {
             ventureText.put("menuWiz", "Sentuh untuk membuka menu");
+            ventureText.put("wishList", "Wishlist");
             ventureText.put("categories", "Kategori");
             ventureText.put("filterWiz", "Pilih filter yang diinginkan lalu sentuh apply");
             ventureText.put("prodWiz", "Sentuh untuk membuka galeri produk");
@@ -30,10 +32,11 @@ public class VentureText {
         }
         if (venture.equals("Vietnam")) {
             ventureText.put("menuWiz", "Chạm vào để mở menu");
+            ventureText.put("wishList", "Danh sách yêu thích");
             ventureText.put("categories", "Các danh mục sản phẩm");
             ventureText.put("filterWiz", "Chọn lựa và chạm vào để lọc ra các sản phẩm");
             ventureText.put("prodWiz", "Chạm vào để xem một số hình ảnh về sản phẩm");
-            ventureText.put("emptyWL", "Giỏ hàng của bạn còn trống");
+            ventureText.put("emptyWL", "Không có món hàng nào trong danh sách yêu thích");
             ventureText.put("addWL", "Sản phẩm đã được thêm vào danh sách yêu thích");
         }
         return ventureText;

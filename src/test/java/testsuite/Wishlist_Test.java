@@ -37,9 +37,9 @@ public class Wishlist_Test extends WishListScenario {
 
     @Test(dataProvider = "getVenturesDataToTest")
     public void test_WishListNotLogin(String venture) throws Exception {
-        wishListNotLogin(venture, setText(venture).get("menuWiz"),
-                setText(venture).get("emptyWL"), setText(venture).get("categories"),
-                setText(venture).get("filterWiz"), setText(venture).get("prodWiz"), setText(venture).get("addWL"));
+        wishListNotLogin(venture, setText(venture).get("menuWiz"), setText(venture).get("wishList"), setText(venture).get("emptyWL"),
+                setText(venture).get("categories"), setText(venture).get("filterWiz"),
+                setText(venture).get("prodWiz"), setText(venture).get("addWL"));
     }
 
 }

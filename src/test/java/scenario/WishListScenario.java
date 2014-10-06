@@ -10,7 +10,7 @@ import static util.Helper.*;
  */
 public class WishListScenario extends AppiumSetupTest {
 
-    protected void wishListNotLogin(String venture, String menuWiz, String emptyWL,
+    protected void wishListNotLogin(String venture, String menuWiz, String wishList, String emptyWL,
                                     String categories, String filterWiz, String prodWiz, String addWL) throws InterruptedException {
 
         selectVenture(venture, menuWiz);
@@ -18,7 +18,7 @@ public class WishListScenario extends AppiumSetupTest {
         Thread.sleep(1000);
 
         //Find & Click on Wishlist
-        driver.findElement(By.xpath("//android.widget.TextView[@resource-id='" + appPackage + ":id/component_text' and @text='Wishlist']")).click();
+        driver.findElement(By.xpath("//android.widget.TextView[@resource-id='" + appPackage + ":id/component_text' and @text='" + wishList + "']")).click();
         //Verify the Wishlist is EMPTY
         find_xpath_forText(appPackage, ":id/wishlist_no_items_text", emptyWL);
         find(appPackage + ":id/wishlist_no_items_bt_continue").click();
