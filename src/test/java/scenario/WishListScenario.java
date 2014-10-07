@@ -34,7 +34,5 @@ public class WishListScenario extends AppiumSetupTest {
         //Verify the message appear:
         find_xpath_forText(appPackage, ":id/items_count", addWL);
         find(appPackage + ":id/button1").click(); //Click on OK button
-
-
     }
 }

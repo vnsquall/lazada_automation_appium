@@ -35,15 +35,15 @@ public class CheckOut_Test extends CheckOutScenario {
         };
     }
 
-    @Test(dataProvider = "getVenturesDataToTest")
-    public void test_CashOnDelivery(String venture) throws Exception {
-        checkOutAndUseTheCoD(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
-                setText(venture).get("filterWiz"), setText(venture).get("prodWiz"));
-    }
-
 //    @Test(dataProvider = "getVenturesDataToTest")
-//    public void test_CreditCard(String venture) throws Exception {
-//        checkOutAndUseCreditCard(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
+//    public void test_CashOnDelivery(String venture) throws Exception {
+//        checkOutAndUseTheCoD(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
 //                setText(venture).get("filterWiz"), setText(venture).get("prodWiz"));
 //    }
+
+    @Test(dataProvider = "getVenturesDataToTest")
+    public void test_CreditCard(String venture) throws Exception {
+        checkOutAndUseCreditCard(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
+                setText(venture).get("filterWiz"), setText(venture).get("prodWiz"));
+    }
 }

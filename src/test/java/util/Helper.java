@@ -3,16 +3,14 @@ package util;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -88,6 +86,17 @@ public class Helper {
 //        wait_web(By.xpath(("//android.widget.TextView[contains(@text, '" + menuWiz + "')]"))).click();
         find(menuWiz).click();
         Thread.sleep(2000);
+    }
+
+    public static void swipe() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        HashMap<String, Double> swipeObject = new HashMap<String, Double>();
+        swipeObject.put("startX", 0.95);
+        swipeObject.put("startY", 0.5);
+        swipeObject.put("endX", 0.05);
+        swipeObject.put("endY", 0.5);
+        swipeObject.put("duration", 1.8);
+        js.executeScript("mobile: swipe", swipeObject);
     }
 
     /**

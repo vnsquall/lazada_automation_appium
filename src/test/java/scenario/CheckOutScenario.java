@@ -31,6 +31,10 @@ public class CheckOutScenario extends AppiumSetupTest {
         }
 
         find(appPackage + ":id/button1").click();
+
+        //Swipe down
+        swipe();
+
         find(appPackage + ":id/checkout_button").click();
 
         //Login to CheckOut
@@ -68,9 +72,7 @@ public class CheckOutScenario extends AppiumSetupTest {
 
             driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
             driver.findElement(By.xpath("//button[@class='orange-button']")).click();
-
-            wait_web(By.xpath("//input[@name='sendPayment']"));
-
+            Thread.sleep(3000);
             driver.findElement(By.xpath("//input[@name='sendPayment']")).click();
 
             driver.getContextHandles();
@@ -81,7 +83,7 @@ public class CheckOutScenario extends AppiumSetupTest {
                 find("Your order number is").isDisplayed();
             }
             if (venture.equals("Philippines")) {
-                find("The Credit Card number is not correct").isDisplayed();
+                find("Your order number is").isDisplayed();
             }
             if (venture.equals("Vietnam")) {
                 find("Mã đơn hàng của bạn là").isDisplayed();
