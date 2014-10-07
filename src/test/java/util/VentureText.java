@@ -35,6 +35,12 @@ public class VentureText {
             ventureText.put("prodWiz", "Sentuh untuk membuka galeri produk");
             ventureText.put("emptyWL", "Tidak ada barang pada wishlist");
             ventureText.put("addWL", "Produk telah ditambahkan ke wishlist Anda");
+            ventureText.put("account", "Pengaturan Akun");
+            ventureText.put("userData", "Data Pelanggan");
+            ventureText.put("createUser", "Buat Akun");
+            ventureText.put("terms", "Saya setuju dengan");
+            ventureText.put("loginFailed", "Silakan periksa username atau password anda.");
+            ventureText.put("logOut", "Sign Out");
         }
         if (venture.equals("Vietnam")) {
             ventureText.put("menuWiz", "Chạm vào để mở menu");
@@ -44,6 +50,13 @@ public class VentureText {
             ventureText.put("prodWiz", "Chạm vào để xem một số hình ảnh về sản phẩm");
             ventureText.put("emptyWL", "Không có món hàng nào trong danh sách yêu thích");
             ventureText.put("addWL", "Sản phẩm đã được thêm vào danh sách yêu thích");
+            ventureText.put("account", "Cài đặt tài khoản");
+            ventureText.put("userData", "Thông tin tài khoản");
+            ventureText.put("createUser", "Đăng ký ngay");
+            ventureText.put("terms", "Tôi đồng ý với");
+            ventureText.put("loginFailed", "Vui lòng kiểm tra lại tên đăng nhập hoặc mật khẩu");
+            ventureText.put("logOut", "Thoát");
+
         }
         return ventureText;
     }

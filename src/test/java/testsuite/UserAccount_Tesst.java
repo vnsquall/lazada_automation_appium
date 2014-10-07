@@ -27,25 +27,33 @@ public class UserAccount_Tesst extends UserAccountScenario {
     Object[][] getVenturesDataToRegister() {
         return new Object[][]{
                 {"Singapore", "qa000@mail.com", "a12345", "Mr Test"}, //Existed Account
-                {"Singapore", "new_user123@mail.com", "a12345", "Mr Test_123"}
-//                {"Malaysia"},
-//                {"Philippines"},
-//                {"Indonesia"},
-//                {"Vietnam"}
+                {"Singapore", "new_user123@mail.com", "a12345", "Mr Test_123"},
+                {"Malaysia", "qa000@mail.com", "a12345", "Mr Test"},
+                {"Philippines", "qa000@mail.com", "a12345", "Mr Test"},
+                {"Indonesia", "qa000@mail.com", "a12345", "Mr Test"},
+                {"Vietnam", "qa000@mail.com", "a12345", "Mr Test"}
         };
     }
 
     @DataProvider
     Object[][] getVenturesDataToLoginFailed() {
         return new Object[][]{
-                {"Singapore", "new_user123@mail.com", "a12345"}
+                {"Singapore", "test_user123@mail.com", "@12345"},
+                {"Vietnam", "test_user123@mail.com", "@12345"},
+                {"Malaysia", "test_user123@mail.com", "@12345"},
+                {"Philippines", "test_user123@mail.com", "@12345"},
+                {"Indonesia", "test_user123@mail.com", "@12345"}
         };
     }
 
     @DataProvider
     Object[][] getVenturesDataToLoginPass() {
         return new Object[][]{
-                {"Singapore", "qa000@mail.com", "a12345"}
+                {"Singapore", "qa000@mail.com", "a12345"},
+                {"Vietnam", "qa000@mail.com", "a12345"},
+                {"Malaysia", "qa000@mail.com", "a12345"},
+                {"Philippines", "qa000@mail.com", "a12345"},
+                {"Indonesia", "qa000@mail.com", "a12345"}
         };
     }
 
