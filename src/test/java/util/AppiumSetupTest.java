@@ -37,7 +37,7 @@ public class AppiumSetupTest {
         capabilities.setCapability("deviceName", "Android Emulator");
         capabilities.setCapability("automationName", "Appium");
 //        capabilities.setCapability("appPackage", "pt.rocket.lazada.dev");
-//        capabilities.setCapability("appActivity", "pt.rocket.view.SplashScreenActivity");
+        capabilities.setCapability("appActivity", "pt.rocket.view.ChangeCountryFragmentActivity");
 //        capabilities.setCapability("platformVersion", "4.3");
 
         String userDir = System.getProperty("user.dir");

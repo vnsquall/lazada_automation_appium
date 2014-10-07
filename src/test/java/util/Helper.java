@@ -82,20 +82,19 @@ public class Helper {
 
     public static void selectVenture(String venture, String menuWiz) throws InterruptedException {
         driver.findElement(By.xpath(("//android.widget.TextView[contains(@text, '" + venture + "')]"))).click();
-        Thread.sleep(3000);
-//        wait_web(By.xpath(("//android.widget.TextView[contains(@text, '" + menuWiz + "')]"))).click();
+        Thread.sleep(4000);
         find(menuWiz).click();
         Thread.sleep(2000);
     }
 
     public static void swipe() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+        JavascriptExecutor js = driver;
         HashMap<String, Double> swipeObject = new HashMap<String, Double>();
-        swipeObject.put("startX", 0.95);
-        swipeObject.put("startY", 0.5);
-        swipeObject.put("endX", 0.05);
-        swipeObject.put("endY", 0.5);
-        swipeObject.put("duration", 1.8);
+        swipeObject.put("startX", 256.0);
+        swipeObject.put("startY", 200.0);
+        swipeObject.put("endX", 256.0);
+        swipeObject.put("endY", 650.0);
+        swipeObject.put("duration", 0.8);
         js.executeScript("mobile: swipe", swipeObject);
     }
 

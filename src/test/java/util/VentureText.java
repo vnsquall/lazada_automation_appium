@@ -20,6 +20,12 @@ public class VentureText {
             ventureText.put("prodWiz", "Tap to open the product gallery");
             ventureText.put("emptyWL", "You have no items in your wishlist");
             ventureText.put("addWL", "Product was added to your wishlist");
+            ventureText.put("account", "Account Settings");
+            ventureText.put("userData", "User Data");
+            ventureText.put("createUser", "Create Account");
+            ventureText.put("terms", "I agree with the");
+            ventureText.put("loginFailed", "Please check your username or password.");
+            ventureText.put("logOut", "Sign Out");
         }
         if (venture.equals("Indonesia")) {
             ventureText.put("menuWiz", "Sentuh untuk membuka menu");
