@@ -20,7 +20,7 @@ public class SearchScenario extends AppiumSetupTest {
         homeSearch.click();
         Thread.sleep(2000);
 //        driver.tap(1, 550, 140, 1); //work-around Tap on search button with screen size "768x1280@120DPI"
-        driver.sendKeyEvent(20); //KEYCODE_DOWN
+        driver.sendKeyEvent(20); //KEYCODE_DOWN for select all products with searchQuery
         Thread.sleep(2000);
         driver.sendKeyEvent(66); //KEYCODE_ENTER
         Thread.sleep(2000);
