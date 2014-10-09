@@ -85,7 +85,7 @@ public class WishListScenario extends AppiumSetupTest {
         Assert.assertNull(deteleBtn);
     }
 
-    protected void wishListAddToCard (String venture, String menuWiz, String wishList, String emptyWL,
+    protected void wishListAddToCart (String venture, String menuWiz, String wishList, String emptyWL,
 
                                           String categories, String filterWiz, String prodWiz, String addWL) throws InterruptedException {
 
@@ -120,12 +120,9 @@ public class WishListScenario extends AppiumSetupTest {
         find(appPackage + ":id/wishlist_item_bt_add").click();
         find(appPackage + ":id/button1").click();
 
-
         // Verify product that product has appear in myCard
         String myCardStr = find(appPackage + ":id/shopping_main_container").getText();
         Assert.assertTrue(myCardStr.contains(productStr));
-
-
     }
 
 }
