@@ -47,7 +47,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         driver.findElement(By.className("android.widget.CheckBox")).click();
         find(appPackage + ":id/middle_login_button_signin").click();
 
-        Thread.sleep(4000);
+        Thread.sleep(5000);
         wait_web(By.id(appPackage + ":id/rocket_app_checkoutweb"));
         driver.findElement(By.id(appPackage + ":id/rocket_app_checkoutweb"));
         Thread.sleep(2000);

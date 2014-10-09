@@ -82,7 +82,7 @@ public class Helper {
 
     public static void selectVenture(String venture, String menuWiz) throws InterruptedException {
         driver.findElement(By.xpath(("//android.widget.TextView[contains(@text, '" + venture + "')]"))).click();
-        Thread.sleep(4000);
+        Thread.sleep(5000);
         find(menuWiz).click();
         Thread.sleep(2000);
     }

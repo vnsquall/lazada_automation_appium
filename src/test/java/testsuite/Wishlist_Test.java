@@ -27,11 +27,11 @@ public class Wishlist_Test extends WishListScenario {
     @DataProvider
     Object[][] getVenturesDataToTest() {
         return new Object[][]{
-//                {"Singapore"},
+                {"Singapore"}
 //                {"Malaysia"},
 //                {"Philippines"},
 //                {"Indonesia"},
-                {"Vietnam"}
+//                {"Vietnam"}
         };
     }
 
