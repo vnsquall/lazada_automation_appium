@@ -48,9 +48,12 @@ public class WishListScenario extends AppiumSetupTest {
 
 
         // Select venture
-        driver.findElement(By.xpath(("//android.widget.TextView[contains(@text, '" + venture + "')]"))).click();
+//        driver.findElement(By.xpath(("//android.widget.TextView[contains(@text, '" + venture + "')]"))).click();
+        driver.findElementByAndroidUIAutomator("UiSelector().text(\""+venture+"\")").click();
         Thread.sleep(7000);
-        driver.findElementByAndroidUIAutomator("UiSelector().text(\""+menuWiz+"\")").click();
+//        driver.findElementByAndroidUIAutomator("UiSelector().text(\""+menuWiz+"\")").click();
+        driver.findElementByAndroidUIAutomator("UiSelector().resourceId(\""+appPackage+":id/wizard_main_container\")").click();
+
         Thread.sleep(2000);
         // Select Category
         driver.findElementByAndroidUIAutomator("UiSelector().resourceId(\""+appPackage+":id/abs__home\")").click();
@@ -81,4 +84,10 @@ public class WishListScenario extends AppiumSetupTest {
 
         Assert.assertNull(deteleBtn);
     }
+
+    public void addOneProductToWishList () {
+        // Go to category
+
+    }
+
 }
