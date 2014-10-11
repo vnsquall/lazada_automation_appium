@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import util.AppiumSetupTest;
+import util.UISelectorType;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -73,46 +74,38 @@ public class WishListScenario extends AppiumSetupTest {
 
                                           String categories, String filterWiz, String prodWiz, String addWL) throws InterruptedException {
 
-
         // Select venture
-        driver.findElementByAndroidUIAutomator("UiSelector().text(\""+venture+"\")").click();
-        Thread.sleep(7000);
-        driver.findElementByAndroidUIAutomator("UiSelector().resourceId(\""+appPackage+":id/wizard_main_container\")").click();
+        selectVenture(venture, menuWiz);
+        findByUISelectorType("resourceID","abs__home", appPackage).click();
+        Thread.sleep(1000);
 
-        Thread.sleep(2000);
-        // Select Category
-        driver.findElementByAndroidUIAutomator("UiSelector().resourceId(\""+appPackage+":id/abs__home\")").click();
-        driver.findElementByAndroidUIAutomator("UiSelector().text(\""+categories+"\")").click();
-        driver.findElementByAndroidUIAutomator("UiSelector().text(\"Cameras\")").click();
-        driver.findElementByAndroidUIAutomator("UiSelector().text(\""+filterWiz+"\")").click();
-        find(appPackage + ":id/middle_productslist_list").click();
+        // Random and add product to WishList
+        randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
+        String productName = findByUISelectorType("resourceID", "product_name",appPackage).getText();
+        findByUISelectorType("resourceID", "btn_wishlist",appPackage).click();
+        findByUISelectorType("resourceID", "button1",appPackage).click();
 
-        // Random product to add to WishList
-        List<WebElement> arrProduct = driver.findElementsByAndroidUIAutomator("UiSelector().resourceId(\""+appPackage+":id/image_view\")");
-        Random ran = new Random();
-        int productIndex  = ran.nextInt(arrProduct.size());
-        String productStr = arrProduct.get(productIndex).getText();
-        arrProduct.get(productIndex).click();
-        System.out.println(productStr);
-        driver.findElementByAndroidUIAutomator("UiSelector().text(\""+prodWiz+"\")").click();
-        find(appPackage + ":id/btn_wishlist").click();
-        find(appPackage + ":id/button1").click();
         // Go to WishList
-        driver.findElementByAndroidUIAutomator("UiSelector().resourceId(\""+appPackage+":id/abs__home\")").click();
-        driver.findElementByAndroidUIAutomator("UiSelector().textContains(\""+wishList+"\")").click();
-        // Add product to Card from WishList
-        find(appPackage + ":id/wishlist_item_bt_add").click();
-        find(appPackage + ":id/button1").click();
+        findByUISelectorType("resourceID","abs__home", appPackage).click();
+        findByUISelectorType("textcontains",wishList, appPackage).click();
+        // Add 1 product to Cart from WishList
+        findByUISelectorType("resourceID","wishlist_item_bt_add", appPackage).click();
+        findByUISelectorType("resourceID","button1", appPackage).click();
+        // Verify product that product appears in myCart
+        String myCardStr = findByUISelectorType(
+                "resourceID",
+                "item_name",
+                appPackage)
+                .getText();
+        System.out.println("myCardStr>>>> "+myCardStr);
+        System.out.println("productName>>>> "+productName);
 
-        // Verify product that product has appear in myCard
-        String myCardStr = find(appPackage + ":id/shopping_main_container").getText();
-        Assert.assertTrue(myCardStr.contains(productStr));
+        Assert.assertTrue(myCardStr.contains(productName));
     }
 
     protected void wishListAddAllToCart (String venture, String menuWiz, String wishList, String emptyWL,
 
                                       String categories, String filterWiz, String prodWiz, String addWL) throws InterruptedException {
-
 
         // Select venture
         selectVenture(venture, menuWiz);
