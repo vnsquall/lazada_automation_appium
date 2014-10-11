@@ -1,5 +1,12 @@
 package util;
 
+
+
+
+
+
+
+
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
@@ -111,7 +118,7 @@ public class Helper {
     private static List<MobileElement> w(List<WebElement> elements) {
         List list = new ArrayList(elements.size());
         for (WebElement element : elements) {
-            list.add(w(element));
+            list.add((element));
         }
 
         return list;
@@ -224,18 +231,23 @@ public class Helper {
      * Wait 30 seconds for locator to find an element *
      */
     public static MobileElement wait(By locator) {
-        return w(driverWait.until(ExpectedConditions.visibilityOfElementLocated(locator)));
+        return w(driverWait.until(ExpectedConditions.visibilityOfElementLocated(locator))) ;
+
     }
 
     public static WebElement wait_web(By locator) {
         return driverWait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+
     }
+
 
     /**
      * Wait 60 seconds for locator to find all elements *
      */
-    public static List<MobileElement> waitAll(By locator) {
-        return w(driverWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator)));
+    public static List<WebElement> waitAll(By locator) {
+        return driverWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+
+
     }
 
     /**
@@ -245,18 +257,35 @@ public class Helper {
         return driverWait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
 
-    /**
-     * Return an element that contains name or text *
-     */
-    public static MobileElement scroll_to(String value) {
-        return driver.scrollTo(value);
-    }
+//    /**
+//     * Return an element that contains name or text *
+//     */
+//    public static MobileElement scroll_to(String value) {
+//        return driver.scrollTo(value);
+//    }
+//
+//    /**
+//     * Return an element that exactly matches name or text *
+//     */
+//    public static MobileElement scroll_to_exact(String value) {
+//        return driver.scrollToExact(value);
+//    }
+    public WebElement findByUISelectorType (UISelectorType selector, String value, String appPacket) {
+        WebElement e = null;
 
-    /**
-     * Return an element that exactly matches name or text *
-     */
-    public static MobileElement scroll_to_exact(String value) {
-        return driver.scrollToExact(value);
+        switch (selector){
+            case RESOURCE_ID:    e = driver.findElementByAndroidUIAutomator("\"UiSelector().resourceId(\\\""+appPacket+":"+value+"\\\")\"");
+                break;
+            case TEXT:    e = driver.findElementByAndroidUIAutomator("\"UiSelector().resourceId(\\\""+appPacket+":"+value+"\\\")\"");
+                break;
+            case TEXT_CONTAIN:    e = driver.findElementByAndroidUIAutomator("\"UiSelector().resourceId(\\\""+appPacket+":"+value+"\\\")\"");
+                break;
+            case TEXT_START_WITH:    e = driver.findElementByAndroidUIAutomator("\"UiSelector().resourceId(\\\""+appPacket+":"+value+"\\\")\"");
+                break;
+
+        }
+
+        return e;
     }
 }
 
