@@ -8,25 +8,25 @@ public enum UISelectorType {
     private String UISelectorCode;
 
     /**
-     *
-     * @param s
+     * init new UISelectorType
+     * @param s String
      */
     private UISelectorType(String s) {
         UISelectorCode=s;
     }
 
     /**
-     *
-     * @return
+     *get UISelectorCode
+     * @return String
      */
     public String getUISelectorCode(){
         return UISelectorCode;
     }
 
     /**
-     *
+     * init new UISelectorType from String
      * @param selectorTypeStr
-     * @return
+     * @return UISelectorType
      */
     public static UISelectorType fromString(String selectorTypeStr) {
         if (selectorTypeStr != null) {
