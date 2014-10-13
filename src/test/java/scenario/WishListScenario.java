@@ -4,10 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import util.AppiumSetupTest;
-import util.UISelectorType;
 
-import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Random;
 
 import static util.Helper.*;
@@ -49,22 +46,26 @@ public class WishListScenario extends AppiumSetupTest {
 
         // Select venture
         selectVenture(venture, menuWiz);
-        find(appPackage + ":id/abs__home").click();
+        findByUISelector("resourceID", "abs__home", appPackage).click();
         Thread.sleep(1000);
 
-        // Select random product
-        randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
-        find(appPackage + ":id/btn_wishlist").click();
-        find(appPackage + ":id/button1").click();
+        // Add random product to WishList
+        randomSelectProduct(categories, appPackage, filterWiz, prodWiz);System.out.println(findByUISelector("resourceID", "btn_wishlist", appPackage).getText());
+        findByUISelector("resourceID", "btn_wishlist", appPackage).click();//  Click on Add to wishList
+        findByUISelector("resourceID", "button1", appPackage).click();// Click on OK button
+
         // Go to WishList
-        driver.findElementByAndroidUIAutomator("UiSelector().resourceId(\""+appPackage+":id/abs__home\")").click();
+        findByUISelector("resourceID", "abs__home", appPackage).click();
         driver.findElementByAndroidUIAutomator("UiSelector().textContains(\""+wishList+"\")").click();
+
         // Delete product from WishList
-        find(appPackage + ":id/wishlist_item_bt_delete").click();
+        findByUISelector("resourceID", "wishlist_item_bt_delete", appPackage).click();// Click on OK button
+
         // Verify the WishList is empty
         WebElement deteleBtn = null;
-        try {
-            deteleBtn = driver.findElementByAndroidUIAutomator("UiSelector().resourceId(\""+appPackage+":id/wishlist_item_bt_delete\")");
+        try { // try to find Delete button
+//            deteleBtn = driver.findElementByAndroidUIAutomator("UiSelector().resourceId(\""+appPackage+":id/wishlist_item_bt_delete\")");
+            deteleBtn = findByUISelector("resourceID", "wishlist_item_bt_delete", appPackage);
         }catch (org.openqa.selenium.NoSuchElementException e) {};
 
         Assert.assertNull(deteleBtn);
@@ -76,23 +77,25 @@ public class WishListScenario extends AppiumSetupTest {
 
         // Select venture
         selectVenture(venture, menuWiz);
-        findByUISelectorType("resourceID","abs__home", appPackage).click();
+        findByUISelector("resourceID", "abs__home", appPackage).click();
         Thread.sleep(1000);
 
         // Random and add product to WishList
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
-        String productName = findByUISelectorType("resourceID", "product_name",appPackage).getText();
-        findByUISelectorType("resourceID", "btn_wishlist",appPackage).click();
-        findByUISelectorType("resourceID", "button1",appPackage).click();
+        String productName = findByUISelector("resourceID", "product_name", appPackage).getText();
+        findByUISelector("resourceID", "btn_wishlist", appPackage).click();
+        findByUISelector("resourceID", "button1", appPackage).click();
 
         // Go to WishList
-        findByUISelectorType("resourceID","abs__home", appPackage).click();
-        findByUISelectorType("textcontains",wishList, appPackage).click();
+        findByUISelector("resourceID", "abs__home", appPackage).click();
+        findByUISelector("textcontains", wishList, appPackage).click();
+
         // Add 1 product to Cart from WishList
-        findByUISelectorType("resourceID","wishlist_item_bt_add", appPackage).click();
-        findByUISelectorType("resourceID","button1", appPackage).click();
+        findByUISelector("resourceID", "wishlist_item_bt_add", appPackage).click();
+        findByUISelector("resourceID", "button1", appPackage).click();
+
         // Verify product that product appears in myCart
-        String myCardStr = findByUISelectorType(
+        String myCardStr = findByUISelector(
                 "resourceID",
                 "item_name",
                 appPackage)
@@ -109,47 +112,40 @@ public class WishListScenario extends AppiumSetupTest {
 
         // Select venture
         selectVenture(venture, menuWiz);
-        find(appPackage + ":id/abs__home").click();
+        findByUISelector("resourceID", "abs__home", appPackage).click();
         Thread.sleep(1000);
 
-        // Select random product
+        // Select random product - first time has wizard
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
-        find(appPackage + ":id/btn_wishlist").click();
-        find(appPackage + ":id/button1").click();
+        findByUISelector("resourceID", "btn_wishlist", appPackage).click();
+        findByUISelector("resourceID", "button1", appPackage).click();
 
 
-        for (int i = 0; i < 3; i++) {
+        Random ran = new Random();
+        int numberOfProduct = ran.nextInt(10);
+        for (int i = 0; i < numberOfProduct; i++) {
 
-            addProductToWishList( venture,  menuWiz,  wishList,  emptyWL,
-
-                     categories,  filterWiz,  prodWiz,  addWL);
+            addProductToWishListNoWizard(
+                    venture,
+                    menuWiz,
+                    wishList,
+                    emptyWL,
+                    categories,
+                    filterWiz,
+                    prodWiz,
+                    addWL,
+                    appPackage);
         }
 
         // Go to WishList
-        driver.findElementByAndroidUIAutomator("UiSelector().resourceId(\""+appPackage+":id/abs__home\")").click();
-        driver.findElementByAndroidUIAutomator("UiSelector().textContains(\""+wishList+"\")").click();
+        findByUISelector("resourceID", "abs__home", appPackage).click();
+        findByUISelector("textcontains", wishList, appPackage).click();
         // Add all product to Cart
-        find(appPackage + ":id/wishlist_bt_add_all").click();
-        find(appPackage + ":id/cart_count").click();
+        findByUISelector("resourceID", "wishlist_bt_add_all", appPackage).click();// Click Add all to Cart
+        findByUISelector("resourceID", "cart_count", appPackage).click();// Click on Go to Cart
 
     }
 
-    public void addProductToWishList (String venture, String menuWiz, String wishList, String emptyWL,
 
-                                      String categories, String filterWiz, String prodWiz, String addWL) {
-        // Select Category
-        driver.findElementByAndroidUIAutomator("UiSelector().resourceId(\""+appPackage+":id/abs__home\")").click();
-        driver.findElementByAndroidUIAutomator("UiSelector().text(\""+categories+"\")").click();
-        driver.findElementByAndroidUIAutomator("UiSelector().text(\"Cameras\")").click();
-        find(appPackage + ":id/middle_productslist_list").click();
-
-        // Random product to add to WishList
-        List<WebElement> arrProduct = driver.findElementsByAndroidUIAutomator("UiSelector().resourceId(\""+appPackage+":id/image_view\")");
-        Random ran = new Random();
-        int productIndex  = ran.nextInt(arrProduct.size());
-        arrProduct.get(productIndex).click();
-        find(appPackage + ":id/btn_wishlist").click();
-        find(appPackage + ":id/button1").click();
-    }
 
 }
