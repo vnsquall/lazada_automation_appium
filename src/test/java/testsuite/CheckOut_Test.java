@@ -27,11 +27,12 @@ public class CheckOut_Test extends CheckOutScenario {
     @DataProvider
     Object[][] getVenturesDataToTest() {
         return new Object[][]{
-                {"Singapore"}
-//                {"Malaysia"},
-//                {"Philippines"},
-//                {"Indonesia"},
-//                {"Vietnam"}
+                {"Singapore"},
+                {"Malaysia"},
+                {"Philippines"},
+                {"Indonesia"},
+                {"Vietnam"},
+                {"Thailand"}
         };
     }
 

@@ -41,7 +41,7 @@ public class AppiumSetupTest {
 //        capabilities.setCapability("platformVersion", "4.3");
 
         String userDir = System.getProperty("user.dir");
-        String localApp = "lazada-android.apk";
+        String localApp = "Lazada_Samsung_v2.7.4_55_R1.apk";
         String appPath = Paths.get(userDir, localApp).toAbsolutePath().toString();
         capabilities.setCapability("app", appPath);
         return capabilities;

@@ -2,11 +2,14 @@ package scenario;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import util.AppiumSetupTest;
 
 import java.util.HashMap;
+import java.util.List;
 
-import static util.Helper.*;
+import static util.Helper.driver;
+import static util.Helper.selectVenture;
 
 /**
  * Created by lazhcm10136 on 10/9/14.
@@ -16,7 +19,9 @@ public class CategoryScenario extends AppiumSetupTest {
         selectVenture(venture, menuWiz);
         Thread.sleep(2000);
         driver.findElement(By.id(appPackage + ":id/abs__home")).click();
-        text_exact(categories).click();
+        List<WebElement> menuItems = driver.findElements(By.id(appPackage + ":id/component_text"));
+        menuItems.get(1).click(); // Categories
+
         Thread.sleep(1000);
 
         //Scroll DOWN for last Categories

@@ -39,7 +39,7 @@ public class UserAccountScenario extends AppiumSetupTest {
     }
 
     protected void registerWithNewUser(String venture, String menuWiz, String account, String userData,
-                                    String createUser, String mail, String pass, String name) throws InterruptedException {
+                                       String createUser, String mail, String pass, String name) throws InterruptedException {
         selectVenture(venture, menuWiz);
         find(appPackage + ":id/abs__home").click();
         Thread.sleep(1000);
@@ -56,7 +56,7 @@ public class UserAccountScenario extends AppiumSetupTest {
     }
 
     protected void loginWrongData(String venture, String menuWiz, String account, String userData,
-                               String mail, String pass, String loginFailed) throws InterruptedException {
+                                  String mail, String pass, String loginFailed) throws InterruptedException {
         selectVenture(venture, menuWiz);
         find(appPackage + ":id/abs__home").click();
         Thread.sleep(1000);
@@ -70,7 +70,7 @@ public class UserAccountScenario extends AppiumSetupTest {
     }
 
     protected void loginAndLogout(String venture, String menuWiz, String account, String userData,
-                               String mail, String pass, String logOut) throws InterruptedException {
+                                  String mail, String pass, String logOut) throws InterruptedException {
         selectVenture(venture, menuWiz);
         find(appPackage + ":id/abs__home").click();
         Thread.sleep(1000);

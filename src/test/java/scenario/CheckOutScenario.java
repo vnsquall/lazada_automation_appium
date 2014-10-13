@@ -73,7 +73,7 @@ public class CheckOutScenario extends AppiumSetupTest {
             driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
             driver.findElement(By.xpath("//button[@class='orange-button']")).click();
             Thread.sleep(3000);
-            driver.findElement(By.xpath("//input[@name='sendPayment']")).click();
+            driver.findElement(By.xpath("//input[@name='sendFinish']")).click();
 
             driver.getContextHandles();
             Thread.sleep(2000);

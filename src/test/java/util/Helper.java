@@ -82,6 +82,10 @@ public class Helper {
 
     public static void selectVenture(String venture, String menuWiz) throws InterruptedException {
         driver.findElement(By.xpath(("//android.widget.TextView[contains(@text, '" + venture + "')]"))).click();
+        if (venture.equals("Thailand")) {
+            driver.findElement(By.xpath("//android.widget.Button[contains(@text, 'English')]")).click();
+        }
+
         Thread.sleep(5000);
         find(menuWiz).click();
         Thread.sleep(2000);
@@ -261,6 +265,7 @@ public class Helper {
 
     /**
      * find Element by UIAndroidSelector
+     *
      * @param selectorTypeStr
      * @param value
      * @param appPackage
@@ -270,14 +275,18 @@ public class Helper {
         WebElement e = null;
         UISelectorType selector = UISelectorType.fromString(selectorTypeStr);
 
-        switch (selector){
-            case RESOURCE_ID:    e = driver.findElementByAndroidUIAutomator("UiSelector().resourceId(\""+appPackage+":id/"+value+"\")");
+        switch (selector) {
+            case RESOURCE_ID:
+                e = driver.findElementByAndroidUIAutomator("UiSelector().resourceId(\"" + appPackage + ":id/" + value + "\")");
                 break;
-            case TEXT:    e = driver.findElementByAndroidUIAutomator("UiSelector().text(\""+value+"\")");
+            case TEXT:
+                e = driver.findElementByAndroidUIAutomator("UiSelector().text(\"" + value + "\")");
                 break;
-            case TEXT_CONTAINS:    e = driver.findElementByAndroidUIAutomator("UiSelector().textContains(\""+value+"\")");
+            case TEXT_CONTAINS:
+                e = driver.findElementByAndroidUIAutomator("UiSelector().textContains(\"" + value + "\")");
                 break;
-            case TEXT_START_WITH:    e = driver.findElementByAndroidUIAutomator("UiSelector().textStartsWith(\""+appPackage+":"+value+"\")");
+            case TEXT_START_WITH:
+                e = driver.findElementByAndroidUIAutomator("UiSelector().textStartsWith(\"" + appPackage + ":" + value + "\")");
                 break;
 
         }
@@ -285,18 +294,22 @@ public class Helper {
         return e;
     }
 
-    public static List<WebElement > findsByUISelector(String selectorTypeStr, String value, String appPackage) {
-        List <WebElement>e = null;
+    public static List<WebElement> findsByUISelector(String selectorTypeStr, String value, String appPackage) {
+        List<WebElement> e = null;
         UISelectorType selector = UISelectorType.fromString(selectorTypeStr);
 
-        switch (selector){
-            case RESOURCE_ID:    e = driver.findElementsByAndroidUIAutomator("UiSelector().resourceId(\""+appPackage+":"+value+"\")");
+        switch (selector) {
+            case RESOURCE_ID:
+                e = driver.findElementsByAndroidUIAutomator("UiSelector().resourceId(\"" + appPackage + ":" + value + "\")");
                 break;
-            case TEXT:    e = driver.findElementsByAndroidUIAutomator("UiSelector().text(\""+appPackage+":"+value+"\")");
+            case TEXT:
+                e = driver.findElementsByAndroidUIAutomator("UiSelector().text(\"" + appPackage + ":" + value + "\")");
                 break;
-            case TEXT_CONTAINS:    e = driver.findElementsByAndroidUIAutomator("UiSelector().textContains(\""+appPackage+":"+value+"\")");
+            case TEXT_CONTAINS:
+                e = driver.findElementsByAndroidUIAutomator("UiSelector().textContains(\"" + appPackage + ":" + value + "\")");
                 break;
-            case TEXT_START_WITH:    e = driver.findElementsByAndroidUIAutomator("UiSelector().textStartsWith(\""+appPackage+":"+value+"\")");
+            case TEXT_START_WITH:
+                e = driver.findElementsByAndroidUIAutomator("UiSelector().textStartsWith(\"" + appPackage + ":" + value + "\")");
                 break;
 
         }
@@ -306,6 +319,7 @@ public class Helper {
 
     /**
      * Add 1 randomly product to WishList
+     *
      * @param venture
      * @param menuWiz
      * @param wishList
