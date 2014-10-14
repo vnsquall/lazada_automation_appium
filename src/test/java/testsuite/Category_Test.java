@@ -36,6 +36,6 @@ public class Category_Test extends CategoryScenario {
 
     @Test(dataProvider = "getVenturesDataToTest")
     public void test_BrowseCategories(String venture) throws Exception {
-        searchCategories(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"));
+        searchCategories(venture, setText(venture).get("menuWiz"), setText(venture).get("filterWiz"));
     }
 }

@@ -33,7 +33,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         find(appPackage + ":id/button1").click();
 
         //Swipe down
-        swipe();
+        swipeDown();
 
         find(appPackage + ":id/checkout_button").click();
 

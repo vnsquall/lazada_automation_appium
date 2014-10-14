@@ -1,48 +1,59 @@
 package scenario;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import util.AppiumSetupTest;
 
-import java.util.HashMap;
 import java.util.List;
 
-import static util.Helper.driver;
-import static util.Helper.selectVenture;
+import static util.Helper.*;
 
 /**
  * Created by lazhcm10136 on 10/9/14.
  */
 public class CategoryScenario extends AppiumSetupTest {
-    protected void searchCategories(String venture, String menuWiz, String categories) throws Exception {
+    protected void searchCategories(String venture, String menuWiz, String filterWiz) throws Exception {
         selectVenture(venture, menuWiz);
         Thread.sleep(2000);
         driver.findElement(By.id(appPackage + ":id/abs__home")).click();
+        //List of Menu Items
         List<WebElement> menuItems = driver.findElements(By.id(appPackage + ":id/component_text"));
         menuItems.get(1).click(); // Categories
-
         Thread.sleep(1000);
+
+        //List of TOP Categories
+        List<WebElement> topCategories = driver.findElements(By.id(appPackage + ":id/category_name"));
+        int topSize = topCategories.size();
+        for (int x = 0; x < topSize; x++) {
+            topCategories.get(x).click();
+            Thread.sleep(1000);
+            if (x == 0) {
+                text_exact(filterWiz).click();
+                Thread.sleep(1000);
+            }
+            driver.findElement(By.xpath("//android.widget.TextView[@resource-id='" + appPackage + ":id/title' and @text='All']")).click();
+            Thread.sleep(1000);
+        }
 
         //Scroll DOWN for last Categories
-        JavascriptExecutor scrollDown = (JavascriptExecutor) driver;
-        HashMap<String, Double> swipeDown = new HashMap<String, Double>();
-        swipeDown.put("startX", 0.95);
-        swipeDown.put("startY", 0.95);
-        swipeDown.put("endX", 0.95);
-        swipeDown.put("endY", 0.5);
-        swipeDown.put("duration", 1.8);
-        scrollDown.executeScript("mobile: swipe", swipeDown);
+        swipeDown();
 
-        Thread.sleep(1000);
+        //List of the rest Categories
+        List<WebElement> restCategories = driver.findElements(By.id(appPackage + ":id/category_name"));
+        int restSize = restCategories.size();
+        for (int y = 4; y < restSize; y++) {
+            restCategories.get(y).click();
+            Thread.sleep(1000);
+            driver.findElement(By.xpath("//android.widget.TextView[@resource-id='" + appPackage + ":id/title' and @text='All']")).click();
+            Thread.sleep(1000);
+            swipeDown();
+        }
+
         //Scroll UP for first Categories
-        JavascriptExecutor scrollUp = (JavascriptExecutor) driver;
-        HashMap<String, Double> swipeUp = new HashMap<String, Double>();
-        swipeUp.put("startX", 0.95);
-        swipeUp.put("startY", 0.6);
-        swipeUp.put("endX", 0.95);
-        swipeUp.put("endY", 0.95);
-        swipeUp.put("duration", 1.8);
-        scrollUp.executeScript("mobile: swipe", swipeUp);
+        swipeUp();
+        topCategories.get(1).click();
+        driver.findElement(By.xpath("//android.widget.TextView[@resource-id='" + appPackage + ":id/title' and @text='All']")).click();
+        swipeDown();
+        swipeDown();
     }
 }

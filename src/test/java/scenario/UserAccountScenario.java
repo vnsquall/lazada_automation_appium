@@ -48,7 +48,7 @@ public class UserAccountScenario extends AppiumSetupTest {
         driver.findElement(By.xpath("//android.widget.TextView[@resource-id='" + appPackage + ":id/component_text' and @text='" + account + "']")).click();
         driver.findElement(By.xpath("//android.widget.TextView[@resource-id='" + appPackage + ":id/option_name' and @text='" + userData + "']")).click();
         //User Register
-        swipe();
+        swipeDown();
         driver.findElement(By.xpath("//android.widget.Button[@resource-id='" + appPackage + ":id/middle_login_link_register' and @text='" + createUser + "']")).click();
 
         register(mail, pass, name, setText(venture).get("terms"));

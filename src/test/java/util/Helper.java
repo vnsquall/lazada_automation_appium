@@ -67,7 +67,6 @@ public class Helper {
 
         // Random selection Categories
         randClick(By.id(appPackage + ":id/category_name"));
-
         text_exact(filterWiz).click();
 
         // Random selection sub-Categories
@@ -91,15 +90,26 @@ public class Helper {
         Thread.sleep(2000);
     }
 
-    public static void swipe() {
-        JavascriptExecutor js = driver;
-        HashMap<String, Double> swipeObject = new HashMap<String, Double>();
-        swipeObject.put("startX", 256.0);
-        swipeObject.put("startY", 200.0);
-        swipeObject.put("endX", 256.0);
-        swipeObject.put("endY", 650.0);
-        swipeObject.put("duration", 0.8);
-        js.executeScript("mobile: swipe", swipeObject);
+    public static void swipeDown() {
+        JavascriptExecutor scrollDown = driver;
+        HashMap<String, Double> swipeDown = new HashMap<String, Double>();
+        swipeDown.put("startX", 0.95);
+        swipeDown.put("startY", 0.95);
+        swipeDown.put("endX", 0.95);
+        swipeDown.put("endY", 0.5);
+        swipeDown.put("duration", 1.8);
+        scrollDown.executeScript("mobile: swipe", swipeDown);
+    }
+
+    public static void swipeUp() {
+        JavascriptExecutor scrollUp = driver;
+        HashMap<String, Double> swipeUp = new HashMap<String, Double>();
+        swipeUp.put("startX", 0.95);
+        swipeUp.put("startY", 0.6);
+        swipeUp.put("endX", 0.95);
+        swipeUp.put("endY", 0.95);
+        swipeUp.put("duration", 1.8);
+        scrollUp.executeScript("mobile: swipe", swipeUp);
     }
 
     /**
