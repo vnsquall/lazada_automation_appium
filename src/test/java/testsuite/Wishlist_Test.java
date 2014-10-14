@@ -35,39 +35,49 @@ public class Wishlist_Test extends WishListScenario {
         };
     }
 
-    @Test(dataProvider = "getVenturesDataToTest" )
+    @DataProvider
+    Object[][] getVenturesDataToTestWishListShareItem() {
+        return new Object[][]{
+//                {"Singapore"}
+                {"Malaysia", "Messaging", "0933081162", "com.android.mms"}
+//                {"Philippines"}
+//                {"Indonesia"},
+//                {"Vietnam"}
+        };
+    }
+
+    @Test(dataProvider = "getVenturesDataToTest" , enabled = false)
     public void test_WishListNotLogin(String venture) throws Exception {
         wishListNotLogin(venture, setText(venture).get("menuWiz"), setText(venture).get("wishList"), setText(venture).get("emptyWL"),
                 setText(venture).get("categories"), setText(venture).get("filterWiz"),
                 setText(venture).get("prodWiz"), setText(venture).get("addWL"));
     }
 
-    @Test(dataProvider = "getVenturesDataToTest" )
+    @Test(dataProvider = "getVenturesDataToTest" , enabled = false)
     public void test_WishListDeleteProduct (String venture) throws InterruptedException {
         wishListDeleteProduct(venture, setText(venture).get("menuWiz"), setText(venture).get("wishList"), setText(venture).get("emptyWL"),
                 setText(venture).get("categories"), setText(venture).get("filterWiz"),
                 setText(venture).get("prodWiz"), setText(venture).get("addWL"));
     }
 
-    @Test(dataProvider = "getVenturesDataToTest" )
+    @Test(dataProvider = "getVenturesDataToTest" , enabled = false)
     public void test_WishListAddToCart (String venture) throws InterruptedException {
         wishListAddToCart(venture, setText(venture).get("menuWiz"), setText(venture).get("wishList"), setText(venture).get("emptyWL"),
                 setText(venture).get("categories"), setText(venture).get("filterWiz"),
                 setText(venture).get("prodWiz"), setText(venture).get("addWL"));
     }
 
-    @Test(dataProvider = "getVenturesDataToTest" )
+    @Test(dataProvider = "getVenturesDataToTest" , enabled = false)
     public void test_WishListAddAllToCart (String venture) throws InterruptedException {
         wishListAddAllToCart(venture, setText(venture).get("menuWiz"), setText(venture).get("wishList"), setText(venture).get("emptyWL"),
                 setText(venture).get("categories"), setText(venture).get("filterWiz"),
                 setText(venture).get("prodWiz"), setText(venture).get("addWL"));
     }
 
-    @Test(dataProvider = "getVenturesDataToTest")
+    @Test(dataProvider = "getVenturesDataToTestWishListShareItem")
     public void test_WishListShareItem (String venture, String sharerAppName, String phoneNumber, String sharerAppPackage) throws InterruptedException {
         wishListShareItem(venture, setText(venture).get("menuWiz"), setText(venture).get("wishList"), setText(venture).get("emptyWL"),
                 setText(venture).get("categories"), setText(venture).get("filterWiz"),
                 setText(venture).get("prodWiz"), setText(venture).get("addWL"), sharerAppName, phoneNumber, sharerAppPackage);
     }
-
 }
