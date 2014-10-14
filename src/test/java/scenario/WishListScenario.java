@@ -69,6 +69,8 @@ public class WishListScenario extends AppiumSetupTest {
         }catch (org.openqa.selenium.NoSuchElementException e) {};
 
         Assert.assertNull(deteleBtn);
+        Assert.assertTrue(findByUISelector("resourceID", "wishlist_no_items_text",appPackage).isDisplayed());
+        Assert.assertEquals(emptyWL,findByUISelector("resourceID","wishlist_no_items_text",appPackage).getText());
     }
 
     protected void wishListAddToCart (String venture, String menuWiz, String wishList, String emptyWL,
