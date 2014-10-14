@@ -41,7 +41,6 @@ public class WishListScenario extends AppiumSetupTest {
     }
 
     protected void wishListDeleteProduct (String venture, String menuWiz, String wishList, String emptyWL,
-
                                           String categories, String filterWiz, String prodWiz, String addWL) throws InterruptedException {
 
         // Select venture
@@ -70,11 +69,10 @@ public class WishListScenario extends AppiumSetupTest {
 
         Assert.assertNull(deteleBtn);
         Assert.assertTrue(findByUISelector("resourceID", "wishlist_no_items_text",appPackage).isDisplayed());
-        Assert.assertEquals(emptyWL,findByUISelector("resourceID","wishlist_no_items_text",appPackage).getText());
+        Assert.assertEquals(emptyWL, findByUISelector("resourceID", "wishlist_no_items_text", appPackage).getText());
     }
 
     protected void wishListAddToCart (String venture, String menuWiz, String wishList, String emptyWL,
-
                                       String categories, String filterWiz, String prodWiz, String addWL) throws InterruptedException {
 
         // Select venture
@@ -109,7 +107,6 @@ public class WishListScenario extends AppiumSetupTest {
     }
 
     protected void wishListAddAllToCart (String venture, String menuWiz, String wishList, String emptyWL,
-
                                          String categories, String filterWiz, String prodWiz, String addWL) throws InterruptedException {
 
         // Select venture
@@ -121,7 +118,6 @@ public class WishListScenario extends AppiumSetupTest {
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
         findByUISelector("resourceID", "btn_wishlist", appPackage).click();
         findByUISelector("resourceID", "button1", appPackage).click();
-
 
         Random ran = new Random();
         int numberOfProduct = ran.nextInt(10);
@@ -149,8 +145,8 @@ public class WishListScenario extends AppiumSetupTest {
     }
 
     protected void wishListShareItem (String venture, String menuWiz, String wishList, String emptyWL,
-
-                                      String categories, String filterWiz, String prodWiz, String addWL, String sharerAppName, String phoneNumber, String sharerAppPackage ) throws InterruptedException {
+                                      String categories, String filterWiz, String prodWiz, String addWL,
+                                      String sharerAppName, String phoneNumber, String sharerAppPackage) throws InterruptedException {
 
         // Select venture
         selectVenture(venture, menuWiz);
