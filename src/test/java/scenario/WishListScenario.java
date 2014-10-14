@@ -170,7 +170,7 @@ public class WishListScenario extends AppiumSetupTest {
         findByUISelector("resourceID", "send_button_sms", sharerAppPackage).click();// Click Send message
 
         // Get back Lazada Application
-        findByUISelector("resourceID", "send_button_sms", sharerAppPackage).sendKeys(Keys.ESCAPE);
+        driver.navigate().back();
 
 
     }
