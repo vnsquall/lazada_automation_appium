@@ -145,4 +145,33 @@ public class WishListScenario extends AppiumSetupTest {
         findByUISelector("resourceID", "cart_count", appPackage).click();// Click on Go to Cart
 
     }
+
+    protected void wishListShareItem (String venture, String menuWiz, String wishList, String emptyWL,
+
+                                      String categories, String filterWiz, String prodWiz, String addWL, String messageApp, String phoneNumber, String sharerAppPackage ) throws InterruptedException {
+
+        // Select venture
+        selectVenture(venture, menuWiz);
+        findByUISelector("resourceID", "abs__home", appPackage).click();
+        Thread.sleep(1000);
+
+        // Select random product - first time has wizard
+        randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
+
+        // Select the Application to share the Item: Bluetooth, Message, Email
+        findByUISelector("resourceID", "btn_share", appPackage).click();
+        findByUISelector("text", messageApp, appPackage).click();
+
+        // Choose Remember type
+//        findByUISelector("resourceID", "button_once", appPackage).click();
+
+        // Enter phone number
+        findByUISelector("resourceID", "recipients_editor", sharerAppPackage).sendKeys(phoneNumber);
+        findByUISelector("resourceID", "send_button_sms", sharerAppPackage).click();// Click Send message
+
+        // Get back Lazada Application
+        findByUISelector("resourceID", "send_button_sms", sharerAppPackage).sendKeys(Keys.ESCAPE);
+
+
+    }
 }
