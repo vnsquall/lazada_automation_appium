@@ -146,9 +146,9 @@ public class WishListScenario extends AppiumSetupTest {
 
     }
 
-    protected void wishListShareItem (String venture, String menuWiz, String wishList, String emptyWL,
+    protected void wishListShareItem_ (String venture, String menuWiz, String wishList, String emptyWL,
 
-                                      String categories, String filterWiz, String prodWiz, String addWL, String messageApp, String phoneNumber, String sharerAppPackage ) throws InterruptedException {
+                                       String categories, String filterWiz, String prodWiz, String addWL, String appName, String phoneNumber, String sharerAppPackage ) throws InterruptedException {
 
         // Select venture
         selectVenture(venture, menuWiz);
@@ -160,11 +160,22 @@ public class WishListScenario extends AppiumSetupTest {
 
         // Select the Application to share the Item: Bluetooth, Message, Email
         findByUISelector("resourceID", "btn_share", appPackage).click();
-        findByUISelector("text", messageApp, appPackage).click();
+
+        // Try to find Application is selected default
+        WebElement sharerApplication = null;
+        try {
+            sharerApplication = findByUISelector("selected", "true", appPackage);
+
+        }catch (NoSuchElementException e){};
 
         // Choose Remember type
-//        findByUISelector("resourceID", "button_once", appPackage).click();
+        if (sharerApplication!= null && sharerApplication.getText() == appName) {
+            findByUISelector("resourceID", "button_once", appPackage).click();
+        }else {
+            findByUISelector("text", appName, appPackage).click();
+            findByUISelector("resourceID", "button_once", appPackage).click();
 
+        }
         // Enter phone number
         findByUISelector("resourceID", "recipients_editor", sharerAppPackage).sendKeys(phoneNumber);
         findByUISelector("resourceID", "send_button_sms", sharerAppPackage).click();// Click Send message
