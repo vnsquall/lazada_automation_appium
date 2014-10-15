@@ -18,7 +18,7 @@ public class WishListScenario extends AppiumSetupTest {
                                     String categories, String filterWiz, String prodWiz, String addWL) throws InterruptedException {
 
         selectVenture(venture, menuWiz);
-        find(appPackage + ":id/abs__home").click();
+        findByUISelector("resourceID", "abs__home", appPackage).click();
         Thread.sleep(1000);
 
         //Find & Click on Wishlist
