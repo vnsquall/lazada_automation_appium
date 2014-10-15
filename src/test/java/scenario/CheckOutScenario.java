@@ -23,25 +23,22 @@ public class CheckOutScenario extends AppiumSetupTest {
         find(appPackage + ":id/shop").click(); //Add to Cart button
 
         //Check for Variant Selection
-        Boolean productVar = isElementPresent(By.id(appPackage + ":id/product_variant_container"));
-        if (productVar) {
+        Boolean cartConfirm = isElementPresent(By.id(appPackage + ":id/button1"));
+        if (cartConfirm) {
+            driver.findElement(By.id(appPackage + ":id/button1")).click();
+        } else {
             driver.findElement(By.id(appPackage + ":id/product_variant_button")).click();
             randClick(By.id("pt.rocket.lazada.dev:id/item_text"));
             find(appPackage + ":id/shop").click();
         }
 
-        find(appPackage + ":id/button1").click();
-
-        //Swipe down
-        swipeDown();
-
         find(appPackage + ":id/checkout_button").click();
 
         //Login to CheckOut
         List<WebElement> editTextList = driver.findElements(By.className("android.widget.EditText"));
-        editTextList.get(0).click();
+//        editTextList.get(0).click();
         editTextList.get(0).sendKeys("qa000@mail.com");
-        editTextList.get(1).click();
+//        editTextList.get(1).click();
         editTextList.get(1).sendKeys("a12345");
 
         driver.findElement(By.className("android.widget.CheckBox")).click();
@@ -57,16 +54,17 @@ public class CheckOutScenario extends AppiumSetupTest {
                 driver.context(contextName); // set context to WEBVIEW_$
             }
         }
-        Thread.sleep(2000);
-        wait_web(By.xpath("//button[@class='orange-button']"));
-        driver.findElement(By.xpath("//button[@class='orange-button']")).click();
-        Thread.sleep(2000);
+        Thread.sleep(3000);
+        //Find the orange-button, name 'submit'
+//        driver.findElement(By.xpath("//button[@name='submit']")).click();
+        driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/form/div[3]/button")).click();
+        Thread.sleep(3000);
     }
 
     protected void checkOutAndUseTheCoD(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
         // Perform Check Out steps
         checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
-
+        Thread.sleep(1000);
         // Check the Cash On Delivery is available or not for this CheckOutTest
         if (isElementPresent(By.xpath("//label[@for='cashondelivery']"))) {
 
