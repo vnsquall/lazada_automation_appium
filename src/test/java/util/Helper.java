@@ -304,24 +304,28 @@ public class Helper {
         return e;
     }
 
-    public static List<WebElement> findsByUISelector(String selectorTypeStr, String value, String appPackage) {
-        List<WebElement> e = null;
+    /**
+     * find Element by UIAndroidSelector
+     * @param selectorTypeStr
+     * @param value
+     * @param appPackage
+     * @return List of Element
+     */
+    public static List<WebElement > findsByUISelector(String selectorTypeStr, String value, String appPackage) {
+        List <WebElement>e = null;
         UISelectorType selector = UISelectorType.fromString(selectorTypeStr);
 
-        switch (selector) {
-            case RESOURCE_ID:
-                e = driver.findElementsByAndroidUIAutomator("UiSelector().resourceId(\"" + appPackage + ":" + value + "\")");
+        switch (selector){
+            case RESOURCE_ID:    e = driver.findElementsByAndroidUIAutomator("UiSelector().resourceId(\""+appPackage+":id/"+value+"\")");
                 break;
-            case TEXT:
-                e = driver.findElementsByAndroidUIAutomator("UiSelector().text(\"" + appPackage + ":" + value + "\")");
+            case TEXT:    e = driver.findElementsByAndroidUIAutomator("UiSelector().text(\""+value+"\")");
                 break;
-            case TEXT_CONTAINS:
-                e = driver.findElementsByAndroidUIAutomator("UiSelector().textContains(\"" + appPackage + ":" + value + "\")");
+            case TEXT_CONTAINS:    e = driver.findElementsByAndroidUIAutomator("UiSelector().textContains(\""+value+"\")");
                 break;
-            case TEXT_START_WITH:
-                e = driver.findElementsByAndroidUIAutomator("UiSelector().textStartsWith(\"" + appPackage + ":" + value + "\")");
+            case TEXT_START_WITH:    e = driver.findElementsByAndroidUIAutomator("UiSelector().textStartsWith(\""+appPackage+":"+value+"\")");
                 break;
-
+            case SELECTED:    e = driver.findElementsByAndroidUIAutomator("UiSelector().selected("+value+")");
+                break;
         }
 
         return e;
