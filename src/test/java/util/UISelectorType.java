@@ -4,7 +4,7 @@ package util;
  * Created by User on 10/11/2014.
  */
 public enum UISelectorType {
-    RESOURCE_ID("resourceID"), TEXT_CONTAINS("textContains"), TEXT("text"), TEXT_START_WITH("textStartWith");
+    RESOURCE_ID("resourceID"), TEXT_CONTAINS("textContains"), TEXT("text"), TEXT_START_WITH("textStartWith"), SELECTED("selected");
     private String UISelectorCode;
 
     /**
