@@ -9,7 +9,11 @@ import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -368,5 +372,25 @@ public class Helper {
 
     }
 
+    /**
+     * take screen shot
+     * @return File
+     * @throws java.io.IOException
+     */
+    public static File takeScreenshot(String SCREENSHOT_PATH)  {
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+        //get current date time with Date()
+        Date date = new Date();
+        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(scrFile, new File(SCREENSHOT_PATH + dateFormat.format(date).toString() + ".png"));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            System.err.println(e);
+        }
+
+        return scrFile;
+    }
 }
 
