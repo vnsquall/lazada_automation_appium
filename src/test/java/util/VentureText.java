@@ -26,6 +26,7 @@ public class VentureText {
             ventureText.put("terms", "I agree with the");
             ventureText.put("loginFailed", "Please check your username or password.");
             ventureText.put("logOut", "Sign Out");
+            ventureText.put("emptyCart", "You have no items in your cart");
         }
         if (venture.equals("Indonesia")) {
             ventureText.put("menuWiz", "Sentuh untuk membuka menu");
@@ -35,6 +36,14 @@ public class VentureText {
             ventureText.put("prodWiz", "Sentuh untuk membuka galeri produk");
             ventureText.put("emptyWL", "Tidak ada barang pada wishlist");
             ventureText.put("addWL", "Produk telah ditambahkan ke wishlist Anda");
+            ventureText.put("account", "Pengaturan Akun");
+            ventureText.put("userData", "Data Pelanggan");
+            ventureText.put("createUser", "Buat Akun");
+            ventureText.put("terms", "Saya setuju dengan");
+            ventureText.put("loginFailed", "Silakan periksa username atau password anda.");
+            ventureText.put("logOut", "Sign Out");
+            ventureText.put("emptyCart", "Tidak ada barang pada troli");
+
         }
         if (venture.equals("Vietnam")) {
             ventureText.put("menuWiz", "Chạm vào để mở menu");
@@ -44,6 +53,15 @@ public class VentureText {
             ventureText.put("prodWiz", "Chạm vào để xem một số hình ảnh về sản phẩm");
             ventureText.put("emptyWL", "Không có món hàng nào trong danh sách yêu thích");
             ventureText.put("addWL", "Sản phẩm đã được thêm vào danh sách yêu thích");
+            ventureText.put("account", "Cài đặt tài khoản");
+            ventureText.put("userData", "Thông tin tài khoản");
+            ventureText.put("createUser", "Đăng ký ngay");
+            ventureText.put("terms", "Tôi đồng ý với");
+            ventureText.put("loginFailed", "Vui lòng kiểm tra lại tên đăng nhập hoặc mật khẩu");
+            ventureText.put("logOut", "Thoát");
+            ventureText.put("emptyCart", "Giỏ hàng của bạn còn trống");
+
+
         }
         return ventureText;
     }

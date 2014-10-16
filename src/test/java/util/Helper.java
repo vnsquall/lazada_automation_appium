@@ -9,15 +9,19 @@ package util;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -74,7 +78,6 @@ public class Helper {
 
         // Random selection Categories
         randClick(By.id(appPackage + ":id/category_name"));
-
         text_exact(filterWiz).click();
 
         // Random selection sub-Categories
@@ -89,20 +92,35 @@ public class Helper {
 
     public static void selectVenture(String venture, String menuWiz) throws InterruptedException {
         driver.findElement(By.xpath(("//android.widget.TextView[contains(@text, '" + venture + "')]"))).click();
-        Thread.sleep(4000);
+        if (venture.equals("Thailand")) {
+            driver.findElement(By.xpath("//android.widget.Button[contains(@text, 'English')]")).click();
+        }
+
+        Thread.sleep(5000);
         find(menuWiz).click();
         Thread.sleep(2000);
     }
 
-    public static void swipe() {
-        JavascriptExecutor js = driver;
-        HashMap<String, Double> swipeObject = new HashMap<String, Double>();
-        swipeObject.put("startX", 256.0);
-        swipeObject.put("startY", 200.0);
-        swipeObject.put("endX", 256.0);
-        swipeObject.put("endY", 650.0);
-        swipeObject.put("duration", 0.8);
-        js.executeScript("mobile: swipe", swipeObject);
+    public static void swipeDown() {
+        JavascriptExecutor scrollDown = driver;
+        HashMap<String, Double> swipeDown = new HashMap<String, Double>();
+        swipeDown.put("startX", 0.95);
+        swipeDown.put("startY", 0.95);
+        swipeDown.put("endX", 0.95);
+        swipeDown.put("endY", 0.5);
+        swipeDown.put("duration", 1.8);
+        scrollDown.executeScript("mobile: swipe", swipeDown);
+    }
+
+    public static void swipeUp() {
+        JavascriptExecutor scrollUp = driver;
+        HashMap<String, Double> swipeUp = new HashMap<String, Double>();
+        swipeUp.put("startX", 0.95);
+        swipeUp.put("startY", 0.6);
+        swipeUp.put("endX", 0.95);
+        swipeUp.put("endY", 0.95);
+        swipeUp.put("duration", 1.8);
+        scrollUp.executeScript("mobile: swipe", swipeUp);
     }
 
     /**
@@ -286,6 +304,122 @@ public class Helper {
         }
 
         return e;
+    }
+
+    /**
+     * find Element by UIAndroidSelector
+     *
+     * @param selectorTypeStr
+     * @param value
+     * @param appPackage
+     * @return WebElement
+     */
+    public static WebElement findByUISelector(String selectorTypeStr, String value, String appPackage) {
+        WebElement e = null;
+        UISelectorType selector = UISelectorType.fromString(selectorTypeStr);
+
+        switch (selector) {
+            case RESOURCE_ID:
+                e = driver.findElementByAndroidUIAutomator("UiSelector().resourceId(\"" + appPackage + ":id/" + value + "\")");
+                break;
+            case TEXT:
+                e = driver.findElementByAndroidUIAutomator("UiSelector().text(\"" + value + "\")");
+                break;
+            case TEXT_CONTAINS:
+                e = driver.findElementByAndroidUIAutomator("UiSelector().textContains(\"" + value + "\")");
+                break;
+            case TEXT_START_WITH:
+                e = driver.findElementByAndroidUIAutomator("UiSelector().textStartsWith(\"" + appPackage + ":" + value + "\")");
+                break;
+
+        }
+
+        return e;
+    }
+
+    /**
+     * find Element by UIAndroidSelector
+     * @param selectorTypeStr
+     * @param value
+     * @param appPackage
+     * @return List of Element
+     */
+    public static List<WebElement > findsByUISelector(String selectorTypeStr, String value, String appPackage) {
+        List <WebElement>e = null;
+        UISelectorType selector = UISelectorType.fromString(selectorTypeStr);
+
+        switch (selector){
+            case RESOURCE_ID:    e = driver.findElementsByAndroidUIAutomator("UiSelector().resourceId(\""+appPackage+":id/"+value+"\")");
+                break;
+            case TEXT:    e = driver.findElementsByAndroidUIAutomator("UiSelector().text(\""+value+"\")");
+                break;
+            case TEXT_CONTAINS:    e = driver.findElementsByAndroidUIAutomator("UiSelector().textContains(\""+value+"\")");
+                break;
+            case TEXT_START_WITH:    e = driver.findElementsByAndroidUIAutomator("UiSelector().textStartsWith(\""+appPackage+":"+value+"\")");
+                break;
+            case SELECTED:    e = driver.findElementsByAndroidUIAutomator("UiSelector().selected("+value+")");
+                break;
+        }
+
+        return e;
+    }
+
+    /**
+     * Add 1 randomly product to WishList
+     *
+     * @param venture
+     * @param menuWiz
+     * @param wishList
+     * @param emptyWL
+     * @param categories
+     * @param filterWiz
+     * @param prodWiz
+     * @param addWL
+     * @param appPackage
+     */
+    public static void addProductToWishListNoWizard(String venture, String menuWiz, String wishList, String emptyWL,
+
+                                                    String categories, String filterWiz, String prodWiz, String addWL, String appPackage) {
+
+        findByUISelector("resourceID", "abs__home", appPackage).click();
+        text_exact(categories).click();
+
+        // Random selection Categories
+        randClick(By.id(appPackage + ":id/category_name"));
+
+        // Random selection sub-Categories
+        randClick(By.id(appPackage + ":id/text"));
+
+        // Get back to the Main Screen for viewing the product
+        find(appPackage + ":id/general_container").click();
+        find(appPackage + ":id/general_container").click();
+
+        // Add product to WishList
+        findByUISelector("resourceID", "btn_wishlist", appPackage).click();
+        findByUISelector("resourceID", "button1", appPackage).click();
+
+
+    }
+
+    /**
+     * take screen shot
+     * @return File
+     * @throws java.io.IOException
+     */
+    public static File takeScreenshot(String SCREENSHOT_PATH)  {
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+        //get current date time with Date()
+        Date date = new Date();
+        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(scrFile, new File(SCREENSHOT_PATH + dateFormat.format(date).toString() + ".png"));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            System.err.println(e);
+        }
+
+        return scrFile;
     }
 }
 

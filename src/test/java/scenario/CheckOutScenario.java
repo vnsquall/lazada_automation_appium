@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import util.AppiumSetupTest;
 
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import static util.Helper.*;
@@ -23,31 +24,28 @@ public class CheckOutScenario extends AppiumSetupTest {
         find(appPackage + ":id/shop").click(); //Add to Cart button
 
         //Check for Variant Selection
-        Boolean productVar = isElementPresent(By.id(appPackage + ":id/product_variant_container"));
-        if (productVar) {
+        Boolean cartConfirm = isElementPresent(By.id(appPackage + ":id/button1"));
+        if (cartConfirm) {
+            driver.findElement(By.id(appPackage + ":id/button1")).click();
+        } else {
             driver.findElement(By.id(appPackage + ":id/product_variant_button")).click();
             randClick(By.id("pt.rocket.lazada.dev:id/item_text"));
             find(appPackage + ":id/shop").click();
         }
 
-        find(appPackage + ":id/button1").click();
-
-        //Swipe down
-        swipe();
-
         find(appPackage + ":id/checkout_button").click();
 
         //Login to CheckOut
         List<WebElement> editTextList = driver.findElements(By.className("android.widget.EditText"));
-        editTextList.get(0).click();
+//        editTextList.get(0).click();
         editTextList.get(0).sendKeys("qa000@mail.com");
-        editTextList.get(1).click();
+//        editTextList.get(1).click();
         editTextList.get(1).sendKeys("a12345");
 
         driver.findElement(By.className("android.widget.CheckBox")).click();
         find(appPackage + ":id/middle_login_button_signin").click();
 
-        Thread.sleep(4000);
+        Thread.sleep(5000);
         wait_web(By.id(appPackage + ":id/rocket_app_checkoutweb"));
         driver.findElement(By.id(appPackage + ":id/rocket_app_checkoutweb"));
         Thread.sleep(2000);
@@ -57,23 +55,24 @@ public class CheckOutScenario extends AppiumSetupTest {
                 driver.context(contextName); // set context to WEBVIEW_$
             }
         }
-        Thread.sleep(2000);
-        wait_web(By.xpath("//button[@class='orange-button']"));
-        driver.findElement(By.xpath("//button[@class='orange-button']")).click();
-        Thread.sleep(2000);
+        Thread.sleep(3000);
+        //Find the orange-button, name 'submit'
+//        driver.findElement(By.xpath("//button[@name='submit']")).click();
+        driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/form/div[3]/button")).click();
+        Thread.sleep(3000);
     }
 
     protected void checkOutAndUseTheCoD(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
         // Perform Check Out steps
         checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
-
+        Thread.sleep(1000);
         // Check the Cash On Delivery is available or not for this CheckOutTest
         if (isElementPresent(By.xpath("//label[@for='cashondelivery']"))) {
 
             driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
             driver.findElement(By.xpath("//button[@class='orange-button']")).click();
             Thread.sleep(3000);
-            driver.findElement(By.xpath("//input[@name='sendPayment']")).click();
+            driver.findElement(By.xpath("//input[@name='sendFinish']")).click();
 
             driver.getContextHandles();
             Thread.sleep(2000);
@@ -133,6 +132,33 @@ public class CheckOutScenario extends AppiumSetupTest {
             if (venture.equals("Vietnam")) {
                 find("Số thẻ tín dụng không đúng").isDisplayed();
             }
+        }
+    }
+
+    protected void checkOutAndUseBankTransfer(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
+        // Perform Check Out steps
+        checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
+
+        // Check the Bank transfer is available or not for this CheckOutTest
+        if (isElementPresent(By.xpath("//label[@for='manualbanktransferid']"))) {
+
+            driver.findElement(By.xpath("//label[@for='manualbanktransferid']")).click();
+            Thread.sleep(1000);
+
+            // Choose pay method -> bank transfer
+            driver.findElement(By.xpath("//label[@class='mainBanks']")).click();
+            List<WebElement> arrBankName = driver.findElements(By.tagName("option"));
+
+            // Select random Bank name
+            Random random = new Random();
+            int randBankName = random.nextInt(arrBankName.size());
+            arrBankName.get(randBankName).click();
+
+            // Fill information and Submit
+            driver.findElement(By.xpath("//input[@class='input_field short_input']")).sendKeys("Mr Test");
+            driver.findElement(By.xpath("//button[@class='orange-button']")).click(); //Place Order
+            driver.findElement(By.xpath("//button[@class='orange-button']")).click(); //Place Order
+            driver.findElement(By.xpath("//button[@class='orange-button']")).click(); //Place Order
         }
     }
 }

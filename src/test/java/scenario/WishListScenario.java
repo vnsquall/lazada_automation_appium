@@ -14,11 +14,11 @@ import static util.Helper.*;
  */
 public class WishListScenario extends AppiumSetupTest {
 
-    protected void wishListNotLogin (String venture, String menuWiz, String wishList, String emptyWL,
+    protected void wishListNotLogin(String venture, String menuWiz, String wishList, String emptyWL,
                                     String categories, String filterWiz, String prodWiz, String addWL) throws InterruptedException {
 
         selectVenture(venture, menuWiz);
-        find(appPackage + ":id/abs__home").click();
+        findByUISelector("resourceID", "abs__home", appPackage).click();
         Thread.sleep(1000);
 
         //Find & Click on Wishlist
@@ -41,8 +41,7 @@ public class WishListScenario extends AppiumSetupTest {
     }
 
     protected void wishListDeleteProduct (String venture, String menuWiz, String wishList, String emptyWL,
-
-                                     String categories, String filterWiz, String prodWiz, String addWL) throws InterruptedException {
+                                          String categories, String filterWiz, String prodWiz, String addWL) throws InterruptedException {
 
         // Select venture
         selectVenture(venture, menuWiz);
@@ -69,11 +68,12 @@ public class WishListScenario extends AppiumSetupTest {
         }catch (org.openqa.selenium.NoSuchElementException e) {};
 
         Assert.assertNull(deteleBtn);
+        Assert.assertTrue(findByUISelector("resourceID", "wishlist_no_items_text",appPackage).isDisplayed());
+        Assert.assertEquals(emptyWL, findByUISelector("resourceID", "wishlist_no_items_text", appPackage).getText());
     }
 
     protected void wishListAddToCart (String venture, String menuWiz, String wishList, String emptyWL,
-
-                                          String categories, String filterWiz, String prodWiz, String addWL) throws InterruptedException {
+                                      String categories, String filterWiz, String prodWiz, String addWL) throws InterruptedException {
 
         // Select venture
         selectVenture(venture, menuWiz);
@@ -107,8 +107,7 @@ public class WishListScenario extends AppiumSetupTest {
     }
 
     protected void wishListAddAllToCart (String venture, String menuWiz, String wishList, String emptyWL,
-
-                                      String categories, String filterWiz, String prodWiz, String addWL) throws InterruptedException {
+                                         String categories, String filterWiz, String prodWiz, String addWL) throws InterruptedException {
 
         // Select venture
         selectVenture(venture, menuWiz);
@@ -119,7 +118,6 @@ public class WishListScenario extends AppiumSetupTest {
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
         findByUISelector("resourceID", "btn_wishlist", appPackage).click();
         findByUISelector("resourceID", "button1", appPackage).click();
-
 
         Random ran = new Random();
         int numberOfProduct = ran.nextInt(10);
@@ -146,6 +144,32 @@ public class WishListScenario extends AppiumSetupTest {
 
     }
 
+    protected void wishListShareItem (String venture, String menuWiz, String wishList, String emptyWL,
+                                      String categories, String filterWiz, String prodWiz, String addWL,
+                                      String sharerAppName, String phoneNumber, String sharerAppPackage) throws InterruptedException {
 
+        // Select venture
+        selectVenture(venture, menuWiz);
+        findByUISelector("resourceID", "abs__home", appPackage).click();
+        Thread.sleep(1000);
 
+        // Select random product - first time has wizard
+        randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
+
+        // Select the Application to share the Item: Bluetooth, Message, Email
+        findByUISelector("resourceID", "btn_share", appPackage).click();
+        findByUISelector("text", sharerAppName, appPackage).click();
+
+        if (isElementPresent(By.id("android:id/button_once"))) { // If the Just once button still appears, push it
+            findByUISelector("resourceID", "button_once", "android").click();
+        }
+
+        // Enter phone number
+        findByUISelector("resourceID", "recipients_editor", sharerAppPackage).sendKeys(phoneNumber);
+        findByUISelector("resourceID", "send_button_sms", sharerAppPackage).click();// Click Send message
+
+        // Get back Lazada Application
+        driver.navigate().back();
+
+    }
 }

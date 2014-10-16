@@ -24,7 +24,6 @@ public class CheckOut_Test extends CheckOutScenario {
         if (driver != null) driver.quit();
     }
 
-
     @DataProvider
     Object[][] getVenturesDataToTestToCashOnDelivery() {
         return new Object[][]{
@@ -73,8 +72,4 @@ public class CheckOut_Test extends CheckOutScenario {
         checkOutAndUseBankTransfer(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"));
     }
-
 }
-
-
-

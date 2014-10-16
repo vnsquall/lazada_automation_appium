@@ -4,29 +4,29 @@ package util;
  * Created by User on 10/11/2014.
  */
 public enum UISelectorType {
-    RESOURCE_ID("resourceID"), TEXT_CONTAIN("textContain"), TEXT("text"), TEXT_START_WITH("textStartWith");
+    RESOURCE_ID("resourceID"), TEXT_CONTAINS("textContains"), TEXT("text"), TEXT_START_WITH("textStartWith"), SELECTED("selected");
     private String UISelectorCode;
 
     /**
-     *
-     * @param s
+     * init new UISelectorType
+     * @param s String
      */
-    private UISelectorType (String s) {
+    private UISelectorType(String s) {
         UISelectorCode=s;
     }
 
     /**
-     *
-     * @return
+     *get UISelectorCode
+     * @return String
      */
     public String getUISelectorCode(){
         return UISelectorCode;
     }
 
     /**
-     *
+     * init new UISelectorType from String
      * @param selectorTypeStr
-     * @return
+     * @return UISelectorType
      */
     public static UISelectorType fromString(String selectorTypeStr) {
         if (selectorTypeStr != null) {

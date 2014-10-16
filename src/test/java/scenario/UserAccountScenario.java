@@ -13,7 +13,7 @@ import static util.VentureText.setText;
  * Created by lazhcm10136 on 10/7/14.
  */
 public class UserAccountScenario extends AppiumSetupTest {
-    public void login(String user, String pass) {
+    protected void login(String user, String pass) {
         List<WebElement> editTextList = driver.findElements(By.className("android.widget.EditText"));
         editTextList.get(0).click();
         editTextList.get(0).sendKeys(user);
@@ -21,7 +21,7 @@ public class UserAccountScenario extends AppiumSetupTest {
         editTextList.get(1).sendKeys(pass);
     }
 
-    public void register(String mail, String pass, String name, String terms) {
+    protected void register(String mail, String pass, String name, String terms) {
         List<WebElement> editTextList = driver.findElements(By.className("android.widget.EditText"));
         editTextList.get(0).click();
         editTextList.get(0).sendKeys(mail);
@@ -38,8 +38,8 @@ public class UserAccountScenario extends AppiumSetupTest {
         driver.findElement(By.id(appPackage + ":id/register_button_submit")).click();
     }
 
-    public void registerWithNewUser(String venture, String menuWiz, String account, String userData,
-                                    String createUser, String mail, String pass, String name) throws InterruptedException {
+    protected void registerWithNewUser(String venture, String menuWiz, String account, String userData,
+                                       String createUser, String mail, String pass, String name) throws InterruptedException {
         selectVenture(venture, menuWiz);
         find(appPackage + ":id/abs__home").click();
         Thread.sleep(1000);
@@ -48,15 +48,15 @@ public class UserAccountScenario extends AppiumSetupTest {
         driver.findElement(By.xpath("//android.widget.TextView[@resource-id='" + appPackage + ":id/component_text' and @text='" + account + "']")).click();
         driver.findElement(By.xpath("//android.widget.TextView[@resource-id='" + appPackage + ":id/option_name' and @text='" + userData + "']")).click();
         //User Register
-        swipe();
+        swipeDown();
         driver.findElement(By.xpath("//android.widget.Button[@resource-id='" + appPackage + ":id/middle_login_link_register' and @text='" + createUser + "']")).click();
 
         register(mail, pass, name, setText(venture).get("terms"));
 
     }
 
-    public void loginWrongData(String venture, String menuWiz, String account, String userData,
-                               String mail, String pass, String loginFailed) throws InterruptedException {
+    protected void loginWrongData(String venture, String menuWiz, String account, String userData,
+                                  String mail, String pass, String loginFailed) throws InterruptedException {
         selectVenture(venture, menuWiz);
         find(appPackage + ":id/abs__home").click();
         Thread.sleep(1000);
@@ -69,8 +69,8 @@ public class UserAccountScenario extends AppiumSetupTest {
         assert (driver.findElement(By.xpath("//android.widget.TextView[@resource-id='" + appPackage + ":id/dialog_text' and @text='" + loginFailed + "']")).isDisplayed());
     }
 
-    public void loginAndLogout(String venture, String menuWiz, String account, String userData,
-                               String mail, String pass, String logOut) throws InterruptedException {
+    protected void loginAndLogout(String venture, String menuWiz, String account, String userData,
+                                  String mail, String pass, String logOut) throws InterruptedException {
         selectVenture(venture, menuWiz);
         find(appPackage + ":id/abs__home").click();
         Thread.sleep(1000);
