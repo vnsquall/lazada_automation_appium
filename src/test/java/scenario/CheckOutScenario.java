@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import util.AppiumSetupTest;
 
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import static util.Helper.*;
@@ -131,6 +132,33 @@ public class CheckOutScenario extends AppiumSetupTest {
             if (venture.equals("Vietnam")) {
                 find("Số thẻ tín dụng không đúng").isDisplayed();
             }
+        }
+    }
+
+    protected void checkOutAndUseBankTransfer(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
+        // Perform Check Out steps
+        checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
+
+        // Check the Bank transfer is available or not for this CheckOutTest
+        if (isElementPresent(By.xpath("//label[@for='manualbanktransferid']"))) {
+
+            driver.findElement(By.xpath("//label[@for='manualbanktransferid']")).click();
+            Thread.sleep(1000);
+
+            // Choose pay method -> bank transfer
+            driver.findElement(By.xpath("//label[@class='mainBanks']")).click();
+            List<WebElement> arrBankName = driver.findElements(By.tagName("option"));
+
+            // Select random Bank name
+            Random random = new Random();
+            int randBankName = random.nextInt(arrBankName.size());
+            arrBankName.get(randBankName).click();
+
+            // Fill information and Submit
+            driver.findElement(By.xpath("//input[@class='input_field short_input']")).sendKeys("Mr Test");
+            driver.findElement(By.xpath("//button[@class='orange-button']")).click(); //Place Order
+            driver.findElement(By.xpath("//button[@class='orange-button']")).click(); //Place Order
+            driver.findElement(By.xpath("//button[@class='orange-button']")).click(); //Place Order
         }
     }
 }
