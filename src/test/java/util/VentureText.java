@@ -26,6 +26,7 @@ public class VentureText {
             ventureText.put("terms", "I agree with the");
             ventureText.put("loginFailed", "Please check your username or password.");
             ventureText.put("logOut", "Sign Out");
+            ventureText.put("emptyCart", "You have no items in your cart");
         }
         if (venture.equals("Indonesia")) {
             ventureText.put("menuWiz", "Sentuh untuk membuka menu");
@@ -41,6 +42,8 @@ public class VentureText {
             ventureText.put("terms", "Saya setuju dengan");
             ventureText.put("loginFailed", "Silakan periksa username atau password anda.");
             ventureText.put("logOut", "Sign Out");
+            ventureText.put("emptyCart", "Tidak ada barang pada troli");
+
         }
         if (venture.equals("Vietnam")) {
             ventureText.put("menuWiz", "Chạm vào để mở menu");
@@ -56,6 +59,8 @@ public class VentureText {
             ventureText.put("terms", "Tôi đồng ý với");
             ventureText.put("loginFailed", "Vui lòng kiểm tra lại tên đăng nhập hoặc mật khẩu");
             ventureText.put("logOut", "Thoát");
+            ventureText.put("emptyCart", "Giỏ hàng của bạn còn trống");
+
 
         }
         return ventureText;
