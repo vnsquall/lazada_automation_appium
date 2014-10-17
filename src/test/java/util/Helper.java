@@ -1,12 +1,5 @@
 package util;
 
-
-
-
-
-
-
-
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.apache.commons.io.FileUtils;
@@ -46,16 +39,12 @@ public class Helper {
         Random rand = new Random();
         List<WebElement> we = driver.findElements(locator);
         int catNum = we.size();
-        int randClick = rand.nextInt((catNum - 1) + 1);
-        if (randClick > catNum || randClick < 1) {
-            randClick(locator);
-        } else {
-            if (!we.get(randClick).getText().isEmpty()) {
-                we.get(randClick).click();
-            } else {
-                randClick(locator);
-            }
-        }
+        //get the range, casting to long to avoid overflow problems
+        long range = (long) catNum - 1 + 1;
+        //compute a fraction of the range, 0 <= frac < range
+        long fraction = (long) (range * rand.nextDouble());
+        int randClick = (int) (fraction + 1);
+        we.get(randClick).click();
     }
 
     public static Boolean isElementPresent(By locator) {
@@ -98,7 +87,7 @@ public class Helper {
 
         Thread.sleep(5000);
         find(menuWiz).click();
-        Thread.sleep(2000);
+        Thread.sleep(6000);
     }
 
     public static void swipeDown() {
@@ -249,7 +238,7 @@ public class Helper {
      * Wait 30 seconds for locator to find an element *
      */
     public static MobileElement wait(By locator) {
-        return w(driverWait.until(ExpectedConditions.visibilityOfElementLocated(locator))) ;
+        return w(driverWait.until(ExpectedConditions.visibilityOfElementLocated(locator)));
 
     }
 
@@ -308,6 +297,7 @@ public class Helper {
 
     /**
      * find Element by UIAndroidSelector
+     *
      * @param selectorTypeStr
      * @param value
      * @param appPackage
@@ -377,6 +367,7 @@ public class Helper {
 
     /**
      * take screen shot
+     *
      * @return File
      * @throws java.io.IOException
      */
