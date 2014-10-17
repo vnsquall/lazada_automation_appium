@@ -35,6 +35,7 @@ public class CheckOut_Test extends CheckOutScenario {
         };
     }
 
+    //4000000000000002 737 06/2015 CC for using the OTP function
     @DataProvider
     Object[][] getVenturesDataToTestCreditCard() {
         return new Object[][]{

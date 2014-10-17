@@ -275,37 +275,6 @@ public class Helper {
         return driverWait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
 
-//    /**
-//     * Return an element that contains name or text *
-//     */
-//    public static MobileElement scroll_to(String value) {
-//        return driver.scrollTo(value);
-//    }
-//
-//    /**
-//     * Return an element that exactly matches name or text *
-//     */
-//    public static MobileElement scroll_to_exact(String value) {
-//        return driver.scrollToExact(value);
-//    }
-    public WebElement findByUISelectorType (UISelectorType selector, String value, String appPacket) {
-        WebElement e = null;
-
-        switch (selector){
-            case RESOURCE_ID:    e = driver.findElementByAndroidUIAutomator("\"UiSelector().resourceId(\\\""+appPacket+":"+value+"\\\")\"");
-                break;
-            case TEXT:    e = driver.findElementByAndroidUIAutomator("\"UiSelector().resourceId(\\\""+appPacket+":"+value+"\\\")\"");
-                break;
-            case TEXT_CONTAIN:    e = driver.findElementByAndroidUIAutomator("\"UiSelector().resourceId(\\\""+appPacket+":"+value+"\\\")\"");
-                break;
-            case TEXT_START_WITH:    e = driver.findElementByAndroidUIAutomator("\"UiSelector().resourceId(\\\""+appPacket+":"+value+"\\\")\"");
-                break;
-
-        }
-
-        return e;
-    }
-
     /**
      * find Element by UIAndroidSelector
      *
@@ -344,20 +313,25 @@ public class Helper {
      * @param appPackage
      * @return List of Element
      */
-    public static List<WebElement > findsByUISelector(String selectorTypeStr, String value, String appPackage) {
-        List <WebElement>e = null;
+    public static List<WebElement> findsByUISelector(String selectorTypeStr, String value, String appPackage) {
+        List<WebElement> e = null;
         UISelectorType selector = UISelectorType.fromString(selectorTypeStr);
 
-        switch (selector){
-            case RESOURCE_ID:    e = driver.findElementsByAndroidUIAutomator("UiSelector().resourceId(\""+appPackage+":id/"+value+"\")");
+        switch (selector) {
+            case RESOURCE_ID:
+                e = driver.findElementsByAndroidUIAutomator("UiSelector().resourceId(\"" + appPackage + ":id/" + value + "\")");
                 break;
-            case TEXT:    e = driver.findElementsByAndroidUIAutomator("UiSelector().text(\""+value+"\")");
+            case TEXT:
+                e = driver.findElementsByAndroidUIAutomator("UiSelector().text(\"" + value + "\")");
                 break;
-            case TEXT_CONTAINS:    e = driver.findElementsByAndroidUIAutomator("UiSelector().textContains(\""+value+"\")");
+            case TEXT_CONTAINS:
+                e = driver.findElementsByAndroidUIAutomator("UiSelector().textContains(\"" + value + "\")");
                 break;
-            case TEXT_START_WITH:    e = driver.findElementsByAndroidUIAutomator("UiSelector().textStartsWith(\""+appPackage+":"+value+"\")");
+            case TEXT_START_WITH:
+                e = driver.findElementsByAndroidUIAutomator("UiSelector().textStartsWith(\"" + appPackage + ":" + value + "\")");
                 break;
-            case SELECTED:    e = driver.findElementsByAndroidUIAutomator("UiSelector().selected("+value+")");
+            case SELECTED:
+                e = driver.findElementsByAndroidUIAutomator("UiSelector().selected(" + value + ")");
                 break;
         }
 
@@ -406,12 +380,12 @@ public class Helper {
      * @return File
      * @throws java.io.IOException
      */
-    public static File takeScreenshot(String SCREENSHOT_PATH)  {
+    public static File takeScreenshot(String SCREENSHOT_PATH) {
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
         //get current date time with Date()
         Date date = new Date();
-        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(scrFile, new File(SCREENSHOT_PATH + dateFormat.format(date).toString() + ".png"));
         } catch (IOException e) {
@@ -420,6 +394,41 @@ public class Helper {
         }
 
         return scrFile;
+    }
+
+    //    /**
+//     * Return an element that contains name or text *
+//     */
+//    public static MobileElement scroll_to(String value) {
+//        return driver.scrollTo(value);
+//    }
+//
+//    /**
+//     * Return an element that exactly matches name or text *
+//     */
+//    public static MobileElement scroll_to_exact(String value) {
+//        return driver.scrollToExact(value);
+//    }
+    public WebElement findByUISelectorType(UISelectorType selector, String value, String appPacket) {
+        WebElement e = null;
+
+        switch (selector) {
+            case RESOURCE_ID:
+                e = driver.findElementByAndroidUIAutomator("\"UiSelector().resourceId(\\\"" + appPacket + ":" + value + "\\\")\"");
+                break;
+            case TEXT:
+                e = driver.findElementByAndroidUIAutomator("\"UiSelector().resourceId(\\\"" + appPacket + ":" + value + "\\\")\"");
+                break;
+            case TEXT_CONTAINS:
+                e = driver.findElementByAndroidUIAutomator("\"UiSelector().resourceId(\\\"" + appPacket + ":" + value + "\\\")\"");
+                break;
+            case TEXT_START_WITH:
+                e = driver.findElementByAndroidUIAutomator("\"UiSelector().resourceId(\\\"" + appPacket + ":" + value + "\\\")\"");
+                break;
+
+        }
+
+        return e;
     }
 }
 
