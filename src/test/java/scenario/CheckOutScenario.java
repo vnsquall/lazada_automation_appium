@@ -1,9 +1,10 @@
 package scenario;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import util.AppiumSetupTest;
-
+import org.testng.asserts.Assertion;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -17,7 +18,8 @@ public class CheckOutScenario extends AppiumSetupTest {
 
     protected void checkOut(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
         selectVenture(venture, menuWiz);
-        find(appPackage + ":id/abs__home").click();
+//        find(appPackage + ":id/abs__home").click();
+        findByUISelector("resourceID","abs__home",appPackage).click();
 
         Thread.sleep(1000);
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
@@ -161,4 +163,27 @@ public class CheckOutScenario extends AppiumSetupTest {
             driver.findElement(By.xpath("//button[@class='orange-button']")).click(); //Place Order
         }
     }
+
+    protected void checkOutAndUsePaypal(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
+        // Perform Check Out steps
+        checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
+
+        // Check the Bank transfer is available or not for this CheckOutTest
+        if (isElementPresent(By.xpath("//label[@for='paypal']"))) {
+
+            driver.findElement(By.xpath("//label[@for='paypal']")).click();
+            Thread.sleep(1000);
+
+            // Choose pay method -> Paypal
+            driver.findElement(By.xpath("//*[@class='orange-button']")).click(); // Select Paypal method
+            driver.findElement(By.xpath("//*[@class='orange-button']")).click();// Place your order
+            Thread.sleep(10000);
+
+            // Verify the URL is Paypal link or not
+            Assert.assertTrue(driver.getCurrentUrl().contains("paypal.com"));
+
+        }
+    }
+
+
 }
