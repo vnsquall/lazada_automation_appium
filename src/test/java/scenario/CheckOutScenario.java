@@ -23,7 +23,7 @@ public class CheckOutScenario extends AppiumSetupTest {
 
         Thread.sleep(1000);
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
-        find(appPackage + ":id/shop").click(); //Add to Cart button
+        findByUISelector("resourceID", "shop", appPackage).click(); //Add to Cart button
 
         //Check for Variant Selection
         Boolean cartConfirm = isElementPresent(By.id(appPackage + ":id/button1"));
@@ -32,7 +32,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         } else {
             driver.findElement(By.id(appPackage + ":id/product_variant_button")).click();
             randClick(By.id("pt.rocket.lazada.dev:id/item_text"));
-            find(appPackage + ":id/shop").click();
+            findByUISelector("resourceID", "shop", appPackage).click();
         }
 
         find(appPackage + ":id/checkout_button").click();
@@ -148,39 +148,32 @@ public class CheckOutScenario extends AppiumSetupTest {
             Thread.sleep(1000);
 
             // Choose pay method -> bank transfer
-            driver.findElement(By.xpath("//label[@class='mainBanks']")).click();
-            List<WebElement> arrBankName = driver.findElements(By.tagName("option"));
-
-            // Select random Bank name
-            Random random = new Random();
-            int randBankName = random.nextInt(arrBankName.size());
-            arrBankName.get(randBankName).click();
+            driver.findElement(By.xpath("//*[@name='PaymentMethodForm[parameter][bankNamePrimary]']")).click();
+            driver.findElement(By.xpath("//option[@value='BNI']")).click();
 
             // Fill information and Submit
-            driver.findElement(By.xpath("//input[@class='input_field short_input']")).sendKeys("Mr Test");
-            driver.findElement(By.xpath("//button[@class='orange-button']")).click(); //Place Order
-            driver.findElement(By.xpath("//button[@class='orange-button']")).click(); //Place Order
-            driver.findElement(By.xpath("//button[@class='orange-button']")).click(); //Place Order
+            driver.findElement(By.xpath("//*[@id='PaymentMethodForm_parameter_senderName']")).sendKeys("Mr Test");
+            driver.findElement(By.xpath("//input[@class='orange-button']")).click(); //Place Order
+            driver.findElement(By.xpath("//input[@class='orange-button']")).click(); //Place Order
         }
     }
 
+    // Only for staging
     protected void checkOutAndUsePaypal(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
         // Perform Check Out steps
         checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
 
-        // Check the Bank transfer is available or not for this CheckOutTest
+        // Check the Paypal is available or not for this CheckOutTest
         if (isElementPresent(By.xpath("//label[@for='paypal']"))) {
 
             driver.findElement(By.xpath("//label[@for='paypal']")).click();
             Thread.sleep(1000);
 
             // Choose pay method -> Paypal
-            driver.findElement(By.xpath("//*[@class='orange-button']")).click(); // Select Paypal method
+            driver.findElement(By.xpath("//*[@class='orange-button']")).click();// Click on Continue button
             driver.findElement(By.xpath("//*[@class='orange-button']")).click();// Place your order
             Thread.sleep(10000);
 
-            // Verify the URL is Paypal link or not
-            Assert.assertTrue(driver.getCurrentUrl().contains("paypal.com"));
 
         }
     }
