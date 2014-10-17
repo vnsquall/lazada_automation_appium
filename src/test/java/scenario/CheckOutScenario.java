@@ -3,6 +3,8 @@ package scenario;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 import util.AppiumSetupTest;
 import org.testng.asserts.Assertion;
 import java.util.List;
@@ -143,18 +145,19 @@ public class CheckOutScenario extends AppiumSetupTest {
 
         // Check the Bank transfer is available or not for this CheckOutTest
         if (isElementPresent(By.xpath("//label[@for='manualbanktransferid']"))) {
-
+            // Choose pay method -> bank transfer
             driver.findElement(By.xpath("//label[@for='manualbanktransferid']")).click();
             Thread.sleep(1000);
 
-            // Choose pay method -> bank transfer
-            driver.findElement(By.xpath("//*[@name='PaymentMethodForm[parameter][bankNamePrimary]']")).click();
-            driver.findElement(By.xpath("//option[@value='BNI']")).click();
+            // Select bank name
+            Select dropdown = new Select(driver.findElement(By.xpath("//*[@name='PaymentMethodForm[parameter][bankNamePrimary]']")));
+            dropdown.selectByIndex(1);
 
             // Fill information and Submit
             driver.findElement(By.xpath("//*[@id='PaymentMethodForm_parameter_senderName']")).sendKeys("Mr Test");
+            Thread.sleep(2000);
             driver.findElement(By.xpath("//input[@class='orange-button']")).click(); //Place Order
-            driver.findElement(By.xpath("//input[@class='orange-button']")).click(); //Place Order
+
         }
     }
 
