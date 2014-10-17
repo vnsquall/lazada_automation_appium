@@ -151,12 +151,17 @@ public class CheckOutScenario extends AppiumSetupTest {
 
             // Select bank name
             Select dropdown = new Select(driver.findElement(By.xpath("//*[@name='PaymentMethodForm[parameter][bankNamePrimary]']")));
-            dropdown.selectByIndex(1);
+            List<WebElement> arrOptione = dropdown.getOptions();
+            Random random = new Random();
+            int randBankIndex = 1+ random.nextInt(arrOptione.size() -1);
+            dropdown.selectByIndex(randBankIndex);
+
 
             // Fill information and Submit
             driver.findElement(By.xpath("//*[@id='PaymentMethodForm_parameter_senderName']")).sendKeys("Mr Test");
             Thread.sleep(2000);
-            driver.findElement(By.xpath("//input[@class='orange-button']")).click(); //Place Order
+            driver.findElement(By.xpath("//*[@class='orange-button']")).click(); //Place Order
+            driver.findElement(By.xpath("//*[@class='orange-button']")).click(); //Place Order
 
         }
     }
