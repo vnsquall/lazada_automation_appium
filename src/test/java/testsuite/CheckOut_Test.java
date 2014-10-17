@@ -25,7 +25,7 @@ public class CheckOut_Test extends CheckOutScenario {
     }
 
     @DataProvider
-    Object[][] getVenturesDataToTestToCashOnDelivery() {
+    Object[][] getVenturesDataToTestCashOnDelivery() {
         return new Object[][]{
 //                {"Singapore"}
                 {"Philippines"},
@@ -36,7 +36,7 @@ public class CheckOut_Test extends CheckOutScenario {
     }
 
     @DataProvider
-    Object[][] getVenturesDataToTestToCreditCard() {
+    Object[][] getVenturesDataToTestCreditCard() {
         return new Object[][]{
 //                {"Singapore"}
                 {"Malaysia"}
@@ -47,29 +47,45 @@ public class CheckOut_Test extends CheckOutScenario {
         };
     }
     @DataProvider
-    Object[][] getVenturesDataToTestToBankTransfer() {
+    Object[][] getVenturesDataToTestBankTransfer() {
         return new Object[][]{
                 {"Indonesia"}
 
         };
     }
 
+    @DataProvider
+    Object[][] getVenturesDataToTestPaypal() {
+        return new Object[][]{
+                {"Malaysia"},
+                {"Philippines"},
+                {"Singapore"},
+                {"Thailand"}
+        };
+    }
 
-    @Test(dataProvider = "getVenturesDataToTestToCashOnDelivery", enabled = false)
+
+    @Test(dataProvider = "getVenturesDataToTestCashOnDelivery", enabled = false)
     public void test_CashOnDelivery(String venture) throws Exception {
         checkOutAndUseTheCoD(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"));
     }
 
-    @Test(dataProvider = "getVenturesDataToTestToCreditCard", enabled = false)
+    @Test(dataProvider = "getVenturesDataToTestCreditCard", enabled = false)
     public void test_CreditCard(String venture) throws Exception {
         checkOutAndUseCreditCard(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"));
     }
 
-    @Test(dataProvider = "getVenturesDataToTestToBankTransfer")
+    @Test(dataProvider = "getVenturesDataToTestBankTransfer")
     public void test_BankTransfer(String venture) throws Exception {
         checkOutAndUseBankTransfer(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
+                setText(venture).get("filterWiz"), setText(venture).get("prodWiz"));
+    }
+
+    @Test(dataProvider = "getVenturesDataToTestPaypal")
+    public void test_Paypal(String venture) throws Exception {
+        checkOutAndUsePaypal(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"));
     }
 }
