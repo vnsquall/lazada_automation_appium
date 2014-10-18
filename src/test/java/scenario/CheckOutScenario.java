@@ -162,6 +162,7 @@ public class CheckOutScenario extends AppiumSetupTest {
             Thread.sleep(2000);
             driver.findElement(By.xpath("//*[@class='orange-button']")).click(); //Place Order
             driver.findElement(By.xpath("//*[@class='orange-button']")).click(); //Place Order
+            driver.findElement(By.xpath("//*[@class='orange-button']")).click(); //Place Order
 
         }
     }
