@@ -39,13 +39,10 @@ public class Helper {
         Random rand = new Random();
         List<WebElement> we = driver.findElements(locator);
         int catNum = we.size();
-        //get the range, casting to long to avoid overflow problems
-        long range = (long) catNum - 1 + 1;
-        //compute a fraction of the range, 0 <= frac < range
-        long fraction = (long) (range * rand.nextDouble());
-        int randClick = (int) (fraction + 1);
+        int randClick = rand.nextInt(catNum);
         we.get(randClick).click();
     }
+
 
     public static Boolean isElementPresent(By locator) {
         Boolean isPresent = Boolean.FALSE;
