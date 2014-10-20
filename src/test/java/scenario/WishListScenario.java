@@ -172,4 +172,41 @@ public class WishListScenario extends AppiumSetupTest {
         driver.navigate().back();
 
     }
+
+    /**
+     * Add 1 randomly product to WishList
+     *
+     * @param venture
+     * @param menuWiz
+     * @param wishList
+     * @param emptyWL
+     * @param categories
+     * @param filterWiz
+     * @param prodWiz
+     * @param addWL
+     * @param appPackage
+     */
+    public static void addProductToWishListNoWizard(String venture, String menuWiz, String wishList, String emptyWL,
+
+                                                    String categories, String filterWiz, String prodWiz, String addWL, String appPackage) {
+
+        findByUISelector("resourceID", "abs__home", appPackage).click();
+        text_exact(categories).click();
+
+        // Random selection Categories
+        randClick(By.id(appPackage + ":id/category_name"));
+
+        // Random selection sub-Categories
+        randClick(By.id(appPackage + ":id/text"));
+
+        // Get back to the Main Screen for viewing the product
+        find(appPackage + ":id/general_container").click();
+        find(appPackage + ":id/general_container").click();
+
+        // Add product to WishList
+        findByUISelector("resourceID", "btn_wishlist", appPackage).click();
+        findByUISelector("resourceID", "button1", appPackage).click();
+
+
+    }
 }
