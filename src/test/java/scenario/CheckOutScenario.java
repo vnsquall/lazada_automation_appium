@@ -139,26 +139,23 @@ public class CheckOutScenario extends AppiumSetupTest {
         }
     }
 
-    protected void checkOutAndUseBankTransfer(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
+    protected void checkOutAndUseBankTransfer(String venture, String menuWiz, String categories, String filterWiz, String prodWiz,
+                                              int bankIndex, String senderName) throws InterruptedException {
         // Perform Check Out steps
         checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
 
         // Check the Bank transfer is available or not for this CheckOutTest
         if (isElementPresent(By.xpath("//label[@for='manualbanktransferid']"))) {
+
             // Choose pay method -> bank transfer
             driver.findElement(By.xpath("//label[@for='manualbanktransferid']")).click();
             Thread.sleep(1000);
 
             // Select bank name
-            Select dropdown = new Select(driver.findElement(By.xpath("//*[@name='PaymentMethodForm[parameter][bankNamePrimary]']")));
-            List<WebElement> arrOptione = dropdown.getOptions();
-            Random random = new Random();
-            int randBankIndex = 1+ random.nextInt(arrOptione.size() -1);
-            dropdown.selectByIndex(randBankIndex);
-
+            selector(By.xpath("//*[@name='PaymentMethodForm[parameter][bankNamePrimary]']"), bankIndex);
 
             // Fill information and Submit
-            driver.findElement(By.xpath("//*[@id='PaymentMethodForm_parameter_senderName']")).sendKeys("Mr Test");
+            driver.findElement(By.xpath("//*[@id='PaymentMethodForm_parameter_senderName']")).sendKeys(senderName);
             Thread.sleep(2000);
             driver.findElement(By.xpath("//*[@class='orange-button']")).click(); //Place Order
             driver.findElement(By.xpath("//*[@class='orange-button']")).click(); //Place Order
@@ -183,9 +180,15 @@ public class CheckOutScenario extends AppiumSetupTest {
             driver.findElement(By.xpath("//*[@class='orange-button']")).click();// Place your order
             Thread.sleep(10000);
 
-
         }
     }
+
+    protected void checkOutCreateAddress(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
+        // Perform Check Out steps
+        checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
+    }
+
+
 
 
 }
