@@ -39,13 +39,13 @@ public class Helper {
         Random rand = new Random();
         List<WebElement> we = driver.findElements(locator);
         int catNum = we.size();
-        if (catNum > 0) {
+        /*if (catNum > 0) {*/
             int randClick = rand.nextInt(catNum);
             we.get(randClick).click();    
             
-        } else {
+      /*  } else {
             randClick(locator);
-        }
+        }*/
         
     }
 
