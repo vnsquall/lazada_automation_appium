@@ -6,6 +6,7 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
@@ -388,6 +389,16 @@ public class Helper {
         }
 
         return e;
+    }
+
+    /**
+     * Select option from dropdown list
+     * @param locator By
+     * @param index int
+     */
+    public static void selector(By locator, int index) {
+        Select dropdown = new Select(driver.findElement(locator));
+        dropdown.selectByIndex(index);
     }
 }
 
