@@ -315,8 +315,6 @@ public class Helper {
         return e;
     }
 
-
-
     /**
      * take screen shot
      *
@@ -337,6 +335,23 @@ public class Helper {
         }
 
         return scrFile;
+    }
+
+    public static void randomSelectProduct(String categories, String appPackage, String filterWiz, String prodWiz) {
+        text_exact(categories).click();
+
+        // Random selection Categories
+        randClick(By.id(appPackage + ":id/category_name"));
+        text_exact(filterWiz).click();
+
+        // Random selection sub-Categories
+        randClick(By.id(appPackage + ":id/text"));
+
+        // Get back to the Main Screen for viewing the product
+        find(appPackage + ":id/general_container").click();
+        find(appPackage + ":id/general_container").click();
+
+        text_exact(prodWiz).click();
     }
 
     //    /**
