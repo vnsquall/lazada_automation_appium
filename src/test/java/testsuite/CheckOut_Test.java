@@ -50,7 +50,7 @@ public class CheckOut_Test extends CheckOutScenario {
     @DataProvider
     Object[][] getVenturesDataToTestBankTransfer() {
         return new Object[][]{
-                {"Indonesia"}
+                {"Indonesia", 3, "Mr Test"}
 
         };
     }
@@ -79,12 +79,12 @@ public class CheckOut_Test extends CheckOutScenario {
     }
 
     @Test(dataProvider = "getVenturesDataToTestBankTransfer")
-    public void test_BankTransfer(String venture) throws Exception {
+    public void test_BankTransfer(String venture, int bankIndex, String senderName) throws Exception {
         checkOutAndUseBankTransfer(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
-                setText(venture).get("filterWiz"), setText(venture).get("prodWiz"));
+                setText(venture).get("filterWiz"), setText(venture).get("prodWiz"), bankIndex, senderName);
     }
 
-    @Test(dataProvider = "getVenturesDataToTestPaypal")
+    @Test(dataProvider = "getVenturesDataToTestPaypal", enabled = false)
     public void test_Paypal(String venture) throws Exception {
         checkOutAndUsePaypal(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"));
