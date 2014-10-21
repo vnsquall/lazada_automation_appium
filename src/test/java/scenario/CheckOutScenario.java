@@ -234,24 +234,24 @@ public class CheckOutScenario extends AppiumSetupTest {
     }
 
     protected void checkOutCreateAddress(String venture, String menuWiz, String categories, String filterWiz,
-                                         String prodWiz, String name, String address, int addressIndex, int locationIndex,
+                                         String prodWiz, String name, String address,
                                          String phoneNumber) throws InterruptedException {
         // Perform Check Out steps
         addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
 
         // Create new address
         swipeDown();
-        driver.findElement(By.xpath("//*[@class='btn gray-button']")).click(); // Click New address
+        driver.findElement(By.xpath("//*[@id='load-different-billing-mobile']")).click(); // Click New address
 
         driver.findElement(By.xpath("//*[@id='AddressForm_first_name']")).sendKeys(name);
         driver.findElement(By.xpath("//*[@id='AddressForm_address1']")).sendKeys(address);
-        selector(By.xpath("//*[@id='AddressForm_location_0']"), addressIndex);
-        selector(By.xpath("//*[@id='AddressForm_location_1']"), locationIndex);
-        selector(By.xpath("//*[@id='AddressForm_location_2']"), locationIndex);
+        selectorRandom(By.xpath("//*[@id='AddressForm_location_0']")); // select random Region
+        selectorRandom(By.xpath("//*[@id='AddressForm_location_1']")); // select random City
+        selectorRandom(By.xpath("//*[@id='AddressForm_location_2']")); // select random Postcode
         driver.findElement(By.xpath("//*[@id='AddressForm_phone']")).sendKeys(phoneNumber);
 
         // Submit
-        driver.findElement(By.xpath("//*[@class='orange-button']")).click();// Place your order
+        driver.findElement(By.xpath("//*[@class='orange-button']")).click();
 
         // Verify new address appears on delivery information page or Not
         String pageSource = driver.getPageSource();
@@ -262,8 +262,7 @@ public class CheckOutScenario extends AppiumSetupTest {
     }
 
     protected void checkOutEditAddress(String venture, String menuWiz, String categories, String filterWiz,
-                                         String prodWiz,String editAddSuccess, String name, String address, int addressIndex, int locationIndex,
-                                         String phoneNumber) throws InterruptedException {
+                                         String prodWiz,String editAddSuccess, String name, String address, String phoneNumber) throws InterruptedException {
         // Perform Check Out steps
         addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
 
@@ -281,9 +280,9 @@ public class CheckOutScenario extends AppiumSetupTest {
         driver.findElement(By.xpath("//*[@id='AddressForm_first_name']")).sendKeys(name);
         driver.findElement(By.xpath("//*[@id='AddressForm_address1']")).clear();
         driver.findElement(By.xpath("//*[@id='AddressForm_address1']")).sendKeys(address);
-        selector(By.xpath("//*[@id='AddressForm_location_0']"), addressIndex);
-        selector(By.xpath("//*[@id='AddressForm_location_1']"), locationIndex);
-        selector(By.xpath("//*[@id='AddressForm_location_2']"), locationIndex);
+        selectorRandom(By.xpath("//*[@id='AddressForm_location_0']")); // select random Region
+        selectorRandom(By.xpath("//*[@id='AddressForm_location_1']")); // select random City
+        selectorRandom(By.xpath("//*[@id='AddressForm_location_2']")); // select random Postcode
         driver.findElement(By.xpath("//*[@id='AddressForm_phone']")).clear();
         driver.findElement(By.xpath("//*[@id='AddressForm_phone']")).sendKeys(phoneNumber);
 
@@ -298,6 +297,37 @@ public class CheckOutScenario extends AppiumSetupTest {
 
     }
 
+    /**
+     * Check out and use "Use different billing address"
+     * @param venture
+     * @param menuWiz
+     * @param categories
+     * @param filterWiz
+     * @param prodWiz
+     * @param editAddSuccess
+     * @param name
+     * @param address
+     * @param phoneNumber
+     * @throws InterruptedException
+     */
+    protected void checkOutDifferentAddress(String venture, String menuWiz, String categories, String filterWiz,
+                                            String prodWiz, String editAddSuccess, String name, String address, String phoneNumber) throws InterruptedException {
+        // Perform Check Out steps
+        addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
+
+        // Choose Use different billing address
+        driver.findElement(By.xpath("//*[@for='ThreeStepBillingAddressForm_isSameShipping']")).click();
+        driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_first_name']")).sendKeys(name);
+        driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_address1']")).sendKeys(address);
+        selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_0']")); // select random Region
+        selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_1']")); // select random City
+        selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_2']")); // select random Postcode
+        driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
+
+        // Submit
+        driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+
+    }
 
 
 
