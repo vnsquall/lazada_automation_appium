@@ -410,7 +410,7 @@ public class Helper {
         Random random = new Random();
         Select dropdown = new Select(driver.findElement(locator));
         List<WebElement> arrOption = dropdown.getOptions();
-        int randomNumber = random.nextInt(arrOption.size());
+        int randomNumber = 1 + random.nextInt(arrOption.size() - 1);
         dropdown.selectByIndex(randomNumber);
     }
 }
