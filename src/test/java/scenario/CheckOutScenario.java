@@ -298,7 +298,7 @@ public class CheckOutScenario extends AppiumSetupTest {
     }
 
     /**
-     * Check out and use "Use different billing address"
+     * Check out and check "Use different billing address"
      * @param venture
      * @param menuWiz
      * @param categories
@@ -310,8 +310,8 @@ public class CheckOutScenario extends AppiumSetupTest {
      * @param phoneNumber
      * @throws InterruptedException
      */
-    protected void checkOutDifferentAddress(String venture, String menuWiz, String categories, String filterWiz,
-                                            String prodWiz, String editAddSuccess, String name, String address, String phoneNumber) throws InterruptedException {
+    protected void checkOutBillingDifferentAddress(String venture, String menuWiz, String categories, String filterWiz,
+                                                   String prodWiz, String editAddSuccess, String name, String address, String phoneNumber) throws InterruptedException {
         // Perform Check Out steps
         addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
 
