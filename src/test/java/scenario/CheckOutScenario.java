@@ -3,10 +3,8 @@ package scenario;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.Select;
 import util.AppiumSetupTest;
-import org.testng.asserts.Assertion;
+
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -183,10 +181,124 @@ public class CheckOutScenario extends AppiumSetupTest {
         }
     }
 
-    protected void checkOutCreateAddress(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
-        // Perform Check Out steps
-        checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
+    /**
+     * Select random product -> add to Cart -> Login and No checkout
+     * @param venture
+     * @param menuWiz
+     * @param categories
+     * @param filterWiz
+     * @param prodWiz
+     * @throws InterruptedException
+     */
+    protected void addRandomProductToCart(String venture, String menuWiz, String categories,
+                                          String filterWiz, String prodWiz) throws InterruptedException {
+        selectVenture(venture, menuWiz);
+        findByUISelector("resourceID","abs__home",appPackage).click();
+
+        Thread.sleep(1000);
+        randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
+        findByUISelector("resourceID", "shop", appPackage).click(); //Add to Cart button
+
+        //Check for Variant Selection
+        Boolean cartConfirm = isElementPresent(By.id(appPackage + ":id/button1"));
+        if (cartConfirm) {
+            driver.findElement(By.id(appPackage + ":id/button1")).click();
+        } else {
+            driver.findElement(By.id(appPackage + ":id/product_variant_button")).click();
+            randClick(By.id(appPackage + ":id/item_text"));
+            findByUISelector("resourceID", "shop", appPackage).click();
+        }
+
+        find(appPackage + ":id/checkout_button").click();
+
+        //Login to CheckOut
+        List<WebElement> editTextList = driver.findElements(By.className("android.widget.EditText"));
+        editTextList.get(0).sendKeys("qa000@mail.com");
+        editTextList.get(1).sendKeys("a12345");
+
+        driver.findElement(By.className("android.widget.CheckBox")).click();
+        find(appPackage + ":id/middle_login_button_signin").click();
+
+        Thread.sleep(5000);
+        wait_web(By.id(appPackage + ":id/rocket_app_checkoutweb"));
+        driver.findElement(By.id(appPackage + ":id/rocket_app_checkoutweb"));
+        Thread.sleep(2000);
+        Set<String> contextNames = driver.getContextHandles();
+        for (String contextName : contextNames) {
+            if (contextName.contains("WEBVIEW")) {
+                driver.context(contextName); // set context to WEBVIEW_$
+            }
+        }
+        Thread.sleep(3000);
+
     }
+
+    protected void checkOutCreateAddress(String venture, String menuWiz, String categories, String filterWiz,
+                                         String prodWiz, String name, String address, int addressIndex, int locationIndex,
+                                         String phoneNumber) throws InterruptedException {
+        // Perform Check Out steps
+        addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
+
+        // Create new address
+        swipeDown();
+        driver.findElement(By.xpath("//*[@class='btn gray-button']")).click(); // Click New address
+
+        driver.findElement(By.xpath("//*[@id='AddressForm_first_name']")).sendKeys(name);
+        driver.findElement(By.xpath("//*[@id='AddressForm_address1']")).sendKeys(address);
+        selector(By.xpath("//*[@id='AddressForm_location_0']"), addressIndex);
+        selector(By.xpath("//*[@id='AddressForm_location_1']"), locationIndex);
+        selector(By.xpath("//*[@id='AddressForm_location_2']"), locationIndex);
+        driver.findElement(By.xpath("//*[@id='AddressForm_phone']")).sendKeys(phoneNumber);
+
+        // Submit
+        driver.findElement(By.xpath("//*[@class='orange-button']")).click();// Place your order
+
+        // Verify new address appears on delivery information page or Not
+        String pageSource = driver.getPageSource();
+        Assert.assertTrue(pageSource.contains(name));
+        Assert.assertTrue(pageSource.contains(address));
+        Assert.assertTrue(pageSource.contains(phoneNumber));
+
+    }
+
+    protected void checkOutEditAddress(String venture, String menuWiz, String categories, String filterWiz,
+                                         String prodWiz,String editAddSuccess, String name, String address, int addressIndex, int locationIndex,
+                                         String phoneNumber) throws InterruptedException {
+        // Perform Check Out steps
+        addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
+
+        // Edit address
+        swipeDown();
+        List<WebElement> arrEditButton = driver.findElements(By.xpath("//*[@class='change-billing']")); // Click Edit address
+
+        // Random click on Edit button
+        Random random = new Random();
+        int randomNumber = random.nextInt(arrEditButton.size());
+        arrEditButton.get(randomNumber).click();
+
+        // Edit information
+        driver.findElement(By.xpath("//*[@id='AddressForm_first_name']")).clear();
+        driver.findElement(By.xpath("//*[@id='AddressForm_first_name']")).sendKeys(name);
+        driver.findElement(By.xpath("//*[@id='AddressForm_address1']")).clear();
+        driver.findElement(By.xpath("//*[@id='AddressForm_address1']")).sendKeys(address);
+        selector(By.xpath("//*[@id='AddressForm_location_0']"), addressIndex);
+        selector(By.xpath("//*[@id='AddressForm_location_1']"), locationIndex);
+        selector(By.xpath("//*[@id='AddressForm_location_2']"), locationIndex);
+        driver.findElement(By.xpath("//*[@id='AddressForm_phone']")).clear();
+        driver.findElement(By.xpath("//*[@id='AddressForm_phone']")).sendKeys(phoneNumber);
+
+        // Save address
+        driver.findElement(By.xpath("//*[@id='send']")).click();
+
+        // Verify the edited address appears on delivery information page or Not
+        String pageSource = driver.getPageSource();
+        Assert.assertTrue(pageSource.contains(name));
+        Assert.assertTrue(pageSource.contains(address));
+        Assert.assertTrue(pageSource.contains(phoneNumber));
+
+    }
+
+
 
 
 
