@@ -276,7 +276,9 @@ public class Helper {
             case TEXT_START_WITH:
                 e = driver.findElementByAndroidUIAutomator("UiSelector().textStartsWith(\"" + appPackage + ":" + value + "\")");
                 break;
-
+            case CLASS_NAME:
+                e = driver.findElementByAndroidUIAutomator("UiSelector().className(\""+value+"\")");
+                break;
         }
 
         return e;
@@ -397,6 +399,19 @@ public class Helper {
     public static void selector(By locator, int index) {
         Select dropdown = new Select(driver.findElement(locator));
         dropdown.selectByIndex(index);
+    }
+
+
+    /**
+     * Select random option from dropdown list
+     * @param locator
+     */
+    public static void selectorRandom(By locator) {
+        Random random = new Random();
+        Select dropdown = new Select(driver.findElement(locator));
+        List<WebElement> arrOption = dropdown.getOptions();
+        int randomNumber = random.nextInt(arrOption.size());
+        dropdown.selectByIndex(randomNumber);
     }
 }
 
