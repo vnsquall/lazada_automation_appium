@@ -79,7 +79,7 @@ public class CheckOutScenario extends AppiumSetupTest {
             driver.getContextHandles();
             Thread.sleep(2000);
             driver.context("NATIVE_APP");
-            //Venture checking for validation successful text
+            // Venture checking for validation successful text
             if (venture.equals("Singapore")) {
                 find("Your order number is").isDisplayed();
             }
@@ -328,9 +328,6 @@ public class CheckOutScenario extends AppiumSetupTest {
         driver.findElement(By.xpath("//*[@class='orange-button']")).click();
 
     }
-
-
-
 
 
 }
