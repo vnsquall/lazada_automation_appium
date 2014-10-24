@@ -12,7 +12,7 @@ public class VentureText {
 
         Map<String, String> ventureText = new HashMap<String, String>();
 
-        if (venture.equals("Singapore") || venture.equals("Philippines") || venture.equals("Malaysia")) {
+        if (venture.equals("Singapore") || venture.equals("Philippines") || venture.equals("Malaysia") ||venture.equals("Thailand")) {
             ventureText.put("menuWiz", "Tap to open the menu");
             ventureText.put("wishList", "Wishlist");
             ventureText.put("categories", "Categories");
