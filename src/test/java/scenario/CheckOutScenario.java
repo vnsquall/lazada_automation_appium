@@ -119,7 +119,7 @@ public class CheckOutScenario extends AppiumSetupTest {
             Thread.sleep(1000);
 
             driver.findElement(By.xpath("//button[@class='orange-button']")).click(); //Place Order
-            driver.findElement(By.xpath("//input[@name='sendFinish']")).click(); //Place Order
+            driver.findElement(By.xpath("//*[@class='orange-button']")).click(); //Place Order
 
             driver.getContextHandles();
             Thread.sleep(2000);
@@ -226,7 +226,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         Thread.sleep(2000);
         Set<String> contextNames = driver.getContextHandles();
         for (String contextName : contextNames) {
-            if (contextName.contains("WEBVIEW")) {
+            if (contextName.contains("WEBVIEW_com.android.browser")) {
                 driver.context(contextName); // set context to WEBVIEW_$
             }
         }
