@@ -3,7 +3,7 @@ package util;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
-
+import static util.Constant.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Paths;
@@ -17,11 +17,11 @@ import static util.Helper.driver;
 public class AppiumSetupTest {
 
     //    public String appPackage = "pt.rocket.lazada.dev"; //for Staging build
-    public String appPackage = "com.lazada.android"; //for Live build
+    public String appPackage = APP_PACKAGE; //for Live build
 
     public void init() throws MalformedURLException {
         DesiredCapabilities capabilities = getAndroid4_4_capabilities();
-        URL serverAddress = new URL("http://127.0.0.1:4723/wd/hub");
+        URL serverAddress = new URL(SERVER_ADDRESS);
         driver = new AppiumDriver(serverAddress, capabilities);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         Helper.init(driver, serverAddress);
@@ -30,18 +30,16 @@ public class AppiumSetupTest {
     public DesiredCapabilities getAndroid4_4_capabilities() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(CapabilityType.BROWSER_NAME, "");
-        capabilities.setCapability("automationName", "Selendroid");
-        capabilities.setCapability("appium-version", "1.2.3");
-        capabilities.setCapability("platformName", "Android");
-        capabilities.setCapability("platformVersion", "4.4");
-        capabilities.setCapability("deviceName", "Android Emulator");
-        capabilities.setCapability("automationName", "Appium");
+        capabilities.setCapability("automationName", AUTOMATION_NAME);
+        capabilities.setCapability("appium-version", APPIUM_VERSION);
+        capabilities.setCapability("platformName", PLATFORM_NAME);
+        capabilities.setCapability("platformVersion", PLATFORM_VERSION);
+        capabilities.setCapability("deviceName", DEVICE_NAME);
 //        capabilities.setCapability("appPackage", "pt.rocket.lazada.dev");
-        capabilities.setCapability("appActivity", "pt.rocket.view.ChangeCountryFragmentActivity");
-//        capabilities.setCapability("platformVersion", "4.3");
+//        capabilities.setCapability("appActivity", "pt.rocket.view.ChangeCountryFragmentActivity");
 
         String userDir = System.getProperty("user.dir");
-        String localApp = "lazada-android.apk";
+        String localApp = LOCAL_APP;
         String appPath = Paths.get(userDir, localApp).toAbsolutePath().toString();
         capabilities.setCapability("app", appPath);
         return capabilities;
