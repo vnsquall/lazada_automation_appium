@@ -111,9 +111,9 @@ public class CheckOutScenario extends AppiumSetupTest {
             driver.findElement(By.id("PaymentMethodForm_parameter_cc_security_code")).sendKeys("123");
 
             driver.findElement(By.id("month-selector-mobile")).click();
-            driver.findElement(By.xpath("//option[@value='09']")).click();
+            selector(By.xpath("//*[@id='PaymentMethodForm_parameter_cc_exp_month']"), 9);
             driver.findElement(By.id("year-selector-mobile")).click();
-            driver.findElement(By.xpath("//option[@value='2016']")).click();
+            selector(By.xpath("//*[@id='PaymentMethodForm_parameter_cc_exp_year']"), 3);
 
             driver.findElement(By.xpath("//button[@class='orange-button']")).click();
             Thread.sleep(1000);
@@ -226,7 +226,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         Thread.sleep(2000);
         Set<String> contextNames = driver.getContextHandles();
         for (String contextName : contextNames) {
-            if (contextName.contains("WEBVIEW_com.android.browser")) {
+            if (contextName.contains("WEBVIEW")) {
                 driver.context(contextName); // set context to WEBVIEW_$
             }
         }
