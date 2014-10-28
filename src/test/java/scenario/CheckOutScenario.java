@@ -32,7 +32,7 @@ public class CheckOutScenario extends AppiumSetupTest {
             driver.findElement(By.id(appPackage + ":id/button1")).click();
         } else {
             driver.findElement(By.id(appPackage + ":id/product_variant_button")).click();
-            randClick(By.id("pt.rocket.lazada.dev:id/item_text"));
+            randClick(By.id(appPackage + ":id/item_text"));
             findByUISelector("resourceID", "shop", appPackage).click();
         }
 
@@ -75,7 +75,7 @@ public class CheckOutScenario extends AppiumSetupTest {
             driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
             driver.findElement(By.xpath("//button[@class='orange-button']")).click();
             Thread.sleep(3000);
-            driver.findElement(By.xpath("//input[@name='sendFinish']")).click();
+            driver.findElement(By.xpath("//*[@class='orange-button']")).click();
 
             driver.getContextHandles();
             Thread.sleep(2000);
