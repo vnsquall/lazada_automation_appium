@@ -33,6 +33,12 @@ public class WishListScenario extends AppiumSetupTest {
         find(appPackage + ":id/abs__home").click();
         Thread.sleep(1000);
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
+
+        // Select size if need
+        if (isElementPresent(By.id(appPackage + ":id/product_variant_button"))) {
+            selectorRandom(By.id(appPackage + ":id/product_variant_button"));
+
+        }
         find(appPackage + ":id/btn_wishlist").click(); //Add to Wishlist
 
         //Verify the message appear:
