@@ -102,6 +102,7 @@ public class CheckOutScenario extends AppiumSetupTest {
 
             driver.findElement(By.xpath("//label[@class='creditcards']")).click();
             Thread.sleep(1000);
+
             // waiting & input the CC info
             driver.findElement(By.id("PaymentMethodForm_parameter_cc_number")).click();
             driver.findElement(By.id("PaymentMethodForm_parameter_cc_number")).sendKeys("4400123456784011");
@@ -110,9 +111,7 @@ public class CheckOutScenario extends AppiumSetupTest {
             driver.findElement(By.id("PaymentMethodForm_parameter_cc_security_code")).click();
             driver.findElement(By.id("PaymentMethodForm_parameter_cc_security_code")).sendKeys("123");
 
-            driver.findElement(By.id("month-selector-mobile")).click();
             selector(By.xpath("//*[@id='PaymentMethodForm_parameter_cc_exp_month']"), 9);
-            driver.findElement(By.id("year-selector-mobile")).click();
             selector(By.xpath("//*[@id='PaymentMethodForm_parameter_cc_exp_year']"), 3);
 
             driver.findElement(By.xpath("//button[@class='orange-button']")).click();
