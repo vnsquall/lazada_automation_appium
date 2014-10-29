@@ -16,18 +16,24 @@ import static util.Helper.driver;
  */
 public class AppiumSetupTest {
 
-    //    public String appPackage = "pt.rocket.lazada.dev"; //for Staging build
-    public String appPackage = APP_PACKAGE_LIVE; //for Live build
+    public String appPackage = APP_PACKAGE_LIVE;
+    public String localApp = LOCAL_APP_LIVE;
+
 
     public void init() throws MalformedURLException {
+
         DesiredCapabilities capabilities = getAndroid4_4_capabilities();
         URL serverAddress = new URL(SERVER_ADDRESS);
         driver = new AppiumDriver(serverAddress, capabilities);
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
         Helper.init(driver, serverAddress);
+
     }
 
     public DesiredCapabilities getAndroid4_4_capabilities() {
+
+        String userDir = System.getProperty("user.dir");
+        String appPath = Paths.get(userDir, localApp).toAbsolutePath().toString();
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(CapabilityType.BROWSER_NAME, "");
         capabilities.setCapability("automationName", AUTOMATION_NAME);
@@ -36,12 +42,10 @@ public class AppiumSetupTest {
         capabilities.setCapability("platformVersion", PLATFORM_VERSION);
         capabilities.setCapability("deviceName", DEVICE_NAME);
         capabilities.setCapability("appPackage", appPackage);
-//        capabilities.setCapability("appActivity", "pt.rocket.view.ChangeCountryFragmentActivity");
-
-        String userDir = System.getProperty("user.dir");
-        String localApp = LOCAL_APP_LIVE;
-        String appPath = Paths.get(userDir, localApp).toAbsolutePath().toString();
+        capabilities.setCapability("appActivity", APP_ACTIVITY);
         capabilities.setCapability("app", appPath);
+
         return capabilities;
+
     }
 }
