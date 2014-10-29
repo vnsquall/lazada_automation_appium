@@ -17,6 +17,8 @@ public  final class Constant {
     public static final String DEVICE_NAME = "Android Emulator";
     public static final String APP_ACTIVITY = "pt.rocket.view.ChangeCountryFragmentActivity";
     public static final String SCREENSHOT_PATH = "Path/here";
+    public static final int TIMEOUT = 30;
+
 
 
 
