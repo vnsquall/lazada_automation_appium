@@ -70,7 +70,8 @@ public class CheckOutScenario extends AppiumSetupTest {
         checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
         Thread.sleep(1000);
         // Check the Cash On Delivery is available or not for this CheckOutTest
-        if (!isElementPresent(By.xpath("//*[@class='payment-method-option radio'and@value='CashOnDelivery'and@disabled='disabled']"))) {
+        if (!isElementPresent(By.xpath("//*[@class='payment-method-option radio'and@value='CashOnDelivery'and@disabled='disabled']"))
+                && isElementPresent(By.xpath("//label[@for='cashondelivery']"))) {
 
             driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
             driver.findElement(By.xpath("//button[@class='orange-button']")).click();
