@@ -17,7 +17,7 @@ import static util.Helper.driver;
 public class AppiumSetupTest {
 
     //    public String appPackage = "pt.rocket.lazada.dev"; //for Staging build
-    public String appPackage = APP_PACKAGE; //for Live build
+    public String appPackage = APP_PACKAGE_LIVE; //for Live build
 
     public void init() throws MalformedURLException {
         DesiredCapabilities capabilities = getAndroid4_4_capabilities();
@@ -35,11 +35,11 @@ public class AppiumSetupTest {
         capabilities.setCapability("platformName", PLATFORM_NAME);
         capabilities.setCapability("platformVersion", PLATFORM_VERSION);
         capabilities.setCapability("deviceName", DEVICE_NAME);
-//        capabilities.setCapability("appPackage", "pt.rocket.lazada.dev");
+        capabilities.setCapability("appPackage", appPackage);
 //        capabilities.setCapability("appActivity", "pt.rocket.view.ChangeCountryFragmentActivity");
 
         String userDir = System.getProperty("user.dir");
-        String localApp = LOCAL_APP;
+        String localApp = LOCAL_APP_LIVE;
         String appPath = Paths.get(userDir, localApp).toAbsolutePath().toString();
         capabilities.setCapability("app", appPath);
         return capabilities;
