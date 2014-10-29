@@ -35,7 +35,7 @@ public class AppiumSetupTest {
         String userDir = System.getProperty("user.dir");
         String appPath = Paths.get(userDir, localApp).toAbsolutePath().toString();
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(CapabilityType.BROWSER_NAME, "");
+        capabilities.setCapability(CapabilityType.BROWSER_NAME, BROWSER_NAME);
         capabilities.setCapability("automationName", AUTOMATION_NAME);
         capabilities.setCapability("appium-version", APPIUM_VERSION);
         capabilities.setCapability("platformName", PLATFORM_NAME);
