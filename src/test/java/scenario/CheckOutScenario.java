@@ -45,7 +45,8 @@ public class CheckOutScenario extends AppiumSetupTest {
         editTextList.get(1).click();
         editTextList.get(1).sendKeys("a12345");
 
-        driver.findElement(By.className("android.widget.CheckBox")).click();
+        // Random shipping address
+        randClick(By.className("android.widget.CheckBox"));
         find(appPackage + ":id/middle_login_button_signin").click();
 
         Thread.sleep(5000);
