@@ -40,9 +40,9 @@ public class CheckOutScenario extends AppiumSetupTest {
 
         //Login to CheckOut
         List<WebElement> editTextList = driver.findElements(By.className("android.widget.EditText"));
-//        editTextList.get(0).click();
+        editTextList.get(0).click();
         editTextList.get(0).sendKeys("qa000@mail.com");
-//        editTextList.get(1).click();
+        editTextList.get(1).click();
         editTextList.get(1).sendKeys("a12345");
 
         driver.findElement(By.className("android.widget.CheckBox")).click();
@@ -81,15 +81,20 @@ public class CheckOutScenario extends AppiumSetupTest {
             driver.getContextHandles();
             Thread.sleep(2000);
             driver.context("NATIVE_APP");
-            // Venture checking for validation successful text
-            if (venture.equals("Singapore")) {
+            // Venture checking for validation successful text - Thank you page
+            if (venture.equals("Singapore")
+                    || venture.equals("Philippines")
+                    || venture.equals("Malaysia")
+                    || venture.equals("Thailand")) {
                 find("Your order number is").isDisplayed();
             }
-            if (venture.equals("Philippines")) {
-                find("Your order number is").isDisplayed();
-            }
+
             if (venture.equals("Vietnam")) {
                 find("Mã đơn hàng của bạn là").isDisplayed();
+            }
+
+            if (venture.equals("Indonesia")) {
+                find("Nomor order Anda adalah").isDisplayed();
             }
         }
     }
