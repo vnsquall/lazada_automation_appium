@@ -70,11 +70,13 @@ public class Helper {
         driver.findElement(By.xpath(("//android.widget.TextView[contains(@text, '" + venture + "')]"))).click();
         if (venture.equals("Thailand")) {
             driver.findElement(By.xpath("//android.widget.Button[contains(@text, 'English')]")).click();
+            Thread.sleep(2000);
+            driver.findElement(By.xpath("//android.widget.Button[contains(@text, 'English')]")).click();
+            Thread.sleep(5000);
         }
-
-        Thread.sleep(5000);
-        find(menuWiz).click();
         Thread.sleep(6000);
+        find(menuWiz).click();
+        Thread.sleep(2000);
     }
 
     public static void swipeDown() {
@@ -412,6 +414,19 @@ public class Helper {
         List<WebElement> arrOption = dropdown.getOptions();
         int randomNumber = 1 + random.nextInt(arrOption.size() - 1);
         dropdown.selectByIndex(randomNumber);
+    }
+
+    /**
+     * find Element
+     * @param locateValue
+     * @return
+     */
+    public static WebElement findElement_(String locateValue) {
+
+        WebElement element = null;
+        element = driver.findElement(By.id(locateValue));
+        return element;
+
     }
 }
 
