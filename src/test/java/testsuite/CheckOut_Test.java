@@ -30,8 +30,9 @@ public class CheckOut_Test extends CheckOutScenario {
                 {"Singapore"},
                 {"Philippines"},
                 {"Indonesia"},
-                {"Vietnam"},
-                {"Thailand"}
+//                {"Malaysia"}
+                {"Vietnam"}
+//                {"Thailand"}
         };
     }
 
@@ -96,6 +97,17 @@ public class CheckOut_Test extends CheckOutScenario {
         };
     }
 
+    @DataProvider
+    Object[][] getVenturesDataToTestEditBillingAddress() {
+        return new Object[][]{
+//                {"Malaysia", "differentially QA name", "QA address differentially", "0933081155"},
+                {"Philippines", "differentially QA name", "QA address differentially", "0933081155"},
+//                {"Singapore", "differentially QA name", "QA address differentially", "0933081155"},
+//                {"Thailand", "differentially QA name", "QA address differentially", "0933081155"},
+
+        };
+    }
+
     @Test(dataProvider = "getVenturesDataToTestCashOnDelivery")
     public void test_CashOnDelivery(String venture) throws Exception {
         checkOutAndUseTheCoD(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
@@ -136,10 +148,16 @@ public class CheckOut_Test extends CheckOutScenario {
 
     @Test(dataProvider = "getVenturesDataToTestDifferentAddress")
     public void test_DifferentAddress(String venture, String name, String address, String phoneNumber) throws Exception {
-        checkOutDifferentAddress(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
+        checkOutBillingDifferentAddress(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
                 setText(venture).get("editAddSuccess"), name, address, phoneNumber);
     }
 
+    @Test(dataProvider = "getVenturesDataToTestEditBillingAddress")
+    public void test_EditBillingAddress(String venture, String name, String address, String phoneNumber) throws Exception {
+        checkOutEditBillingAddress(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
+                setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
+                setText(venture).get("editAddSuccess"), name, address, phoneNumber);
+    }
 
 }
