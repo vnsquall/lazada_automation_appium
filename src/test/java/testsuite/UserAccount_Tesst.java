@@ -13,15 +13,7 @@ import static util.VentureText.setText;
  * Created by lazhcm10136 on 10/7/14.
  */
 public class UserAccount_Tesst extends UserAccountScenario {
-    @BeforeMethod
-    public void setUp() throws Exception {
-        init();
-    }
 
-    @AfterMethod
-    public void tearDown() throws Exception {
-        if (driver != null) driver.quit();
-    }
 
     @DataProvider
     Object[][] getVenturesDataToRegister() {

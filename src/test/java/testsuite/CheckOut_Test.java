@@ -5,7 +5,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import scenario.CheckOutScenario;
-
 import static util.Helper.driver;
 import static util.VentureText.setText;
 
@@ -14,15 +13,6 @@ import static util.VentureText.setText;
  */
 public class CheckOut_Test extends CheckOutScenario {
 
-    @BeforeMethod
-    public void setUp() throws Exception {
-        init();
-    }
-
-    @AfterMethod
-    public void tearDown() throws Exception {
-        if (driver != null) driver.quit();
-    }
 
     @DataProvider
     Object[][] getVenturesDataToTestCashOnDelivery() {
@@ -100,10 +90,12 @@ public class CheckOut_Test extends CheckOutScenario {
     @DataProvider
     Object[][] getVenturesDataToTestEditBillingAddress() {
         return new Object[][]{
-//                {"Malaysia", "differentially QA name", "QA address differentially", "0933081155"},
-                {"Philippines", "differentially QA name", "QA address differentially", "0933081155"},
-//                {"Singapore", "differentially QA name", "QA address differentially", "0933081155"},
-//                {"Thailand", "differentially QA name", "QA address differentially", "0933081155"},
+                {"Malaysia", "differentially QA name", "QA address differentially", "0933081155"},
+//                {"Philippines", "differentially QA name", "QA address differentially", "0933081155"},
+                {"Singapore", "differentially QA name", "QA address differentially", "0933081155"},
+                {"Thailand", "differentially QA name", "QA address differentially", "0933081155"},
+                {"Vietnam", "differentially QA name", "QA address differentially", "0933081155"},
+                {"Indonesia", "differentially QA name", "QA address differentially", "0933081155"},
 
         };
     }

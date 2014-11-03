@@ -13,15 +13,7 @@ import static util.VentureText.setText;
  * Created by lazhcm10136 on 10/8/14.
  */
 public class Search_Test extends SearchScenario {
-    @BeforeMethod
-    public void setUp() throws Exception {
-        init();
-    }
 
-    @AfterMethod
-    public void tearDown() throws Exception {
-        if (driver != null) driver.quit();
-    }
 
     @DataProvider
     Object[][] getVenturesDataToTest() {

@@ -14,15 +14,7 @@ import static util.VentureText.setText;
  */
 public class Wishlist_Test extends WishListScenario {
 
-    @BeforeMethod
-    public void setUp() throws Exception {
-        init();
-    }
 
-    @AfterMethod
-    public void tearDown() throws Exception {
-        if (driver != null) driver.quit();
-    }
 
     @DataProvider
     Object[][] getVenturesDataToTest() {

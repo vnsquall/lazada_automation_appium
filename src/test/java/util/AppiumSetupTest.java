@@ -3,6 +3,9 @@ package util;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+
 import static util.Constant.*;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -18,6 +21,17 @@ public class AppiumSetupTest {
 
     public String appPackage = APP_PACKAGE_LIVE;
     public String localApp = LOCAL_APP_LIVE;
+
+    @BeforeMethod
+    public void setUp() throws Exception {
+        init();
+    }
+
+    @AfterMethod
+    public void tearDown() throws Exception {
+        if (driver != null) driver.quit();
+    }
+
 
 
     public void init() throws MalformedURLException {
