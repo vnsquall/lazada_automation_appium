@@ -425,6 +425,7 @@ public class Helper {
         Set<String> contextNames = driver.getContextHandles();
         for (String contextName : contextNames) {
             if (contextName.contains("NATIVE")) {
+                System.out.println(">>> Set context to NATIVE APP!!!");
                 driver.context(contextName);
             }
         }
@@ -438,7 +439,8 @@ public class Helper {
         Set<String> contextNames = driver.getContextHandles();
         for (String contextName : contextNames) {
             if (contextName.contains("WEBVIEW")) {
-                driver.context(contextName); // set context to WEBVIEW_$
+                System.out.println(">>> Set context to WEBVIEW!!!");
+                driver.context(contextName);
             }
         }
     }
