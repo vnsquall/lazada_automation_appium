@@ -53,12 +53,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         wait_web(By.id(appPackage + ":id/rocket_app_checkoutweb"));
         driver.findElement(By.id(appPackage + ":id/rocket_app_checkoutweb"));
         Thread.sleep(2000);
-        Set<String> contextNames = driver.getContextHandles();
-        for (String contextName : contextNames) {
-            if (contextName.contains("WEBVIEW")) {
-                driver.context(contextName); // set context to WEBVIEW_$
-            }
-        }
+        switchToWebView();
         Thread.sleep(3000);
         //Find the orange-button, name 'submit'
 //        driver.findElement(By.xpath("//button[@name='submit']")).click();
@@ -230,12 +225,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         wait_web(By.id(appPackage + ":id/rocket_app_checkoutweb"));
         driver.findElement(By.id(appPackage + ":id/rocket_app_checkoutweb"));
         Thread.sleep(2000);
-        Set<String> contextNames = driver.getContextHandles();
-        for (String contextName : contextNames) {
-            if (contextName.contains("WEBVIEW")) {
-                driver.context(contextName); // set context to WEBVIEW_$
-            }
-        }
+        switchToWebView();
         Thread.sleep(3000);
 
     }
@@ -390,6 +380,99 @@ public class CheckOutScenario extends AppiumSetupTest {
             driver.findElement(By.xpath("//*[@class='orange-button']")).click(); // Place your order
 
         }
+
+    }
+
+    protected void checkOutEditShippingAddress(String venture, String menuWiz, String categories, String filterWiz,
+                                              String prodWiz, String editAddSuccess, String name, String address, String phoneNumber) throws InterruptedException {
+        // Perform Check Out steps
+        checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
+
+        // Check the Cash On Delivery is available or not for this CheckOutTest
+        if (!isElementPresent(By.xpath("//*[@class='payment-method-option radio'and@value='CashOnDelivery'and@disabled='disabled']"))
+                && isElementPresent(By.xpath("//label[@for='cashondelivery']"))) {
+
+            driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
+            driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+            Thread.sleep(3000);
+            driver.findElement(By.xpath("//*[@id='change-shipping'][contains(@href, 'shipping')]")).click();
+
+            // Random choose address to edit
+            randClick(By.xpath("//*[@class='change-billing']"));
+
+            // Edit billing address
+            driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_first_name']")).sendKeys(name);
+            driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_address1']")).sendKeys(address);
+            if (venture == "Thailand" || venture == "Philippines"
+                    || venture == "Malaysia" || venture == "Indonesia") {
+
+                selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_0']")); // select random Region
+                selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_1']")); // select random City
+                selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_2']")); // select random Postcode
+                driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
+
+            }
+            if (venture == "Singapore") {
+                driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_postcode']")).sendKeys("759674");
+                driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
+            }
+            if (venture == "Vietnam") {
+                selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_0']")); // select random Region
+                selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_1']")); // select random City
+                driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
+            }
+
+            // Submit
+            driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+
+            // Continue checking out
+            driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
+            driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+            Thread.sleep(4000);
+
+            // Verify billing address has changed
+            String pageSource = driver.getPageSource();
+            Assert.assertTrue(pageSource.contains(name));
+            Assert.assertTrue(pageSource.contains(address));
+            Assert.assertTrue(pageSource.contains(phoneNumber));
+
+            // Submit order
+            driver.findElement(By.xpath("//*[@class='orange-button']")).click(); // Place your order
+
+        }
+
+    }
+
+    /**
+     * Remove all product from myCart
+     * @param venture String
+     * @param menuWiz String
+     * @param categories String
+     * @param filterWiz String
+     * @param prodWiz String
+     * @param editAddSuccess String
+     * @param name String
+     * @param address String
+     * @param phoneNumber String
+     * @throws InterruptedException
+     */
+    protected void checkOutRemoveFromCart(String venture, String menuWiz, String categories, String filterWiz,
+                                               String prodWiz, String editAddSuccess, String name, String address, String phoneNumber) throws InterruptedException {
+
+
+        // Perform Check Out steps
+        addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
+
+        driver.findElement(By.xpath("//*[contains(@resource-id, 'id/cart_count')]")).click();
+        List<WebElement> arrDelete = null;
+        do {
+            arrDelete = driver.findElements(By.xpath("//*[contains(@class, 'cart-remove-item')]"));
+            if (arrDelete.size() > 0) {
+                arrDelete.get(0).click();
+            }
+            arrDelete = driver.findElements(By.xpath("//*[contains(@class, 'cart-remove-item')]"));
+        } while (arrDelete.size() > 0);
+
 
     }
 
