@@ -416,17 +416,34 @@ public class Helper {
         dropdown.selectByIndex(randomNumber);
     }
 
+
     /**
-     * find Element
-     * @param locateValue
-     * @return
+     * Set context to NATIVE_APP
      */
-    public static WebElement findElement_(String locateValue) {
+    public static void switchToNativeApp () {
 
-        WebElement element = null;
-        element = driver.findElement(By.id(locateValue));
-        return element;
-
+        Set<String> contextNames = driver.getContextHandles();
+        for (String contextName : contextNames) {
+            if (contextName.contains("NATIVE")) {
+                driver.context(contextName);
+            }
+        }
     }
+
+    /**
+     * Set context to WEBVIEW
+     */
+    public static void switchToWebView () {
+
+        Set<String> contextNames = driver.getContextHandles();
+        for (String contextName : contextNames) {
+            if (contextName.contains("WEBVIEW")) {
+                driver.context(contextName); // set context to WEBVIEW_$
+            }
+        }
+    }
+
+
+
 }
 
