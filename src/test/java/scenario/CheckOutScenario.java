@@ -451,28 +451,29 @@ public class CheckOutScenario extends AppiumSetupTest {
      * @param filterWiz String
      * @param prodWiz String
      * @param editAddSuccess String
-     * @param name String
-     * @param address String
-     * @param phoneNumber String
      * @throws InterruptedException
      */
     protected void checkOutRemoveFromCart(String venture, String menuWiz, String categories, String filterWiz,
-                                               String prodWiz, String editAddSuccess, String name, String address, String phoneNumber) throws InterruptedException {
+                                               String prodWiz, String editAddSuccess) throws InterruptedException {
 
 
         // Perform Check Out steps
         addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
+        switchToNativeApp();
 
+        // Go to myCart and remove all product
         driver.findElement(By.xpath("//*[contains(@resource-id, 'id/cart_count')]")).click();
         List<WebElement> arrDelete = null;
         do {
-            arrDelete = driver.findElements(By.xpath("//*[contains(@class, 'cart-remove-item')]"));
+            arrDelete = findsByUISelector("resourceID","delete_button", appPackage);
             if (arrDelete.size() > 0) {
-                arrDelete.get(0).click();
-            }
-            arrDelete = driver.findElements(By.xpath("//*[contains(@class, 'cart-remove-item')]"));
-        } while (arrDelete.size() > 0);
 
+                arrDelete.get(0).click();
+                findByUISelector("resourceID" , "button1", appPackage).click(); // Click on Remove button
+
+            }
+            arrDelete = findsByUISelector("resourceID","delete_button", appPackage);
+        } while (arrDelete.size() > 0);
 
     }
 
