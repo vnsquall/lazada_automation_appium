@@ -1,11 +1,9 @@
 package testsuite;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import scenario.CheckOutScenario;
-import static util.Helper.driver;
+
 import static util.VentureText.setText;
 
 /**
@@ -20,15 +18,15 @@ public class CheckOut_Test extends CheckOutScenario {
                 {"Singapore"},
                 {"Philippines"},
                 {"Indonesia"},
-//                {"Malaysia"}
-                {"Vietnam"}
-//                {"Thailand"}
+                {"Malaysia"},
+                {"Vietnam"},
+                {"Thailand"}
         };
     }
 
     //4000000000000002 737 06/2015 CC for using the OTP function
     @DataProvider
-    Object[][] getVenturesDataToTestCreditCard() {
+    Object[][] getVenturesDataToTestCreditCardInvalid() {
         return new Object[][]{
                 {"Singapore"},
                 {"Malaysia"},
@@ -71,9 +69,9 @@ public class CheckOut_Test extends CheckOutScenario {
     Object[][] getVenturesDataToTestEditAddress() {
         return new Object[][]{
                 {"Malaysia", "QA name edited", "QA address edited", "0933081152"},
-                {"Philippines"},
-                {"Singapore"},
-                {"Thailand"}
+                {"Philippines", "QA name edited", "QA address edited", "0933081152"},
+                {"Singapore", "QA name edited", "QA address edited", "0933081152"}
+
         };
     }
 
@@ -81,9 +79,9 @@ public class CheckOut_Test extends CheckOutScenario {
     Object[][] getVenturesDataToTestDifferentAddress() {
         return new Object[][]{
                 {"Malaysia", "differentially QA name", "QA address differentially", "0933081155"},
-                {"Philippines"},
-                {"Singapore"},
-                {"Thailand"}
+                {"Philippines", "differentially QA name", "QA address differentially", "0933081155"},
+                {"Singapore", "differentially QA name", "QA address differentially", "0933081155"},
+                {"Thailand", "differentially QA name", "QA address differentially", "0933081155"},
         };
     }
 
@@ -100,15 +98,41 @@ public class CheckOut_Test extends CheckOutScenario {
         };
     }
 
+    @DataProvider
+    Object[][] getVenturesDataToTestEditShippingAddress() {
+        return new Object[][]{
+                {"Malaysia", " QA name edit ", "QA address edit", "0933085533"},
+                {"Philippines", " QA name edit ", "QA address edit", "0933085533"},
+                {"Singapore", " QA name edit ", "QA address edit", "0933085533"},
+                {"Thailand", " QA name edit ", "QA address edit", "0933085533"},
+                {"Vietnam", " QA name edit ", "QA address edit", "0933085533"},
+                {"Indonesia", " QA name edit ", "QA address edit", "0933085533"},
+
+        };
+    }
+
+    @DataProvider
+    Object[][] getVenturesDataToTestRemoveFromCart() {
+        return new Object[][]{
+                {"Malaysia"},
+                {"Philippines"},
+                {"Singapore"},
+                {"Thailand"},
+                {"Vietnam"},
+                {"Indonesia"},
+
+        };
+    }
+
     @Test(dataProvider = "getVenturesDataToTestCashOnDelivery")
     public void test_CashOnDelivery(String venture) throws Exception {
         checkOutAndUseTheCoD(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"));
     }
 
-    @Test(dataProvider = "getVenturesDataToTestCreditCard")
+    @Test(dataProvider = "getVenturesDataToTestCreditCardInvalid")
     public void test_CreditCard(String venture) throws Exception {
-        checkOutAndUseCreditCard(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
+        checkOutAndUseCreditCardInvalid(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"));
     }
 
@@ -151,5 +175,21 @@ public class CheckOut_Test extends CheckOutScenario {
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
                 setText(venture).get("editAddSuccess"), name, address, phoneNumber);
     }
+
+    @Test(dataProvider = "getVenturesDataToTestEditShippingAddress")
+    public void test_EditShippingAddress(String venture, String name, String address, String phoneNumber) throws Exception {
+        checkOutEditShippingAddress(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
+                setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
+                setText(venture).get("editAddSuccess"), name, address, phoneNumber);
+    }
+
+    @Test(dataProvider = "getVenturesDataToTestRemoveFromCart")
+    public void test_RemoveFromCart(String venture) throws Exception {
+        checkOutRemoveFromCart(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
+                setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
+                setText(venture).get("editAddSuccess"));
+    }
+
+
 
 }

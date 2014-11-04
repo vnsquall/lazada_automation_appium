@@ -95,7 +95,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         }
     }
 
-    protected void checkOutAndUseCreditCard(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
+    protected void checkOutAndUseCreditCardInvalid(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
         // Perform Check Out steps
         checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
 
