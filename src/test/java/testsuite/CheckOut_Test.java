@@ -138,6 +138,15 @@ public class CheckOut_Test extends CheckOutScenario {
         };
     }
 
+    @DataProvider
+    Object[][] getVenturesDataToTestCoupon() {
+        return new Object[][]{
+                {"Malaysia", "1ijc6sd"},
+
+
+        };
+    }
+
     @Test(dataProvider = "getVenturesDataToTestCashOnDelivery")
     public void test_CashOnDelivery(String venture) throws Exception {
         checkOutAndUseTheCoD(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
@@ -209,6 +218,14 @@ public class CheckOut_Test extends CheckOutScenario {
         checkOutEditPaymentMethod(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
                 setText(venture).get("editAddSuccess"));
+    }
+
+    // Staging only
+    @Test(dataProvider = "getVenturesDataToTestCoupon")
+    public void test_Coupon(String venture, String coupon) throws Exception {
+        checkOutCoupon(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
+                setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
+                setText(venture).get("editAddSuccess"), coupon);
     }
 
 

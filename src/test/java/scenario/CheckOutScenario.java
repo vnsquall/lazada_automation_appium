@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import util.AppiumSetupTest;
-
+import static util.Constant.*;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -41,9 +41,9 @@ public class CheckOutScenario extends AppiumSetupTest {
         //Login to CheckOut
         List<WebElement> editTextList = driver.findElements(By.className("android.widget.EditText"));
         editTextList.get(0).click();
-        editTextList.get(0).sendKeys("qa000@mail.com");
+        editTextList.get(0).sendKeys(USERNAME);
         editTextList.get(1).click();
-        editTextList.get(1).sendKeys("a12345");
+        editTextList.get(1).sendKeys(PASSWORD);
 
         // Random shipping address
         randClick(By.className("android.widget.CheckBox"));
@@ -504,6 +504,30 @@ public class CheckOutScenario extends AppiumSetupTest {
 
       }
 
+    }
+
+    protected void checkOutCoupon (String venture, String menuWiz, String categories, String filterWiz,
+                                               String prodWiz, String editAddSuccess, String coupon) throws InterruptedException {
+
+        // Perform Check Out steps
+        checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
+
+        // Check out by COD then edit payment method
+        if (!isElementPresent(By.xpath("//*[@class='payment-method-option radio'and@value='CashOnDelivery'and@disabled='disabled']"))
+                && isElementPresent(By.xpath("//label[@for='cashondelivery']"))) {
+
+            driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
+            driver.findElement(By.xpath("//button[@class='orange-button']")).click();
+            Thread.sleep(3000);
+
+            // Input coupon code
+            driver.findElement(By.xpath("//*[@id='addCoupon']")).click();
+            driver.findElement(By.xpath("//*[@id='coupon']")).sendKeys(coupon);
+            driver.findElement(By.xpath("//*[@id='couponSend']")).click();
+            driver.findElement(By.xpath("//*[@class='orange-button']")).click(); // Place your oder
+            Thread.sleep(2000);
+
+      }
     }
 
 }
