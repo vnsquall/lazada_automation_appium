@@ -95,7 +95,8 @@ public class CheckOutScenario extends AppiumSetupTest {
         }
     }
 
-    protected void checkOutAndUseCreditCardInvalid(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
+    protected void checkOutAndUseCreditCardInvalid(String venture, String menuWiz, String categories, String filterWiz,
+                                                   String prodWiz, String creditNumber, String customerName, String securityCode) throws InterruptedException {
         // Perform Check Out steps
         checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
 
@@ -107,14 +108,17 @@ public class CheckOutScenario extends AppiumSetupTest {
 
             // waiting & input the CC info
             driver.findElement(By.id("PaymentMethodForm_parameter_cc_number")).click();
-            driver.findElement(By.id("PaymentMethodForm_parameter_cc_number")).sendKeys("4400123456784011");
+            driver.findElement(By.id("PaymentMethodForm_parameter_cc_number")).sendKeys(creditNumber);
             driver.findElement(By.id("PaymentMethodForm_parameter_cc_holder")).click();
-            driver.findElement(By.id("PaymentMethodForm_parameter_cc_holder")).sendKeys("Mr Test");
+            driver.findElement(By.id("PaymentMethodForm_parameter_cc_holder")).sendKeys(customerName);
             driver.findElement(By.id("PaymentMethodForm_parameter_cc_security_code")).click();
-            driver.findElement(By.id("PaymentMethodForm_parameter_cc_security_code")).sendKeys("123");
+            driver.findElement(By.id("PaymentMethodForm_parameter_cc_security_code")).sendKeys(securityCode);
 
-            selector(By.xpath("//*[@id='PaymentMethodForm_parameter_cc_exp_month']"), 9);
-            selector(By.xpath("//*[@id='PaymentMethodForm_parameter_cc_exp_year']"), 3);
+//            selector(By.xpath("//*[@id='PaymentMethodForm_parameter_cc_exp_month']"), 9);
+//            selector(By.xpath("//*[@id='PaymentMethodForm_parameter_cc_exp_year']"), 3);
+
+            selectorRandom(By.xpath("//*[@id='PaymentMethodForm_parameter_cc_exp_month']"));
+            selectorRandom(By.xpath("//*[@id='PaymentMethodForm_parameter_cc_exp_year']"));
 
             driver.findElement(By.xpath("//button[@class='orange-button']")).click();
             Thread.sleep(1000);
@@ -124,7 +128,7 @@ public class CheckOutScenario extends AppiumSetupTest {
 
             driver.getContextHandles();
             Thread.sleep(2000);
-            driver.context("NATIVE_APP");
+            switchToNativeApp();
 
             //Venture checking for validation successful text
             if (venture.equals("Singapore")) {
@@ -474,6 +478,31 @@ public class CheckOutScenario extends AppiumSetupTest {
             }
             arrDelete = findsByUISelector("resourceID","delete_button", appPackage);
         } while (arrDelete.size() > 0);
+
+    }
+
+    protected void checkOutEditPaymentMethod (String venture, String menuWiz, String categories, String filterWiz,
+                                               String prodWiz, String editAddSuccess) throws InterruptedException {
+
+
+        // Perform Check Out steps
+        checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
+
+        // Check out by COD then edit payment method
+        if (!isElementPresent(By.xpath("//*[@class='payment-method-option radio'and@value='CashOnDelivery'and@disabled='disabled']"))
+                && isElementPresent(By.xpath("//label[@for='cashondelivery']"))) {
+
+            driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
+            driver.findElement(By.xpath("//button[@class='orange-button']")).click();
+            Thread.sleep(3000);
+
+            // Change payment method
+            driver.findElement(By.xpath("//*[@id='change-payment']")).click();
+            randClick(By.xpath("//*[starts-with(@class,'payment-methods')]"));
+            driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+            Thread.sleep(2000);
+
+      }
 
     }
 
