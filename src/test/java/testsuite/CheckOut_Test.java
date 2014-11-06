@@ -115,12 +115,12 @@ public class CheckOut_Test extends CheckOutScenario {
     @DataProvider
     Object[][] getVenturesDataToTestRemoveFromCart() {
         return new Object[][]{
-                {"Malaysia"},
+//                {"Malaysia"},
                 {"Philippines"},
                 {"Singapore"},
                 {"Thailand"},
-                {"Vietnam"},
-                {"Indonesia"},
+//                {"Vietnam"},
+//                {"Indonesia"},
 
         };
     }
@@ -146,6 +146,21 @@ public class CheckOut_Test extends CheckOutScenario {
 
         };
     }
+
+    @DataProvider
+    Object[][] getVenturesDataToTestShareOrder() {
+        return new Object[][]{
+
+                {"Philippines"},
+                {"Singapore"},
+                {"Thailand"},
+                {"Vietnam"},
+                {"Indonesia"},
+                {"Malaysia"}
+
+        };
+    }
+
 
     @Test(dataProvider = "getVenturesDataToTestCashOnDelivery")
     public void test_CashOnDelivery(String venture) throws Exception {
@@ -226,6 +241,13 @@ public class CheckOut_Test extends CheckOutScenario {
         checkOutCoupon(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
                 setText(venture).get("editAddSuccess"), coupon);
+    }
+
+    @Test(dataProvider = "getVenturesDataToTestShareOrder")
+    public void test_ShareOrder(String venture) throws Exception {
+        checkOutShareOrder(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
+                setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
+                setText(venture).get("editAddSuccess"));
     }
 
 

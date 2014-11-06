@@ -34,6 +34,7 @@ public class CheckOutScenario extends AppiumSetupTest {
             driver.findElement(By.id(appPackage + ":id/product_variant_button")).click();
             randClick(By.id(appPackage + ":id/item_text"));
             findByUISelector("resourceID", "shop", appPackage).click();
+            Thread.sleep(2000);
         }
 
         find(appPackage + ":id/checkout_button").click();
@@ -529,5 +530,32 @@ public class CheckOutScenario extends AppiumSetupTest {
 
       }
     }
+
+    protected void checkOutShareOrder (String venture, String menuWiz, String categories, String filterWiz,
+                                               String prodWiz, String editAddSuccess) throws InterruptedException {
+
+        // Perform Check Out steps
+        checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
+        Thread.sleep(1000);
+
+        // Check the Cash On Delivery is available or not for this CheckOutTest
+        if (!isElementPresent(By.xpath("//*[@class='payment-method-option radio'and@value='CashOnDelivery'and@disabled='disabled']"))
+                && isElementPresent(By.xpath("//label[@for='cashondelivery']"))) {
+
+            driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
+            driver.findElement(By.xpath("//button[@class='orange-button']")).click();
+            Thread.sleep(3000);
+            driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+            Thread.sleep(2000);
+            switchToNativeApp();
+
+            // Share order
+//            driver.findElement(By.xpath("//*[@resource-id='com.lazada.android:id/btn_checkout_share']")).click();
+            findByUISelector("resourceID", "btn_checkout_share", appPackage).click();
+            randClick(By.xpath("//*[@resource-id='android:id/text1']"));
+
+        }
+    }
+
 
 }
