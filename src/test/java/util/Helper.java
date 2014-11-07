@@ -8,7 +8,6 @@ import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -17,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
+import static util.Constant.*;
 
 /**
  * Created by lazhcm10136 on 9/30/14.
@@ -432,18 +432,31 @@ public class Helper {
     }
 
     /**
-     * Set context to WEBVIEW
+     * Set context to WEB_VIEW
      */
     public static void switchToWebView () {
 
+        String webviewContext = "";
+        AppiumSetupTest appiumSetupTest = new AppiumSetupTest();
+        if (appiumSetupTest.appPackage.equals(APP_PACKAGE_LIVE)) {
+
+            webviewContext = WEBVIEW_LIVE;
+
+
+        }else {
+
+            webviewContext = WEBVIEW_STAGING;
+
+        }
+
         Set<String> contextNames = driver.getContextHandles();
         for (String contextName : contextNames) {
-            if (contextName.contains("WEBVIEW_pt.rocket.lazada.dev")
-                    || contextName.contains("WEBVIEW_com.lazada.android")) {
-                System.out.println(">>> Set context to WEBVIEW!!!");
-                driver.context(contextName); // set context to WEBVIEW_$
+            if (contextName.contains(webviewContext)) {
+                System.out.println(">>> Set context to WEBVIEW: " + contextName);
+                driver.context(contextName);
             }
         }
+
     }
 
 
