@@ -438,9 +438,10 @@ public class Helper {
 
         Set<String> contextNames = driver.getContextHandles();
         for (String contextName : contextNames) {
-            if (contextName.contains("WEBVIEW")) {
+            if (contextName.contains("WEBVIEW_pt.rocket.lazada.dev")
+                    || contextName.contains("WEBVIEW_com.lazada.android")) {
                 System.out.println(">>> Set context to WEBVIEW!!!");
-                driver.context(contextName);
+                driver.context(contextName); // set context to WEBVIEW_$
             }
         }
     }
