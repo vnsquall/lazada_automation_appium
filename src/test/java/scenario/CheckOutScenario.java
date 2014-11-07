@@ -18,8 +18,7 @@ import static util.Helper.*;
 public class CheckOutScenario extends AppiumSetupTest {
 
     protected void checkOut(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
-        selectVenture(venture, menuWiz);
-//        find(appPackage + ":id/abs__home").click();
+
         findByUISelector("resourceID","abs__home",appPackage).click();
 
         Thread.sleep(1000);
@@ -56,14 +55,13 @@ public class CheckOutScenario extends AppiumSetupTest {
         Thread.sleep(2000);
         switchToWebView();
         Thread.sleep(3000);
-        //Find the orange-button, name 'submit'
-//        driver.findElement(By.xpath("//button[@name='submit']")).click();
         driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/form/div[3]/button")).click();
         Thread.sleep(3000);
     }
 
     protected void checkOutAndUseTheCoD(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
         // Perform Check Out steps
+        selectVenture(venture, menuWiz);
         checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
         Thread.sleep(1000);
         // Check the Cash On Delivery is available or not for this CheckOutTest
@@ -99,6 +97,7 @@ public class CheckOutScenario extends AppiumSetupTest {
     protected void checkOutAndUseCreditCardInvalid(String venture, String menuWiz, String categories, String filterWiz,
                                                    String prodWiz, String creditNumber, String customerName, String securityCode) throws InterruptedException {
         // Perform Check Out steps
+        selectVenture(venture, menuWiz);
         checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
 
         // Check the Credit Cards is available or not for this CheckOutTest
@@ -114,20 +113,12 @@ public class CheckOutScenario extends AppiumSetupTest {
             driver.findElement(By.id("PaymentMethodForm_parameter_cc_holder")).sendKeys(customerName);
             driver.findElement(By.id("PaymentMethodForm_parameter_cc_security_code")).click();
             driver.findElement(By.id("PaymentMethodForm_parameter_cc_security_code")).sendKeys(securityCode);
-
-//            selector(By.xpath("//*[@id='PaymentMethodForm_parameter_cc_exp_month']"), 9);
-//            selector(By.xpath("//*[@id='PaymentMethodForm_parameter_cc_exp_year']"), 3);
-
             selectorRandom(By.xpath("//*[@id='PaymentMethodForm_parameter_cc_exp_month']"));
             selectorRandom(By.xpath("//*[@id='PaymentMethodForm_parameter_cc_exp_year']"));
-
             driver.findElement(By.xpath("//button[@class='orange-button']")).click();
             Thread.sleep(1000);
-
             driver.findElement(By.xpath("//button[@class='orange-button']")).click(); //Place Order
             driver.findElement(By.xpath("//*[@class='orange-button']")).click(); //Place Order
-
-            driver.getContextHandles();
             Thread.sleep(2000);
             switchToNativeApp();
 
@@ -147,6 +138,7 @@ public class CheckOutScenario extends AppiumSetupTest {
     protected void checkOutAndUseBankTransfer(String venture, String menuWiz, String categories, String filterWiz, String prodWiz,
                                               int bankIndex, String senderName) throws InterruptedException {
         // Perform Check Out steps
+        selectVenture(venture, menuWiz);
         checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
 
         // Check the Bank transfer is available or not for this CheckOutTest
@@ -172,6 +164,7 @@ public class CheckOutScenario extends AppiumSetupTest {
     // Only for staging
     protected void checkOutAndUsePaypal(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
         // Perform Check Out steps
+        selectVenture(venture, menuWiz);
         checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
 
         // Check the Paypal is available or not for this CheckOutTest
@@ -334,6 +327,7 @@ public class CheckOutScenario extends AppiumSetupTest {
     protected void checkOutEditBillingAddress(String venture, String menuWiz, String categories, String filterWiz,
                                                    String prodWiz, String editAddSuccess, String name, String address, String phoneNumber) throws InterruptedException {
         // Perform Check Out steps
+        selectVenture(venture, menuWiz);
         checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
 
         // Check the Cash On Delivery is available or not for this CheckOutTest
@@ -391,6 +385,7 @@ public class CheckOutScenario extends AppiumSetupTest {
     protected void checkOutEditShippingAddress(String venture, String menuWiz, String categories, String filterWiz,
                                               String prodWiz, String editAddSuccess, String name, String address, String phoneNumber) throws InterruptedException {
         // Perform Check Out steps
+        selectVenture(venture, menuWiz);
         checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
 
         // Check the Cash On Delivery is available or not for this CheckOutTest
@@ -487,6 +482,7 @@ public class CheckOutScenario extends AppiumSetupTest {
 
 
         // Perform Check Out steps
+        selectVenture(venture, menuWiz);
         checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
 
         // Check out by COD then edit payment method
@@ -511,6 +507,7 @@ public class CheckOutScenario extends AppiumSetupTest {
                                                String prodWiz, String editAddSuccess, String coupon) throws InterruptedException {
 
         // Perform Check Out steps
+        selectVenture(venture, menuWiz);
         checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
 
         // Check out by COD then edit payment method
@@ -535,6 +532,7 @@ public class CheckOutScenario extends AppiumSetupTest {
                                                String prodWiz, String editAddSuccess) throws InterruptedException {
 
         // Perform Check Out steps
+        selectVenture(venture, menuWiz);
         checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
         Thread.sleep(1000);
 
@@ -555,6 +553,25 @@ public class CheckOutScenario extends AppiumSetupTest {
             randClick(By.xpath("//*[@resource-id='android:id/text1']"));
 
         }
+    }
+
+    protected void checkOutSavedCreditCard (String venture, String menuWiz, String categories, String filterWiz,
+                                               String prodWiz, String editAddSuccess) throws InterruptedException {
+        // Perform Check Out steps
+        selectVenture(venture, menuWiz);
+        checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
+
+        // Check the Saved Credit Cards is available or not
+        if (isElementPresent(By.xpath("//*[starts-with(@for,'card_id')]"))) {
+
+            randClick(By.xpath("//*[starts-with(@for,'card_id')]"));
+            driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+            swipeDown();
+            driver.findElement(By.xpath("//*[@class='orange-button']")).click(); // Place your order
+            Thread.sleep(2000);
+
+        }
+
     }
 
 

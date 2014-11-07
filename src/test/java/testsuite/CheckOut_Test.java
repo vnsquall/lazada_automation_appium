@@ -15,12 +15,12 @@ public class CheckOut_Test extends CheckOutScenario {
     @DataProvider
     Object[][] getVenturesDataToTestCashOnDelivery() {
         return new Object[][]{
-                {"Singapore"},
-                {"Philippines"},
+//                {"Singapore"},
+//                {"Philippines"},
                 {"Indonesia"},
-                {"Malaysia"},
-                {"Vietnam"},
-                {"Thailand"}
+//                {"Malaysia"},
+//                {"Vietnam"},
+//                {"Thailand"}
         };
     }
 
@@ -116,11 +116,11 @@ public class CheckOut_Test extends CheckOutScenario {
     Object[][] getVenturesDataToTestRemoveFromCart() {
         return new Object[][]{
 //                {"Malaysia"},
-                {"Philippines"},
-                {"Singapore"},
-                {"Thailand"},
+//                {"Philippines"},
+//                {"Singapore"},
+//                {"Thailand"},
 //                {"Vietnam"},
-//                {"Indonesia"},
+                {"Indonesia"},
 
         };
     }
@@ -157,6 +157,21 @@ public class CheckOut_Test extends CheckOutScenario {
                 {"Vietnam"},
                 {"Indonesia"},
                 {"Malaysia"}
+
+        };
+    }
+
+    @DataProvider
+    Object[][] getVenturesDataToTestSavedCreditCard() {
+        return new Object[][]{
+
+                {"Philippines"},
+                {"Singapore"},
+                {"Vietnam"},
+                {"Indonesia"},
+                {"Malaysia"},
+                {"Thailand"}
+
 
         };
     }
@@ -246,6 +261,14 @@ public class CheckOut_Test extends CheckOutScenario {
     @Test(dataProvider = "getVenturesDataToTestShareOrder")
     public void test_ShareOrder(String venture) throws Exception {
         checkOutShareOrder(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
+                setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
+                setText(venture).get("editAddSuccess"));
+    }
+
+    // Staging only
+    @Test(dataProvider = "getVenturesDataToTestSavedCreditCard")
+    public void test_SavedCreditCard(String venture) throws Exception {
+        checkOutSavedCreditCard(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
                 setText(venture).get("editAddSuccess"));
     }
