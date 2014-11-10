@@ -416,6 +416,17 @@ public class Helper {
         dropdown.selectByIndex(randomNumber);
     }
 
+    /**
+     * Select random option from dropdown list
+     * @param webElement WebElement
+     */
+    public static void selectorRandom(WebElement webElement) {
+        Random random = new Random();
+        Select dropdown = new Select(webElement);
+        List<WebElement> arrOption = dropdown.getOptions();
+        int randomNumber = 1 + random.nextInt(arrOption.size() - 1);
+        dropdown.selectByIndex(randomNumber);
+    }
 
     /**
      * Set context to NATIVE_APP
