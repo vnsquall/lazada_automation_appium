@@ -470,6 +470,65 @@ public class Helper {
 
     }
 
+    /**
+     * Generate an email
+     * @return email String
+     */
+    public static String generateEmail() {
+
+        String email = generateAlphabet(8) + generateNumber(4);
+        email = email + "@mail.com";
+        return email;
+
+    }
+
+    /**
+     * Generate password
+     * @return String
+     */
+    public static String generatePassword() {
+
+        Random random = new Random();
+        String password =  generateAlphabet(3 + random.nextInt(5)) + generateNumber(3);
+        return password;
+    }
+
+    /**
+     * Generate array of alphabet
+     * @return String
+     */
+    public static String generateAlphabet(int length) {
+
+        String alphabet  = "abcdefghijklmnopqrstuvwxyz";
+        String randomAlphabet = "";
+        Random random = new Random();
+        for (int i = 0; i < length ; i++) {
+
+            randomAlphabet = randomAlphabet + alphabet.charAt(random.nextInt(alphabet.length()));
+
+        }
+
+        return randomAlphabet;
+    }
+
+    /**
+     * Generate array of Number
+     * @param length int
+     * @return String
+     */
+    public static String generateNumber(int length) {
+
+        String numbers  = "0123456789";
+        String randomNumber = "";
+        Random random = new Random();
+        for (int i = 0; i < length ; i++) {
+
+            randomNumber = randomNumber + numbers.charAt(random.nextInt(numbers.length()));
+
+        }
+
+        return randomNumber;
+    }
 
 
 }
