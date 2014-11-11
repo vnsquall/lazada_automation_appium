@@ -9,7 +9,6 @@ import util.AppiumSetupTest;
 import static util.Constant.*;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 import static util.Helper.*;
 
@@ -18,7 +17,7 @@ import static util.Helper.*;
  */
 public class CheckOutScenario extends AppiumSetupTest {
 
-    protected void checkOut(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
+    protected void checkOut(String categories, String filterWiz, String prodWiz) throws InterruptedException {
 
         findByUISelector("resourceID","abs__home",appPackage).click();
 
@@ -63,7 +62,7 @@ public class CheckOutScenario extends AppiumSetupTest {
     protected void checkOutUseTheCoD(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
         // Perform Check Out steps
         selectVenture(venture, menuWiz);
-        checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
+        checkOut(categories, filterWiz, prodWiz);
         Thread.sleep(1000);
         // Check the Cash On Delivery is available or not for this CheckOutTest
         if (!isElementPresent(By.xpath("//*[@class='payment-method-option radio'and@value='CashOnDelivery'and@disabled='disabled']"))
@@ -99,7 +98,7 @@ public class CheckOutScenario extends AppiumSetupTest {
                                                 String prodWiz, String creditNumber, String customerName, String securityCode) throws InterruptedException {
         // Perform Check Out steps
         selectVenture(venture, menuWiz);
-        checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
+        checkOut(categories, filterWiz, prodWiz);
 
         // Check the Credit Cards is available or not for this CheckOutTest
         if (isElementPresent(By.xpath("//label[@class='creditcards']"))) {
@@ -140,7 +139,7 @@ public class CheckOutScenario extends AppiumSetupTest {
                                            int bankIndex, String senderName) throws InterruptedException {
         // Perform Check Out steps
         selectVenture(venture, menuWiz);
-        checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
+        checkOut(categories, filterWiz, prodWiz);
         bankTransfer(bankIndex, senderName);
     }
 
@@ -173,7 +172,7 @@ public class CheckOutScenario extends AppiumSetupTest {
     protected void checkOutAndUsePaypal(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
         // Perform Check Out steps
         selectVenture(venture, menuWiz);
-        checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
+        checkOut(categories, filterWiz, prodWiz);
 
         // Check the Paypal is available or not for this CheckOutTest
         if (isElementPresent(By.xpath("//label[@for='paypal']"))) {
@@ -264,7 +263,7 @@ public class CheckOutScenario extends AppiumSetupTest {
     }
 
     protected void checkOutEditAddress(String venture, String menuWiz, String categories, String filterWiz,
-                                         String prodWiz,String editAddSuccess, String name, String address, String phoneNumber) throws InterruptedException {
+                                       String prodWiz, String name, String address, String phoneNumber) throws InterruptedException {
         // Perform Check Out steps
         addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
         login();
@@ -305,7 +304,7 @@ public class CheckOutScenario extends AppiumSetupTest {
      *
      */
     protected void checkOutBillingDifferentAddress(String venture, String menuWiz, String categories, String filterWiz,
-                                                   String prodWiz, String editAddSuccess, String name, String address, String phoneNumber) throws InterruptedException {
+                                                   String prodWiz, String name, String address, String phoneNumber) throws InterruptedException {
         // Perform Check Out steps
         addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
         login();
@@ -325,10 +324,10 @@ public class CheckOutScenario extends AppiumSetupTest {
     }
 
     protected void checkOutEditBillingAddress(String venture, String menuWiz, String categories, String filterWiz,
-                                                   String prodWiz, String editAddSuccess, String name, String address, String phoneNumber) throws InterruptedException {
+                                              String prodWiz, String name, String address, String phoneNumber) throws InterruptedException {
         // Perform Check Out steps
         selectVenture(venture, menuWiz);
-        checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
+        checkOut(categories, filterWiz, prodWiz);
 
         // Check the Cash On Delivery is available or not for this CheckOutTest
         if (!isElementPresent(By.xpath("//*[@class='payment-method-option radio'and@value='CashOnDelivery'and@disabled='disabled']"))
@@ -342,8 +341,8 @@ public class CheckOutScenario extends AppiumSetupTest {
             // Edit billing address
             driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_first_name']")).sendKeys(name);
             driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_address1']")).sendKeys(address);
-            if (venture == "Thailand" || venture == "Philippines"
-                    || venture == "Malaysia" || venture == "Indonesia") {
+            if (venture.equals("Thailand") || venture.equals("Philippines")
+                    || venture.equals("Malaysia") || venture.equals("Indonesia")) {
 
                 selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_0']")); // select random Region
                 selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_1']")); // select random City
@@ -351,11 +350,11 @@ public class CheckOutScenario extends AppiumSetupTest {
                 driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
 
             }
-            if (venture == "Singapore") {
+            if (venture.equals("Singapore")) {
                 driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_postcode']")).sendKeys("759674");
                 driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
             }
-            if (venture == "Vietnam") {
+            if (venture.equals("Vietnam")) {
                 selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_0']")); // select random Region
                 selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_1']")); // select random City
                 driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
@@ -383,10 +382,10 @@ public class CheckOutScenario extends AppiumSetupTest {
     }
 
     protected void checkOutEditShippingAddress(String venture, String menuWiz, String categories, String filterWiz,
-                                              String prodWiz, String editAddSuccess, String name, String address, String phoneNumber) throws InterruptedException {
+                                               String prodWiz, String name, String address, String phoneNumber) throws InterruptedException {
         // Perform Check Out steps
         selectVenture(venture, menuWiz);
-        checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
+        checkOut(categories, filterWiz, prodWiz);
 
         // Check the Cash On Delivery is available or not for this CheckOutTest
         if (!isElementPresent(By.xpath("//*[@class='payment-method-option radio'and@value='CashOnDelivery'and@disabled='disabled']"))
@@ -403,8 +402,8 @@ public class CheckOutScenario extends AppiumSetupTest {
             // Edit billing address
             driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_first_name']")).sendKeys(name);
             driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_address1']")).sendKeys(address);
-            if (venture == "Thailand" || venture == "Philippines"
-                    || venture == "Malaysia" || venture == "Indonesia") {
+            if (venture.equals("Thailand") || venture.equals("Philippines")
+                    || venture.equals("Malaysia") || venture.equals("Indonesia")) {
 
                 selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_0']")); // select random Region
                 selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_1']")); // select random City
@@ -412,11 +411,11 @@ public class CheckOutScenario extends AppiumSetupTest {
                 driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
 
             }
-            if (venture == "Singapore") {
+            if (venture.equals("Singapore")) {
                 driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_postcode']")).sendKeys("759674");
                 driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
             }
-            if (venture == "Vietnam") {
+            if (venture.equals("Vietnam")) {
                 selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_0']")); // select random Region
                 selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_1']")); // select random City
                 driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
@@ -450,11 +449,10 @@ public class CheckOutScenario extends AppiumSetupTest {
      * @param categories String
      * @param filterWiz String
      * @param prodWiz String
-     * @param editAddSuccess String
      * @throws InterruptedException
      */
     protected void checkOutRemoveFromCart(String venture, String menuWiz, String categories, String filterWiz,
-                                               String prodWiz, String editAddSuccess) throws InterruptedException {
+                                          String prodWiz) throws InterruptedException {
 
 
         // Perform Check Out steps
@@ -478,13 +476,13 @@ public class CheckOutScenario extends AppiumSetupTest {
 
     }
 
-    protected void checkOutEditPaymentMethod (String venture, String menuWiz, String categories, String filterWiz,
-                                               String prodWiz, String editAddSuccess) throws InterruptedException {
+    protected void checkOutEditPaymentMethod(String venture, String menuWiz, String categories, String filterWiz,
+                                             String prodWiz) throws InterruptedException {
 
 
         // Perform Check Out steps
         selectVenture(venture, menuWiz);
-        checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
+        checkOut(categories, filterWiz, prodWiz);
 
         // Check out by COD then edit payment method
         if (!isElementPresent(By.xpath("//*[@class='payment-method-option radio'and@value='CashOnDelivery'and@disabled='disabled']"))
@@ -504,12 +502,12 @@ public class CheckOutScenario extends AppiumSetupTest {
 
     }
 
-    protected void checkOutCoupon (String venture, String menuWiz, String categories, String filterWiz,
-                                               String prodWiz, String editAddSuccess, String coupon) throws InterruptedException {
+    protected void checkOutCoupon(String venture, String menuWiz, String categories, String filterWiz,
+                                  String prodWiz, String coupon) throws InterruptedException {
 
         // Perform Check Out steps
         selectVenture(venture, menuWiz);
-        checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
+        checkOut(categories, filterWiz, prodWiz);
 
         // Check out by COD then edit payment method
         if (!isElementPresent(By.xpath("//*[@class='payment-method-option radio'and@value='CashOnDelivery'and@disabled='disabled']"))
@@ -529,12 +527,12 @@ public class CheckOutScenario extends AppiumSetupTest {
       }
     }
 
-    protected void checkOutShareOrder (String venture, String menuWiz, String categories, String filterWiz,
-                                               String prodWiz, String editAddSuccess) throws InterruptedException {
+    protected void checkOutShareOrder(String venture, String menuWiz, String categories, String filterWiz,
+                                      String prodWiz) throws InterruptedException {
 
         // Perform Check Out steps
         selectVenture(venture, menuWiz);
-        checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
+        checkOut(categories, filterWiz, prodWiz);
         Thread.sleep(1000);
 
         // Check the Cash On Delivery is available or not for this CheckOutTest
@@ -555,11 +553,11 @@ public class CheckOutScenario extends AppiumSetupTest {
         }
     }
 
-    protected void checkOutSavedCreditCard (String venture, String menuWiz, String categories, String filterWiz,
-                                               String prodWiz, String editAddSuccess) throws InterruptedException {
+    protected void checkOutSavedCreditCard(String venture, String menuWiz, String categories, String filterWiz,
+                                           String prodWiz) throws InterruptedException {
         // Perform Check Out steps
         selectVenture(venture, menuWiz);
-        checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
+        checkOut(categories, filterWiz, prodWiz);
 
         // Check the Saved Credit Cards is available or not
         if (isElementPresent(By.xpath("//*[starts-with(@for,'card_id')]"))) {
@@ -574,8 +572,8 @@ public class CheckOutScenario extends AppiumSetupTest {
 
     }
 
-    protected void checkOutNewAccount (String venture, String menuWiz, String categories, String filterWiz,
-                                               String prodWiz, String editAddSuccess) throws InterruptedException {
+    protected void checkOutNewAccount(String venture, String menuWiz, String categories, String filterWiz,
+                                      String prodWiz) throws InterruptedException {
         // Perform Check Out steps
         addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
 
@@ -625,8 +623,8 @@ public class CheckOutScenario extends AppiumSetupTest {
         // New billing address
         driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_first_name']")).sendKeys(name);
         driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_address1']")).sendKeys(address);
-        if (venture == "Thailand" || venture == "Philippines"
-                || venture == "Malaysia" || venture == "Indonesia") {
+        if (venture.equals("Thailand") || venture.equals("Philippines")
+                || venture.equals("Malaysia") || venture.equals("Indonesia")) {
 
             selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_0']")); // select random Region
             selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_1']")); // select random City
@@ -634,11 +632,11 @@ public class CheckOutScenario extends AppiumSetupTest {
             driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
 
         }
-        if (venture == "Singapore") {
+        if (venture.equals("Singapore")) {
             driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_postcode']")).sendKeys("759674");
             driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
         }
-        if (venture == "Vietnam") {
+        if (venture.equals("Vietnam")) {
             selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_0']")); // select random Region
             selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_1']")); // select random City
             driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
@@ -650,10 +648,10 @@ public class CheckOutScenario extends AppiumSetupTest {
     }
 
     protected void checkoutNewBillingAddress(String venture, String menuWiz, String categories, String filterWiz,
-                                             String prodWiz, String editAddSuccess, String name, String address, String phoneNumber) throws InterruptedException {
+                                             String prodWiz, String name, String address, String phoneNumber) throws InterruptedException {
         // Perform Check Out steps
         selectVenture(venture, menuWiz);
-        checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
+        checkOut(categories, filterWiz, prodWiz);
         Thread.sleep(1000);
 
         // Check the Cash On Delivery is available or not for this CheckOutTest
@@ -682,10 +680,10 @@ public class CheckOutScenario extends AppiumSetupTest {
      * Create new account -> check out via Bank transfer - ID
      */
     protected void checkoutBankTransferNewUser(String venture, String menuWiz, String categories, String filterWiz,
-                                             String prodWiz, String editAddSuccess,
-                                             int bankIndex, String senderName) throws InterruptedException {
+                                               String prodWiz,
+                                               int bankIndex, String senderName) throws InterruptedException {
 
-        checkOutNewAccount(venture, menuWiz, categories, filterWiz, prodWiz, editAddSuccess);
+        checkOutNewAccount(venture, menuWiz, categories, filterWiz, prodWiz);
         bankTransfer(bankIndex, senderName);
 
     }
