@@ -17,8 +17,8 @@ public class CheckOut_Test extends CheckOutScenario {
         return new Object[][]{
 //                {"Singapore"},
 //                {"Philippines"},
-                {"Indonesia"},
-//                {"Malaysia"},
+//                {"Indonesia"},
+                {"Malaysia"},
 //                {"Vietnam"},
 //                {"Thailand"}
         };
@@ -31,9 +31,9 @@ public class CheckOut_Test extends CheckOutScenario {
 //                {"Singapore", "4400123456784011", "Mr Test", "123"},
 //                {"Malaysia", "4400123456784011", "Mr Test", "123"},
 //                {"Philippines", "4400123456784011", "Mr Test", "123"},
-//                {"Indonesia", "4400123456784011", "Mr Test", "123"},
+                {"Indonesia", "4400123456784011", "Mr Test", "123"},
 //                {"Vietnam", "4400123456784011", "Mr Test", "123"},
-                {"Thailand", "4400123456784011", "Mr Test", "123"}
+//                {"Thailand", "4400123456784011", "Mr Test", "123"}
 
         };
     }
@@ -115,12 +115,12 @@ public class CheckOut_Test extends CheckOutScenario {
     @DataProvider
     Object[][] getVenturesDataToTestRemoveFromCart() {
         return new Object[][]{
-//                {"Malaysia"},
-//                {"Philippines"},
 //                {"Singapore"},
 //                {"Thailand"},
 //                {"Vietnam"},
-                {"Indonesia"},
+//                {"Indonesia"},
+                {"Malaysia"},
+//                {"Philippines"}
 
         };
     }
@@ -176,6 +176,21 @@ public class CheckOut_Test extends CheckOutScenario {
         };
     }
 
+    @DataProvider
+    Object[][] getVenturesDataToTestNewAccount() {
+        return new Object[][]{
+
+                {"Philippines"},
+                {"Singapore"},
+                {"Vietnam"},
+                {"Indonesia"},
+                {"Malaysia"},
+                {"Thailand"}
+
+
+        };
+    }
+
 
     @Test(dataProvider = "getVenturesDataToTestCashOnDelivery")
     public void test_CashOnDelivery(String venture) throws Exception {
@@ -184,7 +199,7 @@ public class CheckOut_Test extends CheckOutScenario {
     }
 
     @Test(dataProvider = "getVenturesDataToTestCreditCardInvalid")
-    public void test_CreditCard(String venture, String creditNumber, String customerName, String securityCode) throws Exception {
+    public void test_CreditCardInvalid(String venture, String creditNumber, String customerName, String securityCode) throws Exception {
         checkOutAndUseCreditCardInvalid(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"), creditNumber, customerName, securityCode);
     }
@@ -269,6 +284,13 @@ public class CheckOut_Test extends CheckOutScenario {
     @Test(dataProvider = "getVenturesDataToTestSavedCreditCard")
     public void test_SavedCreditCard(String venture) throws Exception {
         checkOutSavedCreditCard(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
+                setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
+                setText(venture).get("editAddSuccess"));
+    }
+
+    @Test(dataProvider = "getVenturesDataToTestNewAccount")
+    public void test_NewAccount(String venture) throws Exception {
+        checkOutNewAccount(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
                 setText(venture).get("editAddSuccess"));
     }
