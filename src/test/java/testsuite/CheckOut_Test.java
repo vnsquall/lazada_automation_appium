@@ -191,6 +191,22 @@ public class CheckOut_Test extends CheckOutScenario {
         };
     }
 
+    @DataProvider
+    Object[][] getVenturesDataToTestNewBillingAddress() {
+        return new Object[][]{
+
+                {"Philippines", " QA name edit ", "QA address edit", "0933085533"},
+//                {"Singapore", " QA name edit ", "QA address edit", "0933085533"},
+//                {"Vietnam", " QA name edit ", "QA address edit", "0933085533"},
+//                {"Indonesia", " QA name edit ", "QA address edit", "0933085533"},
+//                {"Malaysia", " QA name edit ", "QA address edit", "0933085533"},
+//                {"Thailand", " QA name edit ", "QA address edit", "0933085533"},
+
+
+
+        };
+    }
+
 
     @Test(dataProvider = "getVenturesDataToTestCashOnDelivery")
     public void test_CashOnDelivery(String venture) throws Exception {
@@ -293,6 +309,13 @@ public class CheckOut_Test extends CheckOutScenario {
         checkOutNewAccount(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
                 setText(venture).get("editAddSuccess"));
+    }
+
+    @Test(dataProvider = "getVenturesDataToTestNewBillingAddress")
+    public void test_NewBillingAddress(String venture, String name, String address, String phoneNumber) throws Exception {
+        checkoutNewBillingAddress(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
+                setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
+                setText(venture).get("editAddSuccess"), name, address, phoneNumber);
     }
 
 

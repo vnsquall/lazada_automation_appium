@@ -1,6 +1,7 @@
 package scenario;
 
 
+import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -623,19 +624,17 @@ public class CheckOutScenario extends AppiumSetupTest {
         String email = generateEmail();
         String password = generatePassword();
         String name = generateAlphabet(5);
-        String address = generateAlphabet(6);
-        String phoneNumber = generateNumber(10);
 
         List<WebElement> editTexts = driver.findElements(By.xpath("//*[contains(@class,'android.widget.EditText')]"));
         driver.findElement(By.className("android.widget.CheckBox")).click(); // Show password
-        editTexts.get(3).click();
-        editTexts.get(3).sendKeys(name); // name
+        MobileElement nameText = (MobileElement)editTexts.get(3);
+        nameText.setValue(name); // name
         editTexts.get(2).click();
-        editTexts.get(2).sendKeys(password); // re-password
+        ((MobileElement)editTexts.get(2)).setValue(password); // re-password
         editTexts.get(1).click();
-        editTexts.get(1).sendKeys(password); // password
+        ((MobileElement)editTexts.get(3)).setValue(password); // password
         editTexts.get(0).click();
-        editTexts.get(0).sendKeys(email); // email
+        ((MobileElement)editTexts.get(3)).setValue(email); // email
 
         // Submit
         findByUISelector("resourceID", "register_button_submit", appPackage).click();
@@ -669,6 +668,34 @@ public class CheckOutScenario extends AppiumSetupTest {
 
         // Submit
         driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+
+    }
+
+    protected void checkoutNewBillingAddress(String venture, String menuWiz, String categories, String filterWiz,
+                                             String prodWiz, String editAddSuccess, String name, String address, String phoneNumber) throws InterruptedException {
+        // Perform Check Out steps
+        selectVenture(venture, menuWiz);
+        checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
+        Thread.sleep(1000);
+
+        // Check the Cash On Delivery is available or not for this CheckOutTest
+        if (!isElementPresent(By.xpath("//*[@class='payment-method-option radio'and@value='CashOnDelivery'and@disabled='disabled']"))
+                && isElementPresent(By.xpath("//label[@for='cashondelivery']"))) {
+
+            driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
+            driver.findElement(By.xpath("//button[@class='orange-button']")).click();
+            Thread.sleep(3000);
+            // Edit billing address
+
+            driver.findElement(By.xpath("//*[@id='change-shipping'][contains(@href, 'billing')]")).click();
+            createAddress(venture, name, address, phoneNumber);
+            driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+            Thread.sleep(2000);
+            driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
+            driver.findElement(By.xpath("//button[@class='orange-button']")).click();
+            driver.findElement(By.xpath("//button[@class='orange-button']")).click();
+
+        }
 
     }
 
