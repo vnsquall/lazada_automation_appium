@@ -141,6 +141,13 @@ public class CheckOutScenario extends AppiumSetupTest {
         // Perform Check Out steps
         selectVenture(venture, menuWiz);
         checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
+        bankTransfer(bankIndex, senderName);
+    }
+
+    /**
+     * Choose bank transfer and place the order
+     */
+    protected void bankTransfer (int bankIndex, String senderName) throws InterruptedException {
 
         // Check the Bank transfer is available or not for this CheckOutTest
         if (isElementPresent(By.xpath("//label[@for='manualbanktransferid']"))) {
@@ -705,10 +712,10 @@ public class CheckOutScenario extends AppiumSetupTest {
      */
     protected void checkoutBankTransferNewUser(String venture, String menuWiz, String categories, String filterWiz,
                                              String prodWiz, String editAddSuccess,
-                                             String name, String address, String phoneNumber) throws InterruptedException {
+                                             int bankIndex, String senderName) throws InterruptedException {
 
         checkOutNewAccount(venture, menuWiz, categories, filterWiz, prodWiz, editAddSuccess);
-
+        bankTransfer(bankIndex, senderName);
 
     }
 
