@@ -60,7 +60,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         Thread.sleep(3000);
     }
 
-    protected void checkOutAndUseTheCoD(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
+    protected void checkOutUseTheCoD(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
         // Perform Check Out steps
         selectVenture(venture, menuWiz);
         checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
@@ -95,8 +95,8 @@ public class CheckOutScenario extends AppiumSetupTest {
         }
     }
 
-    protected void checkOutAndUseCreditCardInvalid(String venture, String menuWiz, String categories, String filterWiz,
-                                                   String prodWiz, String creditNumber, String customerName, String securityCode) throws InterruptedException {
+    protected void checkOutUseCreditCardInvalid(String venture, String menuWiz, String categories, String filterWiz,
+                                                String prodWiz, String creditNumber, String customerName, String securityCode) throws InterruptedException {
         // Perform Check Out steps
         selectVenture(venture, menuWiz);
         checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
@@ -136,8 +136,8 @@ public class CheckOutScenario extends AppiumSetupTest {
         }
     }
 
-    protected void checkOutAndUseBankTransfer(String venture, String menuWiz, String categories, String filterWiz, String prodWiz,
-                                              int bankIndex, String senderName) throws InterruptedException {
+    protected void checkOutUseBankTransfer(String venture, String menuWiz, String categories, String filterWiz, String prodWiz,
+                                           int bankIndex, String senderName) throws InterruptedException {
         // Perform Check Out steps
         selectVenture(venture, menuWiz);
         checkOut(venture, menuWiz, categories, filterWiz, prodWiz);
@@ -696,6 +696,19 @@ public class CheckOutScenario extends AppiumSetupTest {
             driver.findElement(By.xpath("//button[@class='orange-button']")).click();
 
         }
+
+    }
+
+    /**
+     *
+     * Create new account -> check out via Bank transfer - ID
+     */
+    protected void checkoutBankTransferNewUser(String venture, String menuWiz, String categories, String filterWiz,
+                                             String prodWiz, String editAddSuccess,
+                                             String name, String address, String phoneNumber) throws InterruptedException {
+
+        checkOutNewAccount(venture, menuWiz, categories, filterWiz, prodWiz, editAddSuccess);
+
 
     }
 
