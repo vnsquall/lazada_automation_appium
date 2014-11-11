@@ -191,12 +191,7 @@ public class CheckOutScenario extends AppiumSetupTest {
 
     /**
      * Select random product -> add to Cart -> Login and No checkout
-     * @param venture
-     * @param menuWiz
-     * @param categories
-     * @param filterWiz
-     * @param prodWiz
-     * @throws InterruptedException
+     *
      */
     protected void addRandomProductToCart(String venture, String menuWiz, String categories,
                                           String filterWiz, String prodWiz) throws InterruptedException {
@@ -218,21 +213,6 @@ public class CheckOutScenario extends AppiumSetupTest {
         }
 
         find(appPackage + ":id/checkout_button").click();
-
-//        //Login to CheckOut
-//        List<WebElement> editTextList = driver.findElements(By.className("android.widget.EditText"));
-//        editTextList.get(0).sendKeys("qa000@mail.com");
-//        editTextList.get(1).sendKeys("a12345");
-//
-//        driver.findElement(By.className("android.widget.CheckBox")).click();
-//        find(appPackage + ":id/middle_login_button_signin").click();
-//
-//        Thread.sleep(5000);
-//        wait_web(By.id(appPackage + ":id/rocket_app_checkoutweb"));
-//        driver.findElement(By.id(appPackage + ":id/rocket_app_checkoutweb"));
-//        Thread.sleep(2000);
-//        switchToWebView();
-//        Thread.sleep(3000);
 
     }
 
@@ -322,16 +302,7 @@ public class CheckOutScenario extends AppiumSetupTest {
 
     /**
      * Check out and check "Use different billing address"
-     * @param venture
-     * @param menuWiz
-     * @param categories
-     * @param filterWiz
-     * @param prodWiz
-     * @param editAddSuccess
-     * @param name
-     * @param address
-     * @param phoneNumber
-     * @throws InterruptedException
+     *
      */
     protected void checkOutBillingDifferentAddress(String venture, String menuWiz, String categories, String filterWiz,
                                                    String prodWiz, String editAddSuccess, String name, String address, String phoneNumber) throws InterruptedException {
