@@ -207,6 +207,15 @@ public class CheckOut_Test extends CheckOutScenario {
         };
     }
 
+    @DataProvider
+    Object[][] getVenturesDataToTestBankTransferNewUser() {
+        return new Object[][]{
+
+                {"Indonesia", 3, "Mr Test"}
+
+        };
+    }
+
 
     @Test(dataProvider = "getVenturesDataToTestCashOnDelivery")
     public void test_CashOnDelivery(String venture) throws Exception {
@@ -318,6 +327,15 @@ public class CheckOut_Test extends CheckOutScenario {
                 setText(venture).get("editAddSuccess"), name, address, phoneNumber);
     }
 
+    /**
+     * Create new user and check out via Bank transfer - ID
+     */
+    @Test(dataProvider = "getVenturesDataToTestBankTransferNewUser")
+    public void test_BankTransferNewUser(String venture, int bankIndex, String senderName) throws Exception {
+        checkoutBankTransferNewUser(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
+                setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
+                setText(venture).get("editAddSuccess"), bankIndex, senderName );
+    }
 
 
 }
