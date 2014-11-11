@@ -211,10 +211,28 @@ public class CheckOutScenario extends AppiumSetupTest {
 
         find(appPackage + ":id/checkout_button").click();
 
+//        //Login to CheckOut
+//        List<WebElement> editTextList = driver.findElements(By.className("android.widget.EditText"));
+//        editTextList.get(0).sendKeys("qa000@mail.com");
+//        editTextList.get(1).sendKeys("a12345");
+//
+//        driver.findElement(By.className("android.widget.CheckBox")).click();
+//        find(appPackage + ":id/middle_login_button_signin").click();
+//
+//        Thread.sleep(5000);
+//        wait_web(By.id(appPackage + ":id/rocket_app_checkoutweb"));
+//        driver.findElement(By.id(appPackage + ":id/rocket_app_checkoutweb"));
+//        Thread.sleep(2000);
+//        switchToWebView();
+//        Thread.sleep(3000);
+
+    }
+
+    protected void login () throws InterruptedException {
         //Login to CheckOut
         List<WebElement> editTextList = driver.findElements(By.className("android.widget.EditText"));
-        editTextList.get(0).sendKeys("qa000@mail.com");
-        editTextList.get(1).sendKeys("a12345");
+        editTextList.get(0).sendKeys(USERNAME);
+        editTextList.get(1).sendKeys(PASSWORD);
 
         driver.findElement(By.className("android.widget.CheckBox")).click();
         find(appPackage + ":id/middle_login_button_signin").click();
@@ -233,6 +251,7 @@ public class CheckOutScenario extends AppiumSetupTest {
                                          String phoneNumber) throws InterruptedException {
         // Perform Check Out steps
         addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
+        login();
 
         // Create new address
         swipeDown();
@@ -260,6 +279,7 @@ public class CheckOutScenario extends AppiumSetupTest {
                                          String prodWiz,String editAddSuccess, String name, String address, String phoneNumber) throws InterruptedException {
         // Perform Check Out steps
         addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
+        login();
 
         // Edit address
         swipeDown();
@@ -309,6 +329,7 @@ public class CheckOutScenario extends AppiumSetupTest {
                                                    String prodWiz, String editAddSuccess, String name, String address, String phoneNumber) throws InterruptedException {
         // Perform Check Out steps
         addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
+        login();
 
         // Choose Use different billing address
         driver.findElement(By.xpath("//*[@for='ThreeStepBillingAddressForm_isSameShipping']")).click();
@@ -459,6 +480,7 @@ public class CheckOutScenario extends AppiumSetupTest {
 
         // Perform Check Out steps
         addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
+        login();
         switchToNativeApp();
 
         // Go to myCart and remove all product
@@ -548,7 +570,6 @@ public class CheckOutScenario extends AppiumSetupTest {
             switchToNativeApp();
 
             // Share order
-//            driver.findElement(By.xpath("//*[@resource-id='com.lazada.android:id/btn_checkout_share']")).click();
             findByUISelector("resourceID", "btn_checkout_share", appPackage).click();
             randClick(By.xpath("//*[@resource-id='android:id/text1']"));
 
@@ -574,5 +595,81 @@ public class CheckOutScenario extends AppiumSetupTest {
 
     }
 
+    protected void checkOutNewAccount (String venture, String menuWiz, String categories, String filterWiz,
+                                               String prodWiz, String editAddSuccess) throws InterruptedException {
+        // Perform Check Out steps
+        addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
+
+        // Create new account
+        findByUISelector("resourceID", "middle_login_link_register", appPackage).click();
+        registerAccount();
+
+        Thread.sleep(1000);
+        switchToWebView();
+
+        // Create new shipping address
+        String name = generateAlphabet(10);
+        String address = generateAlphabet(10);
+        String phoneNumber = generateNumber(10);
+        createAddress(venture, name, address, phoneNumber);
+
+
+
+    }
+
+    protected void registerAccount() throws InterruptedException {
+
+        // Random email, password, name
+        String email = generateEmail();
+        String password = generatePassword();
+        String name = generateAlphabet(5);
+        String address = generateAlphabet(6);
+        String phoneNumber = generateNumber(10);
+
+        List<WebElement> editTexts = driver.findElements(By.xpath("//*[contains(@class,'android.widget.EditText')]"));
+        driver.findElement(By.className("android.widget.CheckBox")).click(); // Show password
+        editTexts.get(3).click();
+        editTexts.get(3).sendKeys(name); // name
+        editTexts.get(2).click();
+        editTexts.get(2).sendKeys(password); // re-password
+        editTexts.get(1).click();
+        editTexts.get(1).sendKeys(password); // password
+        editTexts.get(0).click();
+        editTexts.get(0).sendKeys(email); // email
+
+        // Submit
+        findByUISelector("resourceID", "register_button_submit", appPackage).click();
+        Thread.sleep(3000);
+
+    }
+
+    protected void createAddress(String venture, String name, String address, String phoneNumber) throws InterruptedException {
+
+        // New billing address
+        driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_first_name']")).sendKeys(name);
+        driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_address1']")).sendKeys(address);
+        if (venture == "Thailand" || venture == "Philippines"
+                || venture == "Malaysia" || venture == "Indonesia") {
+
+            selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_0']")); // select random Region
+            selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_1']")); // select random City
+            selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_2']")); // select random Postcode
+            driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
+
+        }
+        if (venture == "Singapore") {
+            driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_postcode']")).sendKeys("759674");
+            driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
+        }
+        if (venture == "Vietnam") {
+            selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_0']")); // select random Region
+            selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_1']")); // select random City
+            driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
+        }
+
+        // Submit
+        driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+
+    }
 
 }
