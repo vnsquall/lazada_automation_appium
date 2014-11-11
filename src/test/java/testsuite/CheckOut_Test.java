@@ -252,42 +252,42 @@ public class CheckOut_Test extends CheckOutScenario {
     public void test_EditAddress(String venture, String name, String address, String phoneNumber) throws Exception {
         checkOutEditAddress(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
-                setText(venture).get("editAddSuccess"), name, address, phoneNumber);
+                name, address, phoneNumber);
     }
 
     @Test(dataProvider = "getVenturesDataToTestDifferentAddress")
     public void test_DifferentAddress(String venture, String name, String address, String phoneNumber) throws Exception {
         checkOutBillingDifferentAddress(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
-                setText(venture).get("editAddSuccess"), name, address, phoneNumber);
+                name, address, phoneNumber);
     }
 
     @Test(dataProvider = "getVenturesDataToTestEditBillingAddress")
     public void test_EditBillingAddress(String venture, String name, String address, String phoneNumber) throws Exception {
         checkOutEditBillingAddress(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
-                setText(venture).get("editAddSuccess"), name, address, phoneNumber);
+                name, address, phoneNumber);
     }
 
     @Test(dataProvider = "getVenturesDataToTestEditShippingAddress")
     public void test_EditShippingAddress(String venture, String name, String address, String phoneNumber) throws Exception {
         checkOutEditShippingAddress(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
-                setText(venture).get("editAddSuccess"), name, address, phoneNumber);
+                name, address, phoneNumber);
     }
 
     @Test(dataProvider = "getVenturesDataToTestRemoveFromCart")
     public void test_RemoveFromCart(String venture) throws Exception {
         checkOutRemoveFromCart(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
-                setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
-                setText(venture).get("editAddSuccess"));
+                setText(venture).get("filterWiz"), setText(venture).get("prodWiz")
+        );
     }
 
     @Test(dataProvider = "getVenturesDataToTestEditPaymentMethod")
     public void test_EditPaymentMethod(String venture) throws Exception {
         checkOutEditPaymentMethod(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
-                setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
-                setText(venture).get("editAddSuccess"));
+                setText(venture).get("filterWiz"), setText(venture).get("prodWiz")
+        );
     }
 
     // Staging only
@@ -295,36 +295,36 @@ public class CheckOut_Test extends CheckOutScenario {
     public void test_Coupon(String venture, String coupon) throws Exception {
         checkOutCoupon(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
-                setText(venture).get("editAddSuccess"), coupon);
+                coupon);
     }
 
     @Test(dataProvider = "getVenturesDataToTestShareOrder")
     public void test_ShareOrder(String venture) throws Exception {
         checkOutShareOrder(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
-                setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
-                setText(venture).get("editAddSuccess"));
+                setText(venture).get("filterWiz"), setText(venture).get("prodWiz")
+        );
     }
 
     // Staging only
     @Test(dataProvider = "getVenturesDataToTestSavedCreditCard")
     public void test_SavedCreditCard(String venture) throws Exception {
         checkOutSavedCreditCard(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
-                setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
-                setText(venture).get("editAddSuccess"));
+                setText(venture).get("filterWiz"), setText(venture).get("prodWiz")
+        );
     }
 
     @Test(dataProvider = "getVenturesDataToTestNewAccount")
     public void test_NewAccount(String venture) throws Exception {
         checkOutNewAccount(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
-                setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
-                setText(venture).get("editAddSuccess"));
+                setText(venture).get("filterWiz"), setText(venture).get("prodWiz")
+        );
     }
 
     @Test(dataProvider = "getVenturesDataToTestNewBillingAddress")
     public void test_NewBillingAddress(String venture, String name, String address, String phoneNumber) throws Exception {
         checkoutNewBillingAddress(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
-                setText(venture).get("editAddSuccess"), name, address, phoneNumber);
+                name, address, phoneNumber);
     }
 
     /**
@@ -334,7 +334,7 @@ public class CheckOut_Test extends CheckOutScenario {
     public void test_BankTransferNewUser(String venture, int bankIndex, String senderName) throws Exception {
         checkoutBankTransferNewUser(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
-                setText(venture).get("editAddSuccess"), bankIndex, senderName );
+                bankIndex, senderName );
     }
 
 
