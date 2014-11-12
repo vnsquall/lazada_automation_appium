@@ -174,7 +174,7 @@ public class CheckOutScenario extends AppiumSetupTest {
     }
 
     /**
-     * Select random product -> add to Cart -> Login and No checkout
+     * Select random product -> add to Cart
      *
      */
     protected void addRandomProductToCart(String venture, String menuWiz, String categories,
@@ -232,12 +232,14 @@ public class CheckOutScenario extends AppiumSetupTest {
         swipeDown();
         driver.findElement(By.xpath("//*[@id='load-different-billing-mobile']")).click(); // Click New address
 
-        driver.findElement(By.xpath("//*[@id='AddressForm_first_name']")).sendKeys(name);
-        driver.findElement(By.xpath("//*[@id='AddressForm_address1']")).sendKeys(address);
-        selectorRandom(By.xpath("//*[@id='AddressForm_location_0']")); // select random Region
-        selectorRandom(By.xpath("//*[@id='AddressForm_location_1']")); // select random City
-        selectorRandom(By.xpath("//*[@id='AddressForm_location_2']")); // select random Postcode
-        driver.findElement(By.xpath("//*[@id='AddressForm_phone']")).sendKeys(phoneNumber);
+//        driver.findElement(By.xpath("//*[@id='AddressForm_first_name']")).sendKeys(name);
+//        driver.findElement(By.xpath("//*[@id='AddressForm_address1']")).sendKeys(address);
+//        selectorRandom(By.xpath("//*[@id='AddressForm_location_0']")); // select random Region
+//        selectorRandom(By.xpath("//*[@id='AddressForm_location_1']")); // select random City
+//        selectorRandom(By.xpath("//*[@id='AddressForm_location_2']")); // select random Postcode
+//        driver.findElement(By.xpath("//*[@id='AddressForm_phone']")).sendKeys(phoneNumber);
+        Thread.sleep(2000);
+        createBillingAddress(venture, name, address, phoneNumber);
 
         // Submit
         driver.findElement(By.xpath("//*[@class='orange-button']")).click();
@@ -576,7 +578,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         String name = generateAlphabet(10);
         String address = generateAlphabet(10);
         String phoneNumber = generateNumber(10);
-        createAddress(venture, name, address, phoneNumber);
+        createBillingAddress(venture, name, address, phoneNumber);
 
 
 
@@ -607,9 +609,9 @@ public class CheckOutScenario extends AppiumSetupTest {
     }
 
     /**
-     * Create new address
+     * Create new billing address
      */
-    protected void createAddress(String venture, String name, String address, String phoneNumber) throws InterruptedException {
+    protected void createBillingAddress(String venture, String name, String address, String phoneNumber) throws InterruptedException {
 
         // New billing address
         driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_first_name']")).sendKeys(name);
@@ -655,7 +657,7 @@ public class CheckOutScenario extends AppiumSetupTest {
             // Edit billing address
 
             driver.findElement(By.xpath("//*[@id='change-shipping'][contains(@href, 'billing')]")).click();
-            createAddress(venture, name, address, phoneNumber);
+            createBillingAddress(venture, name, address, phoneNumber);
             driver.findElement(By.xpath("//*[@class='orange-button']")).click();
             Thread.sleep(2000);
             driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
