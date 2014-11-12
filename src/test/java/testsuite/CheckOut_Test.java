@@ -28,12 +28,12 @@ public class CheckOut_Test extends CheckOutScenario {
     @DataProvider
     Object[][] getVenturesDataToTestCreditCardInvalid() {
         return new Object[][]{
-//                {"Singapore", "4400123456784011", "Mr Test", "123"},
-//                {"Malaysia", "4400123456784011", "Mr Test", "123"},
-//                {"Philippines", "4400123456784011", "Mr Test", "123"},
+                {"Singapore", "4400123456784011", "Mr Test", "123"},
+                {"Malaysia", "4400123456784011", "Mr Test", "123"},
+                {"Philippines", "4400123456784011", "Mr Test", "123"},
                 {"Indonesia", "4400123456784011", "Mr Test", "123"},
-//                {"Vietnam", "4400123456784011", "Mr Test", "123"},
-//                {"Thailand", "4400123456784011", "Mr Test", "123"}
+                {"Vietnam", "4400123456784011", "Mr Test", "123"},
+                {"Thailand", "4400123456784011", "Mr Test", "123"}
 
         };
     }
@@ -60,8 +60,13 @@ public class CheckOut_Test extends CheckOutScenario {
     Object[][] getVenturesDataToTestCreateAddress() {
         return new Object[][]{
 //                {"Malaysia", "QA name", "QA address", 3, 4, "0933081162"}
-//                {"Philippines"},
-                {"Malaysia", "QA name", "QA address", 3, 4, "0933081162"}
+//                {""},
+//                {"Malaysia", "QA name", "QA address", 3, 4, "0933081162"},
+//                {"Philippines", "QA name", "QA address", 3, 4, "0933081162"},
+//                {"Thailand", "QA name", "QA address", 3, 4, "0933081162"},
+//                {"Vietnam", "QA name", "QA address", 3, 4, "0933081162"},
+//                {"Singapore", "QA name", "QA address", 3, 4, "0933081162"},
+                {"Indonesia", "QA name", "QA address", 3, 4, "0988291923"}
 //                {"Thailand"}
         };
     }
@@ -244,7 +249,7 @@ public class CheckOut_Test extends CheckOutScenario {
     @Test(dataProvider = "getVenturesDataToTestCreateAddress")
     public void test_CreateAddress(String venture, String name, String address, int addressIndex,
                                    int locationIndex, String phoneNumber) throws Exception {
-        checkOutCreateAddress(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
+        checkOutCreateShippingAddress(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"), name, address, phoneNumber);
     }
 
