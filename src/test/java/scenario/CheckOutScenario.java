@@ -319,29 +319,7 @@ public class CheckOutScenario extends AppiumSetupTest {
             driver.findElement(By.xpath("//*[@id='change-shipping'][contains(@href, 'billing')]")).click();
 
             // Edit billing address
-            driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_first_name']")).sendKeys(name);
-            driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_address1']")).sendKeys(address);
-            if (venture.equals("Thailand") || venture.equals("Philippines")
-                    || venture.equals("Malaysia") || venture.equals("Indonesia")) {
-
-                selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_0']")); // select random Region
-                selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_1']")); // select random City
-                selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_2']")); // select random Postcode
-                driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
-
-            }
-            if (venture.equals("Singapore")) {
-                driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_postcode']")).sendKeys("759674");
-                driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
-            }
-            if (venture.equals("Vietnam")) {
-                selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_0']")); // select random Region
-                selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_1']")); // select random City
-                driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
-            }
-
-            // Submit
-            driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+            createBillingAddress(venture, name, address, phoneNumber);
 
             // Continue checking out
             driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
@@ -380,29 +358,7 @@ public class CheckOutScenario extends AppiumSetupTest {
             randClick(By.xpath("//*[@class='change-billing']"));
 
             // Edit billing address
-            driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_first_name']")).sendKeys(name);
-            driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_address1']")).sendKeys(address);
-            if (venture.equals("Thailand") || venture.equals("Philippines")
-                    || venture.equals("Malaysia") || venture.equals("Indonesia")) {
-
-                selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_0']")); // select random Region
-                selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_1']")); // select random City
-                selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_2']")); // select random Postcode
-                driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
-
-            }
-            if (venture.equals("Singapore")) {
-                driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_postcode']")).sendKeys("759674");
-                driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
-            }
-            if (venture.equals("Vietnam")) {
-                selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_0']")); // select random Region
-                selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_1']")); // select random City
-                driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
-            }
-
-            // Submit
-            driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+            createBillingAddress(venture, name, address, phoneNumber);
 
             // Continue checking out
             driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
@@ -424,12 +380,6 @@ public class CheckOutScenario extends AppiumSetupTest {
 
     /**
      * Remove all product from myCart
-     * @param venture String
-     * @param menuWiz String
-     * @param categories String
-     * @param filterWiz String
-     * @param prodWiz String
-     * @throws InterruptedException
      */
     protected void checkOutRemoveFromCart(String venture, String menuWiz, String categories, String filterWiz,
                                           String prodWiz) throws InterruptedException {
