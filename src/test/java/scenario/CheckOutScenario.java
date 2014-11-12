@@ -231,18 +231,8 @@ public class CheckOutScenario extends AppiumSetupTest {
         // Create new address
         swipeDown();
         driver.findElement(By.xpath("//*[@id='load-different-billing-mobile']")).click(); // Click New address
-
-//        driver.findElement(By.xpath("//*[@id='AddressForm_first_name']")).sendKeys(name);
-//        driver.findElement(By.xpath("//*[@id='AddressForm_address1']")).sendKeys(address);
-//        selectorRandom(By.xpath("//*[@id='AddressForm_location_0']")); // select random Region
-//        selectorRandom(By.xpath("//*[@id='AddressForm_location_1']")); // select random City
-//        selectorRandom(By.xpath("//*[@id='AddressForm_location_2']")); // select random Postcode
-//        driver.findElement(By.xpath("//*[@id='AddressForm_phone']")).sendKeys(phoneNumber);
         Thread.sleep(2000);
-        createBillingAddress(venture, name, address, phoneNumber);
-
-        // Submit
-        driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+        createShippingAddress(venture, name, address, phoneNumber);
 
         // Verify new address appears on delivery information page or Not
         String pageSource = driver.getPageSource();
@@ -633,6 +623,35 @@ public class CheckOutScenario extends AppiumSetupTest {
             selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_0']")); // select random Region
             selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_1']")); // select random City
             driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
+        }
+
+        // Submit
+        driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+
+    }
+
+    protected void createShippingAddress(String venture, String name, String address, String phoneNumber) throws InterruptedException {
+
+        // New billing address
+        driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_first_name']")).sendKeys(name);
+        driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_address1']")).sendKeys(address);
+        if (venture.equals("Thailand") || venture.equals("Philippines")
+                || venture.equals("Malaysia") || venture.equals("Indonesia")) {
+
+            selectorRandom(By.xpath("//*[@id='ThreeStepShippingAddressForm_location_0']")); // select random Region
+            selectorRandom(By.xpath("//*[@id='ThreeStepShippingAddressForm_location_1']")); // select random City
+            selectorRandom(By.xpath("//*[@id='ThreeStepShippingAddressForm_location_2']")); // select random Postcode
+            driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_phone']")).sendKeys(phoneNumber);
+
+        }
+        if (venture.equals("Singapore")) {
+            driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_postcode']")).sendKeys("759674");
+            driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_phone']")).sendKeys(phoneNumber);
+        }
+        if (venture.equals("Vietnam")) {
+            selectorRandom(By.xpath("//*[@id='ThreeStepShippingAddressForm_location_0']")); // select random Region
+            selectorRandom(By.xpath("//*[@id='ThreeStepShippingAddressForm_location_1']")); // select random City
+            driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_phone']")).sendKeys(phoneNumber);
         }
 
         // Submit
