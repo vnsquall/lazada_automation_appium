@@ -250,12 +250,12 @@ public class CheckOutScenario extends AppiumSetupTest {
 
         // Edit address
         swipeDown();
-        List<WebElement> arrEditButton = driver.findElements(By.xpath("//*[@class='change-billing']")); // Click Edit address
+        List<WebElement> editButtons = driver.findElements(By.xpath("//*[@class='change-billing']")); // Click Edit address
 
         // Random click on Edit button
         Random random = new Random();
-        int randomNumber = random.nextInt(arrEditButton.size());
-        arrEditButton.get(randomNumber).click();
+        int randomNumber = random.nextInt(editButtons.size());
+        editButtons.get(randomNumber).click();
 
         // Edit information
         driver.findElement(By.xpath("//*[@id='AddressForm_first_name']")).clear();
@@ -291,15 +291,7 @@ public class CheckOutScenario extends AppiumSetupTest {
 
         // Choose Use different billing address
         driver.findElement(By.xpath("//*[@for='ThreeStepBillingAddressForm_isSameShipping']")).click();
-        driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_first_name']")).sendKeys(name);
-        driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_address1']")).sendKeys(address);
-        selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_0']")); // select random Region
-        selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_1']")); // select random City
-        selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_2']")); // select random Postcode
-        driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
-
-        // Submit
-        driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+        createBillingAddress(venture, name, address, phoneNumber);
 
     }
 
