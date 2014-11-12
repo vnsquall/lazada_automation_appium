@@ -1,7 +1,6 @@
 package scenario;
 
 
-import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -38,23 +37,8 @@ public class CheckOutScenario extends AppiumSetupTest {
 
         find(appPackage + ":id/checkout_button").click();
 
-        //Login to CheckOut
-        List<WebElement> editTextList = driver.findElements(By.className("android.widget.EditText"));
-        editTextList.get(0).click();
-        editTextList.get(0).sendKeys(USERNAME);
-        editTextList.get(1).click();
-        editTextList.get(1).sendKeys(PASSWORD);
-
-        // Random shipping address
-        randClick(By.className("android.widget.CheckBox"));
-        find(appPackage + ":id/middle_login_button_signin").click();
-
-        Thread.sleep(5000);
-        wait_web(By.id(appPackage + ":id/rocket_app_checkoutweb"));
-        driver.findElement(By.id(appPackage + ":id/rocket_app_checkoutweb"));
-        Thread.sleep(2000);
-        switchToWebView();
-        Thread.sleep(3000);
+        // Login as default account
+        loginAs(USERNAME, PASSWORD);
         driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/form/div[3]/button")).click();
         Thread.sleep(3000);
     }
@@ -170,6 +154,7 @@ public class CheckOutScenario extends AppiumSetupTest {
 
     // Only for staging
     protected void checkOutAndUsePaypal(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
+
         // Perform Check Out steps
         selectVenture(venture, menuWiz);
         checkOut(categories, filterWiz, prodWiz);
@@ -215,11 +200,14 @@ public class CheckOutScenario extends AppiumSetupTest {
 
     }
 
-    protected void login () throws InterruptedException {
+    /**
+     * Login as
+     */
+    protected void loginAs( String userName, String password) throws InterruptedException {
         //Login to CheckOut
         List<WebElement> editTextList = driver.findElements(By.className("android.widget.EditText"));
-        editTextList.get(0).sendKeys(USERNAME);
-        editTextList.get(1).sendKeys(PASSWORD);
+        editTextList.get(0).sendKeys(userName);
+        editTextList.get(1).sendKeys(password);
 
         driver.findElement(By.className("android.widget.CheckBox")).click();
         find(appPackage + ":id/middle_login_button_signin").click();
@@ -238,7 +226,7 @@ public class CheckOutScenario extends AppiumSetupTest {
                                          String phoneNumber) throws InterruptedException {
         // Perform Check Out steps
         addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
-        login();
+        loginAs(USERNAME, PASSWORD);
 
         // Create new address
         swipeDown();
@@ -266,7 +254,7 @@ public class CheckOutScenario extends AppiumSetupTest {
                                        String prodWiz, String name, String address, String phoneNumber) throws InterruptedException {
         // Perform Check Out steps
         addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
-        login();
+        loginAs(USERNAME, PASSWORD);
 
         // Edit address
         swipeDown();
@@ -307,7 +295,7 @@ public class CheckOutScenario extends AppiumSetupTest {
                                                    String prodWiz, String name, String address, String phoneNumber) throws InterruptedException {
         // Perform Check Out steps
         addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
-        login();
+        loginAs(USERNAME, PASSWORD);
 
         // Choose Use different billing address
         driver.findElement(By.xpath("//*[@for='ThreeStepBillingAddressForm_isSameShipping']")).click();
@@ -457,7 +445,7 @@ public class CheckOutScenario extends AppiumSetupTest {
 
         // Perform Check Out steps
         addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
-        login();
+        loginAs(USERNAME, PASSWORD);
         switchToNativeApp();
 
         // Go to myCart and remove all product
@@ -509,7 +497,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         selectVenture(venture, menuWiz);
         checkOut(categories, filterWiz, prodWiz);
 
-        // Check out by COD then edit payment method
+        // Check out by COD
         if (!isElementPresent(By.xpath("//*[@class='payment-method-option radio'and@value='CashOnDelivery'and@disabled='disabled']"))
                 && isElementPresent(By.xpath("//label[@for='cashondelivery']"))) {
 
@@ -594,6 +582,9 @@ public class CheckOutScenario extends AppiumSetupTest {
 
     }
 
+    /**
+     * Register new account with random email, password, name ...
+     */
     protected void registerAccount() throws InterruptedException {
 
         // Random email, password, name
@@ -601,16 +592,13 @@ public class CheckOutScenario extends AppiumSetupTest {
         String password = generatePassword();
         String name = generateAlphabet(5);
 
+        // Input email, password, name
         List<WebElement> editTexts = driver.findElements(By.xpath("//*[contains(@class,'android.widget.EditText')]"));
+        editTexts.get(0).sendKeys(email);
+        editTexts.get(1).sendKeys(password);
+        editTexts.get(2).sendKeys(password);
+        editTexts.get(3).sendKeys(name);
         driver.findElement(By.className("android.widget.CheckBox")).click(); // Show password
-        MobileElement nameText = (MobileElement)editTexts.get(3);
-        nameText.setValue(name); // name
-        editTexts.get(2).click();
-        ((MobileElement)editTexts.get(2)).setValue(password); // re-password
-        editTexts.get(1).click();
-        ((MobileElement)editTexts.get(3)).setValue(password); // password
-        editTexts.get(0).click();
-        ((MobileElement)editTexts.get(3)).setValue(email); // email
 
         // Submit
         findByUISelector("resourceID", "register_button_submit", appPackage).click();
@@ -618,6 +606,9 @@ public class CheckOutScenario extends AppiumSetupTest {
 
     }
 
+    /**
+     * Create new address
+     */
     protected void createAddress(String venture, String name, String address, String phoneNumber) throws InterruptedException {
 
         // New billing address
