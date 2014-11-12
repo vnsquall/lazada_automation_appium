@@ -221,9 +221,9 @@ public class CheckOutScenario extends AppiumSetupTest {
 
     }
 
-    protected void checkOutCreateAddress(String venture, String menuWiz, String categories, String filterWiz,
-                                         String prodWiz, String name, String address,
-                                         String phoneNumber) throws InterruptedException {
+    protected void checkOutCreateShippingAddress(String venture, String menuWiz, String categories, String filterWiz,
+                                                 String prodWiz, String name, String address,
+                                                 String phoneNumber) throws InterruptedException {
         // Perform Check Out steps
         addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
         loginAs(USERNAME, PASSWORD);
@@ -640,6 +640,7 @@ public class CheckOutScenario extends AppiumSetupTest {
 
             selectorRandom(By.xpath("//*[@id='ThreeStepShippingAddressForm_location_0']")); // select random Region
             selectorRandom(By.xpath("//*[@id='ThreeStepShippingAddressForm_location_1']")); // select random City
+            Thread.sleep(1000);
             selectorRandom(By.xpath("//*[@id='ThreeStepShippingAddressForm_location_2']")); // select random Postcode
             driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_phone']")).sendKeys(phoneNumber);
 
