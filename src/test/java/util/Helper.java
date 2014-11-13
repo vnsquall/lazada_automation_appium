@@ -70,9 +70,9 @@ public class Helper {
         driver.findElement(By.xpath(("//android.widget.TextView[contains(@text, '" + venture + "')]"))).click();
         if (venture.equals("Thailand")) {
             driver.findElement(By.xpath("//android.widget.Button[contains(@text, 'English')]")).click();
-            Thread.sleep(2000);
+//            Thread.sleep(2000);
             driver.findElement(By.xpath("//android.widget.Button[contains(@text, 'English')]")).click();
-            Thread.sleep(5000);
+//            Thread.sleep(5000);
         }
         Thread.sleep(6000);
         find(menuWiz).click();
@@ -258,11 +258,13 @@ public class Helper {
      *
      * @param selectorTypeStr
      * @param value
-     * @param appPackage
      * @return WebElement
      */
-    public static WebElement findByUISelector(String selectorTypeStr, String value, String appPackage) {
+    public static WebElement findByUISelector(String selectorTypeStr, String value) {
+
         WebElement e = null;
+        AppiumSetupTest appiumSetupTest = new AppiumSetupTest();
+        String appPackage = appiumSetupTest.appPackage;
         UISelectorType selector = UISelectorType.fromString(selectorTypeStr);
 
         switch (selector) {
@@ -288,14 +290,15 @@ public class Helper {
 
     /**
      * find Element by UIAndroidSelector
-     *
      * @param selectorTypeStr
      * @param value
-     * @param appPackage
      * @return List of Element
      */
-    public static List<WebElement> findsByUISelector(String selectorTypeStr, String value, String appPackage) {
+    public static List<WebElement> findsByUISelector(String selectorTypeStr, String value) {
+
         List<WebElement> e = null;
+        AppiumSetupTest appiumSetupTest = new AppiumSetupTest();
+        String appPackage = appiumSetupTest.appPackage;
         UISelectorType selector = UISelectorType.fromString(selectorTypeStr);
 
         switch (selector) {
@@ -371,27 +374,6 @@ public class Helper {
 //    public static MobileElement scroll_to_exact(String value) {
 //        return driver.scrollToExact(value);
 //    }
-    public WebElement findByUISelectorType(UISelectorType selector, String value, String appPacket) {
-        WebElement e = null;
-
-        switch (selector) {
-            case RESOURCE_ID:
-                e = driver.findElementByAndroidUIAutomator("\"UiSelector().resourceId(\\\"" + appPacket + ":" + value + "\\\")\"");
-                break;
-            case TEXT:
-                e = driver.findElementByAndroidUIAutomator("\"UiSelector().resourceId(\\\"" + appPacket + ":" + value + "\\\")\"");
-                break;
-            case TEXT_CONTAINS:
-                e = driver.findElementByAndroidUIAutomator("\"UiSelector().resourceId(\\\"" + appPacket + ":" + value + "\\\")\"");
-                break;
-            case TEXT_START_WITH:
-                e = driver.findElementByAndroidUIAutomator("\"UiSelector().resourceId(\\\"" + appPacket + ":" + value + "\\\")\"");
-                break;
-
-        }
-
-        return e;
-    }
 
     /**
      * Select option from dropdown list

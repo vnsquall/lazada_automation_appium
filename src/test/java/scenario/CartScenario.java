@@ -18,17 +18,17 @@ public class CartScenario extends AppiumSetupTest {
                                   String categories, String filterWiz, String prodWiz, String addWL, String emptyCart) throws InterruptedException {
         // Select venture
         selectVenture(venture, menuWiz);
-        findByUISelector("resourceID", "abs__home", appPackage).click();
+        findByUISelector("resourceID", "abs__home").click();
         Thread.sleep(1000);
 
         // Add random product to Cart
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
-        String productName = findByUISelector("resourceID", "product_name", appPackage).getText();//  Get product name
-        findByUISelector("resourceID", "shop", appPackage).click();//  Click on Add to cart
-        findByUISelector("resourceID", "button1", appPackage).click();// Click on Go to cart
+        String productName = findByUISelector("resourceID", "product_name").getText();//  Get product name
+        findByUISelector("resourceID", "shop").click();//  Click on Add to cart
+        findByUISelector("resourceID", "button1").click();// Click on Go to cart
 
         // Verify the myCart appears the product
-        Assert.assertEquals(productName, findByUISelector("resourceID", "item_name", appPackage).getText());// Verify product name is correct
+        Assert.assertEquals(productName, findByUISelector("resourceID", "item_name").getText());// Verify product name is correct
     }
 
     protected void cartDeleteProduct(String venture, String menuWiz, String wishList, String emptyWL,
@@ -36,17 +36,17 @@ public class CartScenario extends AppiumSetupTest {
 
         // Select venture
         selectVenture(venture, menuWiz);
-        findByUISelector("resourceID", "abs__home", appPackage).click();
+        findByUISelector("resourceID", "abs__home").click();
         Thread.sleep(1000);
 
         // Add random product to Cart
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
-        findByUISelector("resourceID", "shop", appPackage).click();//  Click on Add to cart
-        findByUISelector("resourceID", "button1", appPackage).click();// Click on Go to cart
+        findByUISelector("resourceID", "shop").click();//  Click on Add to cart
+        findByUISelector("resourceID", "button1").click();// Click on Go to cart
 
         // Remove product from myCart
-        findByUISelector("resourceID", "delete_button", appPackage).click();// Click on Remove this product
-        findByUISelector("resourceID", "button1", appPackage).click();// Click on Remove item
+        findByUISelector("resourceID", "delete_button").click();// Click on Remove this product
+        findByUISelector("resourceID", "button1").click();// Click on Remove item
         // Verify Empty Cart text
         Assert.assertTrue(driver.getPageSource().toString().contains(emptyCart));
     }
@@ -55,23 +55,23 @@ public class CartScenario extends AppiumSetupTest {
                                       String categories, String filterWiz, String prodWiz, String addWL, String emptyCart) throws InterruptedException {
         // Select venture
         selectVenture(venture, menuWiz);
-        findByUISelector("resourceID", "abs__home", appPackage).click();
+        findByUISelector("resourceID", "abs__home").click();
         Thread.sleep(1000);
 
         // Add random product to Cart
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
-        findByUISelector("resourceID", "shop", appPackage).click();//  Click on Add to cart
-        findByUISelector("resourceID", "button1", appPackage).click();// Click on Go to cart
+        findByUISelector("resourceID", "shop").click();//  Click on Add to cart
+        findByUISelector("resourceID", "button1").click();// Click on Go to cart
 
         // Change quantity of product
-        findByUISelector("resourceID", "changequantity_button", appPackage).click();// Click on quantity
-        List<WebElement> arrResult = findsByUISelector("resourceID", "item_text", appPackage);// Click on quantity
+        findByUISelector("resourceID", "changequantity_button").click();// Click on quantity
+        List<WebElement> arrResult = findsByUISelector("resourceID", "item_text");// Click on quantity
         Random a = new Random();
         int randQuantity = a.nextInt(arrResult.size());
         arrResult.get(randQuantity).click();
 
         // After change the quantity -> verify the quantity is correct
-        Assert.assertEquals(Integer.parseInt(findByUISelector("resourceID", "changequantity_button", appPackage).getText().replaceAll("\\s", "")),
+        Assert.assertEquals(Integer.parseInt(findByUISelector("resourceID", "changequantity_button").getText().replaceAll("\\s", "")),
                 randQuantity + 1);
     }
 

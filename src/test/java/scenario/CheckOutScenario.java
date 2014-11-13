@@ -18,11 +18,11 @@ public class CheckOutScenario extends AppiumSetupTest {
 
     protected void checkOut(String categories, String filterWiz, String prodWiz) throws InterruptedException {
 
-        findByUISelector("resourceID","abs__home",appPackage).click();
+        findByUISelector("resourceID","abs__home").click();
 
         Thread.sleep(1000);
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
-        findByUISelector("resourceID", "shop", appPackage).click(); //Add to Cart button
+        findByUISelector("resourceID", "shop").click(); //Add to Cart button
 
         //Check for Variant Selection
         Boolean cartConfirm = isElementPresent(By.id(appPackage + ":id/button1"));
@@ -31,7 +31,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         } else {
             driver.findElement(By.id(appPackage + ":id/product_variant_button")).click();
             randClick(By.id(appPackage + ":id/item_text"));
-            findByUISelector("resourceID", "shop", appPackage).click();
+            findByUISelector("resourceID", "shop").click();
             Thread.sleep(2000);
         }
 
@@ -180,11 +180,11 @@ public class CheckOutScenario extends AppiumSetupTest {
     protected void addRandomProductToCart(String venture, String menuWiz, String categories,
                                           String filterWiz, String prodWiz) throws InterruptedException {
         selectVenture(venture, menuWiz);
-        findByUISelector("resourceID","abs__home",appPackage).click();
+        findByUISelector("resourceID","abs__home").click();
 
         Thread.sleep(1000);
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
-        findByUISelector("resourceID", "shop", appPackage).click(); //Add to Cart button
+        findByUISelector("resourceID", "shop").click(); //Add to Cart button
 
         //Check for Variant Selection
         Boolean cartConfirm = isElementPresent(By.id(appPackage + ":id/button1"));
@@ -193,7 +193,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         } else {
             driver.findElement(By.id(appPackage + ":id/product_variant_button")).click();
             randClick(By.id(appPackage + ":id/item_text"));
-            findByUISelector("resourceID", "shop", appPackage).click();
+            findByUISelector("resourceID", "shop").click();
         }
 
         find(appPackage + ":id/checkout_button").click();
@@ -349,8 +349,8 @@ public class CheckOutScenario extends AppiumSetupTest {
             // Random choose address to edit
             randClick(By.xpath("//*[@class='change-billing']"));
 
-            // Edit billing address
-            createBillingAddress(venture, name, address, phoneNumber);
+            // Edit shipping address
+            createShippingAddress(venture, name, address, phoneNumber);
 
             // Continue checking out
             driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
@@ -386,14 +386,14 @@ public class CheckOutScenario extends AppiumSetupTest {
         driver.findElement(By.xpath("//*[contains(@resource-id, 'id/cart_count')]")).click();
         List<WebElement> arrDelete = null;
         do {
-            arrDelete = findsByUISelector("resourceID","delete_button", appPackage);
+            arrDelete = findsByUISelector("resourceID","delete_button");
             if (arrDelete.size() > 0) {
 
                 arrDelete.get(0).click();
-                findByUISelector("resourceID" , "button1", appPackage).click(); // Click on Remove button
+                findByUISelector("resourceID" , "button1").click(); // Click on Remove button
 
             }
-            arrDelete = findsByUISelector("resourceID","delete_button", appPackage);
+            arrDelete = findsByUISelector("resourceID","delete_button");
         } while (arrDelete.size() > 0);
 
     }
@@ -469,7 +469,7 @@ public class CheckOutScenario extends AppiumSetupTest {
             switchToNativeApp();
 
             // Share order
-            findByUISelector("resourceID", "btn_checkout_share", appPackage).click();
+            findByUISelector("resourceID", "btn_checkout_share").click();
             randClick(By.xpath("//*[@resource-id='android:id/text1']"));
 
         }
@@ -500,7 +500,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
 
         // Create new account
-        findByUISelector("resourceID", "middle_login_link_register", appPackage).click();
+        findByUISelector("resourceID", "middle_login_link_register").click();
         registerAccount();
 
         Thread.sleep(1000);
@@ -535,7 +535,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         driver.findElement(By.className("android.widget.CheckBox")).click(); // Show password
 
         // Submit
-        findByUISelector("resourceID", "register_button_submit", appPackage).click();
+        findByUISelector("resourceID", "register_button_submit").click();
         Thread.sleep(3000);
 
     }
@@ -572,11 +572,54 @@ public class CheckOutScenario extends AppiumSetupTest {
 
     }
 
+    /**
+     * create new shipping address - use Web view
+     */
     protected void createShippingAddress(String venture, String name, String address, String phoneNumber) throws InterruptedException {
 
         // New billing address
+        Thread.sleep(2000);
         driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_first_name']")).sendKeys(name);
         driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_address1']")).sendKeys(address);
+        if (venture.equals("Thailand") || venture.equals("Philippines")
+                || venture.equals("Malaysia") || venture.equals("Indonesia")) {
+
+            selectorRandom(By.xpath("//*[@id='ThreeStepShippingAddressForm_location_0']")); // select random Region
+            selectorRandom(By.xpath("//*[@id='ThreeStepShippingAddressForm_location_1']")); // select random City
+            Thread.sleep(1000);
+            selectorRandom(By.xpath("//*[@id='ThreeStepShippingAddressForm_location_2']")); // select random Postcode
+            driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_phone']")).sendKeys(phoneNumber);
+
+        }
+        if (venture.equals("Singapore")) {
+            driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_postcode']")).sendKeys("759674");
+            driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_phone']")).sendKeys(phoneNumber);
+        }
+        if (venture.equals("Vietnam")) {
+            selectorRandom(By.xpath("//*[@id='ThreeStepShippingAddressForm_location_0']")); // select random Region
+            selectorRandom(By.xpath("//*[@id='ThreeStepShippingAddressForm_location_1']")); // select random City
+            driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_phone']")).sendKeys(phoneNumber);
+        }
+
+        // Submit
+        driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+
+    }
+
+    /**
+     * edit shipping address - use Native app
+     */
+    protected void editShippingAddress(String venture, String name, String address, String phoneNumber) throws InterruptedException {
+
+        // New billing address
+        switchToNativeApp();
+//        driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_first_name']")).sendKeys(name);
+//        driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_address1']")).sendKeys(address);
+
+        List<WebElement> editTexts = findsByUISelector("class", "android.widget.EditText");
+        editTexts.get(0).sendKeys(name);
+        editTexts.get(1).sendKeys(address);
+
         if (venture.equals("Thailand") || venture.equals("Philippines")
                 || venture.equals("Malaysia") || venture.equals("Indonesia")) {
 
