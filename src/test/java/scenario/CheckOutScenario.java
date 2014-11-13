@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import util.AppiumSetupTest;
 import static util.Constant.*;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -350,11 +352,7 @@ public class CheckOutScenario extends AppiumSetupTest {
             randClick(By.xpath("//*[@class='change-billing']"));
 
             // Edit shipping address
-            createShippingAddress(venture, name, address, phoneNumber);
-
-            // Continue checking out
-            driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
-            driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+            editShippingAddress(venture, name, address, phoneNumber);
             Thread.sleep(4000);
 
             // Verify billing address has changed
@@ -611,37 +609,47 @@ public class CheckOutScenario extends AppiumSetupTest {
      */
     protected void editShippingAddress(String venture, String name, String address, String phoneNumber) throws InterruptedException {
 
-        // New billing address
+        // Edit billing address
         switchToNativeApp();
-//        driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_first_name']")).sendKeys(name);
-//        driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_address1']")).sendKeys(address);
-
-        List<WebElement> editTexts = findsByUISelector("class", "android.widget.EditText");
+        List<WebElement> editTexts = driver.findElements(By.xpath("//*[@class='android.widget.EditText']"));
+        List<WebElement> buttons = new ArrayList<WebElement>();
+        editTexts.get(0).clear();
         editTexts.get(0).sendKeys(name);
+        editTexts.get(1).clear();
         editTexts.get(1).sendKeys(address);
+
 
         if (venture.equals("Thailand") || venture.equals("Philippines")
                 || venture.equals("Malaysia") || venture.equals("Indonesia")) {
 
-            selectorRandom(By.xpath("//*[@id='ThreeStepShippingAddressForm_location_0']")); // select random Region
-            selectorRandom(By.xpath("//*[@id='ThreeStepShippingAddressForm_location_1']")); // select random City
-            Thread.sleep(1000);
-            selectorRandom(By.xpath("//*[@id='ThreeStepShippingAddressForm_location_2']")); // select random Postcode
-            driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_phone']")).sendKeys(phoneNumber);
+            buttons = driver.findElements(By.xpath("//*[@class='android.widget.Button']"));
+            selectorRandom(buttons.get(0)); // select random Region
+            selectorRandom(buttons.get(1)); // select random City
+            selectorRandom(buttons.get(2)); // select random Postcode
+            editTexts.get(2).clear();
+            editTexts.get(2).sendKeys(phoneNumber);
 
         }
         if (venture.equals("Singapore")) {
-            driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_postcode']")).sendKeys("759674");
-            driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_phone']")).sendKeys(phoneNumber);
+
+            editTexts.get(2).clear();
+            editTexts.get(2).sendKeys("759674");
+            editTexts.get(3).clear();
+            editTexts.get(3).sendKeys(phoneNumber);
+
         }
         if (venture.equals("Vietnam")) {
-            selectorRandom(By.xpath("//*[@id='ThreeStepShippingAddressForm_location_0']")); // select random Region
-            selectorRandom(By.xpath("//*[@id='ThreeStepShippingAddressForm_location_1']")); // select random City
-            driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_phone']")).sendKeys(phoneNumber);
+
+            buttons = driver.findElements(By.xpath("//*[@class='android.widget.Button']"));
+            selectorRandom(buttons.get(0)); // select random Region
+            selectorRandom(buttons.get(1)); // select random City
+            editTexts.get(2).clear();
+            editTexts.get(2).sendKeys(phoneNumber);
         }
 
         // Submit
-        driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+        buttons.get(buttons.size()-1).click();
+        switchToWebView();
 
     }
 
