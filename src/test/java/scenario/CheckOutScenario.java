@@ -280,48 +280,11 @@ public class CheckOutScenario extends AppiumSetupTest {
 
     }
 
-    protected void checkOutEditAddress(String venture, String menuWiz, String categories, String filterWiz,
-                                       String prodWiz, String name, String address, String phoneNumber) throws InterruptedException {
-        // Perform Check Out steps
-        addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
-        loginAs(USERNAME, PASSWORD);
-
-        // Edit address
-        swipeDown();
-        List<WebElement> editButtons = driver.findElements(By.xpath("//*[@class='change-billing']")); // Click Edit address
-
-        // Random click on Edit button
-        Random random = new Random();
-        int randomNumber = random.nextInt(editButtons.size());
-        editButtons.get(randomNumber).click();
-
-        // Edit information
-        driver.findElement(By.xpath("//*[@id='AddressForm_first_name']")).clear();
-        driver.findElement(By.xpath("//*[@id='AddressForm_first_name']")).sendKeys(name);
-        driver.findElement(By.xpath("//*[@id='AddressForm_address1']")).clear();
-        driver.findElement(By.xpath("//*[@id='AddressForm_address1']")).sendKeys(address);
-        selectorRandom(By.xpath("//*[@id='AddressForm_location_0']")); // select random Region
-        selectorRandom(By.xpath("//*[@id='AddressForm_location_1']")); // select random City
-        selectorRandom(By.xpath("//*[@id='AddressForm_location_2']")); // select random Postcode
-        driver.findElement(By.xpath("//*[@id='AddressForm_phone']")).clear();
-        driver.findElement(By.xpath("//*[@id='AddressForm_phone']")).sendKeys(phoneNumber);
-
-        // Save address
-        driver.findElement(By.xpath("//*[@id='send']")).click();
-
-        // Verify the edited address appears on delivery information page or Not
-        String pageSource = driver.getPageSource();
-        Assert.assertTrue(pageSource.contains(name));
-        Assert.assertTrue(pageSource.contains(address));
-        Assert.assertTrue(pageSource.contains(phoneNumber));
-
-    }
-
     /**
      * Check out and check "Use different billing address"
      *
      */
-    protected void checkOutBillingDifferentAddress(String venture, String menuWiz, String categories, String filterWiz,
+    protected void checkOutDifferenBillingtAddress(String venture, String menuWiz, String categories, String filterWiz,
                                                    String prodWiz, String name, String address, String phoneNumber) throws InterruptedException {
         // Perform Check Out steps
         addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
@@ -728,6 +691,44 @@ public class CheckOutScenario extends AppiumSetupTest {
 
         checkOutNewAccount(venture, menuWiz, categories, filterWiz, prodWiz);
         bankTransfer(bankIndex, senderName);
+
+    }
+
+    /**
+     * Use bank transfer payment method check out with a different billing address in ID venture
+     */
+    protected void checkoutBankTransferDifferentBillingAddress(String venture, String menuWiz,
+                                                               String categories, String filterWiz, String prodWiz,
+                                                               int bankIndex, String senderName, String name,
+                                                               String address, String phoneNumber) throws InterruptedException {
+        // Perform Check Out steps
+        selectVenture(venture, menuWiz);
+        checkOut(categories, filterWiz, prodWiz);
+        Thread.sleep(1000);
+
+        // Check the Bank transfer is available or not for this CheckOutTest
+        if (isElementPresent(By.xpath("//label[@for='manualbanktransferid']"))) {
+
+            // Choose pay method -> bank transfer
+            driver.findElement(By.xpath("//label[@for='manualbanktransferid']")).click();
+            Thread.sleep(1000);
+
+            // Select bank name
+            selector(By.xpath("//*[@name='PaymentMethodForm[parameter][bankNamePrimary]']"), bankIndex);
+
+            // Fill information and Submit
+            driver.findElement(By.xpath("//*[@id='PaymentMethodForm_parameter_senderName']")).sendKeys(senderName);
+            Thread.sleep(2000);
+            driver.findElement(By.xpath("//*[@class='orange-button']")).click(); //Place Order
+            Thread.sleep(3000);
+            driver.findElement(By.xpath("//*[@id='change-shipping'][contains(@href, 'billing')]")).click(); // New billing address
+
+            // Edit billing address
+            createBillingAddress(venture, name, address, phoneNumber);
+            bankTransfer(bankIndex, senderName);
+
+        }
+
 
     }
 

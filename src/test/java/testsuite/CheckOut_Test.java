@@ -221,6 +221,15 @@ public class CheckOut_Test extends CheckOutScenario {
         };
     }
 
+    @DataProvider
+    Object[][] getVenturesDataToTestBankTransferDifferentBillingAddress() {
+        return new Object[][]{
+
+                {"Indonesia", 3, "Mr Test", " QA name edit ", "QA address editddkdmd", "09330242442"}
+
+        };
+    }
+
 
     @Test(dataProvider = "getVenturesDataToTestCashOnDelivery")
     public void test_CashOnDelivery(String venture) throws Exception {
@@ -247,22 +256,29 @@ public class CheckOut_Test extends CheckOutScenario {
     }
 
     @Test(dataProvider = "getVenturesDataToTestCreateAddress")
-    public void test_CreateAddress(String venture, String name, String address, int addressIndex,
-                                   int locationIndex, String phoneNumber) throws Exception {
+    public void test_CreateShippingAddress(String venture, String name, String address, int addressIndex,
+                                           int locationIndex, String phoneNumber) throws Exception {
         checkOutCreateShippingAddress(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"), name, address, phoneNumber);
     }
 
-    @Test(dataProvider = "getVenturesDataToTestEditAddress")
-    public void test_EditAddress(String venture, String name, String address, String phoneNumber) throws Exception {
-        checkOutEditAddress(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
+    @Test(dataProvider = "getVenturesDataToTestEditShippingAddress")
+    public void test_EditShippingAddress(String venture, String name, String address, String phoneNumber) throws Exception {
+        checkOutEditShippingAddress(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
                 name, address, phoneNumber);
     }
+    
+//    @Test(dataProvider = "getVenturesDataToTestEditAddress")
+//    public void test_EditAddress(String venture, String name, String address, String phoneNumber) throws Exception {
+//        checkOutEditAddress(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
+//                setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
+//                name, address, phoneNumber);
+//    }
 
     @Test(dataProvider = "getVenturesDataToTestDifferentAddress")
-    public void test_DifferentAddress(String venture, String name, String address, String phoneNumber) throws Exception {
-        checkOutBillingDifferentAddress(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
+    public void test_DifferentBillingAddress(String venture, String name, String address, String phoneNumber) throws Exception {
+        checkOutDifferenBillingtAddress(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
                 name, address, phoneNumber);
     }
@@ -274,12 +290,7 @@ public class CheckOut_Test extends CheckOutScenario {
                 name, address, phoneNumber);
     }
 
-    @Test(dataProvider = "getVenturesDataToTestEditShippingAddress")
-    public void test_EditShippingAddress(String venture, String name, String address, String phoneNumber) throws Exception {
-        checkOutEditShippingAddress(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
-                setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
-                name, address, phoneNumber);
-    }
+
 
     @Test(dataProvider = "getVenturesDataToTestRemoveFromCart")
     public void test_RemoveFromCart(String venture) throws Exception {
@@ -340,6 +351,15 @@ public class CheckOut_Test extends CheckOutScenario {
         checkoutBankTransferNewUser(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
                 bankIndex, senderName );
+    }
+
+    @Test(dataProvider = "getVenturesDataToTestBankTransferDifferentBillingAddress")
+    public void test_BankTransferEditBillingAddress(String venture, int bankIndex, String senderName,
+                                                    String name, String address, String phoneNumber) throws Exception {
+
+        checkoutBankTransferDifferentBillingAddress(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
+                setText(venture).get("filterWiz"), setText(venture).get("prodWiz"),
+                bankIndex, senderName, name, address, phoneNumber);
     }
 
 
