@@ -391,11 +391,20 @@ public class Helper {
      * @param locator
      */
     public static void selectorRandom(By locator) {
-        Random random = new Random();
-        Select dropdown = new Select(driver.findElement(locator));
-        List<WebElement> arrOption = dropdown.getOptions();
-        int randomNumber = 1 + random.nextInt(arrOption.size() - 1);
-        dropdown.selectByIndex(randomNumber);
+
+        if (driver.getContext().contains("WEBVIEW")) {
+            Random random = new Random();
+            Select dropdown = new Select(driver.findElement(locator));
+            List<WebElement> arrOption = dropdown.getOptions();
+            int randomNumber = 1 + random.nextInt(arrOption.size() - 1);
+            dropdown.selectByIndex(randomNumber);
+
+        } else { // NATIVE APP
+
+            driver.findElement(locator).click();
+            randClick(By.xpath("//*[@class='android.widget.TextView']"));
+
+        }
     }
 
     /**
@@ -403,11 +412,21 @@ public class Helper {
      * @param webElement WebElement
      */
     public static void selectorRandom(WebElement webElement) {
-        Random random = new Random();
-        Select dropdown = new Select(webElement);
-        List<WebElement> arrOption = dropdown.getOptions();
-        int randomNumber = 1 + random.nextInt(arrOption.size() - 1);
-        dropdown.selectByIndex(randomNumber);
+
+        if (driver.getContext().contains("WEBVIEW")) {
+
+            Random random = new Random();
+            Select dropdown = new Select(webElement);
+            List<WebElement> arrOption = dropdown.getOptions();
+            int randomNumber = 1 + random.nextInt(arrOption.size() - 1);
+            dropdown.selectByIndex(randomNumber);
+        } else { // NATIVE APP
+
+            webElement.click();
+            randClick(By.xpath("//*[@class='android.widget.TextView']"));
+
+        }
+
     }
 
     /**
