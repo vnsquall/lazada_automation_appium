@@ -399,6 +399,7 @@ public class CheckOutScenario extends AppiumSetupTest {
 
             // Submit order
             driver.findElement(By.xpath("//*[@class='orange-button']")).click(); // Place your order
+            cashOnDelivery(); // Checkout again
 
         }
 
@@ -418,7 +419,7 @@ public class CheckOutScenario extends AppiumSetupTest {
 
         // Go to myCart and remove all product
         driver.findElement(By.xpath("//*[contains(@resource-id, 'id/cart_count')]")).click();
-        List<WebElement> arrDelete = null;
+        List<WebElement> arrDelete = new ArrayList<WebElement>();
         do {
             arrDelete = findsByUISelector("resourceID","delete_button");
             if (arrDelete.size() > 0) {
