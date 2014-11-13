@@ -104,6 +104,33 @@ public class CheckOutScenario extends AppiumSetupTest {
         checkOut(categories, filterWiz, prodWiz);
 
         // Check the Credit Cards is available or not for this CheckOutTest
+        boolean hasCreditCard = creditCard(creditNumber, customerName, securityCode);
+
+        // Verify message
+        if (hasCreditCard) {
+
+            if (venture.equals("Singapore")) {
+                find("Sorry, the Credit Card number you entered is Invalid").isDisplayed();
+            }
+            if (venture.equals("Philippines")) {
+                find("The Credit Card number is not correct").isDisplayed();
+            }
+            if (venture.equals("Vietnam")) {
+                find("Số thẻ tín dụng không đúng").isDisplayed();
+            }
+        }
+
+
+    }
+
+    /**
+     * Perform check out steps via Credit card
+     */
+    protected boolean creditCard (String creditNumber, String customerName, String securityCode) throws InterruptedException {
+
+        boolean hasCreditCard = false;
+
+        // Check the Credit Cards is available or not for this CheckOutTest
         if (isElementPresent(By.xpath("//label[@class='creditcards']"))) {
 
             driver.findElement(By.xpath("//label[@class='creditcards']")).click();
@@ -124,18 +151,10 @@ public class CheckOutScenario extends AppiumSetupTest {
             driver.findElement(By.xpath("//*[@class='orange-button']")).click(); //Place Order
             Thread.sleep(2000);
             switchToNativeApp();
+            hasCreditCard = true;
 
-            //Venture checking for validation successful text
-            if (venture.equals("Singapore")) {
-                find("Sorry, the Credit Card number you entered is Invalid").isDisplayed();
-            }
-            if (venture.equals("Philippines")) {
-                find("The Credit Card number is not correct").isDisplayed();
-            }
-            if (venture.equals("Vietnam")) {
-                find("Số thẻ tín dụng không đúng").isDisplayed();
-            }
         }
+        return hasCreditCard;
     }
 
     protected void checkOutUseBankTransfer(String venture, String menuWiz, String categories, String filterWiz, String prodWiz,
