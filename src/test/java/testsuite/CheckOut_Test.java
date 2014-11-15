@@ -15,12 +15,12 @@ public class CheckOut_Test extends CheckOutScenario {
     @DataProvider
     Object[][] getVenturesDataToTestCashOnDelivery() {
         return new Object[][]{
-                {"Singapore"},
-                {"Philippines"},
-                {"Indonesia"},
+//                {"Singapore"},
+//                {"Philippines"},
+//                {"Indonesia"},
                 {"Malaysia"},
-                {"Vietnam"},
-                {"Thailand"}
+//                {"Vietnam"},
+//                {"Thailand"}
         };
     }
 
@@ -59,15 +59,7 @@ public class CheckOut_Test extends CheckOutScenario {
     @DataProvider
     Object[][] getVenturesDataToTestCreateAddress() {
         return new Object[][]{
-//                {"Malaysia", "QA name", "QA address", 3, 4, "0933081162"}
-//                {""},
-//                {"Malaysia", "QA name", "QA address", 3, 4, "0933081162"},
-//                {"Philippines", "QA name", "QA address", 3, 4, "0933081162"},
-//                {"Thailand", "QA name", "QA address", 3, 4, "0933081162"},
-//                {"Vietnam", "QA name", "QA address", 3, 4, "0933081162"},
-//                {"Singapore", "QA name", "QA address", 3, 4, "0933081162"},
-                {"Indonesia", "QA name", "QA address", 3, 4, "0988291923"}
-//                {"Thailand"}
+                {"Indonesia", "Hikary ma ", "Hai ba trung quan 1", "0922483923"}
         };
     }
 
@@ -120,12 +112,12 @@ public class CheckOut_Test extends CheckOutScenario {
     @DataProvider
     Object[][] getVenturesDataToTestRemoveFromCart() {
         return new Object[][]{
-                {"Singapore"},
-                {"Thailand"},
-                {"Vietnam"},
-                {"Indonesia"},
+//                {"Singapore"},
+//                {"Thailand"},
+//                {"Vietnam"},
+//                {"Indonesia"},
                 {"Malaysia"},
-                {"Philippines"}
+//                {"Philippines"}
 
         };
     }
@@ -185,12 +177,12 @@ public class CheckOut_Test extends CheckOutScenario {
     Object[][] getVenturesDataToTestNewAccount() {
         return new Object[][]{
 
-                {"Philippines"},
-                {"Singapore"},
+//                {"Philippines"},
+//                {"Singapore"},
                 {"Vietnam"},
-                {"Indonesia"},
-                {"Malaysia"},
-                {"Thailand"}
+//                {"Indonesia"},
+//                {"Malaysia"},
+//                {"Thailand"}
 
 
         };
@@ -256,8 +248,8 @@ public class CheckOut_Test extends CheckOutScenario {
     }
 
     @Test(dataProvider = "getVenturesDataToTestCreateAddress")
-    public void test_CreateShippingAddress(String venture, String name, String address, int addressIndex,
-                                           int locationIndex, String phoneNumber) throws Exception {
+    public void test_CreateShippingAddress(String venture, String name, String address,
+                                           String phoneNumber) throws Exception {
         checkOutCreateShippingAddress(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"), name, address, phoneNumber);
     }
