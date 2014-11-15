@@ -508,7 +508,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         String name = generateAlphabet(10);
         String address = generateAlphabet(10);
         String phoneNumber = generateNumber(10);
-        createBillingAddress(venture, name, address, phoneNumber);
+        editShippingAddress(venture, name, address, phoneNumber);
 
 
 
