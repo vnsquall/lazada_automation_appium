@@ -34,6 +34,7 @@ public class CheckOutScenario extends AppiumSetupTest {
             driver.findElement(By.id(appPackage + ":id/product_variant_button")).click();
             randClick(By.id(appPackage + ":id/item_text"));
             findByUISelector("resourceID", "shop").click();
+            driver.findElement(By.id(appPackage + ":id/button1")).click();
             Thread.sleep(2000);
         }
 
