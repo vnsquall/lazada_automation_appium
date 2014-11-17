@@ -377,27 +377,25 @@ public class Helper {
         text_exact(prodWiz).click();
     }
 
-    //    /**
-//     * Return an element that contains name or text *
-//     */
-//    public static MobileElement scroll_to(String value) {
-//        return driver.scrollTo(value);
-//    }
-//
-//    /**
-//     * Return an element that exactly matches name or text *
-//     */
-//    public static MobileElement scroll_to_exact(String value) {
-//        return driver.scrollToExact(value);
-//    }
-
     /**
      * Select option from dropdown list
      * @param locator By
      * @param index int
      */
     public static void selector(By locator, int index) {
+
         Select dropdown = new Select(driver.findElement(locator));
+        dropdown.selectByIndex(index);
+    }
+
+    /**
+     * Select option from dropdown list
+     * @param locator String
+     * @param index int
+     */
+    public static void selector(String locator, int index) {
+
+        Select dropdown = new Select(findByUISelector(split(locator)[0], split(locator)[1]));
         dropdown.selectByIndex(index);
     }
 
