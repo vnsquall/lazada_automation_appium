@@ -17,7 +17,7 @@ public class Cart_Screen {
     private static String delete = "resourceID::delete_button";
     private static String changeQuantity = "resourceID::hangequantity_button";
 
-    public static void proceedToCheckout () {
+    public static void click_ProceedToCheckoutBtn() {
 
         findByUISelector(split(proceedToCheckout)[0], split(proceedToCheckout)[1]).click();
     }
