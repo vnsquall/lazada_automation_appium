@@ -9,7 +9,8 @@ public enum UISelectorType {
     TEXT("text"),
     TEXT_START_WITH("textStartWith"),
     SELECTED("selected"),
-    CLASS_NAME("className")
+    CLASS_NAME("className"),
+    XPATH("xpath")
     ;
     private String UISelectorCode;
 

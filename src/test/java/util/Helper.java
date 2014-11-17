@@ -61,6 +61,16 @@ public class Helper {
         }
     }
 
+    public static Boolean isElementPresent(String locator, String locateValue) {
+        Boolean isPresent = Boolean.FALSE;
+        try {
+            isPresent = findsByUISelector(locator, locateValue).size() > 0;
+            return isPresent;
+        } catch (NoSuchElementException ex) {
+            return isPresent;
+        }
+    }
+
     public static WebElement find_xpath_forText(String appPackage, String id, String text) {
         WebElement we = driver.findElement(By.xpath("//android.widget.TextView[@resource-id='" + appPackage + id + "'and @text='" + text + "']"));
         return we;
@@ -283,6 +293,9 @@ public class Helper {
             case CLASS_NAME:
                 e = driver.findElementByAndroidUIAutomator("UiSelector().className(\""+value+"\")");
                 break;
+            case XPATH:
+                e = driver.findElement(By.xpath(value));
+                break;
         }
 
         return e;
@@ -316,6 +329,9 @@ public class Helper {
                 break;
             case SELECTED:
                 e = driver.findElementsByAndroidUIAutomator("UiSelector().selected(" + value + ")");
+                break;
+            case XPATH:
+                e = driver.findElements(By.xpath(value));
                 break;
         }
 
@@ -529,6 +545,12 @@ public class Helper {
         }
 
         return randomNumber;
+    }
+
+    public static String[] split(String str) {
+
+        String[] parts = str.split("::");
+        return parts;
     }
 
 
