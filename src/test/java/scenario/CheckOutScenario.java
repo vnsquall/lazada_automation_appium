@@ -31,11 +31,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         if (cartConfirm) {
             driver.findElement(By.id(appPackage + ":id/button1")).click();
         } else {
-            driver.findElement(By.id(appPackage + ":id/product_variant_button")).click();
-            randClick(By.id(appPackage + ":id/item_text"));
-            findByUISelector("resourceID", "shop").click();
-            driver.findElement(By.id(appPackage + ":id/button1")).click();
-            Thread.sleep(2000);
+            chooseSize();
         }
 
         find(appPackage + ":id/checkout_button").click();
@@ -730,6 +726,19 @@ public class CheckOutScenario extends AppiumSetupTest {
 
         }
 
+
+    }
+
+    /**
+     * Random and select size clothes, shoes, ...
+     */
+    protected void chooseSize () throws InterruptedException {
+
+        driver.findElement(By.id(appPackage + ":id/product_variant_button")).click();
+        randClick(By.id(appPackage + ":id/item_text"));
+        findByUISelector("resourceID", "shop").click();
+        driver.findElement(By.id(appPackage + ":id/button1")).click();
+        Thread.sleep(2000);
 
     }
 
