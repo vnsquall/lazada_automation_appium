@@ -32,7 +32,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         } else {
             chooseSize();
         }
-        Cart_Screen.proceedToCheckout();
+        Cart_Screen.click_ProceedToCheckoutBtn();
 
         // Login as default account
         loginAs(USERNAME, PASSWORD);
@@ -208,23 +208,25 @@ public class CheckOutScenario extends AppiumSetupTest {
     protected void addRandomProductToCart(String venture, String menuWiz, String categories,
                                           String filterWiz, String prodWiz) throws InterruptedException {
         selectVenture(venture, menuWiz);
-        findByUISelector("resourceID","abs__home").click();
+        TopBar_Screen.click_HomeBtn();
 
         Thread.sleep(1000);
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
-        findByUISelector("resourceID", "shop").click(); //Add to Cart button
+        ProductDetail_Screen.click_AddToCartBtn(); //Add to Cart button
 
         //Check for Variant Selection
-        Boolean cartConfirm = isElementPresent(By.id(appPackage + ":id/button1"));
+        Boolean cartConfirm = isElementPresent(ProductDetail_Screen.goToCart);
         if (cartConfirm) {
-            driver.findElement(By.id(appPackage + ":id/button1")).click();
+            ProductDetail_Screen.click_GoToCartBtn();
         } else {
-            driver.findElement(By.id(appPackage + ":id/product_variant_button")).click();
-            randClick(By.id(appPackage + ":id/item_text"));
-            findByUISelector("resourceID", "shop").click();
+
+            ProductDetail_Screen.click_ChooseSizeBtn();
+            randClick(ProductDetail_Screen.sizes);
+            ProductDetail_Screen.click_AddToCartBtn(); //Add to Cart button
+            ProductDetail_Screen.click_GoToCartBtn();
         }
 
-        find(appPackage + ":id/checkout_button").click();
+        Cart_Screen.click_ProceedToCheckoutBtn();
 
     }
 
@@ -233,12 +235,10 @@ public class CheckOutScenario extends AppiumSetupTest {
      */
     protected void loginAs( String userName, String password) throws InterruptedException {
         //Login to CheckOut
-        List<WebElement> editTextList = driver.findElements(By.className("android.widget.EditText"));
-        editTextList.get(0).sendKeys(userName);
-        editTextList.get(1).sendKeys(password);
-
-        driver.findElement(By.className("android.widget.CheckBox")).click();
-        find(appPackage + ":id/middle_login_button_signin").click();
+        Login_Screen.input_Email(userName);
+        Login_Screen.input_Password(password);
+        Login_Screen.click_ShowPassword();
+        Login_Screen.click_Login();
 
         Thread.sleep(5000);
         wait_web(By.id(appPackage + ":id/rocket_app_checkoutweb"));
@@ -258,7 +258,7 @@ public class CheckOutScenario extends AppiumSetupTest {
 
         // Create new address
         swipeDown();
-        driver.findElement(By.xpath("//*[@id='load-different-billing-mobile']")).click(); // Click New address
+        ShippingAddress_Screen.click_NewAddress(); // Click New address
         Thread.sleep(2000);
         createShippingAddress(venture, name, address, phoneNumber);
 

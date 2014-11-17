@@ -11,24 +11,30 @@ import static util.Helper.*;
  */
 public class Login_Screen {
 
-    private static String proceedToCheckout = "resourceID::checkout_button";
-    private static String delete = "resourceID::delete_button";
-    private static String changeQuantity = "resourceID::hangequantity_button";
+    private static String email = "className::android.widget.EditText";
+    private static String password = "className::android.widget.EditText";
+    private static String showPassword = "className::android.widget.CheckBox";
+    private static String login = "resourceID::middle_login_button_signin";
 
-    public static void click_ProceedToCheckoutBtn() {
-
-        findByUISelector(split(proceedToCheckout)[0], split(proceedToCheckout)[1]).click();
+    public static void input_Email (String _email) {
+        List<WebElement> editTexts = findsByUISelector(split(email)[0], split(email)[1]);
+        editTexts.get(0).sendKeys(_email);
     }
 
-    public static List<WebElement> delete () {
-
-        return findsByUISelector(split(delete)[0], split(delete)[1]);
+    public static void input_Password (String _password) {
+        List<WebElement> editTexts = findsByUISelector(split(password)[0], split(password)[1]);
+        editTexts.get(1).sendKeys(_password);
     }
 
-    public static List<WebElement> changeQuantity () {
-
-        return findsByUISelector(split(changeQuantity)[0], split(changeQuantity)[1]);
+    public static void click_ShowPassword () {
+        findByUISelector(split(showPassword)[0], split(showPassword)[1]).click();
     }
+
+    public static void click_Login () {
+        findByUISelector(split(login)[0], split(login)[1]).click();
+    }
+
+
 
 
 }

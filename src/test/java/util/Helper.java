@@ -50,6 +50,20 @@ public class Helper {
         
     }
 
+    public static void randClick(String locator) {
+        Random rand = new Random();
+        List<WebElement> we = findsByUISelector(split(locator)[0], split(locator)[1]);
+        int catNum = we.size();
+        /*if (catNum > 0) {*/
+            int randClick = rand.nextInt(catNum);
+            we.get(randClick).click();
+
+      /*  } else {
+            randClick(locator);
+        }*/
+
+    }
+
 
     public static Boolean isElementPresent(By locator) {
         Boolean isPresent = Boolean.FALSE;
@@ -326,6 +340,9 @@ public class Helper {
                 break;
             case TEXT_START_WITH:
                 e = driver.findElementsByAndroidUIAutomator("UiSelector().textStartsWith(\"" + appPackage + ":" + value + "\")");
+                break;
+            case CLASS_NAME:
+                e = driver.findElementsByAndroidUIAutomator("UiSelector().className(\""+value+"\")");
                 break;
             case SELECTED:
                 e = driver.findElementsByAndroidUIAutomator("UiSelector().selected(" + value + ")");

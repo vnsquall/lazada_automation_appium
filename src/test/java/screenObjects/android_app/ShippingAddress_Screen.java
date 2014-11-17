@@ -12,23 +12,18 @@ import static util.Helper.*;
 public class ShippingAddress_Screen {
 
     private static String continueButton = "xpath:://*[@class='orange-button']";
-    private static String newAddress = "resourceID::";
-    private static String edit = "resourceID::";
+    private static String newAddress = "xpath:://*[@id='load-different-billing-mobile']";
 
     public static void click_ContinueBtn() {
 
         findByUISelector(split(continueButton)[0], split(continueButton)[1]).click();
     }
 
-    public static List<WebElement> newAddress () {
+    public static void click_NewAddress () {
 
-        return findsByUISelector(split(newAddress)[0], split(newAddress)[1]);
+        findByUISelector(split(newAddress)[0], split(newAddress)[1]).click();
     }
 
-    public static List<WebElement> edit () {
-
-        return findsByUISelector(split(edit)[0], split(edit)[1]);
-    }
 
 
 }
