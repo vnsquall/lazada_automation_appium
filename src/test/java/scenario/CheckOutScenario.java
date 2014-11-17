@@ -81,7 +81,7 @@ public class CheckOutScenario extends AppiumSetupTest {
             PayMethod_Screen.click_CashOnDeliveryRadio();
             PayMethod_Screen.click_ContinueBtn();
             Thread.sleep(3000);
-            OderSummary_Screen.click_PlaceOrderBtn();
+            OrderSummary_Screen.click_PlaceOrderBtn();
             Thread.sleep(2000);
             switchToNativeApp();
             hasCashOnDelivery = true;
@@ -124,24 +124,21 @@ public class CheckOutScenario extends AppiumSetupTest {
         boolean hasCreditCard = false;
 
         // Check the Credit Cards is available or not for this CheckOutTest
-        if (isElementPresent(By.xpath("//label[@class='creditcards']"))) {
+        if (isElementPresent(PayMethod_Screen.labelCreditCard)) {
 
-            driver.findElement(By.xpath("//label[@class='creditcards']")).click();
+            PayMethod_Screen.click_CreditCardRadio();
             Thread.sleep(1000);
 
             // waiting & input the CC info
-            driver.findElement(By.id("PaymentMethodForm_parameter_cc_number")).click();
-            driver.findElement(By.id("PaymentMethodForm_parameter_cc_number")).sendKeys(creditNumber);
-            driver.findElement(By.id("PaymentMethodForm_parameter_cc_holder")).click();
-            driver.findElement(By.id("PaymentMethodForm_parameter_cc_holder")).sendKeys(customerName);
-            driver.findElement(By.id("PaymentMethodForm_parameter_cc_security_code")).click();
-            driver.findElement(By.id("PaymentMethodForm_parameter_cc_security_code")).sendKeys(securityCode);
-            selectorRandom(By.xpath("//*[@id='PaymentMethodForm_parameter_cc_exp_month']"));
-            selectorRandom(By.xpath("//*[@id='PaymentMethodForm_parameter_cc_exp_year']"));
-            driver.findElement(By.xpath("//button[@class='orange-button']")).click();
+            PayMethod_Screen.input_CreditNumber(creditNumber);
+            PayMethod_Screen.input_CreditName(customerName);
+            PayMethod_Screen.input_CreditSecurityCode(securityCode);
+            selectorRandom(PayMethod_Screen.creditCardMonthCbx());
+            selectorRandom(PayMethod_Screen.creditCardYearCbx());
+            PayMethod_Screen.click_ContinueBtn();
             Thread.sleep(1000);
-            driver.findElement(By.xpath("//button[@class='orange-button']")).click(); //Place Order
-            driver.findElement(By.xpath("//*[@class='orange-button']")).click(); //Place Order
+            OrderSummary_Screen.click_PlaceOrderBtn();
+            OrderSummary_Screen.click_PlaceOrderBtn();
             Thread.sleep(2000);
             switchToNativeApp();
             hasCreditCard = true;
@@ -164,21 +161,21 @@ public class CheckOutScenario extends AppiumSetupTest {
     protected void bankTransfer (int bankIndex, String senderName) throws InterruptedException {
 
         // Check the Bank transfer is available or not for this CheckOutTest
-        if (isElementPresent(By.xpath("//label[@for='manualbanktransferid']"))) {
+        if (isElementPresent(PayMethod_Screen.labelBankTransfer)) {
 
             // Choose pay method -> bank transfer
-            driver.findElement(By.xpath("//label[@for='manualbanktransferid']")).click();
+            PayMethod_Screen.click_BankTransferRadio();
             Thread.sleep(1000);
 
             // Select bank name
-            selector(By.xpath("//*[@name='PaymentMethodForm[parameter][bankNamePrimary]']"), bankIndex);
+            selector(PayMethod_Screen.bankNames , bankIndex);
 
             // Fill information and Submit
-            driver.findElement(By.xpath("//*[@id='PaymentMethodForm_parameter_senderName']")).sendKeys(senderName);
+            PayMethod_Screen.input_SenderName(senderName);
             Thread.sleep(2000);
-            driver.findElement(By.xpath("//*[@class='orange-button']")).click(); //Place Order
-            driver.findElement(By.xpath("//*[@class='orange-button']")).click(); //Place Order
-            driver.findElement(By.xpath("//*[@class='orange-button']")).click(); //Place Order
+            PayMethod_Screen.click_ContinueBtn(); //Place Order
+            OrderSummary_Screen.click_PlaceOrderBtn(); //Place Order
+            OrderSummary_Screen.click_PlaceOrderBtn(); //Place Order
 
         }
     }

@@ -19,7 +19,9 @@ public class PayMethod_Screen {
     public static String creditSecurityCode = "xpath:://*[@id='PaymentMethodForm_parameter_cc_security_code']";
     public static String creditMonth = "xpath:://*[@id='PaymentMethodForm_parameter_cc_exp_month']";
     public static String creditYear = "xpath:://*[@id='PaymentMethodForm_parameter_cc_exp_year']";
-    public static String continue_ = "xpath:://*[@id='PaymentMethodForm_parameter_cc_exp_year']";
+    public static String labelBankTransfer = "xpath:://label[@for='manualbanktransferid']";
+    public static String bankNames = "xpath:://*[@name='PaymentMethodForm[parameter][bankNamePrimary]']";
+    public static String bankTransferSenderName = "xpath:://*[@id='PaymentMethodForm_parameter_senderName']";
 
 
     public static void click_CashOnDeliveryRadio() {
@@ -63,6 +65,16 @@ public class PayMethod_Screen {
     public static WebElement creditCardYearCbx () {
 
         return findByUISelector(split(creditYear)[0], split(creditYear)[1]);
+    }
+
+    public static void click_BankTransferRadio () {
+
+        findByUISelector(split(labelBankTransfer)[0], split(labelBankTransfer)[1]).click();
+    }
+
+    public static void input_SenderName(String senderName) {
+
+        findByUISelector(split(bankTransferSenderName)[0], split(bankTransferSenderName)[1]).sendKeys(senderName);
     }
 
 
