@@ -61,10 +61,10 @@ public class Helper {
         }
     }
 
-    public static Boolean isElementPresent(String locator, String locateValue) {
+    public static Boolean isElementPresent(String locator) {
         Boolean isPresent = Boolean.FALSE;
         try {
-            isPresent = findsByUISelector(locator, locateValue).size() > 0;
+            isPresent = findsByUISelector(split(locator)[0], split(locator)[1]).size() > 0;
             return isPresent;
         } catch (NoSuchElementException ex) {
             return isPresent;

@@ -4,12 +4,12 @@ package scenario;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import screenObjects.android_app.*;
 import util.AppiumSetupTest;
 import static util.Constant.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import static util.Helper.*;
 
@@ -20,25 +20,23 @@ public class CheckOutScenario extends AppiumSetupTest {
 
     protected void checkOut(String categories, String filterWiz, String prodWiz) throws InterruptedException {
 
-        findByUISelector("resourceID","abs__home").click();
-
+        TopBar_Screen.click_HomeBtn();
         Thread.sleep(1000);
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
-        findByUISelector("resourceID", "shop").click(); //Add to Cart button
+        ProductDetail_Screen.click_AddToCartBtn(); //Add to Cart
 
         //Check for Variant Selection
         Boolean cartConfirm = isElementPresent(By.id(appPackage + ":id/button1"));
         if (cartConfirm) {
-            driver.findElement(By.id(appPackage + ":id/button1")).click();
+            ProductDetail_Screen.click_GoToCartBtn(); // Go to my cart
         } else {
             chooseSize();
         }
-
-        find(appPackage + ":id/checkout_button").click();
+        Cart_Screen.proceedToCheckout();
 
         // Login as default account
         loginAs(USERNAME, PASSWORD);
-        driver.findElement(By.xpath("/html/body/div[2]/div/div[2]/form/div[3]/button")).click();
+        ShippingAddress_Screen.click_ContinueBtn();
         Thread.sleep(3000);
     }
 
@@ -50,7 +48,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         Thread.sleep(1000);
 
         // Check out via COD method
-        boolean hasCashOnDelivery = cashOnDelivery();
+        boolean hasCashOnDelivery = cashOnDelivery(); /*1 => cash on delivery is available  ;0 => not available */
 
         // Verify success page
         if (hasCashOnDelivery) {
@@ -77,15 +75,13 @@ public class CheckOutScenario extends AppiumSetupTest {
     protected boolean cashOnDelivery () throws InterruptedException {
 
         boolean hasCashOnDelivery = false;
-        if (!isElementPresent(By.xpath("//*[@class='payment-method-option radio'and@value='CashOnDelivery'and@disabled='disabled']"))
-                && isElementPresent(By.xpath("//label[@for='cashondelivery']"))) {
+        if (!isElementPresent(PayMethod_Screen.radioCODDisabled)
+                && isElementPresent(PayMethod_Screen.labelCOD)) { // Cash on delivery is available
 
-            driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
-            driver.findElement(By.xpath("//button[@class='orange-button']")).click();
+            PayMethod_Screen.click_CashOnDeliveryRadio();
+            PayMethod_Screen.click_ContinueBtn();
             Thread.sleep(3000);
-            driver.findElement(By.xpath("//*[@class='orange-button']")).click();
-
-            driver.getContextHandles();
+            OderSummary_Screen.click_PlaceOrderBtn();
             Thread.sleep(2000);
             switchToNativeApp();
             hasCashOnDelivery = true;

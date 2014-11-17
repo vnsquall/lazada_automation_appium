@@ -13,23 +13,23 @@ public class ProductDetail_Screen {
     private static String share = "resourceID::btn_share";
     private static String goToCart = "resourceID::button1";
 
-    public static WebElement addToCart () {
+    public static void click_AddToCartBtn() {
 
-        return findByUISelector(split(addToCart)[0], split(addToCart)[1]);
+        findByUISelector(split(addToCart)[0], split(addToCart)[1]).click();
     }
 
-    public static WebElement addToWishList () {
+    public static void click_AddToWishListBtn() {
 
-        return findByUISelector(split(addToWishList)[0], split(addToWishList)[1]);
+        findByUISelector(split(addToWishList)[0], split(addToWishList)[1]).click();
     }
 
-    public static WebElement share () {
+    public static void click_ShareBtn() {
 
-        return findByUISelector(split(share)[0], split(share)[1]);
+        findByUISelector(split(share)[0], split(share)[1]).click();
     }
 
-    public static WebElement goToCart () {
+    public static void click_GoToCartBtn() {
 
-        return findByUISelector(split(goToCart)[0], split(goToCart)[1]);
+        findByUISelector(split(goToCart)[0], split(goToCart)[1]).click();
     }
 }

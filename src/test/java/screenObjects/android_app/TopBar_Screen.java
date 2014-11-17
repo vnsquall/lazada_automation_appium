@@ -14,18 +14,18 @@ public class TopBar_Screen {
     private static String search = "resourceID::abs__imageButton";
     private static String cart = "resourceID::cart_count";
 
-    public static WebElement home () {
+    public static void click_HomeBtn() {
 
-        return findByUISelector(split(home)[0], split(home)[1]);
+        findByUISelector(split(home)[0], split(home)[1]).click();
     }
 
-    public static WebElement search () {
+    public static void search () {
 
-        return findByUISelector(split(search)[0], split(search)[1]);
+        findByUISelector(split(search)[0], split(search)[1]).click();
     }
 
-    public static WebElement cart () {
+    public static void cart () {
 
-        return findByUISelector(split(cart)[0], split(cart)[1]);
+        findByUISelector(split(cart)[0], split(cart)[1]).click();
     }
 }

@@ -8,19 +8,12 @@ import static util.Helper.split;
  */
 public class OderSummary_Screen {
 
-    public static String radioCODDisabled = "xpath:://*[@class='payment-method-option radio'and@value='CashOnDelivery'and@disabled='disabled']";
-    public static String labelCOD = "xpath:://label[@for='cashondelivery']";
-    public static String continueButton = "xpath:://button[@class='orange-button']";
+    private static String placeOrder = "xpath:://*[@class='orange-button']";
 
 
-    public static void click_CashOnDeliveryRadio() {
+    public static void click_PlaceOrderBtn() {
 
-        findByUISelector(split(labelCOD)[0], split(labelCOD)[1]).click();
-    }
-
-    public static void click_ContinueBtn() {
-
-        findByUISelector(split(continueButton)[0], split(continueButton)[1]).click();
+        findByUISelector(split(placeOrder)[0], split(placeOrder)[1]).click();
     }
 
 }

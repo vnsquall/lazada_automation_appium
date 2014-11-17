@@ -17,9 +17,9 @@ public class Cart_Screen {
     private static String delete = "resourceID::delete_button";
     private static String changeQuantity = "resourceID::hangequantity_button";
 
-    public static WebElement proceedToCheckout () {
+    public static void proceedToCheckout () {
 
-        return findByUISelector(split(proceedToCheckout)[0], split(proceedToCheckout)[1]);
+        findByUISelector(split(proceedToCheckout)[0], split(proceedToCheckout)[1]).click();
     }
 
     public static List<WebElement> delete () {
