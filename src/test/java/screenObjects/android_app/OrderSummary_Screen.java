@@ -6,7 +6,7 @@ import static util.Helper.split;
 /**
  * Created by anhpham on 17/11/2014.
  */
-public class OderSummary_Screen {
+public class OrderSummary_Screen {
 
     private static String placeOrder = "xpath:://*[@class='orange-button']";
 
