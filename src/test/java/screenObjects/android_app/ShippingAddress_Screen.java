@@ -11,8 +11,10 @@ import static util.Helper.*;
  */
 public class ShippingAddress_Screen {
 
-    private static String continueButton = "xpath:://*[@class='orange-button']";
-    private static String newAddress = "xpath:://*[@id='load-different-billing-mobile']";
+    public static String continueButton = "xpath:://*[@class='orange-button']";
+    public static String newAddress = "xpath:://*[@id='load-different-billing-mobile']";
+    public static String useDifferentBillingAddress = "xpath:://*[@for='ThreeStepBillingAddressForm_isSameShipping']";
+    public static String editAddress = "xpath:://*[@class='change-billing']";
 
     public static void click_ContinueBtn() {
 
@@ -22,6 +24,14 @@ public class ShippingAddress_Screen {
     public static void click_NewAddress () {
 
         findByUISelector(split(newAddress)[0], split(newAddress)[1]).click();
+    }
+
+    /**
+     * Click on Use different billing address
+     */
+    public static void click_UseDifferent () {
+
+        findByUISelector(split(useDifferentBillingAddress)[0], split(useDifferentBillingAddress)[1]).click();
     }
 
 

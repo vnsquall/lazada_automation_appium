@@ -281,7 +281,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         loginAs(USERNAME, PASSWORD);
 
         // Choose Use different billing address
-        driver.findElement(By.xpath("//*[@for='ThreeStepBillingAddressForm_isSameShipping']")).click();
+        ShippingAddress_Screen.click_UseDifferent();
         createBillingAddress(venture, name, address, phoneNumber);
 
     }
@@ -293,20 +293,20 @@ public class CheckOutScenario extends AppiumSetupTest {
         checkOut(categories, filterWiz, prodWiz);
 
         // Check the Cash On Delivery is available or not for this CheckOutTest
-        if (!isElementPresent(By.xpath("//*[@class='payment-method-option radio'and@value='CashOnDelivery'and@disabled='disabled']"))
-                && isElementPresent(By.xpath("//label[@for='cashondelivery']"))) {
+        if (!isElementPresent(PayMethod_Screen.radioCODDisabled)
+                && isElementPresent(PayMethod_Screen.labelCOD)) {
 
-            driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
-            driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+            PayMethod_Screen.click_CashOnDeliveryRadio();
+            PayMethod_Screen.click_ContinueBtn();
             Thread.sleep(3000);
-            driver.findElement(By.xpath("//*[@id='change-shipping'][contains(@href, 'billing')]")).click();
+            OrderSummary_Screen.click_EditBillingAddress();
 
             // Edit billing address
             createBillingAddress(venture, name, address, phoneNumber);
 
             // Continue checking out
-            driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
-            driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+            PayMethod_Screen.click_CashOnDeliveryRadio();
+            PayMethod_Screen.click_ContinueBtn();
             Thread.sleep(4000);
 
             // Verify billing address has changed
@@ -316,7 +316,7 @@ public class CheckOutScenario extends AppiumSetupTest {
             Assert.assertTrue(pageSource.contains(phoneNumber));
 
             // Submit order
-            driver.findElement(By.xpath("//*[@class='orange-button']")).click(); // Place your order
+            OrderSummary_Screen.click_PlaceOrderBtn(); // Place your order
 
         }
 
@@ -329,16 +329,16 @@ public class CheckOutScenario extends AppiumSetupTest {
         checkOut(categories, filterWiz, prodWiz);
 
         // Check the Cash On Delivery is available or not for this CheckOutTest
-        if (!isElementPresent(By.xpath("//*[@class='payment-method-option radio'and@value='CashOnDelivery'and@disabled='disabled']"))
-                && isElementPresent(By.xpath("//label[@for='cashondelivery']"))) {
+        if (!isElementPresent(PayMethod_Screen.radioCODDisabled)
+                && isElementPresent(PayMethod_Screen.labelCOD)) {
 
-            driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
-            driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+            PayMethod_Screen.click_CashOnDeliveryRadio();
+            PayMethod_Screen.click_ContinueBtn();
             Thread.sleep(3000);
-            driver.findElement(By.xpath("//*[@id='change-shipping'][contains(@href, 'shipping')]")).click();
+            OrderSummary_Screen.click_EditShippingAddress();
 
             // Random choose address to edit
-            randClick(By.xpath("//*[@class='change-billing']"));
+            randClick(ShippingAddress_Screen.editAddress);
 
             // Edit shipping address
             editShippingAddress(venture, name, address, phoneNumber);
@@ -351,7 +351,7 @@ public class CheckOutScenario extends AppiumSetupTest {
             Assert.assertTrue(pageSource.contains(phoneNumber));
 
             // Submit order
-            driver.findElement(By.xpath("//*[@class='orange-button']")).click(); // Place your order
+            OrderSummary_Screen.click_PlaceOrderBtn(); // Place your order
             cashOnDelivery(); // Checkout again
 
         }
