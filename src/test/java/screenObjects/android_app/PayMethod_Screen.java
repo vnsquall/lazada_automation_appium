@@ -1,9 +1,6 @@
 package screenObjects.android_app;
 
 import org.openqa.selenium.WebElement;
-
-import java.util.List;
-
 import static util.Helper.findByUISelector;
 import static util.Helper.split;
 
@@ -26,6 +23,7 @@ public class PayMethod_Screen {
     public static String bankTransferSenderName = "xpath:://*[@id='PaymentMethodForm_parameter_senderName']";
     public static String continueButton = "xpath:://button[@class='orange-button']";
     public static String paymentMethods = "xpath:://*[starts-with(@class,'payment-methods')]";
+    public static String creditCards = "xpath:://*[starts-with(@class,'payment-methods')]"; // Saved credit card
 
 
 
