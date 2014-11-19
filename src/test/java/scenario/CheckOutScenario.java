@@ -28,7 +28,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         //Check for Variant Selection
         Boolean cartConfirm = isElementPresent(By.id(appPackage + ":id/button1"));
         if (cartConfirm) {
-            ProductDetail_Screen.click_GoToCartBtn(); // Go to my cart
+            ProductDetail_Screen.click_GoToCartBtn(); // Go to my click_MyCartBtn
         } else {
             chooseSize();
         }
@@ -241,8 +241,8 @@ public class CheckOutScenario extends AppiumSetupTest {
         Login_Screen.click_Login();
 
         Thread.sleep(5000);
-        wait_web(By.id(appPackage + ":id/rocket_app_checkoutweb"));
-        driver.findElement(By.id(appPackage + ":id/rocket_app_checkoutweb"));
+        Login_Screen.wait_ForCheckout();
+        Login_Screen.rocket_app_checkoutweb();
         Thread.sleep(2000);
         switchToWebView();
         Thread.sleep(3000);
@@ -298,7 +298,7 @@ public class CheckOutScenario extends AppiumSetupTest {
 
             PayMethod_Screen.click_CashOnDeliveryRadio();
             PayMethod_Screen.click_ContinueBtn();
-            Thread.sleep(3000);
+            Thread.sleep(5000);
             OrderSummary_Screen.click_EditBillingAddress();
 
             // Edit billing address
@@ -371,17 +371,17 @@ public class CheckOutScenario extends AppiumSetupTest {
         switchToNativeApp();
 
         // Go to myCart and remove all product
-        driver.findElement(By.xpath("//*[contains(@resource-id, 'id/cart_count')]")).click();
+        TopBar_Screen.click_MyCartBtn();
         List<WebElement> arrDelete = new ArrayList<WebElement>();
         do {
-            arrDelete = findsByUISelector("resourceID","delete_button");
+            arrDelete = Cart_Screen.deleteButtons();
             if (arrDelete.size() > 0) {
 
                 arrDelete.get(0).click();
-                findByUISelector("resourceID" , "button1").click(); // Click on Remove button
+                Cart_Screen.click_RemoveItem(); // Remove confirm
 
             }
-            arrDelete = findsByUISelector("resourceID","delete_button");
+            arrDelete = Cart_Screen.deleteButtons();
         } while (arrDelete.size() > 0);
 
     }
@@ -534,29 +534,30 @@ public class CheckOutScenario extends AppiumSetupTest {
     protected void createBillingAddress(String venture, String name, String address, String phoneNumber) throws InterruptedException {
 
         // New billing address
-        driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_first_name']")).sendKeys(name);
-        driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_address1']")).sendKeys(address);
+        BillingAddress_Screen.input_Name(name);
+        BillingAddress_Screen.input_Address(address);
         if (venture.equals("Thailand") || venture.equals("Philippines")
                 || venture.equals("Malaysia") || venture.equals("Indonesia")) {
 
-            selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_0']")); // select random Region
-            selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_1']")); // select random City
-            selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_2']")); // select random Postcode
-            driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
+            selectorRandom(BillingAddress_Screen.region()); // select random Region
+            selectorRandom(BillingAddress_Screen.city()); // select random City
+            selectorRandom(BillingAddress_Screen.ward()); // select random Postcode
+            BillingAddress_Screen.input_PhoneNumber(phoneNumber);
 
         }
         if (venture.equals("Singapore")) {
-            driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_postcode']")).sendKeys("759674");
-            driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
+            BillingAddress_Screen.input_PostCode("759674");
+            BillingAddress_Screen.input_PhoneNumber(phoneNumber);
+
         }
         if (venture.equals("Vietnam")) {
-            selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_0']")); // select random Region
-            selectorRandom(By.xpath("//*[@id='ThreeStepBillingAddressForm_location_1']")); // select random City
-            driver.findElement(By.xpath("//*[@id='ThreeStepBillingAddressForm_phone']")).sendKeys(phoneNumber);
+            selectorRandom(BillingAddress_Screen.region()); // select random Region
+            selectorRandom(BillingAddress_Screen.city()); // select random City
+            BillingAddress_Screen.input_PhoneNumber(phoneNumber);
         }
 
         // Submit
-        driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+        BillingAddress_Screen.click_ContinueBtn();
 
     }
 
@@ -651,21 +652,21 @@ public class CheckOutScenario extends AppiumSetupTest {
         Thread.sleep(1000);
 
         // Check the Cash On Delivery is available or not for this CheckOutTest
-        if (!isElementPresent(By.xpath("//*[@class='payment-method-option radio'and@value='CashOnDelivery'and@disabled='disabled']"))
-                && isElementPresent(By.xpath("//label[@for='cashondelivery']"))) {
+        if (!isElementPresent(PayMethod_Screen.radioCODDisabled)
+                && isElementPresent(PayMethod_Screen.labelCOD)) { // Cash on delivery is available
 
-            driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
-            driver.findElement(By.xpath("//button[@class='orange-button']")).click();
+            PayMethod_Screen.click_CashOnDeliveryRadio();
+            PayMethod_Screen.click_ContinueBtn();
             Thread.sleep(3000);
             // Edit billing address
 
-            driver.findElement(By.xpath("//*[@id='change-shipping'][contains(@href, 'billing')]")).click();
+            OrderSummary_Screen.click_EditBillingAddress();
             createBillingAddress(venture, name, address, phoneNumber);
-            driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+            BillingAddress_Screen.click_ContinueBtn();
             Thread.sleep(2000);
-            driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
-            driver.findElement(By.xpath("//button[@class='orange-button']")).click();
-            driver.findElement(By.xpath("//button[@class='orange-button']")).click();
+            PayMethod_Screen.click_CashOnDeliveryRadio();
+            PayMethod_Screen.click_ContinueBtn();
+            OrderSummary_Screen.click_PlaceOrderBtn();
 
         }
 
@@ -697,29 +698,26 @@ public class CheckOutScenario extends AppiumSetupTest {
         Thread.sleep(1000);
 
         // Check the Bank transfer is available or not for this CheckOutTest
-        if (isElementPresent(By.xpath("//label[@for='manualbanktransferid']"))) {
+        if (isElementPresent(PayMethod_Screen.labelBankTransfer)) {
 
             // Choose pay method -> bank transfer
-            driver.findElement(By.xpath("//label[@for='manualbanktransferid']")).click();
+            PayMethod_Screen.click_BankTransferRadio();
             Thread.sleep(1000);
 
             // Select bank name
-            selector(By.xpath("//*[@name='PaymentMethodForm[parameter][bankNamePrimary]']"), bankIndex);
+            selector(PayMethod_Screen.bankNames, bankIndex);
 
             // Fill information and Submit
-            driver.findElement(By.xpath("//*[@id='PaymentMethodForm_parameter_senderName']")).sendKeys(senderName);
+            PayMethod_Screen.input_SenderName(senderName);
             Thread.sleep(2000);
-            driver.findElement(By.xpath("//*[@class='orange-button']")).click(); //Place Order
+            PayMethod_Screen.click_ContinueBtn(); //Place Order
             Thread.sleep(3000);
-            driver.findElement(By.xpath("//*[@id='change-shipping'][contains(@href, 'billing')]")).click(); // New billing address
+            OrderSummary_Screen.click_EditBillingAddress(); // New billing address
 
             // Edit billing address
             createBillingAddress(venture, name, address, phoneNumber);
             bankTransfer(bankIndex, senderName);
-
         }
-
-
     }
 
     /**
@@ -727,10 +725,10 @@ public class CheckOutScenario extends AppiumSetupTest {
      */
     protected void chooseSize () throws InterruptedException {
 
-        driver.findElement(By.id(appPackage + ":id/product_variant_button")).click();
-        randClick(By.id(appPackage + ":id/item_text"));
-        findByUISelector("resourceID", "shop").click();
-        driver.findElement(By.id(appPackage + ":id/button1")).click();
+        ProductDetail_Screen.click_ChooseSizeBtn();
+        randClick(ProductDetail_Screen.sizes);
+        ProductDetail_Screen.click_AddToCartBtn();
+        ProductDetail_Screen.click_GoToCartBtn();
         Thread.sleep(2000);
 
     }
