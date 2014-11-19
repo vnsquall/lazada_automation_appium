@@ -1,5 +1,9 @@
 package screenObjects.android_app;
 
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
+
 import static util.Helper.*;
 /**
  * Created by anhpham on 17/11/2014.
@@ -37,4 +41,6 @@ public class ProductDetail_Screen {
 
         findByUISelector(split(chooseSize)[0], split(chooseSize)[1]).click();
     }
+
+
 }
