@@ -470,12 +470,12 @@ public class CheckOutScenario extends AppiumSetupTest {
         checkOut(categories, filterWiz, prodWiz);
 
         // Check the Saved Credit Cards is available or not
-        if (isElementPresent(By.xpath("//*[starts-with(@for,'card_id')]"))) {
+        if (isElementPresent(PayMethod_Screen.creditCards)) {
 
-            randClick(By.xpath("//*[starts-with(@for,'card_id')]"));
-            driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+            randClick(PayMethod_Screen.creditCards);
+            PayMethod_Screen.click_ContinueBtn();
             swipeDown();
-            driver.findElement(By.xpath("//*[@class='orange-button']")).click(); // Place your order
+            OrderSummary_Screen.click_PlaceOrderBtn(); // Place your order
             Thread.sleep(2000);
 
         }
