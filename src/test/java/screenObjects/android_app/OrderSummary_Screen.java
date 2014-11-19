@@ -11,7 +11,7 @@ public class OrderSummary_Screen {
     private static String placeOrder = "xpath:://*[@class='orange-button']";
     private static String editBillingAddress = "xpath:://*[@id='change-shipping'][contains(@href, 'billing')]";
     private static String editShippingAddress = "xpath:://*[@id='change-shipping'][contains(@href, 'shipping')]";
-
+    public static String changePayment = "xpath:://*[@id='change-payment']";
 
     public static void click_PlaceOrderBtn() {
 
@@ -28,4 +28,8 @@ public class OrderSummary_Screen {
         findByUISelector(split(editShippingAddress)[0], split(editShippingAddress)[1]).click();
     }
 
+    public static void click_ChangePayment() {
+
+        findByUISelector(split(changePayment)[0], split(changePayment)[1]).click();
+    }
 }

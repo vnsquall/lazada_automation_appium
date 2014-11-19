@@ -1,8 +1,6 @@
 package screenObjects.android_app;
 
-import org.openqa.selenium.WebElement;
 
-import java.util.List;
 
 import static util.Helper.*;
 
@@ -27,7 +25,7 @@ public class ShippingAddress_Screen {
     }
 
     /**
-     * Click on Use different billing address
+     * Click on Use different billing address checkbox
      */
     public static void click_UseDifferent () {
 

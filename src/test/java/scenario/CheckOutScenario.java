@@ -26,7 +26,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         ProductDetail_Screen.click_AddToCartBtn(); //Add to Cart
 
         //Check for Variant Selection
-        Boolean cartConfirm = isElementPresent(By.id(appPackage + ":id/button1"));
+        Boolean cartConfirm = isElementPresent(ProductDetail_Screen.goToCart);
         if (cartConfirm) {
             ProductDetail_Screen.click_GoToCartBtn(); // Go to my click_MyCartBtn
         } else {
@@ -188,14 +188,14 @@ public class CheckOutScenario extends AppiumSetupTest {
         checkOut(categories, filterWiz, prodWiz);
 
         // Check the Paypal is available or not for this CheckOutTest
-        if (isElementPresent(By.xpath("//label[@for='paypal']"))) {
+        if (isElementPresent(PayMethod_Screen.labelPaypal)) {
 
-            driver.findElement(By.xpath("//label[@for='paypal']")).click();
+            PayMethod_Screen.click_PaypalRadio();
             Thread.sleep(1000);
 
             // Choose pay method -> Paypal
-            driver.findElement(By.xpath("//*[@class='orange-button']")).click();// Click on Continue button
-            driver.findElement(By.xpath("//*[@class='orange-button']")).click();// Place your order
+            PayMethod_Screen.click_ContinueBtn();
+            OrderSummary_Screen.click_PlaceOrderBtn();
             Thread.sleep(10000);
 
         }
@@ -316,7 +316,7 @@ public class CheckOutScenario extends AppiumSetupTest {
             Assert.assertTrue(pageSource.contains(phoneNumber));
 
             // Submit order
-            OrderSummary_Screen.click_PlaceOrderBtn(); // Place your order
+            OrderSummary_Screen.click_PlaceOrderBtn();
 
         }
 
@@ -395,17 +395,17 @@ public class CheckOutScenario extends AppiumSetupTest {
         checkOut(categories, filterWiz, prodWiz);
 
         // Check out by COD then edit payment method
-        if (!isElementPresent(By.xpath("//*[@class='payment-method-option radio'and@value='CashOnDelivery'and@disabled='disabled']"))
-                && isElementPresent(By.xpath("//label[@for='cashondelivery']"))) {
+        if (!isElementPresent(PayMethod_Screen.radioCODDisabled)
+                && isElementPresent(PayMethod_Screen.labelCOD)) {
 
-            driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
-            driver.findElement(By.xpath("//button[@class='orange-button']")).click();
+            PayMethod_Screen.click_CashOnDeliveryRadio();
+            PayMethod_Screen.click_ContinueBtn();
             Thread.sleep(3000);
 
             // Change payment method
-            driver.findElement(By.xpath("//*[@id='change-payment']")).click();
-            randClick(By.xpath("//*[starts-with(@class,'payment-methods')]"));
-            driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+            OrderSummary_Screen.click_ChangePayment();
+            randClick(PayMethod_Screen.paymentMethods);
+            PayMethod_Screen.click_ContinueBtn();
             Thread.sleep(2000);
 
       }
@@ -499,6 +499,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         String address = generateAlphabet(10);
         String phoneNumber = generateNumber(10);
         editShippingAddress(venture, name, address, phoneNumber);
+        cashOnDelivery();
 
 
 

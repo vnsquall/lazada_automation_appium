@@ -18,7 +18,7 @@ public class Login_Screen {
     private static String showPassword = "className::android.widget.CheckBox";
     private static String login = "resourceID::middle_login_button_signin";
     private static String rocket_app_checkoutweb1 = "resourceID::rocket_app_checkoutweb";
-    public static String rocket_app_checkoutweb = ":id/rocket_app_checkoutweb";
+    public static String rocket_app_checkoutweb = ":id/rocket_app_checkoutweb"; /*special case*/
 
 
     public static void input_Email (String _email) {
