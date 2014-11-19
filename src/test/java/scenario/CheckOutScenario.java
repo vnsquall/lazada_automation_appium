@@ -36,7 +36,7 @@ public class CheckOutScenario extends AppiumSetupTest {
 
         // Login as default account
         loginAs(USERNAME, PASSWORD);
-        ShippingAddress_Screen.click_ContinueBtn();
+        ShippingInformation_Screen.click_ContinueBtn();
         Thread.sleep(3000);
     }
 
@@ -258,7 +258,7 @@ public class CheckOutScenario extends AppiumSetupTest {
 
         // Create new address
         swipeDown();
-        ShippingAddress_Screen.click_NewAddress(); // Click New address
+        ShippingInformation_Screen.click_NewAddress(); // Click New address
         Thread.sleep(2000);
         createShippingAddress(venture, name, address, phoneNumber);
 
@@ -281,7 +281,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         loginAs(USERNAME, PASSWORD);
 
         // Choose Use different billing address
-        ShippingAddress_Screen.click_UseDifferent();
+        ShippingInformation_Screen.click_UseDifferent();
         createBillingAddress(venture, name, address, phoneNumber);
 
     }
@@ -338,7 +338,7 @@ public class CheckOutScenario extends AppiumSetupTest {
             OrderSummary_Screen.click_EditShippingAddress();
 
             // Random choose address to edit
-            randClick(ShippingAddress_Screen.editAddress);
+            randClick(ShippingInformation_Screen.editAddress);
 
             // Edit shipping address
             editShippingAddress(venture, name, address, phoneNumber);
@@ -488,7 +488,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
 
         // Create new account
-        findByUISelector("resourceID", "middle_login_link_register").click();
+        Login_Screen.click_RegisterBtn();
         registerAccount();
 
         Thread.sleep(1000);
@@ -500,9 +500,6 @@ public class CheckOutScenario extends AppiumSetupTest {
         String phoneNumber = generateNumber(10);
         editShippingAddress(venture, name, address, phoneNumber);
         cashOnDelivery();
-
-
-
     }
 
     /**
@@ -516,15 +513,14 @@ public class CheckOutScenario extends AppiumSetupTest {
         String name = generateAlphabet(5);
 
         // Input email, password, name
-        List<WebElement> editTexts = driver.findElements(By.xpath("//*[contains(@class,'android.widget.EditText')]"));
-        editTexts.get(0).sendKeys(email);
-        editTexts.get(1).sendKeys(password);
-        editTexts.get(2).sendKeys(password);
-        editTexts.get(3).sendKeys(name);
-        driver.findElement(By.className("android.widget.CheckBox")).click(); // Show password
+        Register_Screen.input_Email(email);
+        Register_Screen.input_Password(password);
+        Register_Screen.input_RePassword(password);
+        Register_Screen.input_Name(name);
+        Register_Screen.click_ShowPassword(); // Show password
 
         // Submit
-        findByUISelector("resourceID", "register_button_submit").click();
+        Register_Screen.click_SubmitBtn();
         Thread.sleep(3000);
 
     }
@@ -569,30 +565,30 @@ public class CheckOutScenario extends AppiumSetupTest {
 
         // New billing address
         Thread.sleep(2000);
-        driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_first_name']")).sendKeys(name);
-        driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_address1']")).sendKeys(address);
+        ShippingAddress_Screen.input_Name(name);
+        ShippingAddress_Screen.input_Address(address);
         if (venture.equals("Thailand") || venture.equals("Philippines")
                 || venture.equals("Malaysia") || venture.equals("Indonesia")) {
 
-            selectorRandom(By.xpath("//*[@id='ThreeStepShippingAddressForm_location_0']")); // select random Region
-            selectorRandom(By.xpath("//*[@id='ThreeStepShippingAddressForm_location_1']")); // select random City
+            selectorRandom(ShippingAddress_Screen.region());
+            selectorRandom(ShippingAddress_Screen.city());
             Thread.sleep(1000);
-            selectorRandom(By.xpath("//*[@id='ThreeStepShippingAddressForm_location_2']")); // select random Postcode
-            driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_phone']")).sendKeys(phoneNumber);
+            selectorRandom(ShippingAddress_Screen.ward());
+            ShippingAddress_Screen.input_PhoneNumber(phoneNumber);
 
         }
         if (venture.equals("Singapore")) {
-            driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_postcode']")).sendKeys("759674");
-            driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_phone']")).sendKeys(phoneNumber);
+            ShippingAddress_Screen.input_PostCode("759674");
+            ShippingAddress_Screen.input_PhoneNumber(phoneNumber);
         }
         if (venture.equals("Vietnam")) {
-            selectorRandom(By.xpath("//*[@id='ThreeStepShippingAddressForm_location_0']")); // select random Region
-            selectorRandom(By.xpath("//*[@id='ThreeStepShippingAddressForm_location_1']")); // select random City
-            driver.findElement(By.xpath("//*[@id='ThreeStepShippingAddressForm_phone']")).sendKeys(phoneNumber);
+            selectorRandom(ShippingAddress_Screen.region());
+            selectorRandom(ShippingAddress_Screen.city());
+            ShippingAddress_Screen.input_PhoneNumber(phoneNumber);
         }
 
         // Submit
-        driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+        ShippingAddress_Screen.click_ContinueBtn();
 
     }
 
