@@ -7,7 +7,7 @@ import static util.Helper.*;
 /**
  * Created by anhpham on 17/11/2014.
  */
-public class ShippingAddress_Screen {
+public class ShippingInformation_Screen {
 
     public static String continueButton = "xpath:://*[@class='orange-button']";
     public static String newAddress = "xpath:://*[@id='load-different-billing-mobile']";
