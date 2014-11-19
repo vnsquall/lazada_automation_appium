@@ -24,7 +24,7 @@ public class TopBar_Screen {
         findByUISelector(split(search)[0], split(search)[1]).click();
     }
 
-    public static void cart () {
+    public static void click_MyCartBtn() {
 
         findByUISelector(split(cart)[0], split(cart)[1]).click();
     }
