@@ -420,18 +420,18 @@ public class CheckOutScenario extends AppiumSetupTest {
         checkOut(categories, filterWiz, prodWiz);
 
         // Check out by COD
-        if (!isElementPresent(By.xpath("//*[@class='payment-method-option radio'and@value='CashOnDelivery'and@disabled='disabled']"))
-                && isElementPresent(By.xpath("//label[@for='cashondelivery']"))) {
+        if (!isElementPresent(PayMethod_Screen.radioCODDisabled)
+                && isElementPresent(PayMethod_Screen.labelCOD)) {
 
-            driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
-            driver.findElement(By.xpath("//button[@class='orange-button']")).click();
+            PayMethod_Screen.click_CashOnDeliveryRadio();
+            PayMethod_Screen.click_ContinueBtn();
             Thread.sleep(3000);
 
             // Input coupon code
-            driver.findElement(By.xpath("//*[@id='addCoupon']")).click();
-            driver.findElement(By.xpath("//*[@id='coupon']")).sendKeys(coupon);
-            driver.findElement(By.xpath("//*[@id='couponSend']")).click();
-            driver.findElement(By.xpath("//*[@class='orange-button']")).click(); // Place your oder
+            OrderSummary_Screen.click_addCouponBtn();
+            OrderSummary_Screen.input_Coupon(coupon);
+            OrderSummary_Screen.click_SubmitCoupon();
+            OrderSummary_Screen.click_PlaceOrderBtn(); // Place your oder
             Thread.sleep(2000);
 
       }
