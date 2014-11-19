@@ -15,21 +15,21 @@ public class Cart_Screen {
 
     private static String proceedToCheckout = "resourceID::checkout_button";
     private static String delete = "resourceID::delete_button";
-    private static String changeQuantity = "resourceID::hangequantity_button";
+    private static String removeItem = "resourceID::button1";
 
     public static void click_ProceedToCheckoutBtn() {
 
         findByUISelector(split(proceedToCheckout)[0], split(proceedToCheckout)[1]).click();
     }
 
-    public static List<WebElement> delete () {
+    public static List<WebElement> deleteButtons() {
 
         return findsByUISelector(split(delete)[0], split(delete)[1]);
     }
 
-    public static List<WebElement> changeQuantity () {
+    public static void click_RemoveItem() {
 
-        return findsByUISelector(split(changeQuantity)[0], split(changeQuantity)[1]);
+        findByUISelector(split(removeItem)[0], split(removeItem)[1]).click();
     }
 
 
