@@ -446,19 +446,19 @@ public class CheckOutScenario extends AppiumSetupTest {
         Thread.sleep(1000);
 
         // Check the Cash On Delivery is available or not for this CheckOutTest
-        if (!isElementPresent(By.xpath("//*[@class='payment-method-option radio'and@value='CashOnDelivery'and@disabled='disabled']"))
-                && isElementPresent(By.xpath("//label[@for='cashondelivery']"))) {
+        if (!isElementPresent(PayMethod_Screen.radioCODDisabled)
+                && isElementPresent(PayMethod_Screen.labelCOD)) {
 
-            driver.findElement(By.xpath("//label[@for='cashondelivery']")).click();
-            driver.findElement(By.xpath("//button[@class='orange-button']")).click();
+            PayMethod_Screen.click_CashOnDeliveryRadio();
+            PayMethod_Screen.click_ContinueBtn();
             Thread.sleep(3000);
-            driver.findElement(By.xpath("//*[@class='orange-button']")).click();
+            OrderSummary_Screen.click_PlaceOrderBtn();
             Thread.sleep(2000);
             switchToNativeApp();
 
             // Share order
-            findByUISelector("resourceID", "btn_checkout_share").click();
-            randClick(By.xpath("//*[@resource-id='android:id/text1']"));
+            Thankyou_Screen.click_ShareBtn();
+            randClick(Thankyou_Screen.sharerApps); // Random & choose application to share order
 
         }
     }
