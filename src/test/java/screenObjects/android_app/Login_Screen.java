@@ -19,6 +19,7 @@ public class Login_Screen {
     private static String login = "resourceID::middle_login_button_signin";
     private static String rocket_app_checkoutweb1 = "resourceID::rocket_app_checkoutweb";
     public static String rocket_app_checkoutweb = ":id/rocket_app_checkoutweb"; /*special case*/
+    public static String register = "resourceID:middle_login_link_register";
 
 
     public static void input_Email (String _email) {
@@ -49,6 +50,11 @@ public class Login_Screen {
     public static WebElement rocket_app_checkoutweb () {
 
         return findByUISelector(split(rocket_app_checkoutweb1)[0], split(rocket_app_checkoutweb1)[1]);
+    }
+
+    public static void click_RegisterBtn () {
+
+        findByUISelector(split(register)[0], split(register)[1]).click();
     }
 
 
