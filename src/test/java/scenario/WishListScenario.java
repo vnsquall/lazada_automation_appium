@@ -3,6 +3,7 @@ package scenario;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import screenObjects.android_app.Init_Screen;
 import util.AppiumSetupTest;
 
 import java.util.Random;
@@ -17,7 +18,7 @@ public class WishListScenario extends AppiumSetupTest {
     protected void wishListNotLogin(String venture, String menuWiz, String wishList, String emptyWL,
                                     String categories, String filterWiz, String prodWiz, String addWL) throws InterruptedException {
 
-        selectVenture(venture, menuWiz);
+        Init_Screen.select_Country(venture, menuWiz);
         findElement("resourceID", "abs__home").click();
         Thread.sleep(1000);
 
@@ -50,7 +51,7 @@ public class WishListScenario extends AppiumSetupTest {
                                           String categories, String filterWiz, String prodWiz, String addWL) throws InterruptedException {
 
         // Select venture
-        selectVenture(venture, menuWiz);
+        Init_Screen.select_Country(venture, menuWiz);
         findElement("resourceID", "abs__home").click();
         Thread.sleep(1000);
 
@@ -82,7 +83,7 @@ public class WishListScenario extends AppiumSetupTest {
                                       String categories, String filterWiz, String prodWiz, String addWL) throws InterruptedException {
 
         // Select venture
-        selectVenture(venture, menuWiz);
+        Init_Screen.select_Country(venture, menuWiz);
         findElement("resourceID", "abs__home").click();
         Thread.sleep(1000);
 
@@ -116,7 +117,7 @@ public class WishListScenario extends AppiumSetupTest {
                                          String categories, String filterWiz, String prodWiz, String addWL) throws InterruptedException {
 
         // Select venture
-        selectVenture(venture, menuWiz);
+        Init_Screen.select_Country(venture, menuWiz);
         findElement("resourceID", "abs__home").click();
         Thread.sleep(1000);
 
@@ -155,7 +156,7 @@ public class WishListScenario extends AppiumSetupTest {
                                       String sharerAppName, String phoneNumber, String sharerAppPackage) throws InterruptedException {
 
         // Select venture
-        selectVenture(venture, menuWiz);
+        Init_Screen.select_Country(venture, menuWiz);
         findElement("resourceID", "abs__home").click();
         Thread.sleep(1000);
 

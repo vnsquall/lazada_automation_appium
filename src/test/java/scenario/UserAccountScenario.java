@@ -2,6 +2,7 @@ package scenario;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import screenObjects.android_app.Init_Screen;
 import util.AppiumSetupTest;
 
 import java.util.List;
@@ -40,7 +41,7 @@ public class UserAccountScenario extends AppiumSetupTest {
 
     protected void registerWithNewUser(String venture, String menuWiz, String account, String userData,
                                        String createUser, String mail, String pass, String name) throws InterruptedException {
-        selectVenture(venture, menuWiz);
+        Init_Screen.select_Country(venture, menuWiz);
         find(appPackage + ":id/abs__home").click();
         Thread.sleep(1000);
 
@@ -57,7 +58,7 @@ public class UserAccountScenario extends AppiumSetupTest {
 
     protected void loginWrongData(String venture, String menuWiz, String account, String userData,
                                   String mail, String pass, String loginFailed) throws InterruptedException {
-        selectVenture(venture, menuWiz);
+        Init_Screen.select_Country(venture, menuWiz);
         find(appPackage + ":id/abs__home").click();
         Thread.sleep(1000);
 
@@ -71,7 +72,7 @@ public class UserAccountScenario extends AppiumSetupTest {
 
     protected void loginAndLogout(String venture, String menuWiz, String account, String userData,
                                   String mail, String pass, String logOut) throws InterruptedException {
-        selectVenture(venture, menuWiz);
+        Init_Screen.select_Country(venture, menuWiz);
         find(appPackage + ":id/abs__home").click();
         Thread.sleep(1000);
 

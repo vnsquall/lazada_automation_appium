@@ -43,7 +43,7 @@ public class CheckOutScenario extends AppiumSetupTest {
     protected void checkOutUseTheCoD(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
 
         // Perform Check Out steps
-        selectVenture(venture, menuWiz);
+        Init_Screen.select_Country(venture, menuWiz);
         checkOut(categories, filterWiz, prodWiz);
         Thread.sleep(1000);
 
@@ -93,7 +93,7 @@ public class CheckOutScenario extends AppiumSetupTest {
     protected void checkOutUseCreditCardInvalid(String venture, String menuWiz, String categories, String filterWiz,
                                                 String prodWiz, String creditNumber, String customerName, String securityCode) throws InterruptedException {
         // Perform Check Out steps
-        selectVenture(venture, menuWiz);
+        Init_Screen.select_Country(venture, menuWiz);
         checkOut(categories, filterWiz, prodWiz);
 
         // Check the Credit Cards is available or not for this CheckOutTest
@@ -150,7 +150,7 @@ public class CheckOutScenario extends AppiumSetupTest {
     protected void checkOutUseBankTransfer(String venture, String menuWiz, String categories, String filterWiz, String prodWiz,
                                            int bankIndex, String senderName) throws InterruptedException {
         // Perform Check Out steps
-        selectVenture(venture, menuWiz);
+        Init_Screen.select_Country(venture, menuWiz);
         checkOut(categories, filterWiz, prodWiz);
         bankTransfer(bankIndex, senderName);
     }
@@ -184,7 +184,7 @@ public class CheckOutScenario extends AppiumSetupTest {
     protected void checkOutAndUsePaypal(String venture, String menuWiz, String categories, String filterWiz, String prodWiz) throws InterruptedException {
 
         // Perform Check Out steps
-        selectVenture(venture, menuWiz);
+        Init_Screen.select_Country(venture, menuWiz);
         checkOut(categories, filterWiz, prodWiz);
 
         // Check the Paypal is available or not for this CheckOutTest
@@ -207,7 +207,7 @@ public class CheckOutScenario extends AppiumSetupTest {
      */
     protected void addRandomProductToCart(String venture, String menuWiz, String categories,
                                           String filterWiz, String prodWiz) throws InterruptedException {
-        selectVenture(venture, menuWiz);
+        Init_Screen.select_Country(venture, menuWiz);
         TopBar_Screen.click_HomeBtn();
 
         Thread.sleep(1000);
@@ -289,7 +289,7 @@ public class CheckOutScenario extends AppiumSetupTest {
     protected void checkOutEditBillingAddress(String venture, String menuWiz, String categories, String filterWiz,
                                               String prodWiz, String name, String address, String phoneNumber) throws InterruptedException {
         // Perform Check Out steps
-        selectVenture(venture, menuWiz);
+        Init_Screen.select_Country(venture, menuWiz);
         checkOut(categories, filterWiz, prodWiz);
 
         // Check the Cash On Delivery is available or not for this CheckOutTest
@@ -325,7 +325,7 @@ public class CheckOutScenario extends AppiumSetupTest {
     protected void checkOutEditShippingAddress(String venture, String menuWiz, String categories, String filterWiz,
                                                String prodWiz, String name, String address, String phoneNumber) throws InterruptedException {
         // Perform Check Out steps
-        selectVenture(venture, menuWiz);
+        Init_Screen.select_Country(venture, menuWiz);
         checkOut(categories, filterWiz, prodWiz);
 
         // Check the Cash On Delivery is available or not for this CheckOutTest
@@ -391,7 +391,7 @@ public class CheckOutScenario extends AppiumSetupTest {
 
 
         // Perform Check Out steps
-        selectVenture(venture, menuWiz);
+        Init_Screen.select_Country(venture, menuWiz);
         checkOut(categories, filterWiz, prodWiz);
 
         // Check out by COD then edit payment method
@@ -416,7 +416,7 @@ public class CheckOutScenario extends AppiumSetupTest {
                                   String prodWiz, String coupon) throws InterruptedException {
 
         // Perform Check Out steps
-        selectVenture(venture, menuWiz);
+        Init_Screen.select_Country(venture, menuWiz);
         checkOut(categories, filterWiz, prodWiz);
 
         // Check out by COD
@@ -441,7 +441,7 @@ public class CheckOutScenario extends AppiumSetupTest {
                                       String prodWiz) throws InterruptedException {
 
         // Perform Check Out steps
-        selectVenture(venture, menuWiz);
+        Init_Screen.select_Country(venture, menuWiz);
         checkOut(categories, filterWiz, prodWiz);
         Thread.sleep(1000);
 
@@ -466,7 +466,7 @@ public class CheckOutScenario extends AppiumSetupTest {
     protected void checkOutSavedCreditCard(String venture, String menuWiz, String categories, String filterWiz,
                                            String prodWiz) throws InterruptedException {
         // Perform Check Out steps
-        selectVenture(venture, menuWiz);
+        Init_Screen.select_Country(venture, menuWiz);
         checkOut(categories, filterWiz, prodWiz);
 
         // Check the Saved Credit Cards is available or not
@@ -644,7 +644,7 @@ public class CheckOutScenario extends AppiumSetupTest {
     protected void checkoutNewBillingAddress(String venture, String menuWiz, String categories, String filterWiz,
                                              String prodWiz, String name, String address, String phoneNumber) throws InterruptedException {
         // Perform Check Out steps
-        selectVenture(venture, menuWiz);
+        Init_Screen.select_Country(venture, menuWiz);
         checkOut(categories, filterWiz, prodWiz);
         Thread.sleep(1000);
 
@@ -690,7 +690,7 @@ public class CheckOutScenario extends AppiumSetupTest {
                                                                int bankIndex, String senderName, String name,
                                                                String address, String phoneNumber) throws InterruptedException {
         // Perform Check Out steps
-        selectVenture(venture, menuWiz);
+        Init_Screen.select_Country(venture, menuWiz);
         checkOut(categories, filterWiz, prodWiz);
         Thread.sleep(1000);
 

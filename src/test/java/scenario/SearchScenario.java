@@ -2,6 +2,7 @@ package scenario;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import screenObjects.android_app.Init_Screen;
 import util.AppiumSetupTest;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import static util.Helper.*;
  */
 public class SearchScenario extends AppiumSetupTest {
     protected void searchQuery(String venture, String menuWiz, String searchQuery, String filterWiz) throws Exception {
-        selectVenture(venture, menuWiz);
+        Init_Screen.select_Country(venture, menuWiz);
         Thread.sleep(2000);
         WebElement homeSearch = driver.findElement(By.id(appPackage + ":id/search_component"));
         homeSearch.sendKeys(searchQuery);
