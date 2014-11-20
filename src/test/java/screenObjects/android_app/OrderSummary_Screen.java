@@ -1,6 +1,6 @@
 package screenObjects.android_app;
 
-import static util.Helper.findByUISelector;
+import static util.Helper.findElement;
 import static util.Helper.split;
 
 /**
@@ -18,36 +18,36 @@ public class OrderSummary_Screen {
 
     public static void click_PlaceOrderBtn() {
 
-        findByUISelector(split(placeOrder)[0], split(placeOrder)[1]).click();
+        findElement(split(placeOrder)[0], split(placeOrder)[1]).click();
     }
 
     public static void click_EditBillingAddress() {
 
-        findByUISelector(split(editBillingAddress)[0], split(editBillingAddress)[1]).click();
+        findElement(split(editBillingAddress)[0], split(editBillingAddress)[1]).click();
     }
 
     public static void click_EditShippingAddress() {
 
-        findByUISelector(split(editShippingAddress)[0], split(editShippingAddress)[1]).click();
+        findElement(split(editShippingAddress)[0], split(editShippingAddress)[1]).click();
     }
 
     public static void click_ChangePayment() {
 
-        findByUISelector(split(changePayment)[0], split(changePayment)[1]).click();
+        findElement(split(changePayment)[0], split(changePayment)[1]).click();
     }
 
     public static void click_addCouponBtn() {
 
-        findByUISelector(split(addCoupon)[0], split(addCoupon)[1]).click();
+        findElement(split(addCoupon)[0], split(addCoupon)[1]).click();
     }
 
     public static void input_Coupon(String _coupon) {
 
-        findByUISelector(split(coupon)[0], split(coupon)[1]).sendKeys(_coupon);
+        findElement(split(coupon)[0], split(coupon)[1]).sendKeys(_coupon);
     }
 
     public static void click_SubmitCoupon() {
 
-        findByUISelector(split(submitCoupon)[0], split(submitCoupon)[1]).click();
+        findElement(split(submitCoupon)[0], split(submitCoupon)[1]).click();
     }
 }

@@ -8,7 +8,7 @@ import static util.Helper.*;
 public class Register_Screen {
 
     public static String textBoxes = "xpath:://*[contains(@class,'android.widget.EditText')]";
-    public static String showPassword = "class::android.widget.CheckBox";
+    public static String showPassword = "className::android.widget.CheckBox";
     public static String submit = "resourceID::register_button_submit";
 
     public static void input_Email (String email) {
@@ -33,12 +33,12 @@ public class Register_Screen {
 
     public static void click_ShowPassword () {
 
-        findByUISelector(split(showPassword)[0], split(showPassword)[1]).click();
+        findElement(split(showPassword)[0], split(showPassword)[1]).click();
     }
 
     public static void click_SubmitBtn () {
 
-        findByUISelector(split(submit)[0], split(submit)[1]).click();
+        findElement(split(submit)[0], split(submit)[1]).click();
     }
 
 

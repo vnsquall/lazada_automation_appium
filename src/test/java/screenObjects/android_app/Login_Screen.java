@@ -33,11 +33,11 @@ public class Login_Screen {
     }
 
     public static void click_ShowPassword () {
-        findByUISelector(split(showPassword)[0], split(showPassword)[1]).click();
+        findElement(split(showPassword)[0], split(showPassword)[1]).click();
     }
 
     public static void click_Login () {
-        findByUISelector(split(login)[0], split(login)[1]).click();
+        findElement(split(login)[0], split(login)[1]).click();
     }
 
     public static void wait_ForCheckout () {
@@ -49,12 +49,12 @@ public class Login_Screen {
 
     public static WebElement rocket_app_checkoutweb () {
 
-        return findByUISelector(split(rocket_app_checkoutweb1)[0], split(rocket_app_checkoutweb1)[1]);
+        return findElement(split(rocket_app_checkoutweb1)[0], split(rocket_app_checkoutweb1)[1]);
     }
 
     public static void click_RegisterBtn () {
 
-        findByUISelector(split(register)[0], split(register)[1]).click();
+        findElement(split(register)[0], split(register)[1]).click();
     }
 
 

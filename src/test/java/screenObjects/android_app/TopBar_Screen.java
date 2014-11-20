@@ -1,8 +1,6 @@
 package screenObjects.android_app;
 
-import org.openqa.selenium.WebElement;
-
-import static util.Helper.findByUISelector;
+import static util.Helper.findElement;
 import static util.Helper.split;
 
 /**
@@ -16,16 +14,16 @@ public class TopBar_Screen {
 
     public static void click_HomeBtn() {
 
-        findByUISelector(split(home)[0], split(home)[1]).click();
+        findElement(split(home)[0], split(home)[1]).click();
     }
 
     public static void search () {
 
-        findByUISelector(split(search)[0], split(search)[1]).click();
+        findElement(split(search)[0], split(search)[1]).click();
     }
 
     public static void click_MyCartBtn() {
 
-        findByUISelector(split(cart)[0], split(cart)[1]).click();
+        findElement(split(cart)[0], split(cart)[1]).click();
     }
 }

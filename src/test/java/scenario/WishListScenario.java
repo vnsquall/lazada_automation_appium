@@ -18,7 +18,7 @@ public class WishListScenario extends AppiumSetupTest {
                                     String categories, String filterWiz, String prodWiz, String addWL) throws InterruptedException {
 
         selectVenture(venture, menuWiz);
-        findByUISelector("resourceID", "abs__home").click();
+        findElement("resourceID", "abs__home").click();
         Thread.sleep(1000);
 
         //Find & Click on Wishlist
@@ -51,31 +51,31 @@ public class WishListScenario extends AppiumSetupTest {
 
         // Select venture
         selectVenture(venture, menuWiz);
-        findByUISelector("resourceID", "abs__home").click();
+        findElement("resourceID", "abs__home").click();
         Thread.sleep(1000);
 
         // Add random product to WishList
-        randomSelectProduct(categories, appPackage, filterWiz, prodWiz);System.out.println(findByUISelector("resourceID", "btn_wishlist").getText());
-        findByUISelector("resourceID", "btn_wishlist").click();//  Click on Add to wishList
-        findByUISelector("resourceID", "button1").click();// Click on OK button
+        randomSelectProduct(categories, appPackage, filterWiz, prodWiz);System.out.println(findElement("resourceID", "btn_wishlist").getText());
+        findElement("resourceID", "btn_wishlist").click();//  Click on Add to wishList
+        findElement("resourceID", "button1").click();// Click on OK button
 
         // Go to WishList
-        findByUISelector("resourceID", "abs__home").click();
+        findElement("resourceID", "abs__home").click();
         driver.findElementByAndroidUIAutomator("UiSelector().textContains(\""+wishList+"\")").click();
 
         // Delete product from WishList
-        findByUISelector("resourceID", "wishlist_item_bt_delete").click();// Click on OK button
+        findElement("resourceID", "wishlist_item_bt_delete").click();// Click on OK button
 
         // Verify the WishList is empty
         WebElement deteleBtn = null;
         try { // try to find Delete button
 //            deteleBtn = driver.findElementByAndroidUIAutomator("UiSelector().resourceId(\""+appPackage+":id/wishlist_item_bt_delete\")");
-            deteleBtn = findByUISelector("resourceID", "wishlist_item_bt_delete");
+            deteleBtn = findElement("resourceID", "wishlist_item_bt_delete");
         }catch (org.openqa.selenium.NoSuchElementException e) {};
 
         Assert.assertNull(deteleBtn);
-        Assert.assertTrue(findByUISelector("resourceID", "wishlist_no_items_text").isDisplayed());
-        Assert.assertEquals(emptyWL, findByUISelector("resourceID", "wishlist_no_items_text").getText());
+        Assert.assertTrue(findElement("resourceID", "wishlist_no_items_text").isDisplayed());
+        Assert.assertEquals(emptyWL, findElement("resourceID", "wishlist_no_items_text").getText());
     }
 
     protected void wishListAddToCart (String venture, String menuWiz, String wishList, String emptyWL,
@@ -83,25 +83,25 @@ public class WishListScenario extends AppiumSetupTest {
 
         // Select venture
         selectVenture(venture, menuWiz);
-        findByUISelector("resourceID", "abs__home").click();
+        findElement("resourceID", "abs__home").click();
         Thread.sleep(1000);
 
         // Random and add product to WishList
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
-        String productName = findByUISelector("resourceID", "product_name").getText();
-        findByUISelector("resourceID", "btn_wishlist").click();
-        findByUISelector("resourceID", "button1").click();
+        String productName = findElement("resourceID", "product_name").getText();
+        findElement("resourceID", "btn_wishlist").click();
+        findElement("resourceID", "button1").click();
 
         // Go to WishList
-        findByUISelector("resourceID", "abs__home").click();
-        findByUISelector("textcontains", wishList).click();
+        findElement("resourceID", "abs__home").click();
+        findElement("textcontains", wishList).click();
 
         // Add 1 product to Cart from WishList
-        findByUISelector("resourceID", "wishlist_item_bt_add").click();
-        findByUISelector("resourceID", "button1").click();
+        findElement("resourceID", "wishlist_item_bt_add").click();
+        findElement("resourceID", "button1").click();
 
         // Verify product that product appears in myCart
-        String myCardStr = findByUISelector(
+        String myCardStr = findElement(
                 "resourceID",
                 "item_name"
         )
@@ -117,13 +117,13 @@ public class WishListScenario extends AppiumSetupTest {
 
         // Select venture
         selectVenture(venture, menuWiz);
-        findByUISelector("resourceID", "abs__home").click();
+        findElement("resourceID", "abs__home").click();
         Thread.sleep(1000);
 
         // Select random product - first time has wizard
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
-        findByUISelector("resourceID", "btn_wishlist").click();
-        findByUISelector("resourceID", "button1").click();
+        findElement("resourceID", "btn_wishlist").click();
+        findElement("resourceID", "button1").click();
 
         Random ran = new Random();
         int numberOfProduct = ran.nextInt(10);
@@ -142,11 +142,11 @@ public class WishListScenario extends AppiumSetupTest {
         }
 
         // Go to WishList
-        findByUISelector("resourceID", "abs__home").click();
-        findByUISelector("textcontains", wishList).click();
+        findElement("resourceID", "abs__home").click();
+        findElement("textcontains", wishList).click();
         // Add all product to Cart
-        findByUISelector("resourceID", "wishlist_bt_add_all").click();// Click Add all to Cart
-        findByUISelector("resourceID", "cart_count").click();// Click on Go to Cart
+        findElement("resourceID", "wishlist_bt_add_all").click();// Click Add all to Cart
+        findElement("resourceID", "cart_count").click();// Click on Go to Cart
 
     }
 
@@ -156,23 +156,23 @@ public class WishListScenario extends AppiumSetupTest {
 
         // Select venture
         selectVenture(venture, menuWiz);
-        findByUISelector("resourceID", "abs__home").click();
+        findElement("resourceID", "abs__home").click();
         Thread.sleep(1000);
 
         // Select random product - first time has wizard
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
 
         // Select the Application to share the Item: Bluetooth, Message, Email
-        findByUISelector("resourceID", "btn_share").click();
-        findByUISelector("text", sharerAppName).click();
+        findElement("resourceID", "btn_share").click();
+        findElement("text", sharerAppName).click();
 
         if (isElementPresent(By.id("android:id/button_once"))) { // If the Just once button still appears, push it
-            findByUISelector("resourceID", "button_once").click();
+            findElement("resourceID", "button_once").click();
         }
 
         // Enter phone number
-        findByUISelector("resourceID", "recipients_editor").sendKeys(phoneNumber);
-        findByUISelector("resourceID", "send_button_sms").click();// Click Send message
+        findElement("resourceID", "recipients_editor").sendKeys(phoneNumber);
+        findElement("resourceID", "send_button_sms").click();// Click Send message
 
         // Get back Lazada Application
         driver.navigate().back();
@@ -196,7 +196,7 @@ public class WishListScenario extends AppiumSetupTest {
 
                                                     String categories, String filterWiz, String prodWiz, String addWL, String appPackage) {
 
-        findByUISelector("resourceID", "abs__home").click();
+        findElement("resourceID", "abs__home").click();
         text_exact(categories).click();
 
         // Random selection Categories
@@ -210,8 +210,8 @@ public class WishListScenario extends AppiumSetupTest {
         find(appPackage + ":id/general_container").click();
 
         // Add product to WishList
-        findByUISelector("resourceID", "btn_wishlist").click();
-        findByUISelector("resourceID", "button1").click();
+        findElement("resourceID", "btn_wishlist").click();
+        findElement("resourceID", "button1").click();
 
 
     }

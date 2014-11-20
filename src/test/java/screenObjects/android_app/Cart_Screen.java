@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static util.Helper.findByUISelector;
+import static util.Helper.findElement;
 import static util.Helper.findsByUISelector;
 import static util.Helper.split;
 
@@ -19,7 +19,7 @@ public class Cart_Screen {
 
     public static void click_ProceedToCheckoutBtn() {
 
-        findByUISelector(split(proceedToCheckout)[0], split(proceedToCheckout)[1]).click();
+        findElement(split(proceedToCheckout)[0], split(proceedToCheckout)[1]).click();
     }
 
     public static List<WebElement> deleteButtons() {
@@ -29,7 +29,7 @@ public class Cart_Screen {
 
     public static void click_RemoveItem() {
 
-        findByUISelector(split(removeItem)[0], split(removeItem)[1]).click();
+        findElement(split(removeItem)[0], split(removeItem)[1]).click();
     }
 
 

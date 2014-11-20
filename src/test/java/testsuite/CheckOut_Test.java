@@ -15,10 +15,10 @@ public class CheckOut_Test extends CheckOutScenario {
     @DataProvider
     Object[][] getVenturesDataToTestCashOnDelivery() {
         return new Object[][]{
-//                {"Singapore"},
+                {"Singapore"},
 //                {"Philippines"},
 //                {"Indonesia"},
-                {"Malaysia"},
+//                {"Malaysia"},
 //                {"Vietnam"},
 //                {"Thailand"}
         };
@@ -59,16 +59,21 @@ public class CheckOut_Test extends CheckOutScenario {
     @DataProvider
     Object[][] getVenturesDataToTestCreateAddress() {
         return new Object[][]{
-                {"Indonesia", "Hikary ma ", "Hai ba trung quan 1", "0922483923"}
+//                {"Indonesia", "Hikary ma ", "Hai ba trung quan 1", "1922483923"},
+//                {"Philippines", "Hikary ma ", "Hai ba trung quan 1", "1922483923"},
+//                {"Singapore", "Hikary ma ", "Hai ba trung quan 1", "1922483923"},
+                {"Malaysia", "Hikary ma ", "Hai ba trung quan 1", "1923123222"},
+//                {"Thailand", "Hikary ma ", "Hai ba trung quan 1", "1922483923"},
+//                {"Vietnam", "Hikary ma ", "Hai ba trung quan 1", "1922483923"},
         };
     }
 
     @DataProvider
     Object[][] getVenturesDataToTestEditAddress() {
         return new Object[][]{
-                {"Malaysia", "QA name edited", "QA address edited", "0933081152"},
-                {"Philippines", "QA name edited", "QA address edited", "0933081152"},
-                {"Singapore", "QA name edited", "QA address edited", "0933081152"}
+                {"Malaysia", "QA name edited", "QA address edited", "1933081152"},
+                {"Philippines", "QA name edited", "QA address edited", "1933081152"},
+                {"Singapore", "QA name edited", "QA address edited", "1933081152"}
 
         };
     }
@@ -76,22 +81,22 @@ public class CheckOut_Test extends CheckOutScenario {
     @DataProvider
     Object[][] getVenturesDataToTestDifferentAddress() {
         return new Object[][]{
-                {"Malaysia", "differentially QA name", "QA address differentially", "0933081155"},
-                {"Philippines", "differentially QA name", "QA address differentially", "0933081155"},
-                {"Singapore", "differentially QA name", "QA address differentially", "0933081155"},
-                {"Thailand", "differentially QA name", "QA address differentially", "0933081155"},
+                {"Malaysia", "differentially QA name", "QA address differentially", "1933081155"},
+                {"Philippines", "differentially QA name", "QA address differentially", "1933081155"},
+                {"Singapore", "differentially QA name", "QA address differentially", "1933081155"},
+                {"Thailand", "differentially QA name", "QA address differentially", "1933081155"},
         };
     }
 
     @DataProvider
     Object[][] getVenturesDataToTestEditBillingAddress() {
         return new Object[][]{
-                {"Malaysia", "differentially QA name", "QA address differentially", "0933081155"},
-//                {"Philippines", "differentially QA name", "QA address differentially", "0933081155"},
-                {"Singapore", "differentially QA name", "QA address differentially", "0933081155"},
-                {"Thailand", "differentially QA name", "QA address differentially", "0933081155"},
-                {"Vietnam", "differentially QA name", "QA address differentially", "0933081155"},
-                {"Indonesia", "differentially QA name", "QA address differentially", "0933081155"},
+                {"Malaysia", "differentially QA name", "QA address differentially", "1933081155"},
+//                {"Philippines", "differentially QA name", "QA address differentially", "1933081155"},
+                {"Singapore", "differentially QA name", "QA address differentially", "1933081155"},
+                {"Thailand", "differentially QA name", "QA address differentially", "1933081155"},
+                {"Vietnam", "differentially QA name", "QA address differentially", "1933081155"},
+                {"Indonesia", "differentially QA name", "QA address differentially", "1933081155"},
 
         };
     }
@@ -99,12 +104,12 @@ public class CheckOut_Test extends CheckOutScenario {
     @DataProvider
     Object[][] getVenturesDataToTestEditShippingAddress() {
         return new Object[][]{
-                {"Malaysia", " QA name edit ", "QA address edit", "0933085533"},
-                {"Philippines", " QA name edit ", "QA address edit", "0933085533"},
-                {"Singapore", " QA name edit ", "QA address edit", "0933085533"},
-                {"Thailand", " QA name edit ", "QA address edit", "0933085533"},
-                {"Vietnam", " QA name edit ", "QA address edit", "0933085533"},
-                {"Indonesia", " QA name edit ", "QA address edit", "0933085533"},
+                {"Malaysia", " QA name edit ", "QA address edit", "1933085533"},
+                {"Philippines", " QA name edit ", "QA address edit", "1933085533"},
+                {"Singapore", " QA name edit ", "QA address edit", "1933085533"},
+                {"Thailand", " QA name edit ", "QA address edit", "1933085533"},
+                {"Vietnam", " QA name edit ", "QA address edit", "1933085533"},
+                {"Indonesia", " QA name edit ", "QA address edit", "1933085533"},
 
         };
     }
@@ -112,12 +117,12 @@ public class CheckOut_Test extends CheckOutScenario {
     @DataProvider
     Object[][] getVenturesDataToTestRemoveFromCart() {
         return new Object[][]{
-//                {"Singapore"},
-//                {"Thailand"},
-//                {"Vietnam"},
-//                {"Indonesia"},
+                {"Singapore"},
+                {"Thailand"},
+                {"Vietnam"},
+                {"Indonesia"},
                 {"Malaysia"},
-//                {"Philippines"}
+                {"Philippines"}
 
         };
     }
@@ -241,7 +246,7 @@ public class CheckOut_Test extends CheckOutScenario {
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"), bankIndex, senderName);
     }
 
-    @Test(dataProvider = "getVenturesDataToTestPaypal", enabled = false)
+    @Test(dataProvider = "getVenturesDataToTestPaypal")
     public void test_Paypal(String venture) throws Exception {
         checkOutAndUsePaypal(venture, setText(venture).get("menuWiz"), setText(venture).get("categories"),
                 setText(venture).get("filterWiz"), setText(venture).get("prodWiz"));

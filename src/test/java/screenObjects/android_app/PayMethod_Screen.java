@@ -1,7 +1,7 @@
 package screenObjects.android_app;
 
 import org.openqa.selenium.WebElement;
-import static util.Helper.findByUISelector;
+import static util.Helper.findElement;
 import static util.Helper.split;
 
 /**
@@ -29,60 +29,60 @@ public class PayMethod_Screen {
 
     public static void click_CashOnDeliveryRadio() {
 
-        findByUISelector(split(labelCOD)[0], split(labelCOD)[1]).click();
+        findElement(split(labelCOD)[0], split(labelCOD)[1]).click();
     }
 
     public static void click_ContinueBtn() {
 
-        findByUISelector(split(continueButton)[0], split(continueButton)[1]).click();
+        findElement(split(continueButton)[0], split(continueButton)[1]).click();
     }
 
     public static void click_CreditCardRadio() {
 
-        findByUISelector(split(labelCreditCard)[0], split(labelCreditCard)[1]).click();
+        findElement(split(labelCreditCard)[0], split(labelCreditCard)[1]).click();
     }
 
     public static void click_PaypalRadio() {
 
-        findByUISelector(split(labelPaypal)[0], split(labelPaypal)[1]).click();
+        findElement(split(labelPaypal)[0], split(labelPaypal)[1]).click();
     }
 
     public static void input_CreditNumber(String creditNumber) {
 
-        findByUISelector(split(PayMethod_Screen.creditNumber)[0], split(PayMethod_Screen.creditNumber)[1]).click();
-        findByUISelector(split(PayMethod_Screen.creditNumber)[0], split(PayMethod_Screen.creditNumber)[1]).sendKeys(creditNumber);
+        findElement(split(PayMethod_Screen.creditNumber)[0], split(PayMethod_Screen.creditNumber)[1]).click();
+        findElement(split(PayMethod_Screen.creditNumber)[0], split(PayMethod_Screen.creditNumber)[1]).sendKeys(creditNumber);
     }
 
     public static void input_CreditName(String customerName) {
 
-        findByUISelector(split(creditCustomerName)[0], split(creditCustomerName)[1]).click();
-        findByUISelector(split(creditCustomerName)[0], split(creditCustomerName)[1]).sendKeys(customerName);
+        findElement(split(creditCustomerName)[0], split(creditCustomerName)[1]).click();
+        findElement(split(creditCustomerName)[0], split(creditCustomerName)[1]).sendKeys(customerName);
     }
 
     public static void input_CreditSecurityCode(String securityCode) {
 
-        findByUISelector(split(creditSecurityCode)[0], split(creditSecurityCode)[1]).click();
-        findByUISelector(split(creditSecurityCode)[0], split(creditSecurityCode)[1]).sendKeys(securityCode);
+        findElement(split(creditSecurityCode)[0], split(creditSecurityCode)[1]).click();
+        findElement(split(creditSecurityCode)[0], split(creditSecurityCode)[1]).sendKeys(securityCode);
     }
 
     public static WebElement creditCardMonthCbx () {
 
-        return findByUISelector(split(creditMonth)[0], split(creditMonth)[1]);
+        return findElement(split(creditMonth)[0], split(creditMonth)[1]);
     }
 
     public static WebElement creditCardYearCbx () {
 
-        return findByUISelector(split(creditYear)[0], split(creditYear)[1]);
+        return findElement(split(creditYear)[0], split(creditYear)[1]);
     }
 
     public static void click_BankTransferRadio () {
 
-        findByUISelector(split(labelBankTransfer)[0], split(labelBankTransfer)[1]).click();
+        findElement(split(labelBankTransfer)[0], split(labelBankTransfer)[1]).click();
     }
 
     public static void input_SenderName(String senderName) {
 
-        findByUISelector(split(bankTransferSenderName)[0], split(bankTransferSenderName)[1]).sendKeys(senderName);
+        findElement(split(bankTransferSenderName)[0], split(bankTransferSenderName)[1]).sendKeys(senderName);
     }
 
 

@@ -707,9 +707,9 @@ public class CheckOutScenario extends AppiumSetupTest {
             // Fill information and Submit
             PayMethod_Screen.input_SenderName(senderName);
             Thread.sleep(2000);
-            PayMethod_Screen.click_ContinueBtn(); //Place Order
+            PayMethod_Screen.click_ContinueBtn();
             Thread.sleep(3000);
-            OrderSummary_Screen.click_EditBillingAddress(); // New billing address
+            OrderSummary_Screen.click_EditBillingAddress();
 
             // Edit billing address
             createBillingAddress(venture, name, address, phoneNumber);

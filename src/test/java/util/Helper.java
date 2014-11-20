@@ -284,28 +284,27 @@ public class Helper {
      * @param value
      * @return WebElement
      */
-    public static WebElement findByUISelector(String selectorTypeStr, String value) {
+    public static WebElement findElement(String selectorTypeStr, String value) {
 
         WebElement e = null;
-        AppiumSetupTest appiumSetupTest = new AppiumSetupTest();
-        String appPackage = appiumSetupTest.appPackage;
+        String appPackage = AppiumSetupTest.appPackage;
         UISelectorType selector = UISelectorType.fromString(selectorTypeStr);
 
         switch (selector) {
             case RESOURCE_ID:
-                e = driver.findElementByAndroidUIAutomator("UiSelector().resourceId(\"" + appPackage + ":id/" + value + "\")");
+                e = driver.findElement(By.id(appPackage + ":id/" + value));
                 break;
             case TEXT:
-                e = driver.findElementByAndroidUIAutomator("UiSelector().text(\"" + value + "\")");
+                e = driver.findElement(By.xpath("//*[@text = '"+ value +"']"));
                 break;
             case TEXT_CONTAINS:
-                e = driver.findElementByAndroidUIAutomator("UiSelector().textContains(\"" + value + "\")");
+                e = driver.findElement(By.xpath("//*[contains(@text, '" + value + "')]"));
                 break;
             case TEXT_START_WITH:
-                e = driver.findElementByAndroidUIAutomator("UiSelector().textStartsWith(\"" + appPackage + ":" + value + "\")");
+                e = driver.findElement(By.xpath("//*[contains(@text, '" + value + "')]"));
                 break;
             case CLASS_NAME:
-                e = driver.findElementByAndroidUIAutomator("UiSelector().className(\""+value+"\")");
+                e = driver.findElement(By.className(value));
                 break;
             case XPATH:
                 e = driver.findElement(By.xpath(value));
@@ -324,28 +323,24 @@ public class Helper {
     public static List<WebElement> findsByUISelector(String selectorTypeStr, String value) {
 
         List<WebElement> e = null;
-        AppiumSetupTest appiumSetupTest = new AppiumSetupTest();
-        String appPackage = appiumSetupTest.appPackage;
+        String appPackage = AppiumSetupTest.appPackage;
         UISelectorType selector = UISelectorType.fromString(selectorTypeStr);
 
         switch (selector) {
             case RESOURCE_ID:
-                e = driver.findElementsByAndroidUIAutomator("UiSelector().resourceId(\"" + appPackage + ":id/" + value + "\")");
+                e = driver.findElements(By.id(appPackage + ":id/" + value));
                 break;
             case TEXT:
-                e = driver.findElementsByAndroidUIAutomator("UiSelector().text(\"" + value + "\")");
+                e = driver.findElements(By.xpath("//*[@text = '" + value + "']"));
                 break;
             case TEXT_CONTAINS:
-                e = driver.findElementsByAndroidUIAutomator("UiSelector().textContains(\"" + value + "\")");
+                e = driver.findElements(By.xpath("//*[contains(@text, '" + value + "')]"));
                 break;
             case TEXT_START_WITH:
-                e = driver.findElementsByAndroidUIAutomator("UiSelector().textStartsWith(\"" + appPackage + ":" + value + "\")");
+                e = driver.findElements(By.xpath("//*[contains(@text, '" + value + "')]"));
                 break;
             case CLASS_NAME:
-                e = driver.findElementsByAndroidUIAutomator("UiSelector().className(\""+value+"\")");
-                break;
-            case SELECTED:
-                e = driver.findElementsByAndroidUIAutomator("UiSelector().selected(" + value + ")");
+                e = driver.findElements(By.className(value));
                 break;
             case XPATH:
                 e = driver.findElements(By.xpath(value));
@@ -412,7 +407,7 @@ public class Helper {
      */
     public static void selector(String locator, int index) {
 
-        Select dropdown = new Select(findByUISelector(split(locator)[0], split(locator)[1]));
+        Select dropdown = new Select(findElement(split(locator)[0], split(locator)[1]));
         dropdown.selectByIndex(index);
     }
 

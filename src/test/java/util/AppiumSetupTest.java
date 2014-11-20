@@ -19,8 +19,8 @@ import static util.Helper.driver;
  */
 public class AppiumSetupTest {
 
-    public String appPackage = APP_PACKAGE_LIVE;
-    public String localApp = LOCAL_APP_LIVE;
+    public static String appPackage = APP_PACKAGE_LIVE;
+    public static String localApp = LOCAL_APP_LIVE;
 
     @BeforeMethod
     public void setUp() throws Exception {
