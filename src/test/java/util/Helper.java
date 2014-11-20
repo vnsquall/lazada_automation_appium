@@ -1,6 +1,7 @@
 package util;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
@@ -88,19 +89,6 @@ public class Helper {
     public static WebElement find_xpath_forText(String appPackage, String id, String text) {
         WebElement we = driver.findElement(By.xpath("//android.widget.TextView[@resource-id='" + appPackage + id + "'and @text='" + text + "']"));
         return we;
-    }
-
-    public static void selectVenture(String venture, String menuWiz) throws InterruptedException {
-        driver.findElement(By.xpath(("//android.widget.TextView[contains(@text, '" + venture + "')]"))).click();
-        if (venture.equals("Thailand")) {
-            driver.findElement(By.xpath("//android.widget.Button[contains(@text, 'English')]")).click();
-//            Thread.sleep(2000);
-            driver.findElement(By.xpath("//android.widget.Button[contains(@text, 'English')]")).click();
-//            Thread.sleep(5000);
-        }
-        Thread.sleep(6000);
-        find(menuWiz).click();
-        Thread.sleep(2000);
     }
 
     public static void swipeDown() {
@@ -562,6 +550,7 @@ public class Helper {
         String[] parts = str.split("::");
         return parts;
     }
+
 
 
 }
