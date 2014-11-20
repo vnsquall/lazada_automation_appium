@@ -15,7 +15,7 @@ public class PayMethod_Screen {
     public static String labelPaypal = "xpath:://label[@for='paypal']";
     public static String labelBankTransfer = "xpath:://label[@for='manualbanktransferid']";
     public static String creditNumber = "xpath:://*[@id='PaymentMethodForm_parameter_cc_number']";
-    public static String creditCustomerName = "xpath:://*[@id='orange-PaymentMethodForm_parameter_cc_holder']";
+    public static String creditCustomerName = "xpath:://*[@id='PaymentMethodForm_parameter_cc_holder']";
     public static String creditSecurityCode = "xpath:://*[@id='PaymentMethodForm_parameter_cc_security_code']";
     public static String creditMonth = "xpath:://*[@id='PaymentMethodForm_parameter_cc_exp_month']";
     public static String creditYear = "xpath:://*[@id='PaymentMethodForm_parameter_cc_exp_year']";
