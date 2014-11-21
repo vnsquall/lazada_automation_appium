@@ -110,8 +110,6 @@ public class CheckOutScenario extends AppiumSetupTest {
                 find("Số thẻ tín dụng không đúng").isDisplayed();
             }
         }
-
-
     }
 
     /**

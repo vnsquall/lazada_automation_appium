@@ -434,12 +434,9 @@ public class Helper {
             int randomNumber = 1 + random.nextInt(arrOption.size() - 1);
             dropdown.selectByIndex(randomNumber);
         } else { // NATIVE APP
-
             webElement.click();
             randClick(By.xpath("//*[@class='android.widget.TextView']"));
-
         }
-
     }
 
     /**
