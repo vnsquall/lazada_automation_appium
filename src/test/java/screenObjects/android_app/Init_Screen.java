@@ -1,9 +1,7 @@
 package screenObjects.android_app;
 
 
-import static util.Helper.findElement;
-import static util.Helper.find_TextView_Android;
-import static util.Helper.split;
+import static util.Helper.*;
 
 /**
  * Created by anhpham on 17/11/2014.
@@ -19,8 +17,8 @@ public class Init_Screen {
         findElement(split(countryName)[0], country).click();
         if (country.equals("Thailand")) { // Special case
 
-            findElement(split(countryName)[0], "English").click();
-            findElement(split(countryName)[0], "English").click();
+            find_ButtonText_Android("English").click();
+            find_ButtonText_Android("English").click();
         }
         Thread.sleep(6000);
         find_TextView_Android(menuWiz).click();

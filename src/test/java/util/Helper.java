@@ -552,6 +552,11 @@ public class Helper {
         return me;
     }
 
+    public static MobileElement find_ButtonText_Android(String text) {
+        MobileElement me = element(MobileBy.xpath("//android.widget.Button[contains(@text, '" + text + "')]"));
+        return me;
+    }
+
 
 
 }
