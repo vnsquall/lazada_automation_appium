@@ -1,6 +1,7 @@
 package util;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
@@ -544,6 +545,11 @@ public class Helper {
 
         String[] parts = str.split("::");
         return parts;
+    }
+
+    public static MobileElement find_TextView_Android(String text) {
+        MobileElement me = element(MobileBy.xpath("//android.widget.TextView[contains(@text, '" + text + "')]"));
+        return me;
     }
 
 

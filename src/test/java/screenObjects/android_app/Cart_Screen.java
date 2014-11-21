@@ -15,7 +15,7 @@ public class Cart_Screen {
     private static String delete = "resourceID::delete_button";
     private static String removeItem = "resourceID::button1";
 
-    public static void click_ProceedToCheckoutBtn() {
+    public static void click_CheckoutBtn() {
 
         findElement(split(proceedToCheckout)[0], split(proceedToCheckout)[1]).click();
     }
