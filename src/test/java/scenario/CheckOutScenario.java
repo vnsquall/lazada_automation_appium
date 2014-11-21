@@ -30,7 +30,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         } else {
             chooseSize();
         }
-        Cart_Screen.click_ProceedToCheckoutBtn();
+        Cart_Screen.click_CheckoutBtn();
 
         // Login as default account
         loginAs(USERNAME, PASSWORD);
@@ -224,7 +224,7 @@ public class CheckOutScenario extends AppiumSetupTest {
             ProductDetail_Screen.click_GoToCartBtn();
         }
 
-        Cart_Screen.click_ProceedToCheckoutBtn();
+        Cart_Screen.click_CheckoutBtn();
 
     }
 
