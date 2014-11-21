@@ -66,7 +66,7 @@ public class CartScenario extends AppiumSetupTest {
 
         // Change quantity of product
         findElement("resourceID", "changequantity_button").click();// Click on quantity
-        List<WebElement> arrResult = findsByUISelector("resourceID", "item_text");// Click on quantity
+        List<WebElement> arrResult = findElements("resourceID", "item_text");// Click on quantity
         Random a = new Random();
         int randQuantity = a.nextInt(arrResult.size());
         arrResult.get(randQuantity).click();

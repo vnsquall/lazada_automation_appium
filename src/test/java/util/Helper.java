@@ -1,7 +1,6 @@
 package util;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
@@ -53,7 +52,7 @@ public class Helper {
 
     public static void randClick(String locator) {
         Random rand = new Random();
-        List<WebElement> we = findsByUISelector(split(locator)[0], split(locator)[1]);
+        List<WebElement> we = findElements(split(locator)[0], split(locator)[1]);
         int catNum = we.size();
         /*if (catNum > 0) {*/
             int randClick = rand.nextInt(catNum);
@@ -79,7 +78,7 @@ public class Helper {
     public static Boolean isElementPresent(String locator) {
         Boolean isPresent = Boolean.FALSE;
         try {
-            isPresent = findsByUISelector(split(locator)[0], split(locator)[1]).size() > 0;
+            isPresent = findElements(split(locator)[0], split(locator)[1]).size() > 0;
             return isPresent;
         } catch (NoSuchElementException ex) {
             return isPresent;
@@ -308,7 +307,7 @@ public class Helper {
      * @param value
      * @return List of Element
      */
-    public static List<WebElement> findsByUISelector(String selectorTypeStr, String value) {
+    public static List<WebElement> findElements(String selectorTypeStr, String value) {
 
         List<WebElement> e = null;
         String appPackage = AppiumSetupTest.appPackage;
@@ -463,8 +462,7 @@ public class Helper {
     public static void switchToWebView () {
 
         String webviewContext = "";
-        AppiumSetupTest appiumSetupTest = new AppiumSetupTest();
-        if (appiumSetupTest.appPackage.equals(APP_PACKAGE_LIVE)) {
+        if (AppiumSetupTest.appPackage.equals(APP_PACKAGE_LIVE)) {
 
             webviewContext = WEBVIEW_LIVE;
 

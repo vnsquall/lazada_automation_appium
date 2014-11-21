@@ -3,9 +3,7 @@ package screenObjects.android_app;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import util.AppiumSetupTest;
-
 import java.util.List;
-
 import static util.Helper.*;
 
 /**
@@ -19,16 +17,16 @@ public class Login_Screen {
     private static String login = "resourceID::middle_login_button_signin";
     private static String rocket_app_checkoutweb1 = "resourceID::rocket_app_checkoutweb";
     public static String rocket_app_checkoutweb = ":id/rocket_app_checkoutweb"; /*special case*/
-    public static String register = "resourceID:middle_login_link_register";
+    public static String register = "resourceID::middle_login_link_register";
 
 
     public static void input_Email (String _email) {
-        List<WebElement> editTexts = findsByUISelector(split(email)[0], split(email)[1]);
+        List<WebElement> editTexts = findElements(split(email)[0], split(email)[1]);
         editTexts.get(0).sendKeys(_email);
     }
 
     public static void input_Password (String _password) {
-        List<WebElement> editTexts = findsByUISelector(split(password)[0], split(password)[1]);
+        List<WebElement> editTexts = findElements(split(password)[0], split(password)[1]);
         editTexts.get(1).sendKeys(_password);
     }
 

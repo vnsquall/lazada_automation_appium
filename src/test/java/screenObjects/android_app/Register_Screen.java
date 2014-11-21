@@ -13,22 +13,22 @@ public class Register_Screen {
 
     public static void input_Email (String email) {
 
-        findsByUISelector(split(textBoxes)[0], split(textBoxes)[1]).get(0).sendKeys(email);
+        findElements(split(textBoxes)[0], split(textBoxes)[1]).get(0).sendKeys(email);
     }
 
     public static void input_Password (String password) {
 
-        findsByUISelector(split(textBoxes)[0], split(textBoxes)[1]).get(1).sendKeys(password);
+        findElements(split(textBoxes)[0], split(textBoxes)[1]).get(1).sendKeys(password);
     }
 
     public static void input_RePassword (String password) {
 
-        findsByUISelector(split(textBoxes)[0], split(textBoxes)[1]).get(2).sendKeys(password);
+        findElements(split(textBoxes)[0], split(textBoxes)[1]).get(2).sendKeys(password);
     }
 
     public static void input_Name (String name) {
 
-        findsByUISelector(split(textBoxes)[0], split(textBoxes)[1]).get(3).sendKeys(name);
+        findElements(split(textBoxes)[0], split(textBoxes)[1]).get(3).sendKeys(name);
     }
 
     public static void click_ShowPassword () {

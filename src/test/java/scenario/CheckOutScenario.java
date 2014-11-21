@@ -7,10 +7,8 @@ import org.testng.Assert;
 import screenObjects.android_app.*;
 import util.AppiumSetupTest;
 import static util.Constant.*;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static util.Helper.*;
 
 /**

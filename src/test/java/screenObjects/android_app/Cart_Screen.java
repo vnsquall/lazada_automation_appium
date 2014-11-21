@@ -1,11 +1,9 @@
 package screenObjects.android_app;
 
 import org.openqa.selenium.WebElement;
-
 import java.util.List;
-
 import static util.Helper.findElement;
-import static util.Helper.findsByUISelector;
+import static util.Helper.findElements;
 import static util.Helper.split;
 
 /**
@@ -24,7 +22,7 @@ public class Cart_Screen {
 
     public static List<WebElement> deleteButtons() {
 
-        return findsByUISelector(split(delete)[0], split(delete)[1]);
+        return findElements(split(delete)[0], split(delete)[1]);
     }
 
     public static void click_RemoveItem() {
