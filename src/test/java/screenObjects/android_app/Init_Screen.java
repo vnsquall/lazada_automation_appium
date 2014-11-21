@@ -2,6 +2,7 @@ package screenObjects.android_app;
 
 
 import static util.Helper.findElement;
+import static util.Helper.find_TextView_Android;
 import static util.Helper.split;
 
 /**
@@ -10,7 +11,6 @@ import static util.Helper.split;
 public class Init_Screen {
 
     private static String countryName = "text::[country]";
-    private static String wizardText = "text::[menuWiz]";
 
 
 
@@ -23,7 +23,7 @@ public class Init_Screen {
             findElement(split(countryName)[0], "English").click();
         }
         Thread.sleep(6000);
-        findElement(split(wizardText)[0], menuWiz).click();
+        find_TextView_Android(menuWiz).click();
         Thread.sleep(2000);
     }
 }
