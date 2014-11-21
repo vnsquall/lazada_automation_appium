@@ -533,7 +533,9 @@ public class CheckOutScenario extends AppiumSetupTest {
                 || venture.equals("Malaysia") || venture.equals("Indonesia")) {
 
             selectorRandom(BillingAddress_Screen.region()); // select random Region
+            Thread.sleep(2000); // wait for loading data from dropdown list
             selectorRandom(BillingAddress_Screen.city()); // select random City
+            Thread.sleep(2000); // wait for loading data from dropdown list
             selectorRandom(BillingAddress_Screen.ward()); // select random Postcode
             BillingAddress_Screen.input_PhoneNumber(phoneNumber);
 
@@ -545,6 +547,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         }
         if (venture.equals("Vietnam")) {
             selectorRandom(BillingAddress_Screen.region()); // select random Region
+            Thread.sleep(2000); // wait for loading data from dropdown list
             selectorRandom(BillingAddress_Screen.city()); // select random City
             BillingAddress_Screen.input_PhoneNumber(phoneNumber);
         }

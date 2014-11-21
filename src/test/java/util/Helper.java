@@ -116,9 +116,9 @@ public class Helper {
     /**
      * Wrap WebElement in MobileElement *
      */
-    private static MobileElement w(WebElement element) {
-        return new MobileElement((RemoteWebElement) element, driver);
-    }
+//    private static MobileElement w(WebElement element) {
+//        return new MobileElement((RemoteWebElement) element, driver);
+//    }
 
     /**
      * Wrap WebElement in MobileElement *
@@ -143,7 +143,7 @@ public class Helper {
      * Return an element by locator *
      */
     public static MobileElement element(By locator) {
-        return w(driver.findElement(locator));
+        return (MobileElement)driver.findElement(locator);
     }
 
     /**
@@ -238,10 +238,10 @@ public class Helper {
     /**
      * Wait 30 seconds for locator to find an element *
      */
-    public static MobileElement wait(By locator) {
-        return w(driverWait.until(ExpectedConditions.visibilityOfElementLocated(locator)));
-
-    }
+//    public static MobileElement wait(By locator) {
+//        return w(driverWait.until(ExpectedConditions.visibilityOfElementLocated(locator)));
+//
+//    }
 
     public static WebElement wait_web(By locator) {
         return driverWait.until(ExpectedConditions.visibilityOfElementLocated(locator));

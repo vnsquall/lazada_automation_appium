@@ -1,11 +1,10 @@
 package util;
 
-import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-
 import static util.Constant.*;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -19,8 +18,8 @@ import static util.Helper.driver;
  */
 public class AppiumSetupTest {
 
-    public static String appPackage = APP_PACKAGE_LIVE;
-    public static String localApp = LOCAL_APP_LIVE;
+    public static String appPackage = APP_PACKAGE_STAGING;
+    public static String localApp = LOCAL_APP_STAGING;
 
     @BeforeMethod
     public void setUp() throws Exception {
@@ -38,7 +37,7 @@ public class AppiumSetupTest {
 
         DesiredCapabilities capabilities = getAndroid4_4_capabilities();
         URL serverAddress = new URL(SERVER_ADDRESS);
-        driver = new AppiumDriver(serverAddress, capabilities);
+        driver = new AndroidDriver(serverAddress, capabilities);
         driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
         Helper.init(driver, serverAddress);
 
@@ -62,4 +61,6 @@ public class AppiumSetupTest {
         return capabilities;
 
     }
+
+
 }

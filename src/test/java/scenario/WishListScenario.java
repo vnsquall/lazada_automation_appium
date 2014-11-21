@@ -62,7 +62,7 @@ public class WishListScenario extends AppiumSetupTest {
 
         // Go to WishList
         findElement("resourceID", "abs__home").click();
-        driver.findElementByAndroidUIAutomator("UiSelector().textContains(\""+wishList+"\")").click();
+//        driver.findElementByAndroidUIAutomator("UiSelector().textContains(\""+wishList+"\")").click(); // To do: dont forget to un-comment this line
 
         // Delete product from WishList
         findElement("resourceID", "wishlist_item_bt_delete").click();// Click on OK button
