@@ -682,6 +682,22 @@ public class CheckOutScenario extends AppiumSetupTest {
     }
 
     /**
+     * Checkout as a guest
+     */
+    protected void checkoutCODAsGuest (String venture, String menuWiz, String categories, String filterWiz,
+                                               String prodWiz, String name, String address, String phoneNumber ) throws InterruptedException {
+        // Perform Check Out steps
+        addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
+        Thread.sleep(1000);
+        Login_Screen.input_Email(generateEmail());
+        Login_Screen.click_ContinueBtn();
+        createShippingAddress(venture, name, address, phoneNumber);
+        ShippingAddress_Screen.click_ContinueBtn();
+        cashOnDelivery();
+
+    }
+
+    /**
      * Use bank transfer payment method check out with a different billing address in ID venture
      */
     protected void checkoutBankTransferDifferentBillingAddress(String venture, String menuWiz,
