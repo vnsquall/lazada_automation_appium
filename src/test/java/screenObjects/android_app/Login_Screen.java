@@ -18,6 +18,7 @@ public class Login_Screen {
     private static String rocket_app_checkoutweb1 = "resourceID::rocket_app_checkoutweb";
     public static String rocket_app_checkoutweb = ":id/rocket_app_checkoutweb"; /*special case*/
     public static String register = "resourceID::middle_login_link_register";
+    public static String continueBtn = "resourceID::xxx";
 
 
     public static void input_Email (String _email) {
@@ -53,6 +54,11 @@ public class Login_Screen {
     public static void click_RegisterBtn () {
 
         findElement(split(register)[0], split(register)[1]).click();
+    }
+
+    public static void click_ContinueBtn () { // for new case: guest checkout
+
+        findElement(split(continueBtn)[0], split(continueBtn)[1]).click();
     }
 
 
