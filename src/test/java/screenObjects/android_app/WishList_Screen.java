@@ -13,6 +13,8 @@ public class WishList_Screen {
     private static String continueBrowsing = "resourceID::wishlist_no_items_bt_continue";
     private static String delete = "resourceID::wishlist_item_bt_delete";
     private static String noItemMessage = "resourceID::wishlist_no_items_text";
+    private static String addToCart = "resourceID::wishlist_item_bt_add";
+    private static String OKBtn = "resourceID::button1";
 
     public static void click_AddAllToCart() {
 
@@ -37,6 +39,16 @@ public class WishList_Screen {
     public static WebElement noItemMessage() {
 
         return findElement(split(noItemMessage)[0], split(noItemMessage)[1]);
+    }
+
+    public static void click_AddToCartBtn() {
+
+        findElement(split(addToCart)[0], split(addToCart)[1]).click();
+    }
+
+    public static void click_OKBtn() {
+
+        findElement(split(OKBtn)[0], split(OKBtn)[1]).click();
     }
 
 
