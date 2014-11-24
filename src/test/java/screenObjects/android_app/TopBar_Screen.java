@@ -17,11 +17,6 @@ public class TopBar_Screen {
         findElement(split(home)[0], split(home)[1]).click();
     }
 
-    public static void search () {
-
-        findElement(split(search)[0], split(search)[1]).click();
-    }
-
     public static void click_MyCartBtn() {
 
         findElement(split(cart)[0], split(cart)[1]).click();
