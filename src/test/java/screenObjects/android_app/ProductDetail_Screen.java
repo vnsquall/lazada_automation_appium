@@ -51,5 +51,13 @@ public class ProductDetail_Screen {
         findElement(split(OKBtn)[0], split(OKBtn)[1]).click();
     }
 
+    /**
+     * Choose application to share product: message, Email, Bluetooth...
+     */
+    public static void click_AppSharer(String appName) {
+
+        find_TextView_Android(appName).click();
+    }
+
 
 }
