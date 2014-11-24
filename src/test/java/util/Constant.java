@@ -22,6 +22,6 @@ public  final class Constant {
     public static final String PASSWORD = "a12345";
     public static final String WEBVIEW_LIVE= "WEBVIEW_com.lazada.android";
     public static final String WEBVIEW_STAGING = "WEBVIEW_pt.rocket.lazada.dev";
-    public static final int TIMEOUT = 30;
+    public static final int TIMEOUT = 20;
 
 }
