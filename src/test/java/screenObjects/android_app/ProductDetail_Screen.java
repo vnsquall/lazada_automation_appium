@@ -15,6 +15,7 @@ public class ProductDetail_Screen {
     public static String chooseSize = "resourceID::product_variant_button";
     public static String sizes = "resourceID::item_text";
     public static String OKBtn = "resourceID::button1"; // This button be showed after click on Add to wish list
+    public static String productName = "resourceID::product_name";
 
     public static void click_AddToCartBtn() {
 
@@ -57,6 +58,11 @@ public class ProductDetail_Screen {
     public static void click_AppSharer(String appName) {
 
         find_TextView_Android(appName).click();
+    }
+
+    public static WebElement productName() {
+
+        return findElement(split(productName)[0], split(productName)[1]);
     }
 
 
