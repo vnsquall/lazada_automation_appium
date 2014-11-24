@@ -105,9 +105,8 @@ public class WishListScenario extends AppiumSetupTest {
 
         // Random and add product to WishList
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
-        String productName = findElement("resourceID", "product_name").getText();
-        findElement("resourceID", "btn_wishlist").click();
-        WishList_Screen.click_OKBtn();
+        String productName = ProductDetail_Screen.productName().getText();
+        addToWishList();
 
         // Go to WishList
         TopBar_Screen.click_HomeBtn();
@@ -118,12 +117,7 @@ public class WishListScenario extends AppiumSetupTest {
         WishList_Screen.click_OKBtn();
 
         // Verify product that product appears in myCart
-        String myCardStr = findElement(
-                "resourceID",
-                "item_name"
-
-        )
-                .getText();
+        String myCardStr = Cart_Screen.productName().getText();
         Assert.assertTrue(myCardStr.contains(productName));
     }
 
