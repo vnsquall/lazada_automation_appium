@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import screenObjects.android_app.*;
-import testsuite.Wishlist_Test;
 import util.AppiumSetupTest;
 
 import java.util.Random;
@@ -26,8 +25,8 @@ public class WishListScenario extends AppiumSetupTest {
         // Find & Click on Wish list
         SideMenu_Screen.click_Menu(wishList);
 
-        //Verify the Wish list is EMPTY
-        find_xpath_forText(appPackage, ":id/wishlist_no_items_text", emptyWL);
+        // Verify the Wish list is EMPTY
+        find_TextView_Android(emptyWL);
         WishList_Screen.click_ContinueBrowsingBtn();
 
         // Verify Home Page is loaded
@@ -51,7 +50,7 @@ public class WishListScenario extends AppiumSetupTest {
         ProductDetail_Screen.click_OKBtn(); //Click on OK button
     }
 
-    protected void addToWishList () {
+    protected static void addToWishList () {
 
         // Add to Wish list
         ProductDetail_Screen.click_AddToWishListBtn();
@@ -108,15 +107,15 @@ public class WishListScenario extends AppiumSetupTest {
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
         String productName = findElement("resourceID", "product_name").getText();
         findElement("resourceID", "btn_wishlist").click();
-        findElement("resourceID", "button1").click();
+        WishList_Screen.click_OKBtn();
 
         // Go to WishList
         TopBar_Screen.click_HomeBtn();
-        findElement("textcontains", wishList).click();
+        SideMenu_Screen.click_Menu(wishList);
 
         // Add 1 product to Cart from WishList
-        findElement("resourceID", "wishlist_item_bt_add").click();
-        findElement("resourceID", "button1").click();
+        WishList_Screen.click_AddToCartBtn();
+        WishList_Screen.click_OKBtn();
 
         // Verify product that product appears in myCart
         String myCardStr = findElement(
@@ -125,9 +124,6 @@ public class WishListScenario extends AppiumSetupTest {
 
         )
                 .getText();
-        System.out.println("myCardStr>>>> "+myCardStr);
-        System.out.println("productName>>>> "+productName);
-
         Assert.assertTrue(myCardStr.contains(productName));
     }
 
@@ -141,8 +137,7 @@ public class WishListScenario extends AppiumSetupTest {
 
         // Select random product - first time has wizard
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
-        findElement("resourceID", "btn_wishlist").click();
-        findElement("resourceID", "button1").click();
+        addToWishList();
 
         Random ran = new Random();
         int numberOfProduct = ran.nextInt(10);
@@ -162,10 +157,11 @@ public class WishListScenario extends AppiumSetupTest {
 
         // Go to WishList
         TopBar_Screen.click_HomeBtn();
-        findElement("textcontains", wishList).click();
+        SideMenu_Screen.click_Menu(wishList);
+
         // Add all product to Cart
-        findElement("resourceID", "wishlist_bt_add_all").click();// Click Add all to Cart
-        findElement("resourceID", "cart_count").click();// Click on Go to Cart
+        WishList_Screen.click_AddAllToCart();// Click Add all to Cart
+        TopBar_Screen.click_MyCartBtn();// Click on Go to Cart
 
     }
 
@@ -182,19 +178,8 @@ public class WishListScenario extends AppiumSetupTest {
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
 
         // Select the Application to share the Item: Bluetooth, Message, Email
-        findElement("resourceID", "btn_share").click();
-        findElement("text", sharerAppName).click();
-
-        if (isElementPresent(By.id("android:id/button_once"))) { // If the Just once button still appears, push it
-            findElement("resourceID", "button_once").click();
-        }
-
-        // Enter phone number
-        findElement("resourceID", "recipients_editor").sendKeys(phoneNumber);
-        findElement("resourceID", "send_button_sms").click();// Click Send message
-
-        // Get back Lazada Application
-        driver.navigate().back();
+        ProductDetail_Screen.click_ShareBtn();
+        ProductDetail_Screen.click_AppSharer(sharerAppName);
 
     }
 
@@ -219,8 +204,7 @@ public class WishListScenario extends AppiumSetupTest {
         find(appPackage + ":id/general_container").click();
 
         // Add product to WishList
-        findElement("resourceID", "btn_wishlist").click();
-        findElement("resourceID", "button1").click();
+        addToWishList();
 
 
     }
