@@ -216,8 +216,7 @@ public class CheckOutScenario extends AppiumSetupTest {
             ProductDetail_Screen.click_GoToCartBtn();
         } else {
 
-            ProductDetail_Screen.click_ChooseSizeBtn();
-            randClick(ProductDetail_Screen.sizes);
+            chooseSize();
             ProductDetail_Screen.click_AddToCartBtn(); //Add to Cart button
             ProductDetail_Screen.click_GoToCartBtn();
         }
