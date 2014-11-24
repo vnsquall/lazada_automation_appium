@@ -7,11 +7,11 @@ import static util.Helper.*;
  */
 public class Home_Screen {
 
-    private static String proceedToCheckout = "resourceID::checkout_button";
+    public static String product_features_title = "resourceID::product_features_title";
 
-    public static void click_CheckoutBtn() {
+    public static void loaded() {
 
-        findElement(split(proceedToCheckout)[0], split(proceedToCheckout)[1]).click();
+        findElement(split(product_features_title)[0], split(product_features_title)[1]);
     }
 
 
