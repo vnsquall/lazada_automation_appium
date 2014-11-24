@@ -374,7 +374,7 @@ public class CheckOutScenario extends AppiumSetupTest {
             if (arrDelete.size() > 0) {
 
                 arrDelete.get(0).click();
-                Cart_Screen.click_RemoveItem(); // Remove confirm
+                Cart_Screen.click_DeleteConfirm(); // Remove confirm
 
             }
             arrDelete = Cart_Screen.deleteButtons();
