@@ -3,7 +3,8 @@ package scenario;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import screenObjects.android_app.Init_Screen;
+import screenObjects.android_app.*;
+import testsuite.Wishlist_Test;
 import util.AppiumSetupTest;
 
 import java.util.Random;
@@ -19,64 +20,80 @@ public class WishListScenario extends AppiumSetupTest {
                                     String categories, String filterWiz, String prodWiz, String addWL) throws InterruptedException {
 
         Init_Screen.select_Country(venture, menuWiz);
-        findElement("resourceID", "abs__home").click();
+        TopBar_Screen.click_HomeBtn();
         Thread.sleep(1000);
 
-        //Find & Click on Wishlist
-        driver.findElement(By.xpath("//android.widget.TextView[@resource-id='" + appPackage + ":id/component_text' and @text='" + wishList + "']")).click();
-        //Verify the Wishlist is EMPTY
-        find_xpath_forText(appPackage, ":id/wishlist_no_items_text", emptyWL);
-        find(appPackage + ":id/wishlist_no_items_bt_continue").click();
-        //Verify Home Page is loaded
-        isElementPresent(By.id(appPackage + ":id/product_features_title"));
+        // Find & Click on Wish list
+        SideMenu_Screen.click_Menu(wishList);
 
-        //Go to Categories & select random product
-        find(appPackage + ":id/abs__home").click();
+        //Verify the Wish list is EMPTY
+        find_xpath_forText(appPackage, ":id/wishlist_no_items_text", emptyWL);
+        WishList_Screen.click_ContinueBrowsingBtn();
+
+        // Verify Home Page is loaded
+        Home_Screen.loaded();
+
+        // Go to Categories & select random product
+        TopBar_Screen.click_HomeBtn();
         Thread.sleep(1000);
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
 
-        // Select size if need
-        if (isElementPresent(By.id(appPackage + ":id/product_variant_button"))) {
-            selectorRandom(By.id(appPackage + ":id/product_variant_button"));
+        // Add to Wish list
+        ProductDetail_Screen.click_AddToWishListBtn();
+        if (!isElementPresent(ProductDetail_Screen.OKBtn)) { // We need select size first
 
+            selectorRandom(ProductDetail_Screen.chooseSizeBtn());
+            ProductDetail_Screen.click_AddToWishListBtn();
         }
-        find(appPackage + ":id/btn_wishlist").click(); //Add to Wishlist
 
-        //Verify the message appear:
-        find_xpath_forText(appPackage, ":id/items_count", addWL);
-        find(appPackage + ":id/button1").click(); //Click on OK button
+        // Verify the message appear:
+        find_TextView_Android(addWL);
+        ProductDetail_Screen.click_OKBtn(); //Click on OK button
     }
+
+    protected void addToWishList () {
+
+        // Add to Wish list
+        ProductDetail_Screen.click_AddToWishListBtn();
+        if (!isElementPresent(ProductDetail_Screen.OKBtn)) { // We need select size first
+
+            selectorRandom(ProductDetail_Screen.chooseSizeBtn());
+            ProductDetail_Screen.click_AddToWishListBtn();
+            ProductDetail_Screen.click_OKBtn();
+        }
+    }
+
+
 
     protected void wishListDeleteProduct (String venture, String menuWiz, String wishList, String emptyWL,
                                           String categories, String filterWiz, String prodWiz, String addWL) throws InterruptedException {
 
         // Select venture
         Init_Screen.select_Country(venture, menuWiz);
-        findElement("resourceID", "abs__home").click();
+        TopBar_Screen.click_HomeBtn();
         Thread.sleep(1000);
 
         // Add random product to WishList
-        randomSelectProduct(categories, appPackage, filterWiz, prodWiz);System.out.println(findElement("resourceID", "btn_wishlist").getText());
-        findElement("resourceID", "btn_wishlist").click();//  Click on Add to wishList
-        findElement("resourceID", "button1").click();// Click on OK button
+        randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
+        addToWishList();
 
         // Go to WishList
-        findElement("resourceID", "abs__home").click();
-//        driver.findElementByAndroidUIAutomator("UiSelector().textContains(\""+wishList+"\")").click(); // To do: dont forget to un-comment this line
+        TopBar_Screen.click_HomeBtn();
+        SideMenu_Screen.click_Menu(wishList);
 
         // Delete product from WishList
-        findElement("resourceID", "wishlist_item_bt_delete").click();// Click on OK button
+        WishList_Screen.click_DeleteBtn();
 
         // Verify the WishList is empty
-        WebElement deteleBtn = null;
-        try { // try to find Delete button
-//            deteleBtn = driver.findElementByAndroidUIAutomator("UiSelector().resourceId(\""+appPackage+":id/wishlist_item_bt_delete\")");
-            deteleBtn = findElement("resourceID", "wishlist_item_bt_delete");
-        }catch (org.openqa.selenium.NoSuchElementException e) {};
+        WebElement deleteBtn = null;
 
-        Assert.assertNull(deteleBtn);
-        Assert.assertTrue(findElement("resourceID", "wishlist_no_items_text").isDisplayed());
-        Assert.assertEquals(emptyWL, findElement("resourceID", "wishlist_no_items_text").getText());
+        try { // try to find Delete button
+            deleteBtn = WishList_Screen.deleteBtn();
+        } catch (org.openqa.selenium.NoSuchElementException e) {};
+
+        Assert.assertNull(deleteBtn);
+        Assert.assertTrue(WishList_Screen.noItemMessage().isDisplayed());
+        Assert.assertEquals(emptyWL, WishList_Screen.noItemMessage().getText());
     }
 
     protected void wishListAddToCart (String venture, String menuWiz, String wishList, String emptyWL,
@@ -84,7 +101,7 @@ public class WishListScenario extends AppiumSetupTest {
 
         // Select venture
         Init_Screen.select_Country(venture, menuWiz);
-        findElement("resourceID", "abs__home").click();
+        TopBar_Screen.click_HomeBtn();
         Thread.sleep(1000);
 
         // Random and add product to WishList
@@ -94,7 +111,7 @@ public class WishListScenario extends AppiumSetupTest {
         findElement("resourceID", "button1").click();
 
         // Go to WishList
-        findElement("resourceID", "abs__home").click();
+        TopBar_Screen.click_HomeBtn();
         findElement("textcontains", wishList).click();
 
         // Add 1 product to Cart from WishList
@@ -105,6 +122,7 @@ public class WishListScenario extends AppiumSetupTest {
         String myCardStr = findElement(
                 "resourceID",
                 "item_name"
+
         )
                 .getText();
         System.out.println("myCardStr>>>> "+myCardStr);
@@ -118,7 +136,7 @@ public class WishListScenario extends AppiumSetupTest {
 
         // Select venture
         Init_Screen.select_Country(venture, menuWiz);
-        findElement("resourceID", "abs__home").click();
+        TopBar_Screen.click_HomeBtn();
         Thread.sleep(1000);
 
         // Select random product - first time has wizard
@@ -143,7 +161,7 @@ public class WishListScenario extends AppiumSetupTest {
         }
 
         // Go to WishList
-        findElement("resourceID", "abs__home").click();
+        TopBar_Screen.click_HomeBtn();
         findElement("textcontains", wishList).click();
         // Add all product to Cart
         findElement("resourceID", "wishlist_bt_add_all").click();// Click Add all to Cart
@@ -157,7 +175,7 @@ public class WishListScenario extends AppiumSetupTest {
 
         // Select venture
         Init_Screen.select_Country(venture, menuWiz);
-        findElement("resourceID", "abs__home").click();
+        TopBar_Screen.click_HomeBtn();
         Thread.sleep(1000);
 
         // Select random product - first time has wizard
@@ -181,23 +199,13 @@ public class WishListScenario extends AppiumSetupTest {
     }
 
     /**
-     * Add 1 randomly product to WishList
-     *
-     * @param venture
-     * @param menuWiz
-     * @param wishList
-     * @param emptyWL
-     * @param categories
-     * @param filterWiz
-     * @param prodWiz
-     * @param addWL
-     * @param appPackage
+     * Add 1 randomly product to WishList - No clicking on menu wizard
      */
     public static void addProductToWishListNoWizard(String venture, String menuWiz, String wishList, String emptyWL,
 
                                                     String categories, String filterWiz, String prodWiz, String addWL, String appPackage) {
 
-        findElement("resourceID", "abs__home").click();
+        TopBar_Screen.click_HomeBtn();
         text_exact(categories).click();
 
         // Random selection Categories
