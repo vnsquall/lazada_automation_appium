@@ -16,6 +16,7 @@ public class ProductDetail_Screen {
     public static String sizes = "resourceID::item_text";
     public static String OKBtn = "resourceID::button1"; // This button be showed after click on Add to wish list
     public static String productName = "resourceID::product_name";
+    public static String chooseSizeMsg = "resourceID::product_variant_choose_error";
 
     public static void click_AddToCartBtn() {
 
