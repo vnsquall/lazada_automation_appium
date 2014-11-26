@@ -1,9 +1,8 @@
 package screenObjects.android_app;
 
 
-import org.openqa.selenium.WebElement;
-
 import static util.Helper.findElement;
+import static util.Helper.find_TextView_Android;
 import static util.Helper.split;
 
 /**
@@ -11,13 +10,10 @@ import static util.Helper.split;
  */
 public class MyAccount_Screen {
 
-    private static String continueButton = "xpath:://*[@class='orange-button']";
 
+    public static void click_UserData(String userData) {
 
-
-    public static void click_ContinueBtn() {
-
-        findElement(split(continueButton)[0], split(continueButton)[1]).click();
+        find_TextView_Android(userData).click();
     }
 
 }
