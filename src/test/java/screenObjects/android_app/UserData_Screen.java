@@ -4,6 +4,7 @@ package screenObjects.android_app;
 import org.openqa.selenium.WebElement;
 
 import static util.Helper.findElement;
+import static util.Helper.find_TextView_Android;
 import static util.Helper.split;
 
 /**
@@ -11,12 +12,17 @@ import static util.Helper.split;
  */
 public class UserData_Screen {
 
-    private static String continueButton = "xpath:://*[@class='orange-button']";
+    private static String cancel = "resourceID::button_cancel";
 
 
-    public static void click_ContinueBtn() {
+    public static WebElement verifyText(String text) {
 
-        findElement(split(continueButton)[0], split(continueButton)[1]).click();
+        return find_TextView_Android(text);
+    }
+
+    public static void click_CancelBtn() {
+
+        findElement(split(cancel)[0], split(cancel)[1]).click();
     }
 
 
