@@ -2,6 +2,7 @@ package scenario;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import screenObjects.android_app.Home_Screen;
 import screenObjects.android_app.Init_Screen;
 import util.AppiumSetupTest;
 
@@ -13,12 +14,12 @@ import static util.Helper.*;
  * Created by lazhcm10136 on 10/8/14.
  */
 public class SearchScenario extends AppiumSetupTest {
-    protected void searchQuery(String venture, String menuWiz, String searchQuery, String filterWiz) throws Exception {
+    protected void searchQuery(String venture, String menuWiz,
+                               String searchQuery, String filterWiz) throws Exception {
+
         Init_Screen.select_Country(venture, menuWiz);
         Thread.sleep(2000);
-        WebElement homeSearch = driver.findElement(By.id(appPackage + ":id/search_component"));
-        homeSearch.sendKeys(searchQuery);
-        homeSearch.click();
+        Home_Screen.input_search(searchQuery);
         Thread.sleep(2000);
 //        driver.tap(1, 550, 140, 1); //work-around Tap on search button with screen size "768x1280@120DPI"
         driver.sendKeyEvent(20); //KEYCODE_DOWN for select all products with searchQuery
