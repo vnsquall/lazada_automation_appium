@@ -208,9 +208,15 @@ public class CheckOutScenario extends AppiumSetupTest {
     /**
      * Login as
      */
-    protected void loginAs( String userName, String password) throws InterruptedException {
+    protected void loginAs( String email, String password) throws InterruptedException {
+
+        // Choose checkout method: Guest or User
+        CheckoutMethod_Screen.input_Email(email);
+        CheckoutMethod_Screen.click_UserRd();
+        CheckoutMethod_Screen.click_ContinueBtn();
+
         //Login to CheckOut
-        Login_Screen.input_Email(userName);
+        Login_Screen.input_Email(email);
         Login_Screen.input_Password(password);
         Login_Screen.click_ShowPassword();
         Login_Screen.click_Login();
