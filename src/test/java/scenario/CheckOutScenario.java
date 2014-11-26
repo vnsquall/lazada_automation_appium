@@ -236,7 +236,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         Login_Screen.click_Login();
 
         Thread.sleep(5000);
-        Login_Screen.wait_ForCheckout();
+        Login_Screen.wait_ForWebView();
         Login_Screen.rocket_app_checkoutweb();
         Thread.sleep(2000);
         switchToWebView();

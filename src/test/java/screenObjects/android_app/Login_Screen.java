@@ -39,7 +39,7 @@ public class Login_Screen {
         findElement(split(login)[0], split(login)[1]).click();
     }
 
-    public static void wait_ForCheckout () {
+    public static void wait_ForWebView() {
 
         AppiumSetupTest appiumSetupTest = new AppiumSetupTest();
         String appPackage =  appiumSetupTest.appPackage;
@@ -61,6 +61,9 @@ public class Login_Screen {
         findElement(split(continueBtn)[0], split(continueBtn)[1]).click();
     }
 
+    public static boolean verifyText (String text) {
 
+        return find_TextView_Android(text).isDisplayed();
+    }
 
 }
