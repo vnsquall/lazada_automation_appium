@@ -8,8 +8,8 @@ import static util.Helper.*;
  */
 public class ProductDetail_Screen {
 
-    public static String addToCart = "resourceID::shop";
-    public static String addToWishList = "resourceID::btn_wishlist";
+    public static String addToCart = "resourceID::btn_add_to_cart";
+    public static String addToWishList = "resourceID::wishlist_item_add";
     public static String share = "resourceID::btn_share";
     public static String goToCart = "resourceID::button1";
     public static String chooseSize = "resourceID::product_variant_button";
