@@ -1,12 +1,8 @@
 package scenario;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import screenObjects.android_app.Init_Screen;
+import screenObjects.android_app.*;
 import util.AppiumSetupTest;
-
-import java.util.List;
-
 import static util.Helper.*;
 import static util.VentureText.setText;
 
@@ -14,27 +10,23 @@ import static util.VentureText.setText;
  * Created by lazhcm10136 on 10/7/14.
  */
 public class UserAccountScenario extends AppiumSetupTest {
+
+
     protected void login(String user, String pass) {
-        List<WebElement> editTextList = driver.findElements(By.className("android.widget.EditText"));
-        editTextList.get(0).click();
-        editTextList.get(0).sendKeys(user);
-        editTextList.get(1).click();
-        editTextList.get(1).sendKeys(pass);
+
+        //Login to CheckOut
+        Login_Screen.input_Email(user);
+        Login_Screen.input_Password(pass);
     }
 
     protected void register(String mail, String pass, String name, String terms) {
-        List<WebElement> editTextList = driver.findElements(By.className("android.widget.EditText"));
-        editTextList.get(0).click();
-        editTextList.get(0).sendKeys(mail);
-        editTextList.get(1).click();
-        editTextList.get(1).sendKeys(pass);
-        editTextList.get(2).click();
-        editTextList.get(2).sendKeys(pass);
-        editTextList.get(3).click();
-        editTextList.get(3).sendKeys(name);
 
-        driver.findElement(By.className("android.widget.CheckBox")).click();
-        driver.findElement(By.id(appPackage + ":id/register_button_submit")).click();
+        Register_Screen.input_Email(mail);
+        Register_Screen.input_Password(pass);
+        Register_Screen.input_RePassword(pass);
+        Register_Screen.input_Name(name);
+        Register_Screen.click_ShowPassword();
+        Register_Screen.click_SubmitBtn();
         driver.findElement(By.xpath("//android.widget.CheckBox[@resource-id='" + appPackage + ":id/checkTerms' and @text='" + terms + "']")).click();
         driver.findElement(By.id(appPackage + ":id/register_button_submit")).click();
     }
@@ -42,15 +34,15 @@ public class UserAccountScenario extends AppiumSetupTest {
     protected void registerWithNewUser(String venture, String menuWiz, String account, String userData,
                                        String createUser, String mail, String pass, String name) throws InterruptedException {
         Init_Screen.select_Country(venture, menuWiz);
-        find(appPackage + ":id/abs__home").click();
+        TopBar_Screen.click_HomeBtn();
         Thread.sleep(1000);
 
         //Find & Click on Account Setting
-        driver.findElement(By.xpath("//android.widget.TextView[@resource-id='" + appPackage + ":id/component_text' and @text='" + account + "']")).click();
-        driver.findElement(By.xpath("//android.widget.TextView[@resource-id='" + appPackage + ":id/option_name' and @text='" + userData + "']")).click();
+        find_TextView_Android(account).click();
+        MyAccount_Screen.click_UserData(userData);
         //User Register
         swipeDown();
-        driver.findElement(By.xpath("//android.widget.Button[@resource-id='" + appPackage + ":id/middle_login_link_register' and @text='" + createUser + "']")).click();
+        Login_Screen.click_RegisterBtn();
 
         register(mail, pass, name, setText(venture).get("terms"));
 
@@ -59,37 +51,38 @@ public class UserAccountScenario extends AppiumSetupTest {
     protected void loginWrongData(String venture, String menuWiz, String account, String userData,
                                   String mail, String pass, String loginFailed) throws InterruptedException {
         Init_Screen.select_Country(venture, menuWiz);
-        find(appPackage + ":id/abs__home").click();
+        TopBar_Screen.click_HomeBtn();
         Thread.sleep(1000);
 
         //Find & Click on Account Setting
-        driver.findElement(By.xpath("//android.widget.TextView[@resource-id='" + appPackage + ":id/component_text' and @text='" + account + "']")).click();
-        driver.findElement(By.xpath("//android.widget.TextView[@resource-id='" + appPackage + ":id/option_name' and @text='" + userData + "']")).click();
+        find_TextView_Android(account).click();
+        MyAccount_Screen.click_UserData(userData);
         login(mail, pass);
-        driver.findElement(By.id(appPackage + ":id/middle_login_button_signin")).click();
+        Login_Screen.click_Login();
         assert (driver.findElement(By.xpath("//android.widget.TextView[@resource-id='" + appPackage + ":id/dialog_text' and @text='" + loginFailed + "']")).isDisplayed());
     }
 
     protected void loginAndLogout(String venture, String menuWiz, String account, String userData,
                                   String mail, String pass, String logOut) throws InterruptedException {
         Init_Screen.select_Country(venture, menuWiz);
-        find(appPackage + ":id/abs__home").click();
+        TopBar_Screen.click_HomeBtn();
         Thread.sleep(1000);
 
         //Find & Click on Account Setting
-        driver.findElement(By.xpath("//android.widget.TextView[@resource-id='" + appPackage + ":id/component_text' and @text='" + account + "']")).click();
-        driver.findElement(By.xpath("//android.widget.TextView[@resource-id='" + appPackage + ":id/option_name' and @text='" + userData + "']")).click();
+        SideMenu_Screen.click_Menu(account);
+        MyAccount_Screen.click_UserData(userData);
         login(mail, pass);
-        driver.findElement(By.id(appPackage + ":id/middle_login_button_signin")).click();
+        Login_Screen.click_Login();
 
         //Verify user has login with correct email
-        assert (driver.findElement(By.xpath("//android.widget.EditText[@resource-id='" + appPackage + ":id/clientEmail' and @text='" + mail + "']")).isDisplayed());
+        assert (UserData_Screen.verifyText(mail).isDisplayed());
 
         //Cancel Edit User Data & LogOut
-        driver.findElement(By.id(appPackage + ":id/button_cancel")).click();
-        find(appPackage + ":id/abs__home").click();
-        driver.findElement(By.xpath("//android.widget.TextView[@resource-id='" + appPackage + ":id/component_text' and @text='" + logOut + "']")).click();
+        UserData_Screen.click_CancelBtn();
+        TopBar_Screen.click_HomeBtn();
+        SideMenu_Screen.click_Menu(logOut);
+
         //LogOut Confirmation
-        driver.findElement(By.id(appPackage + ":id/button2")).click();
+        SideMenu_Screen.click_SignOutConfirmBtn();
     }
 }
