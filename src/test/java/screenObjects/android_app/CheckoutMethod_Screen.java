@@ -13,9 +13,8 @@ public class CheckoutMethod_Screen {
 
     private static String guest = "resourceID::guestradio";
     private static String user = "resourceID::accountradio";
-    private static String continueBtn = "resourceID::accountradio";
-
-
+    private static String continueBtn = "resourceID::continue_checkout";
+    private static String email = "resourceID::emailid";
 
     public static void click_GuestRd() {
 
@@ -30,6 +29,11 @@ public class CheckoutMethod_Screen {
     public static void click_ContinueBtn() {
 
         findElement(split(continueBtn)[0], split(continueBtn)[1]).click();
+    }
+
+    public static void input_Email(String _email) {
+
+        findElement(split(email)[0], split(email)[1]).sendKeys(_email);
     }
 
 
