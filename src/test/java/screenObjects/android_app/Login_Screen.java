@@ -41,8 +41,7 @@ public class Login_Screen {
 
     public static void wait_ForWebView() {
 
-        AppiumSetupTest appiumSetupTest = new AppiumSetupTest();
-        String appPackage =  appiumSetupTest.appPackage;
+        String appPackage =  AppiumSetupTest.appPackage;
         wait_web(By.id(appPackage + rocket_app_checkoutweb));
     }
 
