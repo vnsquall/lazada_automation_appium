@@ -29,7 +29,8 @@ public class CartScenario extends AppiumSetupTest {
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
         String productName = ProductDetail_Screen.productName().getText();//  Get product name
         ProductDetail_Screen.click_AddToCartBtn();//  Click on Add to cart
-        ProductDetail_Screen.click_GoToCartBtn();// Click on Go to cart
+//        ProductDetail_Screen.click_GoToCartBtn();// Click on Go to cart
+        TopBar_Screen.click_MyCartBtn();
 
         // Verify the myCart appears the product
         Assert.assertEquals(productName, Cart_Screen.productName().getText());// Verify product name is correct
@@ -46,7 +47,7 @@ public class CartScenario extends AppiumSetupTest {
         // Add random product to Cart
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
         ProductDetail_Screen.click_AddToCartBtn();//  Click on Add to cart
-        ProductDetail_Screen.click_GoToCartBtn();// Click on Go to cart
+        TopBar_Screen.click_MyCartBtn();
 
         // Remove product from myCart
         Cart_Screen.click_deleteProductBtn();
@@ -66,7 +67,8 @@ public class CartScenario extends AppiumSetupTest {
         // Add random product to Cart
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
         ProductDetail_Screen.click_AddToCartBtn();//  Click on Add to cart
-        ProductDetail_Screen.click_GoToCartBtn();// Click on Go to cart
+//        ProductDetail_Screen.click_GoToCartBtn();// Click on Go to cart
+        TopBar_Screen.click_MyCartBtn();
 
         // Change quantity
         int quantity = changeQuantity();
