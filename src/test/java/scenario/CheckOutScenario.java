@@ -21,15 +21,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         TopBar_Screen.click_HomeBtn();
         Thread.sleep(1000);
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
-        ProductDetail_Screen.click_AddToCartBtn(); //Add to Cart
-
-        //Check for Variant Selection
-        Boolean cartConfirm = isElementPresent(ProductDetail_Screen.goToCart);
-        if (cartConfirm) {
-            ProductDetail_Screen.click_GoToCartBtn(); // Go to my click_MyCartBtn
-        } else {
-            chooseSize();
-        }
+        addToCart();
         Cart_Screen.click_CheckoutBtn();
 
         // Login as default account
@@ -208,19 +200,7 @@ public class CheckOutScenario extends AppiumSetupTest {
 
         Thread.sleep(1000);
         randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
-        ProductDetail_Screen.click_AddToCartBtn(); //Add to Cart button
-
-        //Check for Variant Selection
-        Boolean cartConfirm = isElementPresent(ProductDetail_Screen.goToCart);
-        if (cartConfirm) {
-            ProductDetail_Screen.click_GoToCartBtn();
-        } else {
-
-            chooseSize();
-            ProductDetail_Screen.click_AddToCartBtn(); //Add to Cart button
-            ProductDetail_Screen.click_GoToCartBtn();
-        }
-
+        addToCart();
         Cart_Screen.click_CheckoutBtn();
 
     }
@@ -739,9 +719,28 @@ public class CheckOutScenario extends AppiumSetupTest {
         ProductDetail_Screen.click_ChooseSizeBtn();
         randClick(ProductDetail_Screen.sizes);
         ProductDetail_Screen.click_AddToCartBtn();
-        ProductDetail_Screen.click_GoToCartBtn();
+//        ProductDetail_Screen.click_GoToCartBtn();
+        TopBar_Screen.click_MyCartBtn();
         Thread.sleep(2000);
 
     }
 
+    /**
+     * Add product to cart
+     */
+    protected void addToCart() throws InterruptedException {
+
+        ProductDetail_Screen.click_AddToCartBtn(); //Add to Cart
+
+        //Check for Variant Selection
+        Boolean chooseSizeMsg = isElementPresent(ProductDetail_Screen.chooseSizeMsg);
+        if (chooseSizeMsg) {
+//            ProductDetail_Screen.click_GoToCartBtn(); // Go to my click_MyCartBtn
+            chooseSize();
+        } else {
+//            chooseSize();
+            TopBar_Screen.click_MyCartBtn();
+        }
+
+    }
 }
