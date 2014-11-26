@@ -59,7 +59,7 @@ public class UserAccountScenario extends AppiumSetupTest {
         MyAccount_Screen.click_UserData(userData);
         login(mail, pass);
         Login_Screen.click_Login();
-        assert (driver.findElement(By.xpath("//android.widget.TextView[@resource-id='" + appPackage + ":id/dialog_text' and @text='" + loginFailed + "']")).isDisplayed());
+        assert(Login_Screen.verifyText(loginFailed));
     }
 
     protected void loginAndLogout(String venture, String menuWiz, String account, String userData,
