@@ -210,10 +210,10 @@ public class CheckOutScenario extends AppiumSetupTest {
      */
     protected void loginAs( String email, String password) throws InterruptedException {
 
-        // Choose checkout method: Guest or User
-        CheckoutMethod_Screen.input_Email(email);
-        CheckoutMethod_Screen.click_UserRd();
-        CheckoutMethod_Screen.click_ContinueBtn();
+//        // Choose checkout method: Guest or User
+//        CheckoutMethod_Screen.input_Email(email);
+//        CheckoutMethod_Screen.click_UserRd();
+//        CheckoutMethod_Screen.click_ContinueBtn();
 
         //Login to CheckOut
         Login_Screen.input_Email(email);
@@ -725,7 +725,6 @@ public class CheckOutScenario extends AppiumSetupTest {
         ProductDetail_Screen.click_ChooseSizeBtn();
         randClick(ProductDetail_Screen.sizes);
         ProductDetail_Screen.click_AddToCartBtn();
-//        ProductDetail_Screen.click_GoToCartBtn();
         TopBar_Screen.click_MyCartBtn();
         Thread.sleep(2000);
 
@@ -736,17 +735,17 @@ public class CheckOutScenario extends AppiumSetupTest {
      */
     protected void addToCart() throws InterruptedException {
 
-        ProductDetail_Screen.click_AddToCartBtn(); //Add to Cart
+        int numberItemBefore = TopBar_Screen.getNumberItem();
+        ProductDetail_Screen.click_AddToCartBtn();
+        int numberItemAfter = TopBar_Screen.getNumberItem();
+        if (numberItemBefore != numberItemAfter) {
 
-        //Check for Variant Selection
-        Boolean chooseSizeMsg = isElementPresent(ProductDetail_Screen.chooseSizeMsg);
-        if (chooseSizeMsg) {
-//            ProductDetail_Screen.click_GoToCartBtn(); // Go to my click_MyCartBtn
-            chooseSize();
-        } else {
-//            chooseSize();
             TopBar_Screen.click_MyCartBtn();
+        } else { // We need select size first
+
+            chooseSize();
         }
+
 
     }
 }
