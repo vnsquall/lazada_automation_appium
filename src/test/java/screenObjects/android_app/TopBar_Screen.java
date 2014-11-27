@@ -21,4 +21,16 @@ public class TopBar_Screen {
 
         findElement(split(cart)[0], split(cart)[1]).click();
     }
+
+    /**
+     * get Number of items in my cart
+     */
+    public static int getNumberItem() {
+
+        String itemNumber = findElement(split(cart)[0], split(cart)[1]).getText();
+        if (itemNumber.equals("")) {
+            return 0;
+        }
+        return Integer.parseInt(itemNumber);
+    }
 }
