@@ -737,6 +737,7 @@ public class CheckOutScenario extends AppiumSetupTest {
 
         int numberItemBefore = TopBar_Screen.getNumberItem();
         ProductDetail_Screen.click_AddToCartBtn();
+        Thread.sleep(1000);
         int numberItemAfter = TopBar_Screen.getNumberItem();
         if (numberItemBefore != numberItemAfter) {
 
