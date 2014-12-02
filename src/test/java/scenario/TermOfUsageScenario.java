@@ -15,9 +15,9 @@ import static util.Helper.switchToWebView;
  */
 public class TermOfUsageScenario extends AppiumSetupTest {
 
-    protected void term(String venture, String menuWiz, String categories, String filterWiz,
-                                String prodWiz, String term) throws InterruptedException {
-        // Perform Check Out steps
+    protected void term(String venture, String menuWiz, String term) throws InterruptedException {
+
+        // Select country and go to Term of usage
         Init_Screen.select_Country(venture, menuWiz);
         TopBar_Screen.click_HomeBtn();
         SideMenu_Screen.click_Menu(term);
@@ -26,6 +26,7 @@ public class TermOfUsageScenario extends AppiumSetupTest {
         String pageSource = driver.getPageSource();
         System.out.println(pageSource);
 
+        // Verify text
         if (venture.equals("Singapore")) {
 
             Assert.assertTrue(pageSource.contains("Welcome to the Lazada.com.sg website and/or the LAZADA mobile app"));
