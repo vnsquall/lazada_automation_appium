@@ -28,6 +28,7 @@ public class VentureText {
             ventureText.put("logOut", "Sign Out");
             ventureText.put("emptyCart", "You have no items in your cart");
             ventureText.put("editAddSuccess", "Your address saved successfully"); // Message will show when editing address is successful
+            ventureText.put("term", "Terms of Usage");
 
         }
         if (venture.equals("Indonesia")) {
@@ -46,6 +47,7 @@ public class VentureText {
             ventureText.put("logOut", "Sign Out");
             ventureText.put("emptyCart", "Tidak ada barang pada troli");
             ventureText.put("editAddSuccess", "Your address saved successfully"); // Message will show when editing address is successful
+            ventureText.put("term", "Syarat & Ketentuan");
 
         }
         if (venture.equals("Vietnam")) {
@@ -64,7 +66,7 @@ public class VentureText {
             ventureText.put("logOut", "Thoát");
             ventureText.put("emptyCart", "Giỏ hàng của bạn còn trống");
             ventureText.put("editAddSuccess", "Your address saved successfully"); // Message will show when editing address is successful
-
+            ventureText.put("term", "Các điều khoản sử dụng");
         }
         return ventureText;
     }
