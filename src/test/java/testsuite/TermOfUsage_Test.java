@@ -15,16 +15,19 @@ public class TermOfUsage_Test extends TermOfUsageScenario {
     @DataProvider
     Object[][] getVenturesDataToTest() {
         return new Object[][]{
-//                {"Singapore"}
-//                {"Malaysia"}
-//                {"Philippines"}
-//                {"Indonesia"},
-//                {"Vietnam"}
+                {"Singapore"},
+                {"Malaysia"},
+                {"Philippines"},
+                {"Indonesia"},
+                {"Vietnam"}
         };
     }
 
+    /**
+     * Verify text in Term of usage
+     */
     @Test(dataProvider = "getVenturesDataToTest")
-    public void test_Term (String venture) throws Exception {
+    public void test_VerifyText(String venture) throws Exception {
         term(venture, setText(venture).get("menuWiz"), setText(venture).get("term"));
     }
 
