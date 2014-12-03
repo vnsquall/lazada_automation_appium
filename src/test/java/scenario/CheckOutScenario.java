@@ -212,7 +212,7 @@ public class CheckOutScenario extends AppiumSetupTest {
 
         // Choose checkout method: Guest or User
         Login_Screen.input_Email(email);
-        CheckoutMethod_Screen.click_UserRd();
+        Login_Screen.click_UserRd();
         Login_Screen.input_Password(password);
         Login_Screen.click_ContinueBtn();
 
