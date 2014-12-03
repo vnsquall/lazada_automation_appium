@@ -19,6 +19,8 @@ public class Login_Screen {
     public static String rocket_app_checkoutweb = ":id/rocket_app_checkoutweb"; /*special case*/
     public static String register = "resourceID::middle_login_link_register";
     public static String continueBtn = "resourceID::xxx";
+    private static String guest = "resourceID::guestradio";
+    private static String user = "resourceID::accountradio";
 
 
     public static void input_Email (String _email) {
@@ -63,6 +65,16 @@ public class Login_Screen {
     public static boolean verifyText (String text) {
 
         return find_TextView_Android(text).isDisplayed();
+    }
+
+    public static void click_GuestRd() {
+
+        findElement(split(guest)[0], split(guest)[1]).click();
+    }
+
+    public static void click_UserRd() {
+
+        findElement(split(user)[0], split(user)[1]).click();
     }
 
 }
