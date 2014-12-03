@@ -210,19 +210,14 @@ public class CheckOutScenario extends AppiumSetupTest {
      */
     protected void loginAs( String email, String password) throws InterruptedException {
 
-//        // Choose checkout method: Guest or User
-//        CheckoutMethod_Screen.input_Email(email);
-//        CheckoutMethod_Screen.click_UserRd();
-//        CheckoutMethod_Screen.click_ContinueBtn();
-
-        //Login to CheckOut
+        // Choose checkout method: Guest or User
         Login_Screen.input_Email(email);
+        CheckoutMethod_Screen.click_UserRd();
         Login_Screen.input_Password(password);
-        Login_Screen.click_ShowPassword();
-        Login_Screen.click_Login();
+        Login_Screen.click_ContinueBtn();
 
         Thread.sleep(5000);
-        Login_Screen.wait_ForWebView();
+//        Login_Screen.wait_ForWebView();
         Login_Screen.rocket_app_checkoutweb();
         Thread.sleep(2000);
         switchToWebView();
@@ -737,8 +732,13 @@ public class CheckOutScenario extends AppiumSetupTest {
 
         int numberItemBefore = TopBar_Screen.getNumberItem();
         ProductDetail_Screen.click_AddToCartBtn();
-        Thread.sleep(1000);
+//        Thread.sleep(2000);
+        TopBar_Screen.getNumberItem();
+        TopBar_Screen.getNumberItem();
+        TopBar_Screen.getNumberItem();
+
         int numberItemAfter = TopBar_Screen.getNumberItem();
+        System.out.println(numberItemBefore + ">>> " + numberItemAfter);
         if (numberItemBefore != numberItemAfter) {
 
             TopBar_Screen.click_MyCartBtn();
