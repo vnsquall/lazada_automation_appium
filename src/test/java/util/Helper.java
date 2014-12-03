@@ -116,13 +116,6 @@ public class Helper {
     /**
      * Wrap WebElement in MobileElement *
      */
-//    private static MobileElement w(WebElement element) {
-//        return new MobileElement((RemoteWebElement) element, driver);
-//    }
-
-    /**
-     * Wrap WebElement in MobileElement *
-     */
     private static List<MobileElement> w(List<WebElement> elements) {
         List list = new ArrayList(elements.size());
         for (WebElement element : elements) {
