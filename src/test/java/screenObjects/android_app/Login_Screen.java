@@ -18,7 +18,7 @@ public class Login_Screen {
     private static String rocket_app_checkoutweb1 = "resourceID::rocket_app_checkoutweb";
     public static String rocket_app_checkoutweb = ":id/rocket_app_checkoutweb"; /*special case*/
     public static String register = "resourceID::middle_login_link_register";
-    public static String continueBtn = "resourceID::xxx";
+    public static String continueBtn = "resourceID::continue_checkout";
     private static String guest = "resourceID::guestradio";
     private static String user = "resourceID::accountradio";
 
