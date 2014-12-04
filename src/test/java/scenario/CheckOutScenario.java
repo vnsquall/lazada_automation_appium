@@ -671,6 +671,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         Thread.sleep(1000);
         Login_Screen.input_Email(generateEmail());
         Login_Screen.click_ContinueBtn();
+        Thread.sleep(3000);
         editShippingAddress(venture, name, address, phoneNumber);
         ShippingAddress_Screen.click_ContinueBtn();
         cashOnDelivery();
@@ -730,21 +731,32 @@ public class CheckOutScenario extends AppiumSetupTest {
      */
     protected void addToCart() throws InterruptedException {
 
-        int numberItemBefore = TopBar_Screen.getNumberItem();
-        ProductDetail_Screen.click_AddToCartBtn();
-//        Thread.sleep(2000);
-        TopBar_Screen.getNumberItem();
-        TopBar_Screen.getNumberItem();
-        TopBar_Screen.getNumberItem();
+//        int numberItemBefore = TopBar_Screen.getNumberItem();
+//        ProductDetail_Screen.click_AddToCartBtn();
+////        Thread.sleep(2000);
+//        TopBar_Screen.getNumberItem();
+//        TopBar_Screen.getNumberItem();
+//        TopBar_Screen.getNumberItem();
+//
+//        int numberItemAfter = TopBar_Screen.getNumberItem();
+//        System.out.println(numberItemBefore + ">>> " + numberItemAfter);
+//        if (numberItemBefore != numberItemAfter) {
+//
+//            TopBar_Screen.click_MyCartBtn();
+//        } else { // We need select size first
+//
+//            chooseSize();
+//        }
 
-        int numberItemAfter = TopBar_Screen.getNumberItem();
-        System.out.println(numberItemBefore + ">>> " + numberItemAfter);
-        if (numberItemBefore != numberItemAfter) {
-
-            TopBar_Screen.click_MyCartBtn();
-        } else { // We need select size first
+        ProductDetail_Screen.click_AddToCartBtn(); //Add to Cart
+        // Check for Variant Selection
+        Boolean chooseSizeMsg = isElementPresent(ProductDetail_Screen.chooseSizeMsg);
+        if (chooseSizeMsg) {
 
             chooseSize();
+
+        } else {
+            TopBar_Screen.click_MyCartBtn();
         }
     }
 }
