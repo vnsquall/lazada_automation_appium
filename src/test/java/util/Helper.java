@@ -418,7 +418,7 @@ public class Helper {
      * Select random option from dropdown list
      * @param webElement WebElement
      */
-    public static void selectorRandom(WebElement webElement) {
+    public static void selectorRandom(WebElement webElement) throws InterruptedException {
 
         if (driver.getContext().contains("WEBVIEW")) {
 
@@ -429,6 +429,7 @@ public class Helper {
             dropdown.selectByIndex(randomNumber);
         } else { // NATIVE APP
             webElement.click();
+            Thread.sleep(3000);
             randClick(By.xpath("//*[@class='android.widget.TextView']"));
         }
     }
