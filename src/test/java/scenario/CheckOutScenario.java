@@ -678,6 +678,20 @@ public class CheckOutScenario extends AppiumSetupTest {
 
     }
 
+    protected void checkoutBankTransferAsGuest (String venture, String menuWiz, String categories, String filterWiz,
+                                               String prodWiz, String name, String address, String phoneNumber, int bankIndex, String senderName ) throws InterruptedException {
+        // Perform Check Out steps
+        addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
+        Thread.sleep(1000);
+        Login_Screen.input_Email(generateEmail());
+        Login_Screen.click_ContinueBtn();
+        Thread.sleep(3000);
+        editShippingAddress(venture, name, address, phoneNumber);
+        ShippingAddress_Screen.click_ContinueBtn();
+        bankTransfer(bankIndex, senderName);
+
+    }
+
     /**
      * Use bank transfer payment method check out with a different billing address in ID venture
      */

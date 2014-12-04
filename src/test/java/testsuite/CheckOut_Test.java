@@ -15,12 +15,12 @@ public class CheckOut_Test extends CheckOutScenario {
     @DataProvider
     Object[][] getVenturesDataToTestCashOnDelivery() {
         return new Object[][]{
-//                {"Singapore"},
-//                {"Philippines"},
+                {"Singapore"},
+                {"Philippines"},
 //                {"Indonesia"},
 //                {"Malaysia"},
 //                {"Vietnam"},
-                {"Thailand"}
+//                {"Thailand"}
         };
     }
 
@@ -117,10 +117,10 @@ public class CheckOut_Test extends CheckOutScenario {
     @DataProvider
     Object[][] getVenturesDataToTestRemoveFromCart() {
         return new Object[][]{
-//                {"Singapore"},
+                {"Singapore"},
 //                {"Thailand"},
 //                {"Vietnam"},
-                {"Indonesia"},
+//                {"Indonesia"},
 //                {"Malaysia"},
 //                {"Philippines"}
 
@@ -230,12 +230,19 @@ public class CheckOut_Test extends CheckOutScenario {
     @DataProvider
     Object[][] getVenturesDataToTestCashOnDeliveryGuest () {
         return new Object[][]{
-                {"Singapore"},
-//                {"Philippines"},
-//                {"Indonesia"},
-//                {"Malaysia"},
-//                {"Vietnam"},
-//                {"Thailand"}
+                {"Singapore", "jdalwd", "dhakdhawd", "99999393939"},
+                {"Philippines", "jack", "Bom bai", "8788332222"},
+                {"Indonesia", "nicky", "LA", "38877737373"},
+                {"Malaysia", "jdjdjd", "jdjdda", "42424242424"},
+                {"Vietnam", "nicky", "LA", "38877737373" },
+//                {"Thailand", "hajdald", "dgaihwdh", "88883838383"}
+        };
+    }
+
+    @DataProvider
+    Object[][] getVenturesDataToTestBankTransferGuest () {
+        return new Object[][]{
+                {"Indonesia", "nicky", "LA", "38877737373", 3, "jdajwd"},
         };
     }
     @DataProvider
@@ -243,10 +250,10 @@ public class CheckOut_Test extends CheckOutScenario {
         return new Object[][]{
 //                {"Singapore"},
 //                {"Philippines"},
-//                {"Indonesia"},
+                {"Indonesia"},
 //                {"Malaysia"},
 //                {"Vietnam"},
-                {"Thailand"}
+//                {"Thailand"}
         };
     }
 
@@ -259,6 +266,36 @@ public class CheckOut_Test extends CheckOutScenario {
                 setText(venture).get("categories"),
                 setText(venture).get("filterWiz"),
                 setText(venture).get("prodWiz"));
+    }
+
+    @Test(dataProvider = "getVenturesDataToTestCashOnDeliveryGuest")
+    public void test_CashOnDeliveryGuest(String venture, String name,
+                                         String address, String phoneNumber) throws Exception {
+
+        checkoutCODAsGuest(venture,
+                setText(venture).get("menuWiz"),
+                setText(venture).get("categories"),
+                setText(venture).get("filterWiz"),
+                setText(venture).get("prodWiz"),
+                name,
+                address,
+                phoneNumber);
+    }
+
+    @Test(dataProvider = "getVenturesDataToTestBankTransferGuest")
+    public void test_BankTransferGuest(String venture, String name,
+                                         String address, String phoneNumber, int bankIndex, String senderName) throws Exception {
+
+        checkoutBankTransferAsGuest(venture,
+                setText(venture).get("menuWiz"),
+                setText(venture).get("categories"),
+                setText(venture).get("filterWiz"),
+                setText(venture).get("prodWiz"),
+                name,
+                address,
+                phoneNumber,
+                bankIndex,
+                senderName);
     }
 
     @Test(dataProvider = "getVenturesDataToTestCreditCardInvalid")
