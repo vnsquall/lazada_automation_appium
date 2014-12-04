@@ -50,7 +50,7 @@ public class WishListScenario extends AppiumSetupTest {
         ProductDetail_Screen.click_OKBtn(); //Click on OK button
     }
 
-    protected static void addToWishList () {
+    protected static void addToWishList () throws InterruptedException {
 
         // Add to Wish list
         ProductDetail_Screen.click_AddToWishListBtn();
@@ -182,7 +182,7 @@ public class WishListScenario extends AppiumSetupTest {
      */
     public static void addProductToWishListNoWizard(String venture, String menuWiz, String wishList, String emptyWL,
 
-                                                    String categories, String filterWiz, String prodWiz, String addWL, String appPackage) {
+                                                    String categories, String filterWiz, String prodWiz, String addWL, String appPackage) throws InterruptedException {
 
         TopBar_Screen.click_HomeBtn();
         text_exact(categories).click();
@@ -199,6 +199,7 @@ public class WishListScenario extends AppiumSetupTest {
 
         // Add product to WishList
         addToWishList();
+
 
 
     }
