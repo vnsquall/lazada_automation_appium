@@ -671,7 +671,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         Thread.sleep(1000);
         Login_Screen.input_Email(generateEmail());
         Login_Screen.click_ContinueBtn();
-        createShippingAddress(venture, name, address, phoneNumber);
+        editShippingAddress(venture, name, address, phoneNumber);
         ShippingAddress_Screen.click_ContinueBtn();
         cashOnDelivery();
 
@@ -746,7 +746,5 @@ public class CheckOutScenario extends AppiumSetupTest {
 
             chooseSize();
         }
-
-
     }
 }
