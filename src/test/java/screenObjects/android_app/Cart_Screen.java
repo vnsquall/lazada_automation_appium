@@ -20,42 +20,42 @@ public class Cart_Screen {
 
     public static void click_CheckoutBtn() {
 
-        findElement(split(proceedToCheckout)[0], split(proceedToCheckout)[1]).click();
+        findElement(proceedToCheckout).click();
     }
 
     public static List<WebElement> deleteButtons() {
 
-        return findElements(split(delete)[0], split(delete)[1]);
+        return findElements(delete);
     }
 
     public static void click_DeleteConfirm() {
 
-        findElement(split(removeItem)[0], split(removeItem)[1]).click();
+        findElement(removeItem).click();
     }
 
     public static WebElement productName() {
 
-        return findElement(split(productName)[0], split(productName)[1]);
+        return findElement(productName);
     }
 
     public static void click_deleteProductBtn() {
 
-        findElement(split(delete)[0], split(delete)[1]).click();
+        findElement(delete).click();
     }
 
     public static void click_quantityBtn() {
 
-        findElement(split(quantity)[0], split(quantity)[1]).click();
+        findElement(quantity).click();
     }
 
     public static WebElement quantity() {
 
-        return findElement(split(quantity)[0], split(quantity)[1]);
+        return findElement(quantity);
     }
 
     public static List<WebElement> sizes() {
 
-        return findElements(split(sizes)[0], split(sizes)[1]);
+        return findElements(delete);
     }
 
 
