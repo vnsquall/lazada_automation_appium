@@ -615,7 +615,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         }
 
         // Submit
-        buttons.get(buttons.size()-1).click();
+        buttons.get(buttons.size() - 1).click();
         switchToWebView();
 
     }
@@ -771,6 +771,23 @@ public class CheckOutScenario extends AppiumSetupTest {
 
         } else {
             TopBar_Screen.click_MyCartBtn();
+        }
+    }
+
+    /**
+     * Buy now
+     */
+    protected void buyNow() throws InterruptedException {
+
+        ProductDetail_Screen.click_BuyNowBtn(); //Add to Cart
+        // Check for Variant Selection
+        Boolean chooseSizeMsg = isElementPresent(ProductDetail_Screen.chooseSizeMsg);
+        if (chooseSizeMsg) {
+
+            chooseSize();
+
+        } else {
+            ProductDetail_Screen.click_BuyNowBtn();
         }
     }
 }
