@@ -18,7 +18,7 @@ public class SideMenu_Screen {
 
     public static void click_SignOutConfirmBtn() {
 
-        findElement(split(signOutConfirm)[0], split(signOutConfirm)[1]).click();
+        findElement(signOutConfirm).click();
     }
 
 
