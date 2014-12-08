@@ -574,8 +574,17 @@ public class Helper {
      */
     public static Boolean isPageContains(String text) {
 
-        String pageSoucre = driver.getPageSource();
-        return pageSoucre.contains(text);
+        String pageSource = driver.getPageSource();
+        return pageSource.contains(text);
+
+    }
+
+    /**
+     * Check page contains text or Not
+     */
+    public static Boolean hasSize () {
+
+        return isPageContains("product_variant_button");
 
     }
 
