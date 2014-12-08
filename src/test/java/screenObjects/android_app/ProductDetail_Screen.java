@@ -21,37 +21,37 @@ public class ProductDetail_Screen {
 
     public static void click_AddToCartBtn() {
 
-        findElement(split(addToCart)[0], split(addToCart)[1]).click();
+        findElement(addToCart).click();
     }
 
     public static void click_AddToWishListBtn() {
 
-        findElement(split(addToWishList)[0], split(addToWishList)[1]).click();
+        findElement(addToWishList).click();
     }
 
     public static void click_ShareBtn() {
 
-        findElement(split(share)[0], split(share)[1]).click();
+        findElement(share).click();
     }
 
     public static void click_GoToCartBtn() {
 
-        findElement(split(goToCart)[0], split(goToCart)[1]).click();
+        findElement(goToCart).click();
     }
 
     public static void click_ChooseSizeBtn() {
 
-        findElement(split(chooseSize)[0], split(chooseSize)[1]).click();
+        findElement(chooseSize).click();
     }
 
     public static WebElement chooseSizeBtn() {
 
-        return findElement(split(chooseSize)[0], split(chooseSize)[1]);
+        return findElement(chooseSize);
     }
 
     public static void click_OKBtn() {
 
-        findElement(split(OKBtn)[0], split(OKBtn)[1]).click();
+        findElement(OKBtn).click();
     }
 
     /**
@@ -64,12 +64,12 @@ public class ProductDetail_Screen {
 
     public static WebElement productName() {
 
-        return findElement(split(productName)[0], split(productName)[1]);
+        return findElement(productName);
     }
 
     public static void click_BuyNowBtn() {
 
-        findElement(split(buyNow)[0], split(buyNow)[1]).click();
+        findElement(buyNow).click();
     }
 
 
