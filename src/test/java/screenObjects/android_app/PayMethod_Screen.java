@@ -34,55 +34,55 @@ public class PayMethod_Screen {
 
     public static void click_ContinueBtn() {
 
-        findElement(split(continueButton)[0], split(continueButton)[1]).click();
+        findElement(continueButton).click();
     }
 
     public static void click_CreditCardRadio() {
 
-        findElement(split(labelCreditCard)[0], split(labelCreditCard)[1]).click();
+        findElement(labelCreditCard).click();
     }
 
     public static void click_PaypalRadio() {
 
-        findElement(split(labelPaypal)[0], split(labelPaypal)[1]).click();
+        findElement(labelPaypal).click();
     }
 
-    public static void input_CreditNumber(String creditNumber) {
+    public static void input_CreditNumber(String _creditNumber) {
 
-        findElement(split(PayMethod_Screen.creditNumber)[0], split(PayMethod_Screen.creditNumber)[1]).click();
-        findElement(split(PayMethod_Screen.creditNumber)[0], split(PayMethod_Screen.creditNumber)[1]).sendKeys(creditNumber);
+        findElement(creditNumber).click();
+        findElement(creditNumber).sendKeys(_creditNumber);
     }
 
     public static void input_CreditName(String customerName) {
 
-        findElement(split(creditCustomerName)[0], split(creditCustomerName)[1]).click();
-        findElement(split(creditCustomerName)[0], split(creditCustomerName)[1]).sendKeys(customerName);
+        findElement(creditCustomerName).click();
+        findElement(creditCustomerName).sendKeys(customerName);
     }
 
     public static void input_CreditSecurityCode(String securityCode) {
 
-        findElement(split(creditSecurityCode)[0], split(creditSecurityCode)[1]).click();
-        findElement(split(creditSecurityCode)[0], split(creditSecurityCode)[1]).sendKeys(securityCode);
+        findElement(creditSecurityCode).click();
+        findElement(creditSecurityCode).sendKeys(securityCode);
     }
 
     public static WebElement creditCardMonthCbx () {
 
-        return findElement(split(creditMonth)[0], split(creditMonth)[1]);
+        return findElement(creditMonth);
     }
 
     public static WebElement creditCardYearCbx () {
 
-        return findElement(split(creditYear)[0], split(creditYear)[1]);
+        return findElement(creditYear);
     }
 
     public static void click_BankTransferRadio () {
 
-        findElement(split(labelBankTransfer)[0], split(labelBankTransfer)[1]).click();
+        findElement(labelBankTransfer).click();
     }
 
     public static void input_SenderName(String senderName) {
 
-        findElement(split(bankTransferSenderName)[0], split(bankTransferSenderName)[1]).sendKeys(senderName);
+        findElement(bankTransferSenderName).sendKeys(senderName);
     }
 
 
