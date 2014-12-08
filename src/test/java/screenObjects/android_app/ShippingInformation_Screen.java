@@ -16,12 +16,12 @@ public class ShippingInformation_Screen {
 
     public static void click_ContinueBtn() {
 
-        findElement(split(continueButton)[0], split(continueButton)[1]).click();
+        findElement(continueButton).click();
     }
 
     public static void click_NewAddress () {
 
-        findElement(split(newAddress)[0], split(newAddress)[1]).click();
+        findElement(newAddress).click();
     }
 
     /**
@@ -29,7 +29,7 @@ public class ShippingInformation_Screen {
      */
     public static void click_UseDifferent () {
 
-        findElement(split(useDifferentBillingAddress)[0], split(useDifferentBillingAddress)[1]).click();
+        findElement(useDifferentBillingAddress).click();
     }
 
 
