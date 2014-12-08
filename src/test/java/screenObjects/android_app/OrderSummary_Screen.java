@@ -18,36 +18,36 @@ public class OrderSummary_Screen {
 
     public static void click_PlaceOrderBtn() {
 
-        findElement(split(placeOrder)[0], split(placeOrder)[1]).click();
+        findElement(placeOrder).click();
     }
 
     public static void click_EditBillingAddress() {
 
-        findElement(split(editBillingAddress)[0], split(editBillingAddress)[1]).click();
+        findElement(editBillingAddress).click();
     }
 
     public static void click_EditShippingAddress() {
 
-        findElement(split(editShippingAddress)[0], split(editShippingAddress)[1]).click();
+        findElement(editShippingAddress).click();
     }
 
     public static void click_ChangePayment() {
 
-        findElement(split(changePayment)[0], split(changePayment)[1]).click();
+        findElement(changePayment).click();
     }
 
     public static void click_addCouponBtn() {
 
-        findElement(split(addCoupon)[0], split(addCoupon)[1]).click();
+        findElement(addCoupon).click();
     }
 
     public static void input_Coupon(String _coupon) {
 
-        findElement(split(coupon)[0], split(coupon)[1]).sendKeys(_coupon);
+        findElement(coupon).sendKeys(_coupon);
     }
 
     public static void click_SubmitCoupon() {
 
-        findElement(split(submitCoupon)[0], split(submitCoupon)[1]).click();
+        findElement(submitCoupon).click();
     }
 }
