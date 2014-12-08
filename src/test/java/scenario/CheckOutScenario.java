@@ -734,8 +734,6 @@ public class CheckOutScenario extends AppiumSetupTest {
 
         ProductDetail_Screen.click_ChooseSizeBtn();
         randClick(ProductDetail_Screen.sizes);
-        ProductDetail_Screen.click_AddToCartBtn();
-        TopBar_Screen.click_MyCartBtn();
         Thread.sleep(2000);
 
     }
@@ -745,33 +743,12 @@ public class CheckOutScenario extends AppiumSetupTest {
      */
     protected void addToCart() throws InterruptedException {
 
-//        int numberItemBefore = TopBar_Screen.getNumberItem();
-//        ProductDetail_Screen.click_AddToCartBtn();
-////        Thread.sleep(2000);
-//        TopBar_Screen.getNumberItem();
-//        TopBar_Screen.getNumberItem();
-//        TopBar_Screen.getNumberItem();
-//
-//        int numberItemAfter = TopBar_Screen.getNumberItem();
-//        System.out.println(numberItemBefore + ">>> " + numberItemAfter);
-//        if (numberItemBefore != numberItemAfter) {
-//
-//            TopBar_Screen.click_MyCartBtn();
-//        } else { // We need select size first
-//
-//            chooseSize();
-//        }
-
-        ProductDetail_Screen.click_AddToCartBtn(); //Add to Cart
-        // Check for Variant Selection
-        Boolean chooseSizeMsg = isElementPresent(ProductDetail_Screen.chooseSizeMsg);
-        if (chooseSizeMsg) {
+        if (hasSize()) { // We need select size first
 
             chooseSize();
-
-        } else {
-            TopBar_Screen.click_MyCartBtn();
         }
+        ProductDetail_Screen.click_AddToCartBtn();
+        TopBar_Screen.click_MyCartBtn();
     }
 
     /**
@@ -779,15 +756,10 @@ public class CheckOutScenario extends AppiumSetupTest {
      */
     protected void buyNow() throws InterruptedException {
 
-        ProductDetail_Screen.click_BuyNowBtn(); //Add to Cart
-        // Check for Variant Selection
-        Boolean chooseSizeMsg = isElementPresent(ProductDetail_Screen.chooseSizeMsg);
-        if (chooseSizeMsg) {
+        if (hasSize()) { // We need select size first
 
             chooseSize();
-
-        } else {
-            ProductDetail_Screen.click_BuyNowBtn();
         }
+        ProductDetail_Screen.click_BuyNowBtn();
     }
 }
