@@ -2,10 +2,8 @@ package screenObjects.android_app;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static util.Helper.*;
 
 /**
@@ -20,12 +18,12 @@ public class Home_Screen {
 
     public static void loaded() {
 
-        findElement(split(product_features_title)[0], split(product_features_title)[1]);
+        findElement(product_features_title);
     }
 
     public static void input_search(String query) {
 
-        findElement(split(search)[0], split(search)[1]).sendKeys(query);
+        findElement(search).sendKeys(query);
     }
 
     /**
@@ -34,7 +32,7 @@ public class Home_Screen {
     public static List<WebElement> getRichRelevanceProducts () {
 
         List<WebElement> products = new ArrayList<WebElement>();
-        List<WebElement> groupTeasers = findElements(split(groupTeaser)[0], split(groupTeaser)[1]);
+        List<WebElement> groupTeasers = findElements(groupTeaser);
         System.out.println("number of group teaser >>>> " + groupTeasers.size());
 
         for (WebElement groupTeaser : groupTeasers) {
