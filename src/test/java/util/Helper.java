@@ -569,6 +569,18 @@ public class Helper {
         return me;
     }
 
+    /**
+     * Check page contains text or Not
+     */
+    public static Boolean isPageContains(String text) {
+
+        String pageSoucre = driver.getPageSource();
+        return pageSoucre.contains(text);
+
+    }
+
+
+
 
 
 }
