@@ -23,42 +23,42 @@ public class ShippingAddress_Screen {
 
     public static void click_ContinueBtn() {
 
-        findElement(split(continueButton)[0], split(continueButton)[1]).click();
+        findElement(continueButton).click();
     }
 
     public static void input_Name(String _name) {
 
-        findElement(split(name)[0], split(name)[1]).sendKeys(_name);
+        findElement(name).sendKeys(_name);
     }
 
     public static void input_Address(String _address) {
 
-        findElement(split(address)[0], split(address)[1]).sendKeys(_address);
+        findElement(address).sendKeys(_address);
     }
 
     public static WebElement region () {
 
-        return findElement(split(region)[0], split(region)[1]);
+        return findElement(region);
     }
 
     public static WebElement city () {
 
-        return findElement(split(city)[0], split(city)[1]);
+        return findElement(city);
     }
 
     public static WebElement ward() {
 
-        return findElement(split(ward)[0], split(ward)[1]);
+        return findElement(ward);
     }
 
     public static void input_PostCode (String _postCode) {
 
-        findElement(split(postCode)[0], split(postCode)[1]).sendKeys(_postCode);
+        findElement(postCode).sendKeys(_postCode);
     }
 
     public static void input_PhoneNumber(String _phoneNumber) {
 
-        findElement(split(phoneNumber)[0], split(phoneNumber)[1]).sendKeys(_phoneNumber);
+        findElement(phoneNumber).sendKeys(_phoneNumber);
     }
 
 
