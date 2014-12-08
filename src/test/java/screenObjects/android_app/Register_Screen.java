@@ -13,32 +13,32 @@ public class Register_Screen {
 
     public static void input_Email (String email) {
 
-        findElements(split(textBoxes)[0], split(textBoxes)[1]).get(0).sendKeys(email);
+        findElements(textBoxes).get(0).sendKeys(email);
     }
 
     public static void input_Password (String password) {
 
-        findElements(split(textBoxes)[0], split(textBoxes)[1]).get(1).sendKeys(password);
+        findElements(textBoxes).get(1).sendKeys(password);
     }
 
     public static void input_RePassword (String password) {
 
-        findElements(split(textBoxes)[0], split(textBoxes)[1]).get(2).sendKeys(password);
+        findElements(textBoxes).get(2).sendKeys(password);
     }
 
     public static void input_Name (String name) {
 
-        findElements(split(textBoxes)[0], split(textBoxes)[1]).get(3).sendKeys(name);
+        findElements(textBoxes).get(3).sendKeys(name);
     }
 
     public static void click_ShowPassword () {
 
-        findElement(split(showPassword)[0], split(showPassword)[1]).click();
+        findElement(showPassword).click();
     }
 
     public static void click_SubmitBtn () {
 
-        findElement(split(submit)[0], split(submit)[1]).click();
+        findElement(submit).click();
     }
 
 
