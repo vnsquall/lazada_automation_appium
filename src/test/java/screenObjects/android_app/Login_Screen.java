@@ -24,21 +24,21 @@ public class Login_Screen {
 
 
     public static void input_Email (String _email) {
-        List<WebElement> editTexts = findElements(split(email)[0], split(email)[1]);
+        List<WebElement> editTexts = findElements(email);
         editTexts.get(0).sendKeys(_email);
     }
 
     public static void input_Password (String _password) {
-        List<WebElement> editTexts = findElements(split(password)[0], split(password)[1]);
+        List<WebElement> editTexts = findElements(password);
         editTexts.get(1).sendKeys(_password);
     }
 
     public static void click_ShowPassword () {
-        findElement(split(showPassword)[0], split(showPassword)[1]).click();
+        findElement(showPassword).click();
     }
 
     public static void click_Login () {
-        findElement(split(login)[0], split(login)[1]).click();
+        findElement(login).click();
     }
 
     public static void wait_ForWebView() {
@@ -49,17 +49,17 @@ public class Login_Screen {
 
     public static WebElement rocket_app_checkoutweb () {
 
-        return findElement(split(rocket_app_checkoutweb1)[0], split(rocket_app_checkoutweb1)[1]);
+        return findElement(rocket_app_checkoutweb1);
     }
 
     public static void click_RegisterBtn () {
 
-        findElement(split(register)[0], split(register)[1]).click();
+        findElement(register).click();
     }
 
     public static void click_ContinueBtn () { // for new case: guest checkout
 
-        findElement(split(continueBtn)[0], split(continueBtn)[1]).click();
+        findElement(continueBtn).click();
     }
 
     public static boolean verifyText (String text) {
@@ -69,12 +69,12 @@ public class Login_Screen {
 
     public static void click_GuestRd() {
 
-        findElement(split(guest)[0], split(guest)[1]).click();
+        findElement(guest).click();
     }
 
     public static void click_UserRd() {
 
-        findElement(split(user)[0], split(user)[1]).click();
+        findElement(user).click();
     }
 
 }
