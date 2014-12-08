@@ -14,12 +14,12 @@ public class TopBar_Screen {
 
     public static void click_HomeBtn() {
 
-        findElement(split(home)[0], split(home)[1]).click();
+        findElement(home).click();
     }
 
     public static void click_MyCartBtn() {
 
-        findElement(split(cart)[0], split(cart)[1]).click();
+        findElement(cart).click();
     }
 
     /**
@@ -27,7 +27,7 @@ public class TopBar_Screen {
      */
     public static int getNumberItem() {
 
-        String itemNumber = findElement(split(cart)[0], split(cart)[1]).getText();
+        String itemNumber = findElement(cart).getText();
         if (itemNumber.equals("")) {
             return 0;
         }
