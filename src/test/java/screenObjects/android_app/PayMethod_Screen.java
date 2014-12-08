@@ -29,7 +29,7 @@ public class PayMethod_Screen {
 
     public static void click_CashOnDeliveryRadio() {
 
-        findElement(split(labelCOD)[0], split(labelCOD)[1]).click();
+        findElement(labelCOD).click();
     }
 
     public static void click_ContinueBtn() {
