@@ -17,6 +17,7 @@ public class ProductDetail_Screen {
     public static String OKBtn = "resourceID::button1"; // This button be showed after click on Add to wish list
     public static String productName = "resourceID::product_name";
     public static String chooseSizeMsg = "resourceID::product_variant_choose_error";
+    public static String buyNow = "resourceID::btn_buy_now";
 
     public static void click_AddToCartBtn() {
 
@@ -64,6 +65,11 @@ public class ProductDetail_Screen {
     public static WebElement productName() {
 
         return findElement(split(productName)[0], split(productName)[1]);
+    }
+
+    public static void click_BuyNowBtn() {
+
+        findElement(split(buyNow)[0], split(buyNow)[1]).click();
     }
 
 
