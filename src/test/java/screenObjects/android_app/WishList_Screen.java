@@ -18,37 +18,37 @@ public class WishList_Screen {
 
     public static void click_AddAllToCart() {
 
-        findElement(split(addAllToCart)[0], split(addAllToCart)[1]).click();
+        findElement(addAllToCart).click();
     }
 
     public static void click_ContinueBrowsingBtn() {
 
-        findElement(split(continueBrowsing)[0], split(continueBrowsing)[1]).click();
+        findElement(continueBrowsing).click();
     }
 
     public static WebElement deleteBtn() {
 
-        return findElement(split(delete)[0], split(delete)[1]);
+        return findElement(delete);
     }
 
     public static void click_DeleteBtn() {
 
-        findElement(split(delete)[0], split(delete)[1]).click();
+        findElement(delete).click();
     }
 
     public static WebElement noItemMessage() {
 
-        return findElement(split(noItemMessage)[0], split(noItemMessage)[1]);
+        return findElement(noItemMessage);
     }
 
     public static void click_AddToCartBtn() {
 
-        findElement(split(addToCart)[0], split(addToCart)[1]).click();
+        findElement(addToCart).click();
     }
 
     public static void click_OKBtn() {
 
-        findElement(split(OKBtn)[0], split(OKBtn)[1]).click();
+        findElement(OKBtn).click();
     }
 
 
