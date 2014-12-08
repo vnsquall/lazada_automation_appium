@@ -22,7 +22,7 @@ public class UserData_Screen {
 
     public static void click_CancelBtn() {
 
-        findElement(split(cancel)[0], split(cancel)[1]).click();
+        findElement(cancel).click();
     }
 
 
