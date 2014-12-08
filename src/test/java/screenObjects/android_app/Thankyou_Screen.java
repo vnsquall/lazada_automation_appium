@@ -15,7 +15,7 @@ public class Thankyou_Screen {
 
     public static void click_ShareBtn() {
 
-        findElement(split(share)[0], split(share)[1]).click();
+        findElement(share).click();
     }
 
 
