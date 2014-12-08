@@ -268,6 +268,15 @@ public class Helper {
     }
 
     /**
+     * Find list of element
+     */
+    public static List<WebElement> findElements(String locator) {
+
+        List<WebElement> e = findElements(split(locator)[0], split(locator)[1]);
+        return e;
+    }
+
+    /**
      * find Element by UIAndroidSelector
      *
      * @param selectorTypeStr
