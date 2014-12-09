@@ -55,7 +55,7 @@ public class Cart_Screen {
 
     public static List<WebElement> sizes() {
 
-        return findElements(delete);
+        return findElements(sizes);
     }
 
 
