@@ -51,13 +51,15 @@ public class WishListScenario extends AppiumSetupTest {
 
     protected void addToWishList () throws InterruptedException {
 
+        ProductDetail_Screen.click_AddToWishListBtn();
+
         // Add to Wish list
-        if (hasSize()) { // We need select size first
+        if (hasSizeErrorMgs()) { // We need select size first
 
             chooseSize();
+            ProductDetail_Screen.click_AddToWishListBtn();
+
         }
-        ProductDetail_Screen.click_AddToWishListBtn();
-        TopBar_Screen.click_MyCartBtn();
         ProductDetail_Screen.click_OKBtn();
     }
 
