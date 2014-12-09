@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import screenObjects.android_app.*;
 import util.AppiumSetupTest;
-
 import java.util.Random;
 
 import static util.Helper.*;
@@ -50,19 +49,28 @@ public class WishListScenario extends AppiumSetupTest {
         ProductDetail_Screen.click_OKBtn(); //Click on OK button
     }
 
-    protected static void addToWishList () throws InterruptedException {
+    protected void addToWishList () throws InterruptedException {
 
         // Add to Wish list
-        ProductDetail_Screen.click_AddToWishListBtn();
-        if (!isElementPresent(ProductDetail_Screen.OKBtn)) { // We need select size first
+        if (hasSize()) { // We need select size first
 
-            selectorRandom(ProductDetail_Screen.chooseSizeBtn());
-            ProductDetail_Screen.click_AddToWishListBtn();
-            ProductDetail_Screen.click_OKBtn();
+            chooseSize();
         }
+        ProductDetail_Screen.click_AddToWishListBtn();
+        TopBar_Screen.click_MyCartBtn();
+        ProductDetail_Screen.click_OKBtn();
     }
 
+    /**
+     * Random and select size clothes, shoes, ...
+     */
+    protected void chooseSize () throws InterruptedException {
 
+        ProductDetail_Screen.click_ChooseSizeBtn();
+        randClick(ProductDetail_Screen.sizes);
+        Thread.sleep(2000);
+
+    }
 
     protected void wishListDeleteProduct (String venture, String menuWiz, String wishList, String emptyWL,
                                           String categories, String filterWiz, String prodWiz, String addWL) throws InterruptedException {
@@ -180,9 +188,9 @@ public class WishListScenario extends AppiumSetupTest {
     /**
      * Add 1 randomly product to WishList - No clicking on menu wizard
      */
-    public static void addProductToWishListNoWizard(String venture, String menuWiz, String wishList, String emptyWL,
+    public void addProductToWishListNoWizard(String venture, String menuWiz, String wishList, String emptyWL,
 
-                                                    String categories, String filterWiz, String prodWiz, String addWL, String appPackage) throws InterruptedException {
+                                             String categories, String filterWiz, String prodWiz, String addWL, String appPackage) throws InterruptedException {
 
         TopBar_Screen.click_HomeBtn();
         text_exact(categories).click();
@@ -199,8 +207,6 @@ public class WishListScenario extends AppiumSetupTest {
 
         // Add product to WishList
         addToWishList();
-
-
 
     }
 }
