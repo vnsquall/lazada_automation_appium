@@ -743,11 +743,12 @@ public class CheckOutScenario extends AppiumSetupTest {
      */
     protected void addToCart() throws InterruptedException {
 
-        if (hasSize()) { // We need select size first
+        ProductDetail_Screen.click_AddToCartBtn();
+        if (hasSizeErrorMgs()) { // We need select size first
 
             chooseSize();
+            ProductDetail_Screen.click_AddToCartBtn();
         }
-        ProductDetail_Screen.click_AddToCartBtn();
         TopBar_Screen.click_MyCartBtn();
     }
 
@@ -756,10 +757,11 @@ public class CheckOutScenario extends AppiumSetupTest {
      */
     protected void buyNow() throws InterruptedException {
 
-        if (hasSize()) { // We need select size first
+        ProductDetail_Screen.click_BuyNowBtn();
+        if (hasSizeErrorMgs()) { // We need select size first
 
             chooseSize();
+            ProductDetail_Screen.click_BuyNowBtn();
         }
-        ProductDetail_Screen.click_BuyNowBtn();
     }
 }
