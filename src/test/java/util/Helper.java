@@ -79,7 +79,7 @@ public class Helper {
     public static Boolean isElementPresent(String locator) {
         Boolean isPresent = Boolean.FALSE;
         try {
-            isPresent = findElements(split(locator)[0], split(locator)[1]).size() > 0;
+            isPresent = findElements(locator).size() > 0;
             return isPresent;
         } catch (NoSuchElementException ex) {
             return isPresent;
