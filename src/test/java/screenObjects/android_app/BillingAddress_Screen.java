@@ -11,14 +11,14 @@ import static util.Helper.*;
  */
 public class BillingAddress_Screen {
 
-    private static String continueButton = "xpath:://*[@class='orange-button']";
-    private static String name = "xpath:://*[@id='ThreeStepBillingAddressForm_first_name']";
-    private static String address = "xpath:://*[@id='ThreeStepBillingAddressForm_address1']";
-    private static String region = "xpath:://*[@id='ThreeStepBillingAddressForm_location_0']";
-    private static String city = "xpath:://*[@id='ThreeStepBillingAddressForm_location_1']";
-    private static String ward = "xpath:://*[@id='ThreeStepBillingAddressForm_location_2']";
-    private static String postCode = "xpath:://*[@id='ThreeStepBillingAddressForm_postcode']";
-    private static String phoneNumber = "xpath:://*[@id='ThreeStepBillingAddressForm_phone']";
+    public static String continueButton = "xpath:://*[@class='orange-button']";
+    public static String name = "xpath:://*[@id='ThreeStepBillingAddressForm_first_name']";
+    public static String address = "xpath:://*[@id='ThreeStepBillingAddressForm_address1']";
+    public static String region = "xpath:://*[@id='ThreeStepBillingAddressForm_location_0']";
+    public static String city = "xpath:://*[@id='ThreeStepBillingAddressForm_location_1']";
+    public static String ward = "xpath:://*[@id='ThreeStepBillingAddressForm_location_2']";
+    public static String postCode = "xpath:://*[@id='ThreeStepBillingAddressForm_postcode']";
+    public static String phoneNumber = "xpath:://*[@id='ThreeStepBillingAddressForm_phone']";
 
 
     public static void click_ContinueBtn() {
