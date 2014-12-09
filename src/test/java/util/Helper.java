@@ -580,7 +580,7 @@ public class Helper {
     }
 
     /**
-     * Check page contains text or Not
+     * Check product has size or Not; true: size, false: no size
      */
     public static Boolean hasSize () {
 
