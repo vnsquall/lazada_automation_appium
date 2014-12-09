@@ -11,16 +11,16 @@ import static util.Helper.*;
  */
 public class Login_Screen {
 
-    private static String email = "className::android.widget.EditText";
-    private static String password = "className::android.widget.EditText";
-    private static String showPassword = "className::android.widget.CheckBox";
-    private static String login = "resourceID::middle_login_button_signin";
-    private static String rocket_app_checkoutweb1 = "resourceID::rocket_app_checkoutweb";
+    public static String email = "className::android.widget.EditText";
+    public static String password = "className::android.widget.EditText";
+    public static String showPassword = "className::android.widget.CheckBox";
+    public static String login = "resourceID::middle_login_button_signin";
+    public static String rocket_app_checkoutweb1 = "resourceID::rocket_app_checkoutweb";
     public static String rocket_app_checkoutweb = ":id/rocket_app_checkoutweb"; /*special case*/
     public static String register = "resourceID::middle_login_link_register";
     public static String continueBtn = "resourceID::continue_checkout";
-    private static String guest = "resourceID::guestradio";
-    private static String user = "resourceID::accountradio";
+    public static String guest = "resourceID::guestradio";
+    public static String user = "resourceID::accountradio";
 
 
     public static void input_Email (String _email) {
