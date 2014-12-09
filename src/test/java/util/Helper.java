@@ -580,11 +580,13 @@ public class Helper {
     }
 
     /**
-     * Check product has size or Not; true: size, false: no size
+     * Check error choose size message
      */
-    public static Boolean hasSize () {
+    public static Boolean hasSizeErrorMgs() throws InterruptedException {
 
-        return isPageContains("product_variant_button");
+        Thread.sleep(2000);
+        return isPageContains("product_variant_choose_error");
+//        return isPageContains("product_variant_text");
 
     }
 
