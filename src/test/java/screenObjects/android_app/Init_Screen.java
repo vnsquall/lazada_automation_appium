@@ -8,7 +8,7 @@ import static util.Helper.*;
  */
 public class Init_Screen {
 
-    private static String countryName = "text::[country]";
+    public static String countryName = "text::[country]";
 
 
 

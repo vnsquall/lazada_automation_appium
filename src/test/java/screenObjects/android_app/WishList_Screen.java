@@ -9,12 +9,12 @@ import static util.Helper.*;
  */
 public class WishList_Screen {
 
-    private static String addAllToCart = "resourceID::checkout_button";
-    private static String continueBrowsing = "resourceID::wishlist_no_items_bt_continue";
-    private static String delete = "resourceID::wishlist_item_bt_delete";
-    private static String noItemMessage = "resourceID::wishlist_no_items_text";
-    private static String addToCart = "resourceID::wishlist_item_bt_add";
-    private static String OKBtn = "resourceID::button1";
+    public static String addAllToCart = "resourceID::checkout_button";
+    public static String continueBrowsing = "resourceID::wishlist_no_items_bt_continue";
+    public static String delete = "resourceID::wishlist_item_bt_delete";
+    public static String noItemMessage = "resourceID::wishlist_no_items_text";
+    public static String addToCart = "resourceID::wishlist_item_bt_add";
+    public static String OKBtn = "resourceID::button1";
 
     public static void click_AddAllToCart() {
 

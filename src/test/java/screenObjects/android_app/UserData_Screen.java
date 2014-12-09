@@ -12,7 +12,7 @@ import static util.Helper.split;
  */
 public class UserData_Screen {
 
-    private static String cancel = "resourceID::button_cancel";
+    public static String cancel = "resourceID::button_cancel";
 
 
     public static WebElement verifyText(String text) {

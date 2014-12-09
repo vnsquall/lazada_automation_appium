@@ -9,7 +9,7 @@ import static util.Helper.*;
  */
 public class SideMenu_Screen {
 
-    private static String signOutConfirm = "resourceID::button2";
+    public static String signOutConfirm = "resourceID::button2";
 
     public static void click_Menu(String menuName) {
 

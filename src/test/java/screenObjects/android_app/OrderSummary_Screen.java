@@ -8,9 +8,9 @@ import static util.Helper.split;
  */
 public class OrderSummary_Screen {
 
-    private static String placeOrder = "xpath:://*[@class='orange-button']";
-    private static String editBillingAddress = "xpath:://*[@id='change-shipping'][contains(@href, 'billing')]";
-    private static String editShippingAddress = "xpath:://*[@id='change-shipping'][contains(@href, 'shipping')]";
+    public static String placeOrder = "xpath:://*[@class='orange-button']";
+    public static String editBillingAddress = "xpath:://*[@id='change-shipping'][contains(@href, 'billing')]";
+    public static String editShippingAddress = "xpath:://*[@id='change-shipping'][contains(@href, 'shipping')]";
     public static String changePayment = "xpath:://*[@id='change-payment']";
     public static String addCoupon = "xpath:://*[@id='addCoupon']";
     public static String coupon = "xpath:://*[@id='coupon']";

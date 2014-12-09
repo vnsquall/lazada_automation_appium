@@ -8,9 +8,9 @@ import static util.Helper.split;
  */
 public class TopBar_Screen {
 
-    private static String home = "resourceID::abs__home";
-    private static String search = "resourceID::abs__imageButton";
-    private static String cart = "resourceID::cart_count";
+    public static String home = "resourceID::abs__home";
+    public static String search = "resourceID::abs__imageButton";
+    public static String cart = "resourceID::cart_count";
 
     public static void click_HomeBtn() {
 
