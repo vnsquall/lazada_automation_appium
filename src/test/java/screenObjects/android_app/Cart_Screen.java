@@ -11,12 +11,12 @@ import static util.Helper.split;
  */
 public class Cart_Screen {
 
-    private static String proceedToCheckout = "resourceID::checkout_button";
-    private static String delete = "resourceID::delete_button";
-    private static String removeItem = "resourceID::button1";
-    private static String productName = "resourceID::item_name";
-    private static String quantity = "resourceID::changequantity_button";
-    private static String sizes = "resourceID::item_text";
+    public static String proceedToCheckout = "resourceID::checkout_button";
+    public static String delete = "resourceID::delete_button";
+    public static String removeItem = "resourceID::button1";
+    public static String productName = "resourceID::item_name";
+    public static String quantity = "resourceID::changequantity_button";
+    public static String sizes = "resourceID::item_text";
 
     public static void click_CheckoutBtn() {
 
