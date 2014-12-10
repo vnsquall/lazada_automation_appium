@@ -104,6 +104,38 @@ public class CheckOutScenario extends AppiumSetupTest {
         }
     }
 
+    protected void checkOutUseCreditCardInvalidGuest(String venture, String menuWiz, String categories, String filterWiz,
+                                                String prodWiz, String creditNumber, String customerName, String securityCode,
+                                                String name, String address, String phoneNumber) throws InterruptedException {
+        // Perform Check Out steps
+//        Init_Screen.select_Country(venture, menuWiz);
+//        checkOut(categories, filterWiz, prodWiz);
+        buyNowRandomProduct(venture, menuWiz, categories, filterWiz, prodWiz);
+
+        // Login as guest
+        loginAsGuest();
+
+        // Input shipping address
+        editShippingAddress(venture, name, address, phoneNumber);
+
+        // Check the Credit Cards is available or not for this CheckOutTest
+        boolean hasCreditCard = creditCard(creditNumber, customerName, securityCode);
+
+        // Verify message
+        if (hasCreditCard) {
+
+            if (venture.equals("Singapore")) {
+                find("Sorry, the Credit Card number you entered is Invalid").isDisplayed();
+            }
+            if (venture.equals("Philippines")) {
+                find("The Credit Card number is not correct").isDisplayed();
+            }
+            if (venture.equals("Vietnam")) {
+                find("Số thẻ tín dụng không đúng").isDisplayed();
+            }
+        }
+    }
+
     /**
      * Perform check out steps via Credit card
      */
@@ -206,6 +238,20 @@ public class CheckOutScenario extends AppiumSetupTest {
     }
 
     /**
+     * Select random product -> add to Cart
+     *
+     */
+    protected void buyNowRandomProduct(String venture, String menuWiz, String categories,
+                                          String filterWiz, String prodWiz) throws InterruptedException {
+        Init_Screen.select_Country(venture, menuWiz);
+        TopBar_Screen.click_HomeBtn();
+
+        Thread.sleep(1000);
+        randomSelectProduct(categories, appPackage, filterWiz, prodWiz);
+        buyNow();
+    }
+
+    /**
      * Login as
      */
     protected void loginAs( String email, String password) throws InterruptedException {
@@ -223,6 +269,16 @@ public class CheckOutScenario extends AppiumSetupTest {
         switchToWebView();
         Thread.sleep(3000);
 
+    }
+
+    /**
+     * Login as guest
+     */
+    protected void loginAsGuest() throws InterruptedException {
+
+        Login_Screen.input_Email(generateEmail());
+        Login_Screen.click_ContinueBtn();
+        Thread.sleep(3000);
     }
 
     protected void checkOutCreateShippingAddress(String venture, String menuWiz, String categories, String filterWiz,
@@ -578,7 +634,7 @@ public class CheckOutScenario extends AppiumSetupTest {
 
         // Edit billing address
         switchToNativeApp();
-        List<WebElement> editTexts = driver.findElements(By.xpath("//*[@class='android.widget.EditText']"));
+        List<WebElement> editTexts = driver.findElementsByClassName("android.widget.EditText");
         List<WebElement> buttons = new ArrayList<WebElement>();
         editTexts.get(0).clear();
         editTexts.get(0).sendKeys(name);
@@ -589,7 +645,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         if (venture.equals("Thailand") || venture.equals("Philippines")
                 || venture.equals("Malaysia") || venture.equals("Indonesia")) {
 
-            buttons = driver.findElements(By.xpath("//*[@class='android.widget.Button']"));
+            buttons = driver.findElementsByClassName("android.widget.Button");
             selectorRandom(buttons.get(0)); // select random Region
             selectorRandom(buttons.get(1)); // select random City
             selectorRandom(buttons.get(2)); // select random Postcode
@@ -607,7 +663,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         }
         if (venture.equals("Vietnam")) {
 
-            buttons = driver.findElements(By.xpath("//*[@class='android.widget.Button']"));
+            buttons = driver.findElementsByClassName("android.widget.Button");
             selectorRandom(buttons.get(0)); // select random Region
             selectorRandom(buttons.get(1)); // select random City
             editTexts.get(2).clear();
@@ -667,11 +723,13 @@ public class CheckOutScenario extends AppiumSetupTest {
     protected void checkoutCODAsGuest (String venture, String menuWiz, String categories, String filterWiz,
                                                String prodWiz, String name, String address, String phoneNumber ) throws InterruptedException {
         // Perform Check Out steps
-        addRandomProductToCart(venture, menuWiz, categories, filterWiz, prodWiz);
+        buyNowRandomProduct(venture, menuWiz, categories, filterWiz, prodWiz);
         Thread.sleep(1000);
-        Login_Screen.input_Email(generateEmail());
-        Login_Screen.click_ContinueBtn();
-        Thread.sleep(3000);
+//        Login_Screen.input_Email(generateEmail());
+//        Login_Screen.click_ContinueBtn();
+//        Thread.sleep(3000);
+        loginAsGuest();
+
         editShippingAddress(venture, name, address, phoneNumber);
         ShippingAddress_Screen.click_ContinueBtn();
         cashOnDelivery();
