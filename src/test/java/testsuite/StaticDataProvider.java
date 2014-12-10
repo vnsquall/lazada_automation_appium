@@ -9,7 +9,7 @@ import scenario.CheckOutScenario;
 public class StaticDataProvider {
 
     @DataProvider
-    Object[][] getVenturesDataToTestCashOnDelivery() {
+    public static Object[][] getVenturesDataToTestCashOnDelivery() {
         return new Object[][]{
 //                {"Singapore"},
 //                {"Philippines"},
@@ -22,7 +22,7 @@ public class StaticDataProvider {
 
     //4000000000000002 737 06/2015 CC for using the OTP function
     @DataProvider
-    Object[][] getVenturesDataToTestCreditCardInvalid() {
+    public static Object[][] getVenturesDataToTestCreditCardInvalid() {
         return new Object[][]{
 //                {"Singapore", "4400123456784444", "Mr Test", "123"},
                 {"Malaysia", "4400123456784011", "dajdiaw", "777"},
@@ -36,7 +36,7 @@ public class StaticDataProvider {
 
     //4000000000000002 737 06/2015 CC for using the OTP function
     @DataProvider
-    Object[][] getVenturesDataToTestCreditCardInvalidGuest() {
+    public static Object[][] getVenturesDataToTestCreditCardInvalidGuest() {
         return new Object[][]{
 //                {"Singapore", "4400123456784444", "Mr Test", "123"},
 //                {"Malaysia", "4400123456784011", "dajdiaw", "777"},
@@ -49,7 +49,7 @@ public class StaticDataProvider {
     }
 
     @DataProvider
-    Object[][] getVenturesDataToTestBankTransfer() {
+    public static Object[][] getVenturesDataToTestBankTransfer() {
         return new Object[][]{
                 {"Indonesia", 3, "Mr Test"}
 
@@ -57,7 +57,7 @@ public class StaticDataProvider {
     }
 
     @DataProvider
-    Object[][] getVenturesDataToTestPaypal() {
+    public static Object[][] getVenturesDataToTestPaypal() {
         return new Object[][]{
                 {"Malaysia"},
                 {"Philippines"},
@@ -67,7 +67,7 @@ public class StaticDataProvider {
     }
 
     @DataProvider
-    Object[][] getVenturesDataToTestCreateAddress() {
+    public static Object[][] getVenturesDataToTestCreateAddress() {
         return new Object[][]{
 //                {"Indonesia", "Hikary djakdjd", "Hai ba trung quan 1", "19224832332"},
                 {"Philippines", "djaldawd", "Hai ba trung quan 1", "1922483923"},
@@ -79,7 +79,7 @@ public class StaticDataProvider {
     }
 
     @DataProvider
-    Object[][] getVenturesDataToTestEditAddress() {
+    public static Object[][] getVenturesDataToTestEditAddress() {
         return new Object[][]{
                 {"Malaysia", "QA name edited", "QA address edited", "1933081152"},
                 {"Philippines", "QA name edited", "QA address edited", "1933081152"},
@@ -89,7 +89,7 @@ public class StaticDataProvider {
     }
 
     @DataProvider
-    Object[][] getVenturesDataToTestDifferentAddress() {
+    public static Object[][] getVenturesDataToTestDifferentAddress() {
         return new Object[][]{
                 {"Malaysia", "differentially QA name", "QA address differentially", "1933081155"},
                 {"Philippines", "differentially QA name", "QA address differentially", "1933081155"},
@@ -99,7 +99,7 @@ public class StaticDataProvider {
     }
 
     @DataProvider
-    Object[][] getVenturesDataToTestEditBillingAddress() {
+    public static Object[][] getVenturesDataToTestEditBillingAddress() {
         return new Object[][]{
                 {"Malaysia", "differentially QA name", "QA address differentially", "1933081155"},
 //                {"Philippines", "differentially QA name", "QA address differentially", "1933081155"},
@@ -112,7 +112,7 @@ public class StaticDataProvider {
     }
 
     @DataProvider
-    Object[][] getVenturesDataToTestEditShippingAddress() {
+    public static Object[][] getVenturesDataToTestEditShippingAddress() {
         return new Object[][]{
                 {"Malaysia", " QA name edit ", "QA address edit", "1933085533"},
                 {"Philippines", " QA name edit ", "QA address edit", "1933085533"},
@@ -125,7 +125,7 @@ public class StaticDataProvider {
     }
 
     @DataProvider
-    Object[][] getVenturesDataToTestRemoveFromCart() {
+    public static Object[][] getVenturesDataToTestRemoveFromCart() {
         return new Object[][]{
 //                {"Singapore"},
 //                {"Thailand"},
@@ -138,7 +138,7 @@ public class StaticDataProvider {
     }
 
     @DataProvider
-    Object[][] getVenturesDataToTestEditPaymentMethod() {
+    public static Object[][] getVenturesDataToTestEditPaymentMethod() {
         return new Object[][]{
                 {"Malaysia"},
                 {"Philippines"},
@@ -151,7 +151,7 @@ public class StaticDataProvider {
     }
 
     @DataProvider
-    Object[][] getVenturesDataToTestCoupon() {
+    public static Object[][] getVenturesDataToTestCoupon() {
         return new Object[][]{
                 {"Malaysia", "1ijc6sd"},
 
@@ -160,7 +160,7 @@ public class StaticDataProvider {
     }
 
     @DataProvider
-    Object[][] getVenturesDataToTestShareOrder() {
+    public static Object[][] getVenturesDataToTestShareOrder() {
         return new Object[][]{
 
                 {"Philippines"},
@@ -174,7 +174,7 @@ public class StaticDataProvider {
     }
 
     @DataProvider
-    Object[][] getVenturesDataToTestSavedCreditCard() {
+    public static Object[][] getVenturesDataToTestSavedCreditCard() {
         return new Object[][]{
 
                 {"Philippines"},
@@ -189,7 +189,7 @@ public class StaticDataProvider {
     }
 
     @DataProvider
-    Object[][] getVenturesDataToTestNewAccount() {
+    public static Object[][] getVenturesDataToTestNewAccount() {
         return new Object[][]{
 
 //                {"Philippines"},
@@ -204,7 +204,7 @@ public class StaticDataProvider {
     }
 
     @DataProvider
-    Object[][] getVenturesDataToTestNewBillingAddress() {
+    public static Object[][] getVenturesDataToTestNewBillingAddress() {
         return new Object[][]{
 
                 {"Philippines", " QA name edit ", "QA address edit", "0933085533"},
@@ -220,7 +220,7 @@ public class StaticDataProvider {
     }
 
     @DataProvider
-    Object[][] getVenturesDataToTestBankTransferNewUser() {
+    public static Object[][] getVenturesDataToTestBankTransferNewUser() {
         return new Object[][]{
 
                 {"Indonesia", 3, "Mr Test"}
@@ -229,7 +229,7 @@ public class StaticDataProvider {
     }
 
     @DataProvider
-    Object[][] getVenturesDataToTestBankTransferDifferentBillingAddress() {
+    public static Object[][] getVenturesDataToTestBankTransferDifferentBillingAddress() {
         return new Object[][]{
 
                 {"Indonesia", 3, "Mr Test", " QA name edit ", "QA address editddkdmd", "09330242442"}
@@ -238,7 +238,7 @@ public class StaticDataProvider {
     }
 
     @DataProvider
-    Object[][] getVenturesDataToTestCashOnDeliveryGuest () {
+    public static Object[][] getVenturesDataToTestCashOnDeliveryGuest () {
         return new Object[][]{
 //                {"Singapore", "jdalwd", "dhakdhawd", "99999393939"},
 //                {"Philippines", "jack", "Bom bai", "8788332222"},
@@ -250,13 +250,13 @@ public class StaticDataProvider {
     }
 
     @DataProvider
-    Object[][] getVenturesDataToTestBankTransferGuest () {
+    public static Object[][] getVenturesDataToTestBankTransferGuest () {
         return new Object[][]{
                 {"Indonesia", "nicky", "LA", "38877737373", 3, "jdajwd"},
         };
     }
     @DataProvider
-    Object[][] getVenturesDataToTestTerm () {
+    public static Object[][] getVenturesDataToTestTerm () {
         return new Object[][]{
 //                {"Singapore"},
                 {"Philippines"},
