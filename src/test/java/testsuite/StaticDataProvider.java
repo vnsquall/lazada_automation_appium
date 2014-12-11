@@ -1,8 +1,6 @@
 package testsuite;
 
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
-import scenario.CheckOutScenario;
 /**
  * Created by anhpham on 10/12/2014.
  */
@@ -14,9 +12,9 @@ public class StaticDataProvider {
 //                {"Singapore"},
 //                {"Philippines"},
 //                {"Indonesia"},
-                {"Malaysia"},
+//                {"Malaysia"},
 //                {"Vietnam"},
-//                {"Thailand"}
+                {"Thailand"}
         };
     }
 
@@ -25,11 +23,11 @@ public class StaticDataProvider {
     public static Object[][] getVenturesDataToTestCreditCardInvalid() {
         return new Object[][]{
 //                {"Singapore", "4400123456784444", "Mr Test", "123"},
-                {"Malaysia", "4400123456784011", "dajdiaw", "777"},
+//                {"Malaysia", "4400123456784011", "dajdiaw", "777"},
 //                {"Philippines", "5500005555555559", "Mr Test", "123"},
 //                {"Indonesia", "4400123456784011", "Mr Test", "123"},
 //                {"Vietnam", "4400123456784011", "hduaiwud", "222"},
-//                {"Thailand", "4400123456784011", "Mr Test", "123"}
+                {"Thailand", "4400123456784011", "Mr Test", "123"}
 
         };
     }
@@ -242,8 +240,8 @@ public class StaticDataProvider {
         return new Object[][]{
 //                {"Singapore", "jdalwd", "dhakdhawd", "99999393939"},
 //                {"Philippines", "jack", "Bom bai", "8788332222"},
-//                {"Indonesia", "dhakwd", "daddad", "443235556544"},
-                {"Malaysia", "jdjdjd", "jdjdda", "42424242424"},
+                {"Indonesia", "dhakwd", "daddad", "443235556544"},
+//                {"Malaysia", "jdjdjd", "jdjdda", "42424242424"},
 //                {"Vietnam", "nicky", "LA", "38877737373" },
 //                {"Thailand", "hajdald", "dgaihwdh", "88883838383"}
         };
