@@ -61,7 +61,23 @@ public class ShippingAddress_Screen {
         findElement(phoneNumber).sendKeys(_phoneNumber);
     }
 
+    /**
+     * try to find Web view in 30s
+     */
+    public static void waitForWebView() {
 
+        long start = System.currentTimeMillis();
+        long end = start + 30 * 1000; // 30 seconds * 1000 ms/sec
+        boolean isWebViewLoaded = false;
+        while (System.currentTimeMillis() < end)
+        {
+
+            isWebViewLoaded = switchToWebView();
+            if(isWebViewLoaded == true) return;
+
+        }
+        System.out.println(">>>> No web view!!!");
+    }
 
 
 
