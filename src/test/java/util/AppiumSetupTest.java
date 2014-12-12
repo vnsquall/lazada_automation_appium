@@ -55,7 +55,7 @@ public class AppiumSetupTest {
         capabilities.setCapability("platformVersion", PLATFORM_VERSION);
         capabilities.setCapability("deviceName", DEVICE_NAME);
         capabilities.setCapability("appPackage", appPackage);
-        capabilities.setCapability("appActivity", APP_ACTIVITY);
+//        capabilities.setCapability("appActivity", APP_ACTIVITY);
         capabilities.setCapability("app", appPath);
 
         return capabilities;
