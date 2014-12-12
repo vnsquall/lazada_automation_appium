@@ -18,7 +18,6 @@ public class Init_Screen {
         if (country.equals("Thailand")) { // Special case
 
             find_ButtonText_Android("English").click();
-            find_ButtonText_Android("English").click();
         }
         Thread.sleep(6000);
         find_TextView_Android(menuWiz).click();
