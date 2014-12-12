@@ -124,7 +124,9 @@ public class WishListScenario extends AppiumSetupTest {
 
         // Add 1 product to Cart from WishList
         WishList_Screen.click_AddToCartBtn();
-        WishList_Screen.click_OKBtn();
+
+        // Go to myCart
+        TopBar_Screen.click_MyCartBtn();
 
         // Verify product that product appears in myCart
         String myCardStr = Cart_Screen.productName().getText();
