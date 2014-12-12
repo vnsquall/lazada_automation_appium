@@ -467,10 +467,11 @@ public class Helper {
     }
 
     /**
-     * Set context to WEB_VIEW
+     * Set context to WEB_VIEW: true: success, false: No web view
      */
-    public static void switchToWebView () {
+    public static boolean switchToWebView () {
 
+        boolean isSwitched = false;
         String webviewContext = "";
         if (AppiumSetupTest.appPackage.equals(APP_PACKAGE_LIVE)) {
 
@@ -488,8 +489,11 @@ public class Helper {
             if (contextName.contains(webviewContext)) {
                 System.out.println(">>> Set context to WEBVIEW: " + contextName);
                 driver.context(contextName);
+                isSwitched = true;
+                return isSwitched;
             }
         }
+        return isSwitched;
 
     }
 
