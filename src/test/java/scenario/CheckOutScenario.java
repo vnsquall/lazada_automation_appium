@@ -276,7 +276,7 @@ public class CheckOutScenario extends AppiumSetupTest {
 
         Login_Screen.input_Email(generateEmail());
         Login_Screen.click_ContinueBtn();
-        Thread.sleep(3000);
+        Thread.sleep(8000);
     }
 
     protected void checkOutCreateShippingAddress(String venture, String menuWiz, String categories, String filterWiz,
@@ -597,8 +597,8 @@ public class CheckOutScenario extends AppiumSetupTest {
     protected void createShippingAddress(String venture, String name, String address, String phoneNumber) throws InterruptedException {
 
         // New billing address
-        switchToWebView();
         Thread.sleep(2000);
+        switchToWebView();
         ShippingAddress_Screen.input_Name(name);
         ShippingAddress_Screen.input_Address(address);
         if (venture.equals("Thailand") || venture.equals("Philippines")
