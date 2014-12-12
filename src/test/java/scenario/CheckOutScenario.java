@@ -109,11 +109,10 @@ public class CheckOutScenario extends AppiumSetupTest {
                                                 String name, String address, String phoneNumber) throws InterruptedException {
         // Perform Check Out steps
         buyNowRandomProduct(venture, menuWiz, categories, filterWiz, prodWiz);
-
-        // Login as guest
+        Thread.sleep(1000);
         loginAsGuest();
 
-        // Input shipping address
+        // Create new shipping address
         createShippingAddress(venture, name, address, phoneNumber);
 
         // Check the Credit Cards is available or not for this CheckOutTest
@@ -597,7 +596,7 @@ public class CheckOutScenario extends AppiumSetupTest {
     protected void createShippingAddress(String venture, String name, String address, String phoneNumber) throws InterruptedException {
 
         // New billing address
-        Thread.sleep(2000);
+        ShippingAddress_Screen.waitForWebView();
         switchToWebView();
         ShippingAddress_Screen.input_Name(name);
         ShippingAddress_Screen.input_Address(address);
@@ -724,13 +723,15 @@ public class CheckOutScenario extends AppiumSetupTest {
         // Perform Check Out steps
         buyNowRandomProduct(venture, menuWiz, categories, filterWiz, prodWiz);
         Thread.sleep(1000);
-//        Login_Screen.input_Email(generateEmail());
-//        Login_Screen.click_ContinueBtn();
-//        Thread.sleep(3000);
+
+        // Login as guest
         loginAsGuest();
 
-        editShippingAddress(venture, name, address, phoneNumber);
+        // Create new shipping address
+        createBillingAddress(venture, name, address, phoneNumber);
         ShippingAddress_Screen.click_ContinueBtn();
+
+        // Checkout via COD
         cashOnDelivery();
 
     }
