@@ -5,10 +5,10 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
-import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import screenObjects.android_app.SideMenu_Screen;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -375,7 +375,7 @@ public class Helper {
         text_exact(categories).click();
 
         // Random selection Categories
-        randClick(By.id(appPackage + ":id/category_name"));
+        randClick(SideMenu_Screen.categories);
         text_exact(filterWiz).click();
 
         // Random selection sub-Categories
