@@ -26,6 +26,11 @@ public class Home_Screen {
         findElement(search).sendKeys(query);
     }
 
+    public static void click_SearchTxt() {
+
+        findElement(search).click();
+    }
+
     /**
      * Find array of products in Rich relevance
      */
