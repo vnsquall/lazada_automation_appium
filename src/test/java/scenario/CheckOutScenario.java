@@ -728,7 +728,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         loginAsGuest();
 
         // Create new shipping address
-        createBillingAddress(venture, name, address, phoneNumber);
+        createShippingAddress(venture, name, address, phoneNumber);
         ShippingAddress_Screen.click_ContinueBtn();
 
         // Checkout via COD
@@ -744,7 +744,7 @@ public class CheckOutScenario extends AppiumSetupTest {
         Login_Screen.input_Email(generateEmail());
         Login_Screen.click_ContinueBtn();
         Thread.sleep(3000);
-        editShippingAddress(venture, name, address, phoneNumber);
+        createShippingAddress(venture, name, address, phoneNumber);
         ShippingAddress_Screen.click_ContinueBtn();
         bankTransfer(bankIndex, senderName);
 
