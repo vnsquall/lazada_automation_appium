@@ -1,6 +1,5 @@
 package testsuite;
 
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import scenario.CheckOutScenario;
 
@@ -265,23 +264,6 @@ public class CheckOut_Test extends CheckOutScenario {
                 name,
                 address,
                 phoneNumber);
-    }
-
-    /**
-     * Create new user and check out via Bank transfer - ID
-     */
-    @Test(dataProvider = "getVenturesDataToTestBankTransferNewUser", dataProviderClass = StaticDataProvider.class)
-    public void test_BankTransferNewUser(String venture,
-                                         int bankIndex,
-                                         String senderName) throws Exception {
-
-        checkoutBankTransferNewUser(venture,
-                setText(venture).get("menuWiz"),
-                setText(venture).get("categories"),
-                setText(venture).get("filterWiz"),
-                setText(venture).get("prodWiz"),
-                bankIndex,
-                senderName );
     }
 
     @Test(dataProvider = "getVenturesDataToTestBankTransferDifferentBillingAddress", dataProviderClass = StaticDataProvider.class)
