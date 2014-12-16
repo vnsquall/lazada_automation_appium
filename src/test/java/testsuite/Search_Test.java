@@ -30,4 +30,9 @@ public class Search_Test extends SearchScenario {
     public void test_SearchInHomePage(String venture, String searchQuery) throws Exception {
         homeSearchAndSortResults(venture, setText(venture).get("menuWiz"), searchQuery, setText(venture).get("filterWiz"));
     }
+
+    @Test(dataProvider = "getVenturesDataToTest")
+    public void test_SearchPopular(String venture, String searchQuery) throws Exception {
+        searchPopular();
+    }
 }
