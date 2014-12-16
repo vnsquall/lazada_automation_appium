@@ -42,4 +42,9 @@ public class SearchScenario extends AppiumSetupTest {
             homeSort.click();
         }
     }
+
+    protected void searchPopular () {
+
+        Home_Screen.click_SearchTxt();
+    }
 }
