@@ -18,8 +18,8 @@ import static util.Helper.driver;
  */
 public class AppiumSetupTest {
 
-    public static String appPackage = APP_PACKAGE_STAGING;
-    public static String localApp = LOCAL_APP_STAGING;
+    public static String appPackage = APP_PACKAGE_LIVE;
+    public static String localApp = LOCAL_APP_LIVE;
 
     @BeforeMethod
     public void setUp() throws Exception {
@@ -55,7 +55,7 @@ public class AppiumSetupTest {
         capabilities.setCapability("platformVersion", PLATFORM_VERSION);
         capabilities.setCapability("deviceName", DEVICE_NAME);
         capabilities.setCapability("appPackage", appPackage);
-//        capabilities.setCapability("appActivity", APP_ACTIVITY);
+        capabilities.setCapability("appActivity", APP_ACTIVITY);
         capabilities.setCapability("app", appPath);
 
         return capabilities;
