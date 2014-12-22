@@ -406,7 +406,7 @@ public class Helper {
      */
     public static void selector(String locator, int index) {
 
-        Select dropdown = new Select(findElement(split(locator)[0], split(locator)[1]));
+        Select dropdown = new Select(findElement(locator));
         dropdown.selectByIndex(index);
     }
 
@@ -460,7 +460,7 @@ public class Helper {
         Set<String> contextNames = driver.getContextHandles();
         for (String contextName : contextNames) {
             if (contextName.contains("NATIVE")) {
-                System.out.println(">>> Set context to NATIVE APP!!!");
+                System.out.println(">>> Set context to: " + contextName);
                 driver.context(contextName);
             }
         }
@@ -487,7 +487,7 @@ public class Helper {
         Set<String> contextNames = driver.getContextHandles();
         for (String contextName : contextNames) {
             if (contextName.contains(webviewContext)) {
-                System.out.println(">>> Set context to WEBVIEW: " + contextName);
+                System.out.println(">>> Set context to: " + contextName);
                 driver.context(contextName);
                 isSwitched = true;
                 return isSwitched;
@@ -557,6 +557,10 @@ public class Helper {
         return randomNumber;
     }
 
+    /**
+     * Split a string by "::"
+     * @return array of String
+     */
     public static String[] split(String str) {
 
         String[] parts = str.split("::");
