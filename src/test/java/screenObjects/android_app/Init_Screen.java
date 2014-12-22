@@ -20,7 +20,9 @@ public class Init_Screen {
             find_ButtonText_Android("English").click();
         }
         Thread.sleep(6000);
-        find_TextView_Android(menuWiz).click();
+
+        // Click on the Menu wizard
+        tapOnElement(find_TextView_Android(menuWiz));
         Thread.sleep(2000);
     }
 }
