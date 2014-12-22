@@ -598,6 +598,14 @@ public class Helper {
 
     }
 
+    /**
+     * Tap on an element
+     */
+    public static void tapOnElement(WebElement element) {
+
+        driver.tap(1, element, 2000);
+    }
+
 
 
 
