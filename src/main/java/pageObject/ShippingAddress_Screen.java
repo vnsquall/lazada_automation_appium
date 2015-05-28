@@ -1,0 +1,83 @@
+package pageObject;
+
+
+
+import org.openqa.selenium.WebElement;
+
+import static util.Helper.findElement;
+import static util.Helper.switchToWebView;
+
+
+public class ShippingAddress_Screen {
+
+    public static String continueButton = "xpath:://*[@class='orange-button']";
+    public static String name = "xpath:://*[@id='ThreeStepShippingAddressForm_first_name']";
+    public static String address = "xpath:://*[@id='ThreeStepShippingAddressForm_address1']";
+    public static String region = "xpath:://*[@id='ThreeStepShippingAddressForm_location_0']";
+    public static String city = "xpath:://*[@id='ThreeStepShippingAddressForm_location_1']";
+    public static String ward = "xpath:://*[@id='ThreeStepShippingAddressForm_location_2']";
+    public static String postCode = "xpath:://*[@id='ThreeStepShippingAddressForm_postcode']";
+    public static String phoneNumber = "xpath:://*[@id='ThreeStepShippingAddressForm_phone']";
+
+
+    public static void click_ContinueBtn() {
+
+        findElement(continueButton).click();
+    }
+
+    public static void input_Name(String _name) {
+
+        findElement(name).sendKeys(_name);
+    }
+
+    public static void input_Address(String _address) {
+
+        findElement(address).sendKeys(_address);
+    }
+
+    public static WebElement region () {
+
+        return findElement(region);
+    }
+
+    public static WebElement city () {
+
+        return findElement(city);
+    }
+
+    public static WebElement ward() {
+
+        return findElement(ward);
+    }
+
+    public static void input_PostCode (String _postCode) {
+
+        findElement(postCode).sendKeys(_postCode);
+    }
+
+    public static void input_PhoneNumber(String _phoneNumber) {
+
+        findElement(phoneNumber).sendKeys(_phoneNumber);
+    }
+
+    /**
+     * try to find Web view in 30s
+     */
+    public static void waitForWebView() {
+
+        long start = System.currentTimeMillis();
+        long end = start + 30 * 1000; // 30 seconds * 1000 ms/sec
+        boolean isWebViewLoaded = false;
+        while (System.currentTimeMillis() < end)
+        {
+
+            isWebViewLoaded = switchToWebView();
+            if(isWebViewLoaded == true) return;
+
+        }
+        System.out.println(">>>> No web view!!!");
+    }
+
+
+
+}
