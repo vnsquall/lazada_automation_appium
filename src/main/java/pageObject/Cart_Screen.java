@@ -1,14 +1,14 @@
 package pageObject;
 
+import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebElement;
-
 import java.util.List;
 
-import static util.Helper.findElement;
-import static util.Helper.findElements;
+public class Cart_Screen extends CommonPageObject{
 
-
-public class Cart_Screen {
+    public Cart_Screen(AndroidDriver driver) {
+        super(driver);
+    }
 
     public static String proceedToCheckout = "resourceID::checkout_button";
     public static String delete = "resourceID::delete_button";
@@ -17,44 +17,44 @@ public class Cart_Screen {
     public static String quantity = "resourceID::changequantity_button";
     public static String sizes = "resourceID::item_text";
 
-    public static void click_CheckoutBtn() {
+    public void click_CheckoutBtn() {
 
-        findElement(proceedToCheckout).click();
+        getHelper().findElement(proceedToCheckout).click();
     }
 
-    public static List<WebElement> deleteButtons() {
+    public List<WebElement> deleteButtons() {
 
-        return findElements(delete);
+        return getHelper().findElements(delete);
     }
 
-    public static void click_DeleteConfirm() {
+    public void click_DeleteConfirm() {
 
-        findElement(removeItem).click();
+        getHelper().findElement(removeItem).click();
     }
 
-    public static WebElement productName() {
+    public WebElement productName() {
 
-        return findElement(productName);
+        return getHelper().findElement(productName);
     }
 
-    public static void click_deleteProductBtn() {
+    public void click_deleteProductBtn() {
 
-        findElement(delete).click();
+        getHelper().findElement(delete).click();
     }
 
-    public static void click_quantityBtn() {
+    public void click_quantityBtn() {
 
-        findElement(quantity).click();
+        getHelper().findElement(quantity).click();
     }
 
-    public static WebElement quantity() {
+    public WebElement quantity() {
 
-        return findElement(quantity);
+        return getHelper().findElement(quantity);
     }
 
-    public static List<WebElement> sizes() {
+    public List<WebElement> sizes() {
 
-        return findElements(sizes);
+        return getHelper().findElements(sizes);
     }
 
 

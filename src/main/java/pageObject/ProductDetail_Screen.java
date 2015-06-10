@@ -1,11 +1,13 @@
 package pageObject;
 
+import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebElement;
 
-import static util.Helper.findElement;
-import static util.Helper.find_TextView_Android;
+public class ProductDetail_Screen extends CommonPageObject{
 
-public class ProductDetail_Screen {
+    public ProductDetail_Screen(AndroidDriver driver) {
+        super(driver);
+    }
 
     public static String addToCart = "resourceID::btn_add_to_cart";
     public static String addToWishList = "resourceID::wishlist_item_add";
@@ -19,62 +21,62 @@ public class ProductDetail_Screen {
     public static String leftArrow = "resourceID::product_previous";
     public static String rightArrow = "resourceID::product_next";
 
-    public static void click_AddToCartBtn() {
+    public void click_AddToCartBtn() {
 
-        findElement(addToCart).click();
+        getHelper().findElement(addToCart).click();
     }
 
-    public static void click_AddToWishListBtn() {
+    public void click_AddToWishListBtn() {
 
-        findElement(addToWishList).click();
+        getHelper().findElement(addToWishList).click();
     }
 
-    public static void click_ShareBtn() {
+    public void click_ShareBtn() {
 
-        findElement(share).click();
+        getHelper().findElement(share).click();
     }
 
-    public static void click_ChooseSizeBtn() {
+    public void click_ChooseSizeBtn() {
 
-        findElement(chooseSize).click();
+        getHelper().findElement(chooseSize).click();
     }
 
-    public static WebElement chooseSizeBtn() {
+    public WebElement chooseSizeBtn() {
 
-        return findElement(chooseSize);
+        return getHelper().findElement(chooseSize);
     }
 
-    public static void click_OKBtn() {
+    public void click_OKBtn() {
 
-        findElement(OKBtn).click();
+        getHelper().findElement(OKBtn).click();
     }
 
     /**
      * Choose application to share product: message, Email, Bluetooth...
      */
-    public static void click_AppSharer(String appName) {
+    public void click_AppSharer(String appName) {
 
-        find_TextView_Android(appName).click();
+        getHelper().find_TextView_Android(appName).click();
     }
 
-    public static WebElement productName() {
+    public WebElement productName() {
 
-        return findElement(productName);
+        return getHelper().findElement(productName);
     }
 
-    public static void click_BuyNowBtn() {
+    public void click_BuyNowBtn() {
 
-        findElement(buyNow).click();
+        getHelper().findElement(buyNow).click();
     }
 
-    public static void click_LeftArrow() {
+    public void click_LeftArrow() {
 
-        findElement(leftArrow).click();
+        getHelper().findElement(leftArrow).click();
     }
 
-    public static void click_RightArrow() {
+    public void click_RightArrow() {
 
-        findElement(rightArrow).click();
+        getHelper().findElement(rightArrow).click();
     }
 
 

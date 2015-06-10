@@ -1,18 +1,20 @@
 package pageObject;
 
-
+import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebElement;
-
 import java.util.List;
 
-import static util.Helper.findElements;
+public class ProductList_Screen extends CommonPageObject{
 
-public class ProductList_Screen {
+    public ProductList_Screen(AndroidDriver driver) {
+        super(driver);
+    }
+    
 
     public static String containers = "resourceID::general_container";
 
-    public static List<WebElement> containers () {
-        return findElements(containers);
+    public List<WebElement> containers () {
+        return getHelper().findElements(containers);
     }
 
 }

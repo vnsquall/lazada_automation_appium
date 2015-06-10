@@ -1,18 +1,29 @@
 package testsuite;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pageObject.Init_Screen;
 import pageObject.SideMenu_Screen;
 import pageObject.TopBar_Screen;
 import util.AppiumSetupTest;
-
-import static util.Helper.driver;
-import static util.Helper.switchToWebView;
 import static util.VentureText.setText;
 
-public class TermOfUsage_Test extends AppiumSetupTest {
+public class TermOfUsageTest extends AppiumSetupTest {
+
+    private Init_Screen init_screen;
+    private SideMenu_Screen sideMenu_screen;
+    private TopBar_Screen topBar_screen;
+
+    @Override
+    @BeforeMethod
+    public void setUp() throws Exception {
+        super.setUp();
+        init_screen = new Init_Screen(driver);
+        sideMenu_screen = new SideMenu_Screen(driver);
+        topBar_screen= new TopBar_Screen(driver);
+    }
 
     @DataProvider
     Object[][] getVenturesDataToTest() {
@@ -30,16 +41,14 @@ public class TermOfUsage_Test extends AppiumSetupTest {
      */
     @Test(dataProvider = "getVenturesDataToTest")
     public void test_VerifyText(String venture) throws Exception {
-        term(venture, setText(venture).get("menuWiz"), setText(venture).get("term"));
-    }
-
-    protected void term(String venture, String menuWiz, String term) throws InterruptedException {
+        String menuWiz = setText(venture).get("menuWiz");
+        String term = setText(venture).get("term");
 
         // Select country and go to Term of usage
-        Init_Screen.select_Country(venture, menuWiz);
-        TopBar_Screen.click_MenuBtn();
-        SideMenu_Screen.click_Menu(term);
-        switchToWebView();
+        init_screen.select_Country(venture, menuWiz);
+        topBar_screen.click_MenuBtn();
+        sideMenu_screen.click_Menu(term);
+        init_screen.getHelper().switchToWebView();
 
         String pageSource = driver.getPageSource();
         System.out.println(pageSource);
@@ -74,7 +83,7 @@ public class TermOfUsage_Test extends AppiumSetupTest {
 
             Assert.assertTrue(pageSource.contains("Halaman ini, bersama dokumen yang disebutkan di dalamnya, menginformasikan syarat dan ketentuan (Syarat dan Ketentuan ini) dimana kami memberikan produk (masing-masing Produk) apapun yang terdaftar di situs www.lazada.co.id"));
         }
-
     }
+
 
 }

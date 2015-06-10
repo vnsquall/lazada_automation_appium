@@ -1,11 +1,13 @@
 package pageObject;
 
+import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebElement;
 
-import static util.Helper.findElement;
+public class WishList_Screen extends CommonPageObject{
 
-
-public class WishList_Screen {
+    public WishList_Screen(AndroidDriver driver) {
+        super(driver);
+    }
 
     public static String addAllToCart = "resourceID::wishlist_bt_add_all";
     public static String continueBrowsing = "resourceID::wishlist_no_items_bt_continue";
@@ -14,39 +16,39 @@ public class WishList_Screen {
     public static String addToCart = "resourceID::wishlist_item_bt_add";
     public static String OKBtn = "resourceID::button1";
 
-    public static void click_AddAllToCart() {
+    public void click_AddAllToCart() {
 
-        findElement(addAllToCart).click();
+        getHelper().findElement(addAllToCart).click();
     }
 
-    public static void click_ContinueBrowsingBtn() {
+    public void click_ContinueBrowsingBtn() {
 
-        findElement(continueBrowsing).click();
+        getHelper().findElement(continueBrowsing).click();
     }
 
-    public static WebElement deleteBtn() {
+    public WebElement deleteBtn() {
 
-        return findElement(delete);
+        return getHelper().findElement(delete);
     }
 
-    public static void click_DeleteBtn() {
+    public void click_DeleteBtn() {
 
-        findElement(delete).click();
+        getHelper().findElement(delete).click();
     }
 
-    public static WebElement noItemMessage() {
+    public WebElement noItemMessage() {
 
-        return findElement(noItemMessage);
+        return getHelper().findElement(noItemMessage);
     }
 
-    public static void click_AddToCartBtn() {
+    public void click_AddToCartBtn() {
 
-        findElement(addToCart).click();
+        getHelper().findElement(addToCart).click();
     }
 
-    public static void click_OKBtn() {
+    public void click_OKBtn() {
 
-        findElement(OKBtn).click();
+        getHelper().findElement(OKBtn).click();
     }
 
 

@@ -1,11 +1,14 @@
 package pageObject;
 
+import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebElement;
 import java.util.List;
-import static util.Helper.*;
 
+public class Login_Screen extends CommonPageObject{
 
-public class Login_Screen {
+    public Login_Screen(AndroidDriver driver) {
+        super(driver);
+    }
 
     public static String email = "className::android.widget.EditText";
     public static String password = "className::android.widget.EditText";
@@ -19,52 +22,53 @@ public class Login_Screen {
     public static String user = "resourceID::accountradio";
 
 
-    public static void input_Email (String _email) {
-        List<WebElement> editTexts = findElements(email);
+    public void input_Email (String _email) {
+        List<WebElement> editTexts = getHelper().findElements(email);
         editTexts.get(0).sendKeys(_email);
     }
 
-    public static void input_Password (String _password) {
-        List<WebElement> editTexts = findElements(password);
+    public void input_Password (String _password) {
+        List<WebElement> editTexts = getHelper().findElements(password);
         editTexts.get(1).sendKeys(_password);
     }
 
-    public static void click_ShowPassword () {
-        findElement(showPassword).click();
+    public void click_ShowPassword () {
+
+        getHelper().findElement(showPassword).click();
     }
 
-    public static void click_Login () {
-        findElement(login).click();
+    public void click_Login () {
+        getHelper().findElement(login).click();
     }
 
-    public static WebElement rocket_app_checkoutweb () {
+    public WebElement rocket_app_checkoutweb () {
 
-        return findElement(rocket_app_checkoutweb1);
+        return getHelper().findElement(rocket_app_checkoutweb1);
     }
 
-    public static void click_RegisterBtn () {
+    public void click_RegisterBtn () {
 
-        findElement(register).click();
+        getHelper().findElement(register).click();
     }
 
-    public static void click_ContinueBtn () { // for new case: guest checkout
+    public void click_ContinueBtn () { // for new case: guest checkout
 
-        findElement(continueBtn).click();
+        getHelper().findElement(continueBtn).click();
     }
 
-    public static boolean verifyText (String text) {
+    public boolean verifyText (String text) {
 
-        return find_TextView_Android(text).isDisplayed();
+        return getHelper().find_TextView_Android(text).isDisplayed();
     }
 
-    public static void click_GuestRd() {
+    public void click_GuestRd() {
 
-        findElement(guest).click();
+        getHelper().findElement(guest).click();
     }
 
-    public static void click_UserRd() {
+    public void click_UserRd() {
 
-        findElement(user).click();
+        getHelper().findElement(user).click();
     }
 
 }

@@ -1,20 +1,21 @@
 package pageObject;
 
+import io.appium.java_client.android.AndroidDriver;
 
-import static util.Helper.*;
+public class Init_Screen extends CommonPageObject {
 
-public class Init_Screen {
+    public Init_Screen (AndroidDriver driver){
+        super(driver);
+    }
 
     public static String countryName = "text::[country]";
 
+    public  void select_Country(String country, String menuWiz) throws InterruptedException {
 
-
-    public static void select_Country(String country, String menuWiz) throws InterruptedException {
-
-        findElement(split(countryName)[0], country).click();
+        getHelper().findElement(getHelper().split(countryName)[0], country).click();
         if (country.equals("Thailand")) { // Special case
 
-            find_ButtonText_Android("English").click();
+            getHelper().find_ButtonText_Android("English").click();
         }
 
         // Click on the Menu wizard
@@ -22,12 +23,12 @@ public class Init_Screen {
 
     }
 
-    public static void click_MenuWizard(String menuWiz) throws InterruptedException {
+    public void click_MenuWizard(String menuWiz) throws InterruptedException {
 
-        tapOnElement(find_TextView_Android(menuWiz));
+        getHelper().tapOnElement(getHelper().find_TextView_Android(menuWiz));
         Thread.sleep(6000);
-        while (isPageContains(menuWiz)) { // Special case: Make sure the Menu wizard have been closed
-            tapOnElement(find_TextView_Android(menuWiz));
+        while (getHelper().isPageContains(menuWiz)) { // Special case: Make sure the Menu wizard have been closed
+            getHelper().tapOnElement(getHelper().find_TextView_Android(menuWiz));
         }
         Thread.sleep(2000);
     }

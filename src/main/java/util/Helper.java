@@ -1,51 +1,39 @@
 package util;
 
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObject.ProductList_Screen;
 import pageObject.SideMenu_Screen;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.NoSuchElementException;
-
 import static util.Constant.*;
 
 public class Helper {
-    public static AppiumDriver driver;
-    public static URL serverAddress;
-    private static WebDriverWait driverWait;
 
-    /**
-     * Initialize the webdriver. Must be called before using any helper methods. *
-     */
-    public static void init(AppiumDriver webDriver, URL driverServerAddress) {
-        driver = webDriver;
-        serverAddress = driverServerAddress;
-        int timeoutInSeconds = 60;
-        driverWait = new WebDriverWait(webDriver, timeoutInSeconds);
+    private AndroidDriver driver;
+
+    public Helper(AndroidDriver driver) {
+        this.driver = driver;
     }
 
-    public static void randClick(By locator) {
+    public void randClick(By locator) {
 
         Random rand = new Random();
         List<WebElement> we = driver.findElements(locator);
         int catNum = we.size();
         int randClick = rand.nextInt(catNum);
         we.get(randClick).click();
-
     }
 
-    public static void randClick(List<WebElement> elements) {
+    public void randClick(List<WebElement> elements) {
 
         Random rand = new Random();
         int catNum = elements.size();
@@ -53,14 +41,14 @@ public class Helper {
         elements.get(randClick).click();
     }
 
-    public static void randClick(String locator) {
+    public void randClick(String locator) {
 
         List<WebElement> elements = findElements(split(locator)[0], split(locator)[1]);
         randClick(elements);
 
     }
 
-    public static Boolean isElementPresent(String locator) {
+    public Boolean isElementPresent(String locator) {
         Boolean isPresent = Boolean.FALSE;
         try {
             isPresent = findElements(locator).size() > 0;
@@ -70,7 +58,7 @@ public class Helper {
         }
     }
 
-    public static void swipeDown() {
+    public void swipeDown() {
         JavascriptExecutor scrollDown = driver;
         HashMap<String, Double> swipeDown = new HashMap<String, Double>();
         swipeDown.put("startX", 0.95);
@@ -81,7 +69,7 @@ public class Helper {
         scrollDown.executeScript("mobile: swipe", swipeDown);
     }
 
-    public static void swipeUp() {
+    public void swipeUp() {
         JavascriptExecutor scrollUp = driver;
         HashMap<String, Double> swipeUp = new HashMap<String, Double>();
         swipeUp.put("startX", 0.95);
@@ -95,14 +83,14 @@ public class Helper {
     /**
      * Return an element by locator *
      */
-    public static MobileElement element(By locator) {
+    public MobileElement element(By locator) {
         return (MobileElement)driver.findElement(locator);
     }
 
     /**
      * Press the back button *
      */
-    public static void back() {
+    public void back() {
         driver.navigate().back();
     }
 
@@ -116,7 +104,7 @@ public class Helper {
     /**
      * Return a static text element that contains text *
      */
-    public static MobileElement text(String text) {
+    public MobileElement text(String text) {
         return element(for_text(text));
     }
 
@@ -130,7 +118,7 @@ public class Helper {
     /**
      * Return a static text element by exact text *
      */
-    public static MobileElement text_exact(String text) {
+    public MobileElement text_exact(String text) {
         return element(for_text_exact(text));
     }
 
@@ -148,19 +136,19 @@ public class Helper {
                 "\",\"" + value + "\"), \"" + value + "\") or @resource-id=\"" + value + "\"]");
     }
 
-    public static MobileElement find(String value) {
+    public MobileElement find(String value) {
         return element(for_find(value));
     }
 
-    public static WebElement wait_web(By locator) {
-        return driverWait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-
-    }
+//    public WebElement wait_web(By locator) {
+//        return driverWait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+//
+//    }
 
     /**
      * Find element
      */
-    public static WebElement findElement(String locator) {
+    public WebElement findElement(String locator) {
 
         WebElement e = findElement(split(locator)[0], split(locator)[1]);
         return e;
@@ -169,7 +157,7 @@ public class Helper {
     /**
      * Find list of element
      */
-    public static List<WebElement> findElements(String locator) {
+    public List<WebElement> findElements(String locator) {
 
         List<WebElement> e = findElements(split(locator)[0], split(locator)[1]);
         return e;
@@ -181,7 +169,7 @@ public class Helper {
      * @param value
      * @return WebElement
      */
-    public static WebElement findElement(String selectorTypeStr, String value) {
+    public WebElement findElement(String selectorTypeStr, String value) {
 
         WebElement e = null;
         String appPackage = AppiumSetupTest.appPackage;
@@ -217,7 +205,7 @@ public class Helper {
      * @param value
      * @return List of Element
      */
-    public static List<WebElement> findElements(String selectorTypeStr, String value) {
+    public List<WebElement> findElements(String selectorTypeStr, String value) {
 
         List<WebElement> e = null;
         String appPackage = AppiumSetupTest.appPackage;
@@ -253,7 +241,7 @@ public class Helper {
      * @return File
      * @throws java.io.IOException
      */
-    public static File takeScreenshot(String SCREENSHOT_PATH) {
+    public File takeScreenshot(String SCREENSHOT_PATH) {
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
         //get current date time with Date()
@@ -269,7 +257,7 @@ public class Helper {
         return scrFile;
     }
 
-    public static void randomSelectProduct(String categories, String filterWiz, String prodWiz) {
+    public void randomSelectProduct(String categories, String filterWiz, String prodWiz) {
         text_exact(categories).click();
 
         // Random selection Categories
@@ -280,8 +268,9 @@ public class Helper {
         randClick(SideMenu_Screen.subCategories);
 
         // Get back to the Main Screen for viewing the product
-        randClick(ProductList_Screen.containers()); // Go to product list
-        randClick(ProductList_Screen.containers()); // Select randomly product
+        ProductList_Screen productList_screen = new ProductList_Screen(driver);
+        randClick(productList_screen.containers()); // Go to product list
+        randClick(productList_screen.containers()); // Select randomly product
         text_exact(prodWiz).click();
     }
 
@@ -290,7 +279,7 @@ public class Helper {
      * @param locator String
      * @param index int
      */
-    public static void selector(String locator, int index) {
+    public void selector(String locator, int index) {
 
         Select dropdown = new Select(findElement(locator));
         dropdown.selectByIndex(index);
@@ -300,7 +289,7 @@ public class Helper {
      * Select random option from dropdown list
      * @param webElement WebElement
      */
-    public static void selectorRandom(WebElement webElement) throws InterruptedException {
+    public void selectorRandom(WebElement webElement) throws InterruptedException {
 
         if (driver.getContext().contains("WEBVIEW")) {
 
@@ -319,7 +308,7 @@ public class Helper {
     /**
      * Set context to NATIVE_APP
      */
-    public static void switchToNativeApp () {
+    public void switchToNativeApp () {
 
         Set<String> contextNames = driver.getContextHandles();
         for (String contextName : contextNames) {
@@ -333,7 +322,7 @@ public class Helper {
     /**
      * Set context to WEB_VIEW: true: success, false: No web view
      */
-    public static boolean switchToWebView () {
+    public boolean switchToWebView () {
 
         boolean isSwitched = false;
         String webviewContext = "";
@@ -365,7 +354,7 @@ public class Helper {
      * Generate an email
      * @return email String
      */
-    public static String generateEmail() {
+    public String generateEmail() {
 
         String email = generateAlphabet(8) + generateNumber(4);
         email = email + "@mail.com";
@@ -377,7 +366,7 @@ public class Helper {
      * Generate password
      * @return String
      */
-    public static String generatePassword() {
+    public String generatePassword() {
 
         Random random = new Random();
         String password =  generateAlphabet(3 + random.nextInt(5)) + generateNumber(3);
@@ -388,7 +377,7 @@ public class Helper {
      * Generate array of alphabet
      * @return String
      */
-    public static String generateAlphabet(int length) {
+    public String generateAlphabet(int length) {
 
         String alphabet  = "abcdefghijklmnopqrstuvwxyz";
         String randomAlphabet = "";
@@ -407,7 +396,7 @@ public class Helper {
      * @param length int
      * @return String
      */
-    public static String generateNumber(int length) {
+    public String generateNumber(int length) {
 
         String numbers  = "0123456789";
         String randomNumber = "";
@@ -431,12 +420,12 @@ public class Helper {
         return parts;
     }
 
-    public static MobileElement find_TextView_Android(String text) {
+    public MobileElement find_TextView_Android(String text) {
         MobileElement me = element(MobileBy.xpath("//android.widget.TextView[contains(@text, '" + text + "')]"));
         return me;
     }
 
-    public static MobileElement find_ButtonText_Android(String text) {
+    public MobileElement find_ButtonText_Android(String text) {
         MobileElement me = element(MobileBy.xpath("//android.widget.Button[contains(@text, '" + text + "')]"));
         return me;
     }
@@ -444,7 +433,7 @@ public class Helper {
     /**
      * Check page contains text or Not
      */
-    public static Boolean isPageContains(String text) {
+    public Boolean isPageContains(String text) {
 
         String pageSource = "";
         try {
@@ -460,7 +449,7 @@ public class Helper {
     /**
      * Check error choose size message
      */
-    public static Boolean hasSizeErrorMgs() throws InterruptedException {
+    public boolean hasSizeErrorMgs() throws InterruptedException {
 
         Thread.sleep(2000);
         return isPageContains("product_variant_choose_error");
@@ -471,7 +460,7 @@ public class Helper {
     /**
      * Tap on an element
      */
-    public static void tapOnElement(WebElement element) {
+    public void tapOnElement(WebElement element) {
 
         driver.tap(1, element, 2000);
     }
@@ -479,14 +468,10 @@ public class Helper {
     /**
      * Hide android keyBoard
      */
-    public static void hideKeyBoard() {
+    public void hideKeyBoard() {
 
         driver.hideKeyboard();
     }
-
-
-
-
 
 }
 

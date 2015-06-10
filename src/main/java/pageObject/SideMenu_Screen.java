@@ -1,24 +1,26 @@
 package pageObject;
 
+import io.appium.java_client.android.AndroidDriver;
 
-import static util.Helper.findElement;
-import static util.Helper.text;
+public class SideMenu_Screen extends CommonPageObject{
 
-public class SideMenu_Screen {
+    public SideMenu_Screen(AndroidDriver driver) {
+        super(driver);
+    }
 
     public static String signOutConfirm = "resourceID::button2";
     public static String categories = "resourceID::category_name";
     public static String subCategories = "resourceID::text";
 
-    public static void click_Menu(String menuName) throws InterruptedException {
+    public void click_Menu(String menuName) throws InterruptedException {
 
         Thread.sleep(3000);
-        text(menuName).click();
+        getHelper().text(menuName).click();
     }
 
-    public static void click_SignOutConfirmBtn() {
+    public void click_SignOutConfirmBtn() {
 
-        findElement(signOutConfirm).click();
+        getHelper().findElement(signOutConfirm).click();
     }
 
 }

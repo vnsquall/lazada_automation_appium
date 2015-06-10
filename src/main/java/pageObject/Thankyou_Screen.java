@@ -1,18 +1,21 @@
 package pageObject;
 
 
-import static util.Helper.findElement;
+import io.appium.java_client.android.AndroidDriver;
 
+public class Thankyou_Screen extends CommonPageObject{
 
-public class Thankyou_Screen {
+    public Thankyou_Screen(AndroidDriver driver) {
+        super(driver);
+    }
 
     public static String share = "resourceID::btn_checkout_share";
     public static String sharerApps = "xpath:://*[@resource-id='android:id/text1']";
 
 
-    public static void click_ShareBtn() {
+    public void click_ShareBtn() {
 
-        findElement(share).click();
+        getHelper().findElement(share).click();
     }
 
 

@@ -2,39 +2,43 @@ package testsuite;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pageObject.Init_Screen;
+import pageObject.*;
 import util.AppiumSetupTest;
-
 import java.util.List;
-import static util.Helper.*;
-import static util.Helper.driver;
-import static util.Helper.swipeDown;
 import static util.VentureText.setText;
 
 
-public class Category_Test extends AppiumSetupTest {
+public class CategoryTest extends AppiumSetupTest {
 
+    private Init_Screen init_screen;
+    @Override
+    @BeforeMethod
+    public void setUp() throws Exception {
+        super.setUp();
+        init_screen = new Init_Screen(driver);
+    }
 
     @DataProvider
     Object[][] getVenturesDataToTest() {
         return new Object[][]{
                 {"Singapore"},
-//                {"Malaysia", "Adidas"},
-//                {"Philippines", "Nike"},
-//                {"Indonesia", "Cari"},
-//                {"Vietnam", "Apple"}
+                {"Malaysia"},
+                {"Philippines"},
+                {"Indonesia"},
+                {"Vietnam"},
+                {"Thailand"}
         };
     }
 
     @Test(dataProvider = "getVenturesDataToTest")
     public void test_BrowseCategories(String venture) throws Exception {
-        searchCategories(venture, setText(venture).get("menuWiz"), setText(venture).get("filterWiz"));
-    }
+        String menuWiz = setText(venture).get("menuWiz");
+        String filterWiz = setText(venture).get("filterWiz");
 
-    protected void searchCategories(String venture, String menuWiz, String filterWiz) throws Exception {
-        Init_Screen.select_Country(venture, menuWiz);
+        init_screen.select_Country(venture, menuWiz);
         Thread.sleep(2000);
         driver.findElement(By.id(appPackage + ":id/abs__home")).click();
         //List of Menu Items
@@ -49,7 +53,7 @@ public class Category_Test extends AppiumSetupTest {
             topCategories.get(x).click();
             Thread.sleep(1000);
             if (x == 0) {
-                text_exact(filterWiz).click();
+                init_screen.getHelper().text_exact(filterWiz).click();
                 Thread.sleep(1000);
             }
             driver.findElement(By.xpath("//android.widget.TextView[@resource-id='" + appPackage + ":id/title' and @text='All']")).click();
@@ -57,7 +61,7 @@ public class Category_Test extends AppiumSetupTest {
         }
 
         //Scroll DOWN for last Categories
-        swipeDown();
+        init_screen.getHelper().swipeDown();
 
         //List of the rest Categories
         List<WebElement> restCategories = driver.findElements(By.id(appPackage + ":id/category_name"));
@@ -67,14 +71,15 @@ public class Category_Test extends AppiumSetupTest {
             Thread.sleep(1000);
             driver.findElement(By.xpath("//android.widget.TextView[@resource-id='" + appPackage + ":id/title' and @text='All']")).click();
             Thread.sleep(1000);
-            swipeDown();
+            init_screen.getHelper().swipeDown();
         }
 
         //Scroll UP for first Categories
-        swipeUp();
+        init_screen.getHelper().swipeUp();
         topCategories.get(1).click();
         driver.findElement(By.xpath("//android.widget.TextView[@resource-id='" + appPackage + ":id/title' and @text='All']")).click();
-        swipeDown();
-        swipeDown();
+        init_screen.getHelper().swipeDown();
+        init_screen.getHelper().swipeDown();
     }
+
 }

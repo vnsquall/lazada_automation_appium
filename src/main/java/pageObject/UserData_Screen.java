@@ -1,25 +1,28 @@
 package pageObject;
 
 
-import static util.Helper.findElement;
+import io.appium.java_client.android.AndroidDriver;
 
+public class UserData_Screen extends CommonPageObject{
 
-public class UserData_Screen {
+    public UserData_Screen(AndroidDriver driver) {
+        super(driver);
+    }
 
     public static String cancel = "resourceID::button_cancel";
     public static String name = "resourceID::clientFirstName";
     public static String email = "resourceID::clientEmail";
 
-    public static void click_CancelBtn() {
-        findElement(cancel).click();
+    public void click_CancelBtn() {
+        getHelper().findElement(cancel).click();
     }
 
-    public static String name() {
-        return findElement(name).getText();
+    public String name() {
+        return getHelper().findElement(name).getText();
     }
 
-    public static String email() {
-        return findElement(email).getText();
+    public String email() {
+        return getHelper().findElement(email).getText();
     }
 
 

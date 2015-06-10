@@ -7,12 +7,12 @@ public class    StaticDataProvider {
     @DataProvider
     public static Object[][] getVenturesDataToTestCashOnDelivery() {
         return new Object[][]{
-                {"Singapore"},
+//                {"Singapore"},
 //                {"Philippines"},
 //                {"Indonesia"},
 //                {"Malaysia"},
 //                {"Vietnam"},
-//                {"Thailand"}
+                {"Thailand"}
         };
     }
 
@@ -237,9 +237,9 @@ public class    StaticDataProvider {
     public static Object[][] getVenturesDataToTestCashOnDeliveryGuest () {
         return new Object[][]{
 //                {"Singapore", "jdalwd", "dhakdhawd", "99999393939"},
-                {"Philippines", "jack", "Bom bai", "8788332222"},
+//                {"Philippines", "jack", "Bom bai", "8788332222"},
 //                {"Indonesia", "dhakwd", "daddad", "443235556544"},
-//                {"Malaysia", "jdjdjd", "jdjdda", "42424242424"},
+                {"Malaysia", "jdjdjd", "jdjdda", "42424242424"},
 //                {"Vietnam", "nicky", "LA", "38877737373" },
 //                {"Thailand", "hajdald", "dgaihwdh", "88883838383"}
         };

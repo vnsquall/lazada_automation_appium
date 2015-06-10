@@ -1,27 +1,30 @@
 package pageObject;
 
-import static util.Helper.findElement;
+import io.appium.java_client.android.AndroidDriver;
 
+public class TopBar_Screen extends CommonPageObject{
 
-public class TopBar_Screen {
+    public TopBar_Screen(AndroidDriver driver) {
+        super(driver);
+    }
 
     public static String menu = "resourceID::abs__home";
     public static String search = "resourceID::abs__imageButton";
     public static String cart = "resourceID::cart_count";
 
-    public static void click_MenuBtn() {
+    public void click_MenuBtn() {
 
-        findElement(menu).click();
+        getHelper().findElement(menu).click();
     }
 
-    public static void click_MyCartBtn() {
+    public void click_MyCartBtn() {
 
-        findElement(cart).click();
+        getHelper().findElement(cart).click();
     }
 
-    public static void click_SearchBtn() {
+    public void click_SearchBtn() {
 
-        findElement(search).click();
+        getHelper().findElement(search).click();
     }
 
 

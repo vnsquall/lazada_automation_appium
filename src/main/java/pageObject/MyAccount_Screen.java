@@ -1,15 +1,16 @@
 package pageObject;
 
+import io.appium.java_client.android.AndroidDriver;
 
-import static util.Helper.find_TextView_Android;
+public class MyAccount_Screen extends CommonPageObject{
 
+    public MyAccount_Screen(AndroidDriver driver) {
+        super(driver);
+    }
 
-public class MyAccount_Screen {
+    public void click_UserData(String userData) {
 
-
-    public static void click_UserData(String userData) {
-
-        find_TextView_Android(userData).click();
+        getHelper().find_TextView_Android(userData).click();
     }
 
 }

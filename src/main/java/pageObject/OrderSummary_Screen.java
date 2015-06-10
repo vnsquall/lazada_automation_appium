@@ -1,9 +1,12 @@
 package pageObject;
 
-import static util.Helper.findElement;
-import static util.Helper.findElements;
+import io.appium.java_client.android.AndroidDriver;
 
-public class OrderSummary_Screen {
+public class OrderSummary_Screen extends CommonPageObject{
+
+    public OrderSummary_Screen(AndroidDriver driver) {
+        super(driver);
+    }
 
     public static String placeOrder = "xpath:://*[@class='orange-button']";
     public static String editBillingAddress = "xpath:://*[@id='change-shipping'][contains(@href, 'billing')]";
@@ -14,55 +17,55 @@ public class OrderSummary_Screen {
     public static String submitCoupon = "xpath:://*[@id='couponSend']";
     public static String productName = "xpath:://*[@class='product-name']";
 
-    public static void loaded() {
+    public void loaded() {
 
-        findElements(productName);
-        findElements(placeOrder);
-        findElements(editBillingAddress);
-        findElements(editShippingAddress);
-        findElements(changePayment);
-        findElements(addCoupon);
+        getHelper().findElements(productName);
+        getHelper().findElements(placeOrder);
+        getHelper().findElements(editBillingAddress);
+        getHelper().findElements(editShippingAddress);
+        getHelper().findElements(changePayment);
+        getHelper().findElements(addCoupon);
     }
 
-    public static void click_PlaceOrderBtn() {
+    public void click_PlaceOrderBtn() {
 
         loaded();
-        findElement(placeOrder).click();
+        getHelper().findElement(placeOrder).click();
     }
 
-    public static void click_EditBillingAddress() {
+    public void click_EditBillingAddress() {
 
         loaded();
-        findElement(editBillingAddress).click();
+        getHelper().findElement(editBillingAddress).click();
     }
 
-    public static void click_EditShippingAddress() {
+    public void click_EditShippingAddress() {
 
         loaded();
-        findElement(editShippingAddress).click();
+        getHelper().findElement(editShippingAddress).click();
     }
 
-    public static void click_ChangePayment() {
+    public void click_ChangePayment() {
 
         loaded();
-        findElement(changePayment).click();
+        getHelper().findElement(changePayment).click();
     }
 
-    public static void click_addCouponBtn() {
+    public void click_addCouponBtn() {
 
         loaded();
-        findElement(addCoupon).click();
+        getHelper().findElement(addCoupon).click();
     }
 
-    public static void input_Coupon(String _coupon) {
+    public void input_Coupon(String _coupon) {
 
         loaded();
-        findElement(coupon).sendKeys(_coupon);
+        getHelper().findElement(coupon).sendKeys(_coupon);
     }
 
-    public static void click_SubmitCoupon() {
+    public void click_SubmitCoupon() {
 
         loaded();
-        findElement(submitCoupon).click();
+        getHelper().findElement(submitCoupon).click();
     }
 }

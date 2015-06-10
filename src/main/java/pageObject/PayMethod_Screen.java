@@ -1,11 +1,13 @@
 package pageObject;
 
+import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebElement;
 
-import static util.Helper.findElement;
-
-
-public class PayMethod_Screen {
+public class PayMethod_Screen extends CommonPageObject{
+    
+    public PayMethod_Screen(AndroidDriver driver) {
+        super(driver);
+    }
 
     public static String radioCODDisabled = "xpath:://*[@class='payment-method-option radio'and@value='CashOnDelivery'and@disabled='disabled']";
     public static String labelCOD = "xpath:://label[@for='cashondelivery']";
@@ -24,66 +26,62 @@ public class PayMethod_Screen {
     public static String creditCards = "xpath:://*[starts-with(@class,'payment-methods')]"; // Saved credit card
 
 
+    public void click_CashOnDeliveryRadio() {
 
-    public static void click_CashOnDeliveryRadio() {
-
-        findElement(labelCOD).click();
+        getHelper().findElement(labelCOD).click();
     }
 
-    public static void click_ContinueBtn() {
+    public void click_ContinueBtn() {
 
-        findElement(continueButton).click();
+        getHelper().findElement(continueButton).click();
     }
 
-    public static void click_CreditCardRadio() {
+    public void click_CreditCardRadio() {
 
-        findElement(labelCreditCard).click();
+        getHelper().findElement(labelCreditCard).click();
     }
 
-    public static void click_PaypalRadio() {
+    public void click_PaypalRadio() {
 
-        findElement(labelPaypal).click();
+        getHelper().findElement(labelPaypal).click();
     }
 
-    public static void input_CreditNumber(String _creditNumber) {
+    public void input_CreditNumber(String _creditNumber) {
 
-        findElement(creditNumber).click();
-        findElement(creditNumber).sendKeys(_creditNumber);
+        getHelper().findElement(creditNumber).click();
+        getHelper().findElement(creditNumber).sendKeys(_creditNumber);
     }
 
-    public static void input_CreditName(String customerName) {
+    public void input_CreditName(String customerName) {
 
-        findElement(creditCustomerName).click();
-        findElement(creditCustomerName).sendKeys(customerName);
+        getHelper().findElement(creditCustomerName).click();
+        getHelper().findElement(creditCustomerName).sendKeys(customerName);
     }
 
-    public static void input_CreditSecurityCode(String securityCode) {
+    public void input_CreditSecurityCode(String securityCode) {
 
-        findElement(creditSecurityCode).click();
-        findElement(creditSecurityCode).sendKeys(securityCode);
+        getHelper().findElement(creditSecurityCode).click();
+        getHelper().findElement(creditSecurityCode).sendKeys(securityCode);
     }
 
-    public static WebElement creditCardMonthCbx () {
+    public WebElement creditCardMonthCbx () {
 
-        return findElement(creditMonth);
+        return getHelper().findElement(creditMonth);
     }
 
-    public static WebElement creditCardYearCbx () {
+    public WebElement creditCardYearCbx () {
 
-        return findElement(creditYear);
+        return getHelper().findElement(creditYear);
     }
 
-    public static void click_BankTransferRadio () {
+    public void click_BankTransferRadio () {
 
-        findElement(labelBankTransfer).click();
+        getHelper().findElement(labelBankTransfer).click();
     }
 
-    public static void input_SenderName(String senderName) {
+    public void input_SenderName(String senderName) {
 
-        findElement(bankTransferSenderName).sendKeys(senderName);
+        getHelper().findElement(bankTransferSenderName).sendKeys(senderName);
     }
-
-
-
 
 }

@@ -1,33 +1,34 @@
 package pageObject;
 
+import io.appium.java_client.android.AndroidDriver;
 
-
-import static util.Helper.findElement;
-
-
-public class ShippingInformation_Screen {
+public class ShippingInformation_Screen extends CommonPageObject{
+    
+    public ShippingInformation_Screen(AndroidDriver driver) {
+        super(driver);
+    }
 
     public static String continueButton = "xpath:://*[@class='orange-button']";
     public static String newAddress = "xpath:://*[@id='load-different-billing-mobile']";
     public static String useDifferentBillingAddress = "xpath:://*[@for='ThreeStepBillingAddressForm_isSameShipping']";
     public static String editAddress = "xpath:://*[@class='change-billing']";
 
-    public static void click_ContinueBtn() {
+    public void click_ContinueBtn() {
 
-        findElement(continueButton).click();
+        getHelper().findElement(continueButton).click();
     }
 
-    public static void click_NewAddress () {
+    public void click_NewAddress () {
 
-        findElement(newAddress).click();
+        getHelper().findElement(newAddress).click();
     }
 
     /**
      * Click on Use different billing address checkbox
      */
-    public static void click_UseDifferent () {
+    public void click_UseDifferent () {
 
-        findElement(useDifferentBillingAddress).click();
+        getHelper().findElement(useDifferentBillingAddress).click();
     }
 
 

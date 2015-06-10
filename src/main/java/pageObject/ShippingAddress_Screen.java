@@ -2,13 +2,15 @@ package pageObject;
 
 
 
+import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebElement;
 
-import static util.Helper.findElement;
-import static util.Helper.switchToWebView;
 
+public class ShippingAddress_Screen extends CommonPageObject{
 
-public class ShippingAddress_Screen {
+    public ShippingAddress_Screen(AndroidDriver driver){
+        super(driver);
+    }
 
     public static String continueButton = "xpath:://*[@class='orange-button']";
     public static String name = "xpath:://*[@id='ThreeStepShippingAddressForm_first_name']";
@@ -20,50 +22,50 @@ public class ShippingAddress_Screen {
     public static String phoneNumber = "xpath:://*[@id='ThreeStepShippingAddressForm_phone']";
 
 
-    public static void click_ContinueBtn() {
+    public void click_ContinueBtn() {
 
-        findElement(continueButton).click();
+        getHelper().findElement(continueButton).click();
     }
 
-    public static void input_Name(String _name) {
+    public void input_Name(String _name) {
 
-        findElement(name).sendKeys(_name);
+        getHelper().findElement(name).sendKeys(_name);
     }
 
-    public static void input_Address(String _address) {
+    public void input_Address(String _address) {
 
-        findElement(address).sendKeys(_address);
+        getHelper().findElement(address).sendKeys(_address);
     }
 
-    public static WebElement region () {
+    public WebElement region () {
 
-        return findElement(region);
+        return getHelper().findElement(region);
     }
 
-    public static WebElement city () {
+    public WebElement city () {
 
-        return findElement(city);
+        return getHelper().findElement(city);
     }
 
-    public static WebElement ward() {
+    public WebElement ward() {
 
-        return findElement(ward);
+        return getHelper().findElement(ward);
     }
 
-    public static void input_PostCode (String _postCode) {
+    public void input_PostCode (String _postCode) {
 
-        findElement(postCode).sendKeys(_postCode);
+        getHelper().findElement(postCode).sendKeys(_postCode);
     }
 
-    public static void input_PhoneNumber(String _phoneNumber) {
+    public void input_PhoneNumber(String _phoneNumber) {
 
-        findElement(phoneNumber).sendKeys(_phoneNumber);
+        getHelper().findElement(phoneNumber).sendKeys(_phoneNumber);
     }
 
     /**
      * try to find Web view in 30s
      */
-    public static void waitForWebView() {
+    public void waitForWebView() {
 
         long start = System.currentTimeMillis();
         long end = start + 30 * 1000; // 30 seconds * 1000 ms/sec
@@ -71,7 +73,7 @@ public class ShippingAddress_Screen {
         while (System.currentTimeMillis() < end)
         {
 
-            isWebViewLoaded = switchToWebView();
+            isWebViewLoaded = getHelper().switchToWebView();
             if(isWebViewLoaded == true) return;
 
         }
